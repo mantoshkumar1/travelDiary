@@ -1,23 +1,24 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Rike on 06.06.2015.
  */
-//@Entity
+@Entity
 public abstract class Location {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
     private String description;
-    private AngularMeasure angularMeasure;
-    private Address address;
+    private double longitude;
+    private double latitude;
+
+    //@OneToOne(fetch= FetchType.LAZY)
+    //@JoinColumn(name="addressId")
+    //private Address address;
 
     public long getId() {
         return id;
@@ -43,19 +44,27 @@ public abstract class Location {
         this.description = description;
     }
 
-    public AngularMeasure getAngularMeasure() {
-        return angularMeasure;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
-    public void setAngularMeasure(AngularMeasure angularMeasure) {
-        this.angularMeasure = angularMeasure;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public Address getAddress() {
-        return address;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public double getLatitude() {
+        return latitude;
     }
+
+//    public Address getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(Address address) {
+//        this.address = address;
+//    }
 }

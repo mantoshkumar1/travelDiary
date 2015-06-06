@@ -1,7 +1,6 @@
 package models;
 
 import play.data.validation.Constraints;
-import play.db.jpa.JPA;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,33 +10,39 @@ import java.util.List;
  * Created by Rike on 06.06.2015.
  */
 
-//@Entity
+@Entity
 public class Activity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long activityId;
+    @Id
+    @GeneratedValue
+    private long id;
+
+    @Constraints.Required
     private String name;
+
+    @Constraints.Required
     private String description;
-//    @OneToOne(fetch= FetchType.LAZY)
-//    @JoinColumn(name="locationId")
+
+    @ManyToOne
+    @JoinColumn(name= "locationId")
     private Location location;
-    private List<Review> reviewsList;
+//    private List<Review> reviews;
     private Date startTime;
     private Date endTime;
+
 //    @ManyToMany
-//    @JoinTable(name = "Activity_Keywords",
+//    @JoinTable(name = "ActivityKeywords",
 //            joinColumns = {@JoinColumn(name="activityId")},
 //            inverseJoinColumns = {@JoinColumn(name="keywordId")})
-    private List<Keywords> activityKeywordsList;
+//    private List<Keywords> activityKeywords;
 
-    public List<Keywords> getActivityKeywordsList() {
-        return activityKeywordsList;
-    }
-
-    public void setActivityKeywordsList(List<Keywords> activityKeywordsList) {
-        this.activityKeywordsList = activityKeywordsList;
-    }
+//    public List<Keywords> getActivityKeywords() {
+//        return activityKeywords;
+//    }
+//
+//    public void setActivityKeywords(List<Keywords> activityKeywords) {
+//        this.activityKeywords = activityKeywords;
+//    }
 
     public Date getStartTime() {
         return startTime;
@@ -54,14 +59,14 @@ public class Activity {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
-
-    public List<Review> getReviewsList() {
-        return reviewsList;
-    }
-
-    public void setReviewsList(List<Review> reviewsList) {
-        this.reviewsList = reviewsList;
-    }
+//
+//    public List<Review> getReviews() {
+//        return reviews;
+//    }
+//
+//    public void setReviewsList(List<Review> reviews) {
+//        this.reviews = reviews;
+//    }
 
     public Location getLocation() {
         return location;
@@ -71,12 +76,12 @@ public class Activity {
         this.location = location;
     }
 
-    public long getActivityId() {
-        return activityId;
+    public long getId() {
+        return id;
     }
 
-    public void setActivityId(long activityId) {
-        this.activityId = activityId;
+    public void setId(long id) {
+        this.id = id;
     }
     public String getName() {
         return name;
