@@ -64,6 +64,10 @@ CREATE TABLE Vacation (
   endDate DATE
 );
 
+CREATE TABLE Role (
+  roleId INTEGER PRIMARY KEY AUTOINCREMENT,
+  roleName TEXT NOT NULL
+)
 
 
 # --- !Downs
@@ -75,3 +79,4 @@ DROP TABLE Activity;
 DROP TABLE Keyword;
 DROP TABLE Location;
 DROP TABLE Vacation;
+DROP TABLE Role;
