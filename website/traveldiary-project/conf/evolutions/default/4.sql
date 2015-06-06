@@ -64,10 +64,12 @@ CREATE TABLE Vacation (
   endDate DATE
 );
 
+
+
 # --- !Downs
 DROP TABLE VacationReviews;
 DROP TABLE ActivityKeywords;
-DROP TABLE ActivityKeywords;
+DROP TABLE ActivityReviews;
 DROP TABLE Review;
 DROP TABLE Activity;
 DROP TABLE Keyword;
