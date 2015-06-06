@@ -3,20 +3,34 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>My movie collection</title>
+        <title>Travel Diary</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel='shortcut icon' type='image/png' href='@routes.Assets.at("images/favicon.png")'>
         <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.css"))'>
+        <link rel='custom stylesheet' href='@routes.Assets.at("css/custom.css")'>
     </head>
-    <body ng-app="movieCollection">
 
-        <div class="container">
-            <h1>My movie collection</h1>
-            <ul class="nav nav-tabs">
-                <li role="presentation" class=""><a ui-sref="show_all">Show All Movies</a></li>
-                <li role="presentation" class=""><a ui-sref="add_movie">Add new Movie</a></li>
-            </ul>
-        </div>
+    <body ng-app="travelDiary">
+
+        <nav class="navbar navbar-inverse navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Travel Diary</a>
+                </div>
+                <div id="navbar">
+                    <form class="navbar-search navbar-form ">
+                        <input type="text" class="form-control" placeholder="Search...">
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-calendar"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-bell"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
         <div ui-view></div>
 
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular.js"))"></script>
