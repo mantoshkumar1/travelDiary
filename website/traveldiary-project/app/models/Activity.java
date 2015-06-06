@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,6 +20,24 @@ public class Activity {
     @JoinColumn(name="locationId")
     private Location location;
     private List<Review> reviewsList;
+    private Date startTime;
+    private Date endTime;
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
 
     public List<Review> getReviewsList() {
         return reviewsList;
