@@ -20,10 +20,6 @@ public class Vacation {
     private  Activity[] activities;
     private double budget;
 
-    public Vacation(String name, User creator) {
-        this.name = name;
-        this.creator = creator;
-    }
 
     public long getId() {
         return id;

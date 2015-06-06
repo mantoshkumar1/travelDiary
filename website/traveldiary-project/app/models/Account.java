@@ -11,14 +11,6 @@ public abstract class Account {
     private String email;
     private String passwordHash;
 
-    public Account(String username, String firstName, String lastName, String email, String passwordHash) {
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.passwordHash = passwordHash;
-    }
-
     public String getUsername() {
         return username;
     }

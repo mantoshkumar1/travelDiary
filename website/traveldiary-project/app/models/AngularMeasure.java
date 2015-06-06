@@ -8,11 +8,6 @@ public class AngularMeasure extends Location {
     private double latitude;
     private double longtitude;
 
-    public AngularMeasure(String name, String description, double latitude, double longtitude) {
-        super(name, description);
-        this.latitude = latitude;
-        this.longtitude = longtitude;
-    }
 
     public double getLatitude() {
         return latitude;

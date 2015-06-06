@@ -9,11 +9,6 @@ public class Review {
     private String content;
     private EnumRating rating;
 
-    public Review(String title, String content, EnumRating rating) {
-        this.title = title;
-        this.content = content;
-        this.rating = rating;
-    }
 
     public String getTitle() {
         return title;

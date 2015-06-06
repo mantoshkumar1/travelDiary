@@ -10,14 +10,6 @@ public class Address extends Location {
     private String zipCode;
     private String country;
 
-    public Address(String name, String description, String street, String city, String zipCode, String country) {
-        super(name, description);
-        this.street = street;
-        this.city = city;
-        this.zipCode = zipCode;
-        this.country = country;
-    }
-
     public String getStreet() {
         return street;
     }

@@ -17,12 +17,6 @@ public class User extends Account {
 
     private Vacation[] vacations;
 
-
-    public User(String username, String firstName, String lastName, String email, String passwordHash, Vacation[] vacations) {
-        super(username, firstName, lastName, email, passwordHash);
-        this.vacations = vacations;
-    }
-
     public long getId() {
         return id;
     }
