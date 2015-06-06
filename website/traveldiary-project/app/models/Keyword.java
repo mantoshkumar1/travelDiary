@@ -7,15 +7,17 @@ package models;
 // import net.sf.ehcache.config.PersistenceConfiguration;
 
 import play.data.validation.Constraints;
-import play.db.jpa.JPA;
 
 import javax.persistence.*;
 
-//@Entity
-public class Keywords {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long keywordId;
+@Entity
+public class Keyword {
+
+    @Id
+    @GeneratedValue
+    private long id;
+
+    @Constraints.Required
     private String keyword;
 
     public String getKeyword() {
@@ -26,11 +28,11 @@ public class Keywords {
         this.keyword = keyword;
     }
 
-    public long getKeywordId() {
-        return keywordId;
+    public long getId() {
+        return id;
     }
 
-    public void setKeywordId(long keywordId) {
-        this.keywordId = keywordId;
+    public void setId(long id) {
+        this.id = id;
     }
 }

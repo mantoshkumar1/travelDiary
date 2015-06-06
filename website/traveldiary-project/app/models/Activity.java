@@ -30,19 +30,19 @@ public class Activity {
     private Date startTime;
     private Date endTime;
 
-//    @ManyToMany
-//    @JoinTable(name = "ActivityKeywords",
-//            joinColumns = {@JoinColumn(name="activityId")},
-//            inverseJoinColumns = {@JoinColumn(name="keywordId")})
-//    private List<Keywords> activityKeywords;
+    @ManyToMany
+    @JoinTable(name = "ActivityKeywords",
+            joinColumns = {@JoinColumn(name="activityId",referencedColumnName="id")},
+            inverseJoinColumns = {@JoinColumn(name="keywordId",referencedColumnName="id")})
+    private List<Keyword> activityKeywords;
 
-//    public List<Keywords> getActivityKeywords() {
-//        return activityKeywords;
-//    }
-//
-//    public void setActivityKeywords(List<Keywords> activityKeywords) {
-//        this.activityKeywords = activityKeywords;
-//    }
+    public List<Keyword> getActivityKeywords() {
+        return activityKeywords;
+    }
+
+    public void setActivityKeywords(List<Keyword> activityKeywords) {
+        this.activityKeywords = activityKeywords;
+    }
 
     public Date getStartTime() {
         return startTime;

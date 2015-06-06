@@ -1,5 +1,7 @@
 package models;
 
+import play.data.validation.Constraints;
+
 import javax.persistence.*;
 
 /**
@@ -11,8 +13,13 @@ public abstract class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Constraints.Required
     private String name;
+
+    @Constraints.Required
     private String description;
+
     private double longitude;
     private double latitude;
 

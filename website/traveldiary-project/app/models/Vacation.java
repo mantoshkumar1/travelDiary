@@ -1,6 +1,5 @@
 package models;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -29,13 +28,13 @@ public class Vacation {
 //    @JoinTable(name = "Vacation_Keywords",
 //    joinColumns = {@JoinColumn(name="vacationId")},
 //    inverseJoinColumns = {@JoinColumn(name="keywordId")})
-    private List<Keywords> vacationKeywordsList;
+    private List<Keyword> vacationKeywordsList;
 
-    public List<Keywords> getVacationKeywordsList() {
+    public List<Keyword> getVacationKeywordsList() {
         return vacationKeywordsList;
     }
 
-    public void setVacationKeywordsList(List<Keywords> vacationKeywordsList) {
+    public void setVacationKeywordsList(List<Keyword> vacationKeywordsList) {
         this.vacationKeywordsList = vacationKeywordsList;
     }
 
