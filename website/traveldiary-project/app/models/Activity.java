@@ -39,6 +39,10 @@ public class Activity {
     private Date startTime;
     private Date endTime;
 
+    @ManyToOne
+    @JoinColumn(name="creatorId")
+    private User creator;
+
     @ManyToMany
     @JoinTable(name = "ActivityKeywords",
             joinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")},
