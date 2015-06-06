@@ -57,11 +57,13 @@ CREATE TABLE Vacation (
   vacationId INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   description TEXT,
-  FOREIGN KEY(userId) REFERENCES User(userId),
+  userId INTEGER NOT NULL,
+  locationId INTEGER NOT NULL,
   budget DECIMAL(5,2) NOT NULL,
-  FOREIGN KEY(locationId) REFERENCES Location(locationId),
   startDate DATE,
-  endDate DATE
+  endDate DATE,
+  FOREIGN KEY(userId) REFERENCES User(userId),
+  FOREIGN KEY(locationId) REFERENCES Location(locationId)
 );
 
 CREATE TABLE Role (
@@ -72,7 +74,7 @@ CREATE TABLE Role (
 # --- !Downs
 DROP TABLE VacationReviews;
 DROP TABLE ActivityKeywords;
-DROP TABLE ActivityReviews;
+--DROP TABLE ActivityReviews;
 DROP TABLE Review;
 DROP TABLE Activity;
 DROP TABLE Keyword;
