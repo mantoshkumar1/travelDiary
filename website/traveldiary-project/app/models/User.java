@@ -17,12 +17,12 @@ public class User {
     private String lastName;
     private String email;
     @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="ROLE_ID")
+    @JoinColumn(name="roleId")
     private Role role;
     private String passwordHash;
     private List<Vacation> vacationsList;
     @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="LOCATION_ID")
+    @JoinColumn(name="locationID")
     private Location location;
 
     public Role getRole() {

@@ -12,15 +12,15 @@ public class AngularMeasure{
     private double latitude;
     private double longtitude;
     @OneToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="LOCATION_ID")
-    private Location locationId;
+    @JoinColumn(name="locationId")
+    private Location location;
 
-    public Location getLocationId() {
-        return locationId;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setLocationId(Location locationId) {
-        this.locationId = locationId;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public double getLatitude() {

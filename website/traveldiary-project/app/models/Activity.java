@@ -12,13 +12,21 @@ public class Activity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long activityId;
     private String name;
     private String description;
     @OneToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="LOCATION_ID")
+    @JoinColumn(name="locationId")
     private Location location;
     private List<Review> reviewsList;
+
+    public List<Review> getReviewsList() {
+        return reviewsList;
+    }
+
+    public void setReviewsList(List<Review> reviewsList) {
+        this.reviewsList = reviewsList;
+    }
 
     public Location getLocation() {
         return location;
@@ -28,12 +36,12 @@ public class Activity {
         this.location = location;
     }
 
-    public long getId() {
-        return id;
+    public long getActivityId() {
+        return activityId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setActivityId(long activityId) {
+        this.activityId = activityId;
     }
     public String getName() {
         return name;

@@ -14,13 +14,13 @@ public class Vacation {
     private String name;
     private String description;
     @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="CREATOR_ID")
+    @JoinColumn(name="userID")
     private User creator;
     private List<Activity> activitiesList;
     private List<Review> reviewsList;
     private double budget;
     @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="LOCATION_ID")
+    @JoinColumn(name="locationId")
     private Location locationId;
 
     public Location getLocationId() {

@@ -14,7 +14,7 @@ public class Address {
     private String zipCode;
     private String country;
     @OneToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="LOCATION_ID")
+    @JoinColumn(name="locationId")
     private Location locationId;
 
     public Location getLocationId() {

@@ -16,13 +16,13 @@ public class Review {
     private String activityReview;
     private EnumRating rating;
     @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="ACTIVITY_ID")
+    @JoinColumn(name="activityId")
     private Activity activity;
     @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="VACATION_ID")
+    @JoinColumn(name="vacationId")
     private Vacation vacation;
     @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="CREATOR_ID")
+    @JoinColumn(name="userId")
     private User user;
     private Date reviewDate;
 
