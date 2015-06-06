@@ -22,6 +22,19 @@ public class Activity {
     private List<Review> reviewsList;
     private Date startTime;
     private Date endTime;
+    @ManyToMany
+    @JoinTable(name = "Activity_Keywords",
+            joinColumns = {@JoinColumn(name="activityId")},
+            inverseJoinColumns = {@JoinColumn(name="keywordId")})
+    private List<Keywords> activityKeywordsList;
+
+    public List<Keywords> getActivityKeywordsList() {
+        return activityKeywordsList;
+    }
+
+    public void setActivityKeywordsList(List<Keywords> activityKeywordsList) {
+        this.activityKeywordsList = activityKeywordsList;
+    }
 
     public Date getStartTime() {
         return startTime;

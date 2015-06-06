@@ -10,7 +10,7 @@ public class Vacation {
     @Id
 
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long vacationId;
 
     private String name;
     private String description;
@@ -25,6 +25,19 @@ public class Vacation {
     private Location locationId;
     private Date startDate;
     private Date endDate;
+    @ManyToMany
+    @JoinTable(name = "Vacation_Keywords",
+    joinColumns = {@JoinColumn(name="vacationId")},
+    inverseJoinColumns = {@JoinColumn(name="keywordId")})
+    private List<Keywords> vacationKeywordsList;
+
+    public List<Keywords> getVacationKeywordsList() {
+        return vacationKeywordsList;
+    }
+
+    public void setVacationKeywordsList(List<Keywords> vacationKeywordsList) {
+        this.vacationKeywordsList = vacationKeywordsList;
+    }
 
     public Date getStartDate() {
         return startDate;
@@ -50,12 +63,12 @@ public class Vacation {
         this.locationId = locationId;
     }
 
-    public long getId() {
-        return id;
+    public long getVacationId() {
+        return vacationId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setVacationId(long vacationId) {
+        this.vacationId = vacationId;
     }
 
     public String getName() {
