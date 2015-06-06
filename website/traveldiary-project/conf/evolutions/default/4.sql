@@ -54,15 +54,14 @@ CREATE TABLE VacationReviews (
 );
 
 CREATE TABLE Vacation (
-  vacationId INTEGER,
+  vacationId INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   description TEXT,
   FOREIGN KEY(userId) REFERENCES User(userId),
   budget DECIMAL(5,2) NOT NULL,
   FOREIGN KEY(locationId) REFERENCES Location(locationId),
   startDate DATE,
-  endDate DATE,
-  PRIMARY KEY(vacationId)
+  endDate DATE
 );
 
 # --- !Downs
