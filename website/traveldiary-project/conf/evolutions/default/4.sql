@@ -67,8 +67,7 @@ CREATE TABLE Vacation (
 CREATE TABLE Role (
   roleId INTEGER PRIMARY KEY AUTOINCREMENT,
   roleName TEXT NOT NULL
-)
-
+);
 
 # --- !Downs
 DROP TABLE VacationReviews;

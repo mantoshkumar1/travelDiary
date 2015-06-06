@@ -1,14 +1,14 @@
 package models;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 //@Entity
 public class Vacation {
 
-//    @Id
-
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long vacationId;
 
     private String name;
@@ -24,10 +24,10 @@ public class Vacation {
     private Location locationId;
     private Date startDate;
     private Date endDate;
-//    @ManyToMany
-//    @JoinTable(name = "Vacation_Keywords",
-//    joinColumns = {@JoinColumn(name="vacationId")},
-//    inverseJoinColumns = {@JoinColumn(name="keywordId")})
+    @ManyToMany
+    @JoinTable(name = "Vacation_Keywords",
+    joinColumns = {@JoinColumn(name="vacationId")},
+    inverseJoinColumns = {@JoinColumn(name="keywordId")})
     private List<Keyword> vacationKeywordsList;
 
     public List<Keyword> getVacationKeywordsList() {
