@@ -1,37 +1,51 @@
 package models;
 
+import play.data.validation.Constraints;
 import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by Rike on 06.06.2015.
  */
-//@Entity
+@Entity
 public class User {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue
     private long userId;
+
+    @Constraints.Required
     private String username;
     private String firstName;
     private String lastName;
     private String email;
-//    @OneToOne(fetch=FetchType.LAZY)
-//    @JoinColumn(name="roleId")
-    private Role role;
+    @Constraints.Required
     private String passwordHash;
-    private List<Vacation> vacationsList;
-//    @OneToOne(fetch=FetchType.LAZY)
-//    @JoinColumn(name="locationID")
-    private Location location;
 
-    public Role getRole() {
-        return role;
-    }
+    @OneToMany
+    @JoinColumn(name="creatorId")
+    private List<Activity> createdActivites;
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+//    @OneToMany
+//    @JoinColumn(name="creatorId")
+//    private List<Vacation> createdVacations;
+
+
+
+
+//    private List<Vacation> savedVacations;
+
+ //   @OneToOne(fetch=FetchType.LAZY)
+ //   @JoinColumn(name="locationID")
+ //   private Location location;
+
+//    public Role getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(Role role) {
+//        this.role = role;
+//    }
 
     public String getUsername() {
         return username;
@@ -82,13 +96,13 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
+//    public Location getLocation() {
+//        return location;
+//    }
+//
+//    public void setLocation(Location location) {
+//        this.location = location;
+//    }
 
     public long getUserId() {
         return userId;
@@ -98,11 +112,11 @@ public class User {
         this.userId = id;
     }
 
-    public void setVacationsList(List<Vacation> vacationsList) {
-        this.vacationsList = vacationsList;
-    }
-
-    public List<Vacation> getVacationsList() {
-        return vacationsList;
-    }
+//    public void setVacationsList(List<Vacation> vacationsList) {
+//        this.vacationsList = vacationsList;
+//    }
+//
+//    public List<Vacation> getVacationsList() {
+//        return vacationsList;
+//    }
 }

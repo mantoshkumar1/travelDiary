@@ -23,9 +23,9 @@ public class Review {
     @Enumerated(EnumType.STRING)
     private EnumRating rating;
 
-//    @OneToOne(fetch=FetchType.LAZY)
-//    @JoinColumn(name="userId")
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name="userId")
+    private User user;
 
     private Date date;
 
@@ -37,13 +37,13 @@ public class Review {
         this.date = date;
     }
 
-    //    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getTitle() {
         return title;

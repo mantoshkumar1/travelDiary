@@ -12,6 +12,14 @@ CREATE TABLE Keyword (
 	keyword	TEXT NOT NULL
 );
 
+CREATE TABLE User (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT NOT NULL,
+  firstName TEXT,
+  lastName TEXT,
+  passwordHash TEXT
+);
+
 CREATE TABLE Activity (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	name	TEXT NOT NULL,
@@ -19,7 +27,9 @@ CREATE TABLE Activity (
   startTime INTEGER,
   endTime INTEGER,
   locationId INTEGER,
-  FOREIGN KEY(locationId) REFERENCES Location(id)
+  creatorId INTEGER,
+  FOREIGN KEY(locationId) REFERENCES Location(id),
+  FOREIGN KEY(creatorId) REFERENCES User(id)
 );
 
 CREATE TABLE ActivityKeywords (
@@ -34,7 +44,9 @@ CREATE TABLE Review (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title	TEXT NOT NULL,
   description TEXT NOT NULL,
-  date INTEGER
+  date INTEGER,
+  userId INTEGER,
+  FOREIGN KEY(userId) REFERENCES User(id)
 );
 
 CREATE TABLE ActivityReviews (
@@ -55,9 +67,10 @@ CREATE TABLE VacationReviews (
 
 # --- !Downs
 DROP TABLE VacationReviews;
-DROP TABLE ActivityKeywords;
-DROP TABLE ActivityKeywords;
+DROP TABLE ActivityReviews;
 DROP TABLE Review;
+DROP TABLE ActivityKeywords;
 DROP TABLE Activity;
+DROP TABLE User;
 DROP TABLE Keyword;
 DROP TABLE Location;
