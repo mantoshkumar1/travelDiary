@@ -22,7 +22,7 @@ public class Review {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private EnumRating rating;
+    private Rating rating;
 
     @ManyToOne
     @JoinColumn(name = "userId")
@@ -70,9 +70,9 @@ public class Review {
         this.description = description;
     }
 
-    public EnumRating getRating() { return rating; }
+    public Rating getRating() { return rating; }
 
-    public void setRating(EnumRating rating) {
+    public void setRating(Rating rating) {
         this.rating = rating;
     }
 }
