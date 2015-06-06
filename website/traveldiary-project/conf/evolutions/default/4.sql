@@ -53,6 +53,18 @@ CREATE TABLE VacationReviews (
   PRIMARY KEY(vacationId,reviewId)
 );
 
+CREATE TABLE Vacation (
+  vacationId INTEGER,
+  name TEXT NOT NULL,
+  description TEXT,
+  FOREIGN KEY(userId) REFERENCES User(userId),
+  budget DECIMAL(5,2) NOT NULL,
+  FOREIGN KEY(locationId) REFERENCES Location(locationId),
+  startDate DATE,
+  endDate DATE,
+  PRIMARY KEY(vacationId)
+);
+
 # --- !Downs
 DROP TABLE VacationReviews;
 DROP TABLE ActivityKeywords;
@@ -61,3 +73,4 @@ DROP TABLE Review;
 DROP TABLE Activity;
 DROP TABLE Keyword;
 DROP TABLE Location;
+DROP TABLE Vacation;
