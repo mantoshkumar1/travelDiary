@@ -7,30 +7,95 @@ import java.util.List;
  * Created by Rike on 06.06.2015.
  */
 @Entity
-public class User extends Account {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long userId;
+    private String username;
+    private String firstName;
+    private String lastName;
+    private String email;
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="ROLE_ID")
+    private Role role;
+    private String passwordHash;
     private List<Vacation> vacationsList;
     @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="LOCATION_ID")
-    private Location locationId;
+    private Location location;
 
-    public Location getLocationId() {
-        return locationId;
+    public Role getRole() {
+        return role;
     }
 
-    public void setLocationId(Location locationId) {
-        this.locationId = locationId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
-    public long getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setId(long id) {
-        this.id = id;
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+
+    public String getLastName() {
+        return lastName;
+    }
+
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long id) {
+        this.userId = id;
     }
 
     public void setVacationsList(List<Vacation> vacationsList) {
