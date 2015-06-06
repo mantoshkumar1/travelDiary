@@ -8,13 +8,13 @@ import javax.persistence.OneToOne;
 /**
  * Created by Rike on 06.06.2015.
  */
-@Entity
+//@Entity
 public class AngularMeasure{
 
     private double latitude;
     private double longtitude;
-    @OneToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="locationId")
+//    @OneToOne(fetch= FetchType.LAZY)
+//    @JoinColumn(name="locationId")
     private Location location;
 
     public Location getLocation() {

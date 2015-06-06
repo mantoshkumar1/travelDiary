@@ -8,11 +8,11 @@ import javax.persistence.Id;
 /**
  * Created by Rike on 06.06.2015.
  */
-@Entity
+//@Entity
 public abstract class Location {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
     private String description;

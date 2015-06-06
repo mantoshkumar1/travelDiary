@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 /**
  * Created by JOY on 6/6/2015.
  */
-@Entity
+//@Entity
 public class Role {
     private long roleId;
     private String roleName;

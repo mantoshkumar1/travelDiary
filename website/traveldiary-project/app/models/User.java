@@ -6,23 +6,23 @@ import java.util.List;
 /**
  * Created by Rike on 06.06.2015.
  */
-@Entity
+//@Entity
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
     private String username;
     private String firstName;
     private String lastName;
     private String email;
-    @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="roleId")
+//    @OneToOne(fetch=FetchType.LAZY)
+//    @JoinColumn(name="roleId")
     private Role role;
     private String passwordHash;
     private List<Vacation> vacationsList;
-    @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="locationID")
+//    @OneToOne(fetch=FetchType.LAZY)
+//    @JoinColumn(name="locationID")
     private Location location;
 
     public Role getRole() {

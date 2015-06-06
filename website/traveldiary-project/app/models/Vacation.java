@@ -4,31 +4,31 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Entity
+//@Entity
 public class Vacation {
 
-    @Id
+//    @Id
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private long vacationId;
 
     private String name;
     private String description;
-    @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="userID")
+//    @OneToOne(fetch=FetchType.LAZY)
+//    @JoinColumn(name="userID")
     private User creator;
     private List<Activity> activitiesList;
     private List<Review> reviewsList;
     private double budget;
-    @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="locationId")
+//    @OneToOne(fetch=FetchType.LAZY)
+//    @JoinColumn(name="locationId")
     private Location locationId;
     private Date startDate;
     private Date endDate;
-    @ManyToMany
-    @JoinTable(name = "Vacation_Keywords",
-    joinColumns = {@JoinColumn(name="vacationId")},
-    inverseJoinColumns = {@JoinColumn(name="keywordId")})
+//    @ManyToMany
+//    @JoinTable(name = "Vacation_Keywords",
+//    joinColumns = {@JoinColumn(name="vacationId")},
+//    inverseJoinColumns = {@JoinColumn(name="keywordId")})
     private List<Keywords> vacationKeywordsList;
 
     public List<Keywords> getVacationKeywordsList() {

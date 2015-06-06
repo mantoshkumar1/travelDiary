@@ -1,5 +1,8 @@
 package models;
 
+import play.data.validation.Constraints;
+import play.db.jpa.JPA;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -8,24 +11,24 @@ import java.util.List;
  * Created by Rike on 06.06.2015.
  */
 
-@Entity
+//@Entity
 public class Activity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private long activityId;
     private String name;
     private String description;
-    @OneToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="locationId")
+//    @OneToOne(fetch= FetchType.LAZY)
+//    @JoinColumn(name="locationId")
     private Location location;
     private List<Review> reviewsList;
     private Date startTime;
     private Date endTime;
-    @ManyToMany
-    @JoinTable(name = "Activity_Keywords",
-            joinColumns = {@JoinColumn(name="activityId")},
-            inverseJoinColumns = {@JoinColumn(name="keywordId")})
+//    @ManyToMany
+//    @JoinTable(name = "Activity_Keywords",
+//            joinColumns = {@JoinColumn(name="activityId")},
+//            inverseJoinColumns = {@JoinColumn(name="keywordId")})
     private List<Keywords> activityKeywordsList;
 
     public List<Keywords> getActivityKeywordsList() {

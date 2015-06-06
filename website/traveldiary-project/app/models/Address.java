@@ -8,15 +8,15 @@ import javax.persistence.OneToOne;
 /**
  * Created by Rike on 06.06.2015.
  */
-@Entity
+//@Entity
 public class Address {
 
     private String street;
     private String city;
     private String zipCode;
     private String country;
-    @OneToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="locationId")
+//    @OneToOne(fetch= FetchType.LAZY)
+//    @JoinColumn(name="locationId")
     private Location locationId;
 
     public Location getLocationId() {

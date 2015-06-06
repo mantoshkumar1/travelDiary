@@ -6,24 +6,24 @@ import java.util.Date;
 /**
  * Created by Rike on 06.06.2015.
  */
-@Entity
+//@Entity
 public class Review {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private long reviewId;
     private String title;
     private String vacationReview;
     private String activityReview;
     private EnumRating rating;
-    @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="activityId")
+//    @OneToOne(fetch=FetchType.LAZY)
+//    @JoinColumn(name="activityId")
     private Activity activity;
-    @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="vacationId")
+//    @OneToOne(fetch=FetchType.LAZY)
+//    @JoinColumn(name="vacationId")
     private Vacation vacation;
-    @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="userId")
+//    @OneToOne(fetch=FetchType.LAZY)
+//    @JoinColumn(name="userId")
     private User user;
     private Date reviewDate;
 
