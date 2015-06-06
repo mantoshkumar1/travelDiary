@@ -1,4 +1,4 @@
-package assets;
+package models;
 
 /**
  * Created by JOY on 6/6/2015.
