@@ -6,6 +6,7 @@ import java.util.Date;
 /**
  * Created by Rike on 06.06.2015.
  */
+@Entity
 public class Review {
 
     @Id
