@@ -1,9 +1,7 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Rike on 06.06.2015.
@@ -17,7 +15,18 @@ public class Activity {
     private long id;
     private String name;
     private String description;
+    @OneToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="LOCATION_ID")
     private Location location;
+    private List<Review> reviewsList;
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 
     public long getId() {
         return id;

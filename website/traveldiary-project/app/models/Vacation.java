@@ -1,26 +1,35 @@
 package models;
 
-import play.*;
-import play.mvc.*;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Vacation {
 
     @Id
+
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private String name;
     private String description;
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="CREATOR_ID")
     private User creator;
-    private List<Activity> activities;
-    private List<Review> reviews;
+    private List<Activity> activitiesList;
+    private List<Review> reviewsList;
     private double budget;
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="LOCATION_ID")
+    private Location locationId;
+
+    public Location getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(Location locationId) {
+        this.locationId = locationId;
+    }
 
     public long getId() {
         return id;
@@ -54,20 +63,20 @@ public class Vacation {
         this.creator = creator;
     }
 
-    public List<Activity> getActivities() {
-        return activities;
+    public List<Activity> getActivitiesList() {
+        return activitiesList;
     }
 
-    public void setActivities(List<Activity> activities) {
-        this.activities = activities;
+    public void setActivitiesList(List<Activity> activitiesList) {
+        this.activitiesList = activitiesList;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
+    public List<Review> getReviewsList() {
+        return reviewsList;
     }
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
+    public void setReviewsList(List<Review> reviewsList) {
+        this.reviewsList = reviewsList;
     }
 
     public double getBudget() {

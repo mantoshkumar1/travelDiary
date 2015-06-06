@@ -1,5 +1,9 @@
 package models;
 
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 /**
  * Created by Rike on 06.06.2015.
  */
@@ -10,6 +14,17 @@ public abstract class Account {
     private String lastName;
     private String email;
     private String passwordHash;
+    @OneToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="USER_ID")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getUsername() {
         return username;
