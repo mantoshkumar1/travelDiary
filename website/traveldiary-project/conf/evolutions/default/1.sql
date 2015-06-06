@@ -12,12 +12,19 @@ CREATE TABLE Keyword (
 	keyword	TEXT NOT NULL
 );
 
+CREATE TABLE Role (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  roleName TEXT NOT NULL
+);
+
 CREATE TABLE User (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT NOT NULL,
   firstName TEXT,
   lastName TEXT,
-  passwordHash TEXT
+  passwordHash TEXT,
+  roleId INTEGER,
+  FOREIGN KEY (roleId) REFERENCES Role(id)
 );
 
 CREATE TABLE Activity (
@@ -94,13 +101,7 @@ CREATE TABLE VacationActivities (
   PRIMARY KEY(vacationId,activityId)
 );
 
-CREATE TABLE Role (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  roleName TEXT NOT NULL
-);
-
 # --- !Downs
-DROP TABLE Role;
 DROP TABLE VacationActivities;
 DROP TABLE VacationReviews;
 DROP TABLE VacationKeywords;
@@ -110,6 +111,6 @@ DROP TABLE ActivityKeywords;
 DROP TABLE Review;
 DROP TABLE Activity;
 DROP TABLE User;
+DROP TABLE Role;
 DROP TABLE Keyword;
 DROP TABLE Location;
-DROP TABLE Vacation;

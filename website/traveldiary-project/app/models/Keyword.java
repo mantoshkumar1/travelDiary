@@ -4,11 +4,11 @@ package models;
  * Created by JOY on 6/6/2015.
  */
 
-// import net.sf.ehcache.config.PersistenceConfiguration;
-
 import play.data.validation.Constraints;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Keyword {

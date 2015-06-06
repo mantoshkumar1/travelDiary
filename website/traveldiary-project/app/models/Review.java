@@ -1,6 +1,7 @@
 package models;
 
 import play.data.validation.Constraints;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -24,7 +25,7 @@ public class Review {
     private EnumRating rating;
 
     @ManyToOne
-    @JoinColumn(name="userId")
+    @JoinColumn(name = "userId")
     private User user;
 
     private Date date;
@@ -57,22 +58,19 @@ public class Review {
         return id;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public EnumRating getRating() {
-        return rating;
-
-    }
-
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public EnumRating getRating() { return rating; }
 
     public void setRating(EnumRating rating) {
         this.rating = rating;

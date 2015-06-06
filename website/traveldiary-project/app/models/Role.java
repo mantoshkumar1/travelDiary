@@ -2,8 +2,9 @@ package models;
 
 import play.data.validation.Constraints;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created by JOY on 6/6/2015.

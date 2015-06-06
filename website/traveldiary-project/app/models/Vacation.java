@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-//@Entity
+@Entity
 public class Vacation {
 
     @Id
@@ -20,29 +20,29 @@ public class Vacation {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name="creatorId")
+    @JoinColumn(name = "creatorId")
     private User creator;
 
     @ManyToMany
     @JoinTable(name = "VacationActivities",
-            joinColumns = {@JoinColumn(name="vacationId", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name="activityId", referencedColumnName = "id")})
+            joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")})
     private List<Activity> activitiesList;
 
     @OneToMany
     @JoinTable
-    (
-            name = "VacationReviews",
-            joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "reviewId", referencedColumnName = "id", unique = true)}
-    )
+            (
+                    name = "VacationReviews",
+                    joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
+                    inverseJoinColumns = {@JoinColumn(name = "reviewId", referencedColumnName = "id", unique = true)}
+            )
     private List<Review> reviewsList;
 
     @Column(precision = 5, scale = 2)
     private BigDecimal budget;
 
     @ManyToOne
-    @JoinColumn(name="locationId")
+    @JoinColumn(name = "locationId")
     private Location locationId;
 
     private Date startDate;
@@ -50,8 +50,8 @@ public class Vacation {
 
     @ManyToMany
     @JoinTable(name = "VacationKeywords",
-    joinColumns = {@JoinColumn(name="vacationId", referencedColumnName = "id")},
-    inverseJoinColumns = {@JoinColumn(name="keywordId", referencedColumnName = "id")})
+            joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "keywordId", referencedColumnName = "id")})
     private List<Keyword> vacationKeywords;
 
     public List<Keyword> getVacationKeywords() {
@@ -118,7 +118,6 @@ public class Vacation {
         this.creator = creator;
     }
 
-
     public BigDecimal getBudget() {
         return budget;
     }
@@ -127,19 +126,19 @@ public class Vacation {
         this.budget = budget;
     }
 
-    public void setActivitiesList(List<Activity> activitiesList) {
-        this.activitiesList = activitiesList;
-    }
-
-    public void setReviewsList(List<Review> reviewsList) {
-        this.reviewsList = reviewsList;
-    }
-
     public List<Activity> getActivitiesList() {
         return activitiesList;
     }
 
+    public void setActivitiesList(List<Activity> activitiesList) {
+        this.activitiesList = activitiesList;
+    }
+
     public List<Review> getReviewsList() {
         return reviewsList;
+    }
+
+    public void setReviewsList(List<Review> reviewsList) {
+        this.reviewsList = reviewsList;
     }
 }

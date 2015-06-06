@@ -39,7 +39,7 @@ public class Activity {
     private Date endTime;
 
     @ManyToOne
-    @JoinColumn(name="creatorId")
+    @JoinColumn(name = "creatorId")
     private User creator;
 
     @ManyToMany
