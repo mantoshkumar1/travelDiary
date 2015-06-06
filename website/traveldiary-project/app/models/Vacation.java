@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
 @Entity
 public class Vacation {
@@ -17,13 +18,9 @@ public class Vacation {
     private String name;
     private String description;
     private User creator;
-    private  Activity[] activities;
+    private List<Activity> activities;
+    private List<Review> reviews;
     private double budget;
-
-    public Vacation(String name, User creator) {
-        this.name = name;
-        this.creator = creator;
-    }
 
     public long getId() {
         return id;
@@ -57,12 +54,20 @@ public class Vacation {
         this.creator = creator;
     }
 
-    public Activity[] getActivities() {
+    public List<Activity> getActivities() {
         return activities;
     }
 
-    public void setActivities(Activity[] activities) {
+    public void setActivities(List<Activity> activities) {
         this.activities = activities;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
     public double getBudget() {

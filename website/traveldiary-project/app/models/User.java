@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
 /**
  * Created by Rike on 06.06.2015.
@@ -15,13 +16,7 @@ public class User extends Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private Vacation[] vacations;
-
-
-    public User(String username, String firstName, String lastName, String email, String passwordHash, Vacation[] vacations) {
-        super(username, firstName, lastName, email, passwordHash);
-        this.vacations = vacations;
-    }
+    private List<Vacation> vacations;
 
     public long getId() {
         return id;
@@ -31,11 +26,11 @@ public class User extends Account {
         this.id = id;
     }
 
-    public void setVacations(Vacation[] vacations) {
+    public void setVacations(List<Vacation> vacations) {
         this.vacations = vacations;
     }
 
-    public Vacation[] getVacations() {
+    public List<Vacation> getVacations() {
         return vacations;
     }
 

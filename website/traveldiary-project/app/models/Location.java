@@ -10,16 +10,16 @@ import javax.persistence.Id;
  */
 @Entity
 public abstract class Location {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     private String name;
     private String description;
+    private AngularMeasure angularMeasure;
+    private Address address;
 
-    public Location(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
     public long getId() {
         return id;
     }
@@ -42,5 +42,21 @@ public abstract class Location {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public AngularMeasure getAngularMeasure() {
+        return angularMeasure;
+    }
+
+    public void setAngularMeasure(AngularMeasure angularMeasure) {
+        this.angularMeasure = angularMeasure;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

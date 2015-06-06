@@ -3,20 +3,12 @@ package models;
 /**
  * Created by Rike on 06.06.2015.
  */
-public class Address extends Location {
+public class Address {
 
     private String street;
     private String city;
     private String zipCode;
     private String country;
-
-    public Address(String name, String description, String street, String city, String zipCode, String country) {
-        super(name, description);
-        this.street = street;
-        this.city = city;
-        this.zipCode = zipCode;
-        this.country = country;
-    }
 
     public String getStreet() {
         return street;
