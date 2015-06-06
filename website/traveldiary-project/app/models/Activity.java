@@ -24,16 +24,25 @@ public class Activity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name= "locationId")
+    @JoinColumn(name = "locationId")
     private Location location;
-//    private List<Review> reviews;
+
+    @OneToMany
+    @JoinTable
+            (
+                    name = "ActivityReviews",
+                    joinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")},
+                    inverseJoinColumns = {@JoinColumn(name = "reviewId", referencedColumnName = "id", unique = true)}
+            )
+    private List<Review> reviews;
+
     private Date startTime;
     private Date endTime;
 
     @ManyToMany
     @JoinTable(name = "ActivityKeywords",
-            joinColumns = {@JoinColumn(name="activityId",referencedColumnName="id")},
-            inverseJoinColumns = {@JoinColumn(name="keywordId",referencedColumnName="id")})
+            joinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "keywordId", referencedColumnName = "id")})
     private List<Keyword> activityKeywords;
 
     public List<Keyword> getActivityKeywords() {
@@ -59,14 +68,14 @@ public class Activity {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
-//
-//    public List<Review> getReviews() {
-//        return reviews;
-//    }
-//
-//    public void setReviewsList(List<Review> reviews) {
-//        this.reviews = reviews;
-//    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     public Location getLocation() {
         return location;
@@ -83,6 +92,7 @@ public class Activity {
     public void setId(long id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }

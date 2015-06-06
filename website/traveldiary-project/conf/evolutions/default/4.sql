@@ -30,8 +30,34 @@ CREATE TABLE ActivityKeywords (
   PRIMARY KEY(activityId,keywordId)
 );
 
+CREATE TABLE Review (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title	TEXT NOT NULL,
+  description TEXT NOT NULL,
+  date INTEGER
+);
+
+CREATE TABLE ActivityReviews (
+  activityId INTEGER,
+  reviewId INTEGER UNIQUE,
+  FOREIGN KEY(activityId) REFERENCES Activity(id),
+  FOREIGN KEY(reviewId) REFERENCES Review(id),
+  PRIMARY KEY(activityId,reviewId)
+);
+
+CREATE TABLE VacationReviews (
+  vacationId INTEGER,
+  reviewId INTEGER UNIQUE,
+  FOREIGN KEY(vacationId) REFERENCES Activity(id),
+  FOREIGN KEY(reviewId) REFERENCES Review(id),
+  PRIMARY KEY(vacationId,reviewId)
+);
+
 # --- !Downs
+DROP TABLE VacationReviews;
 DROP TABLE ActivityKeywords;
+DROP TABLE ActivityKeywords;
+DROP TABLE Review;
 DROP TABLE Activity;
 DROP TABLE Keyword;
 DROP TABLE Location;
