@@ -3,10 +3,14 @@ package models;
 /**
  * Created by Rike on 06.06.2015.
  */
-public class User {
+public class User extends Account {
 
-    private String name;
     private Vacation[] vacations;
+
+    public User(String username, String firstName, String lastName, String email, String passwordHash, Vacation[] vacations) {
+        super(username, firstName, lastName, email, passwordHash);
+        this.vacations = vacations;
+    }
 
     public Vacation[] getVacations() {
         return vacations;
@@ -14,14 +18,6 @@ public class User {
 
     public void setVacations(Vacation[] vacations) {
         this.vacations = vacations;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }

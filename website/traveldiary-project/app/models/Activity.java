@@ -7,5 +7,6 @@ public class Activity {
 
     private String name;
     private String description;
+    private Location location;
 
 }
