@@ -22,9 +22,10 @@ public class Location {
     @Constraints.Required
     private String description;
 
-
     private double longitude;
     private double latitude;
+    private String address;
+    private String googleMapsLink;
 
     public long getId() {
         return id;
@@ -64,6 +65,22 @@ public class Location {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getGoogleMapsLink() {
+        return googleMapsLink;
+    }
+
+    public void setGoogleMapsLink(String googleMapsLink) {
+        this.googleMapsLink = googleMapsLink;
     }
 
     public static List<Location> findAll() {
