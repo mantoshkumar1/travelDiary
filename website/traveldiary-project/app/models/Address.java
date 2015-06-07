@@ -1,10 +1,5 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
 /**
  * Created by Rike on 06.06.2015.
  */
@@ -15,7 +10,7 @@ public class Address {
     private String city;
     private String zipCode;
     private String country;
-//    @OneToOne(fetch= FetchType.LAZY)
+    //    @OneToOne(fetch= FetchType.LAZY)
 //    @JoinColumn(name="locationId")
     private Location locationId;
 

@@ -1,41 +1,66 @@
 package models;
 
+import play.data.validation.Constraints;
+import play.db.jpa.JPA;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-//@Entity
+@Entity
 public class Vacation {
 
-//    @Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long vacationId;
-
+    @Constraints.Required
     private String name;
+    @Constraints.Required
     private String description;
-//    @OneToOne(fetch=FetchType.LAZY)
-//    @JoinColumn(name="userID")
+
+    @ManyToOne
+    @JoinColumn(name = "creatorId")
     private User creator;
+
+    @ManyToMany
+    @JoinTable(name = "VacationActivities",
+            joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")})
     private List<Activity> activitiesList;
+
+    @OneToMany
+    @JoinTable
+            (
+                    name = "VacationReviews",
+                    joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
+                    inverseJoinColumns = {@JoinColumn(name = "reviewId", referencedColumnName = "id", unique = true)}
+            )
     private List<Review> reviewsList;
-    private double budget;
-//    @OneToOne(fetch=FetchType.LAZY)
-//    @JoinColumn(name="locationId")
+
+    @Column(precision = 5, scale = 2)
+    private BigDecimal budget;
+
+    @ManyToOne
+    @JoinColumn(name = "locationId")
     private Location locationId;
+
     private Date startDate;
     private Date endDate;
-//    @ManyToMany
-//    @JoinTable(name = "Vacation_Keywords",
-//    joinColumns = {@JoinColumn(name="vacationId")},
-//    inverseJoinColumns = {@JoinColumn(name="keywordId")})
-    private List<Keyword> vacationKeywordsList;
 
-    public List<Keyword> getVacationKeywordsList() {
-        return vacationKeywordsList;
+    @ManyToMany
+    @JoinTable(name = "VacationKeywords",
+            joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "keywordId", referencedColumnName = "id")})
+    private List<Keyword> vacationKeywords;
+
+    public List<Keyword> getVacationKeywords() {
+        return vacationKeywords;
     }
 
-    public void setVacationKeywordsList(List<Keyword> vacationKeywordsList) {
-        this.vacationKeywordsList = vacationKeywordsList;
+    public void setVacationKeywords(List<Keyword> vacationKeywords) {
+        this.vacationKeywords = vacationKeywords;
     }
 
     public Date getStartDate() {
@@ -62,12 +87,12 @@ public class Vacation {
         this.locationId = locationId;
     }
 
-    public long getVacationId() {
-        return vacationId;
+    public long getId() {
+        return id;
     }
 
-    public void setVacationId(long vacationId) {
-        this.vacationId = vacationId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -94,6 +119,14 @@ public class Vacation {
         this.creator = creator;
     }
 
+    public BigDecimal getBudget() {
+        return budget;
+    }
+
+    public void setBudget(BigDecimal budget) {
+        this.budget = budget;
+    }
+
     public List<Activity> getActivitiesList() {
         return activitiesList;
     }
@@ -110,11 +143,9 @@ public class Vacation {
         this.reviewsList = reviewsList;
     }
 
-    public double getBudget() {
-        return budget;
-    }
+    public static List<Vacation> findAll() {
+        TypedQuery<Vacation> query = JPA.em().createQuery("SELECT m FROM Vacation m", Vacation.class);
 
-    public void setBudget(double budget) {
-        this.budget = budget;
+        return query.getResultList();
     }
 }

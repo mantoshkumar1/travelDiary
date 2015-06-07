@@ -35,9 +35,12 @@ public class Activity {
                     inverseJoinColumns = {@JoinColumn(name = "reviewId", referencedColumnName = "id", unique = true)}
             )
     private List<Review> reviews;
-
     private Date startTime;
     private Date endTime;
+
+    @ManyToOne
+    @JoinColumn(name = "creatorId")
+    private User creator;
 
     @ManyToMany
     @JoinTable(name = "ActivityKeywords",
