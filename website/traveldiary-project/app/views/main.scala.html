@@ -14,19 +14,23 @@
     <div ng-controller="searchController">
         <nav class="navbar navbar-fixed" >
             <div class="container-fluid">
-                <div class="navbar-header">
+                <div class="navbar-header col-md-3">
                     <a class="navbar-brand  navbar-custom" href="#">Travel Diary</a>
                 </div>
-                <div id="navbar">
-                    <form class="navbar-search navbar-form navbar-custom" ng-enter="addKeyword(currentKeyword)">
-                        <input type="text" class="form-control" ng-model="currentKeyword" typeahead="k as k.keyword for k in keywordList" placeholder="Search...">
-                        <div ng-repeat="s in searchList">{{s}}</div>
+                <div id="navbar" class="col-md-9">
+                    <div class="col-md-9">
+                    <form class="navbar-form navbar-custom" ng-enter="addKeyword(currentKeyword)">
+                        <input type="text" class="navbar-search form-control" ng-model="currentKeyword" typeahead="k as k.keyword for k in keywordList" placeholder="Search...">
+                        <div ng-repeat="s in searchList"><span class="badge">{{s.keyword}}</span></div>
                     </form>
+                    </div>
+                    <div class="col-md-3">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#"><span class="glyphicon glyphicon-calendar navbar-custom"></span></a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-bell navbar-custom"></span></a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-user navbar-custom"></span></a></li>
                     </ul>
+                    </div>
                 </div>
             </div>
         </nav></div>

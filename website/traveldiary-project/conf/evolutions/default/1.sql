@@ -55,7 +55,7 @@ CREATE TABLE Review (
   title	TEXT NOT NULL,
   description TEXT NOT NULL,
   date DATE,
-  userId DATE,
+  userId INTEGER,
   rating TEXT,
   FOREIGN KEY(userId) REFERENCES User(id)
 );
@@ -99,7 +99,7 @@ CREATE TABLE VacationReviews (
 
 CREATE TABLE VacationActivities (
   vacationId INTEGER,
-  activityId INTEGER UNIQUE,
+  activityId INTEGER,
   FOREIGN KEY(vacationId) REFERENCES Vacation(id),
   FOREIGN KEY(activityId) REFERENCES Activity(id),
   PRIMARY KEY(vacationId,activityId)
