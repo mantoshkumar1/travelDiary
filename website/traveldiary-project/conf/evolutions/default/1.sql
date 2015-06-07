@@ -4,7 +4,9 @@ CREATE TABLE Location (
 	name	TEXT NOT NULL,
 	description	TEXT NOT NULL,
   longitude REAL,
-  latitude REAL
+  latitude REAL,
+  address TEXT,
+  googleMapsLink TEXT
 );
 
 CREATE TABLE Keyword (

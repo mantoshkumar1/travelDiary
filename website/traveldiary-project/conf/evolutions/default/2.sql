@@ -21,10 +21,10 @@ INSERT INTO Keyword VALUES (15,'BIKING');
 INSERT INTO Role VALUES (1,'User');
 INSERT INTO Role VALUES (2,'Administrator');
 
-INSERT INTO Location VALUES (1,'name1','description1',1.0,1.0);
-INSERT INTO Location VALUES (2,'name2','description2',2.0,2.0);
-INSERT INTO Location VALUES (3,'name3','description3',3.0,3.0);
-INSERT INTO Location VALUES (4,'name4','description4',4.0,4.0);
+INSERT INTO Location VALUES (1,'name1','description1',1.0,1.0,'address1','googleMapsLink1');
+INSERT INTO Location VALUES (2,'name2','description2',2.0,2.0,'address2','googleMapsLink2');
+INSERT INTO Location VALUES (3,'name3','description3',3.0,3.0,'address3','googleMapsLink3');
+INSERT INTO Location VALUES (4,'name4','description4',4.0,4.0,'address4','googleMapsLink4');
 
 INSERT INTO User VALUES (1,'user1','name1','lname1','email1@mail.com','SOMEHASHVALUE1',1,1);
 INSERT INTO User VALUES (2,'user2','name2','lname2','email2@mail.com','SOMEHASHVALUE2',1,2);
