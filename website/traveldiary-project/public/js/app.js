@@ -122,17 +122,34 @@
         var keywords = Keyword.findAll();
         console.log(keywords);
         $scope.keywordList = Keyword.findAll();
-       /* for(k in keywords){
+     //   $scope.keywordList = [];
+      /* for(k in keywords){
             $scope.keywordList.push(k);
         }*/
         $scope.searchList = [];
 
         $scope.addKeyword = function(newKeyword){
             if(newKeyword != undefined) {
-                $scope.searchList.push(newKeyword);
-                $scope.keywordList.slice(newKeyword);
+                console.log("keyword.id="+newKeyword.id);
+                if(!containsKeyword($scope.searchList, newKeyword)){
+                    $scope.searchList.push(newKeyword);
+                }
+                //$scope.keywordList.splice($scope.keywordList.indexOf(newKeyword), 1);
+               // $scope.keywordList = $scope.keywordList.filter( function(el) { return el.id != newKeyword.id; });
+                //$scope.keywordList.remove($scope.keywordList.indexOf(newKeyword).id);
                 $scope.currentKeyword = undefined;
             }
+        };
+
+        var containsKeyword = function(list, keyword){
+            var found = false;
+            for(var i = 0; i < list.length; i++) {
+                if (list[i].id == keyword.id) {
+                    found = true;
+                    break;
+                }
+            }
+            return found;
         }
     }]);
 
