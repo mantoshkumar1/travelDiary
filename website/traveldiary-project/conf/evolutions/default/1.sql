@@ -22,9 +22,12 @@ CREATE TABLE User (
   username TEXT NOT NULL,
   firstName TEXT,
   lastName TEXT,
+  email TEXT,
   passwordHash TEXT,
   roleId INTEGER,
-  FOREIGN KEY (roleId) REFERENCES Role(id)
+  locationId INTEGER,
+  FOREIGN KEY (roleId) REFERENCES Role(id),
+  FOREIGN KEY (locationId) REFERENCES Location(id)
 );
 
 CREATE TABLE Activity (
@@ -52,7 +55,8 @@ CREATE TABLE Review (
   title	TEXT NOT NULL,
   description TEXT NOT NULL,
   date DATE,
-  userId INTEGER,
+  userId DATE,
+  rating TEXT,
   FOREIGN KEY(userId) REFERENCES User(id)
 );
 

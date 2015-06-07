@@ -8,14 +8,14 @@
 
 #POST          /createMovie          controllers.SearchControllerller.createMovie()
 
-GET            /                    controllers.SearchController.index()
+GET        /                      controllers.SearchController.index()
 
-GET           /api/vacation         controllers.SearchController.getAllVacations()
+GET        /api/vacations         controllers.SearchController.getAllVacations()
 #GET           /api/movie/:id        controllers.SearchControllerller.getMovie(id: Integer)
 #POST          /api/movie            controllers.SearchControllerller.createMovie
 #PUT           /api/movie/:id        controllers.SearchControllerller.updateMovie(id: Integer)
 #DELETE        /api/movie/:id        controllers.SearchControllerller.deleteMovie(id: Integer)
 
 # Map static resources from the /public folder to the /assets URL path
-GET           /assets/*file         controllers.Assets.at(path="/public", file)
-GET           /webjars/*file        controllers.WebJarAssets.at(file)
+GET        /assets/*file          controllers.Assets.at(path="/public", file)
+GET        /webjars/*file         controllers.WebJarAssets.at(file)

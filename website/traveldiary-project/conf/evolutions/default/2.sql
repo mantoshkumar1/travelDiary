@@ -17,10 +17,10 @@ INSERT INTO Location
 VALUES (0,'name','description',0.0,0.0);
 
 INSERT INTO User
-VALUES (0,'jd','John','Doe','SOMEHASHVALUE',0);
+VALUES (0,'jd','John','Doe','email@mail.com','SOMEHASHVALUE',0,0);
 
 INSERT INTO Vacation
-VALUES (0, 'Some Vacation','Some Description', 2.5, date('now'), date('now'), 0, 0);
+VALUES (0, 'Some Vacation','Some Description', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 0, 0);
 
 # --- !Downs
 

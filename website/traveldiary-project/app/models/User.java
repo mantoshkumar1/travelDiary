@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    private long userId;
+    private long id;
 
     @Constraints.Required
     private String username;
@@ -25,10 +26,12 @@ public class User {
 
     @OneToMany
     @JoinColumn(name = "creatorId")
+    @JsonManagedReference
     private List<Activity> createdActivites;
 
     @OneToMany
     @JoinColumn(name = "creatorId")
+    @JsonManagedReference
     private List<Vacation> createdVacations;
 
     @ManyToOne
@@ -95,10 +98,10 @@ public class User {
         this.location = location;
     }
 
-    public long getUserId() { return userId; }
+    public long getId() { return id; }
 
-    public void setUserId(long id) {
-        this.userId = id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public List<Activity> getCreatedActivites() {

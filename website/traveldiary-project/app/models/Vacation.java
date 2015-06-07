@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import play.data.validation.Constraints;
 import play.db.jpa.JPA;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class Vacation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private long id;
 
     @Constraints.Required
@@ -22,6 +23,7 @@ public class Vacation {
 
     @ManyToOne
     @JoinColumn(name = "creatorId")
+    @JsonBackReference
     private User creator;
 
     @ManyToMany
@@ -46,7 +48,9 @@ public class Vacation {
     @JoinColumn(name = "locationId")
     private Location locationId;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
 
     @ManyToMany
