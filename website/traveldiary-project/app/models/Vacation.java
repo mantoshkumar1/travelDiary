@@ -6,6 +6,8 @@ import play.db.jpa.JPA;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -151,5 +153,39 @@ public class Vacation {
         TypedQuery<Vacation> query = JPA.em().createQuery("SELECT m FROM Vacation m", Vacation.class);
 
         return query.getResultList();
+    }
+
+    public static List<Vacation> findVacationsFor(String[] keywords) {
+
+        if (keywords == null) {
+            return new ArrayList<Vacation>();
+        }
+
+        String keywordQuery = "";
+
+        // Add filter for all keywords. Keywords referenced by :keyword<id>
+        for (int i = 0; i < keywords.length; i++) {
+            if (keywords[i] != null) {
+                keywordQuery += " AND Keyword" +
+                        ".keyword LIKE :keyword" + i;
+            }
+        }
+
+        String query = "SELECT * FROM Vacation WHERE " +
+                "EXISTS (SELECT * FROM VacationKeywords JOIN Keyword on VacationKeywords.keywordId = Keyword.id " +
+                "WHERE Vacation.id = VacationKeywords.vacationId" + keywordQuery + ");";
+
+        Query searchQquery = JPA.em().createNativeQuery(query, Vacation.class);
+
+        System.out.println(query);
+
+        // Fill statement with corresponding keywords values
+        for (int i = 0; i < keywords.length; i++) {
+            if (keywords[i] != null) {
+                searchQquery.setParameter("keyword" + i, keywords[i]);
+            }
+        }
+
+        return (List<Vacation>) searchQquery.getResultList();
     }
 }

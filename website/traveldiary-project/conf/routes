@@ -13,6 +13,8 @@ GET        /api/user             controllers.MainController.getAllUsers()
 GET        /api/role             controllers.MainController.getAllRoles()
 GET        /api/review           controllers.MainController.getAllReviews()
 
+GET        /searchvacations/:keyString   controllers.SearchController.getVacationsFor(keyString: String)
+
 # Map static resources from the /public folder to the /assets URL path
 
 GET        /assets/*file         controllers.Assets.at(path="/public", file)
