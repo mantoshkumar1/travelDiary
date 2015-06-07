@@ -55,7 +55,7 @@ CREATE TABLE Review (
   title	TEXT NOT NULL,
   description TEXT NOT NULL,
   date DATE,
-  userId DATE,
+  userId INTEGER,
   rating TEXT,
   FOREIGN KEY(userId) REFERENCES User(id)
 );
