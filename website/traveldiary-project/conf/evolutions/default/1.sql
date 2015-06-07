@@ -99,7 +99,7 @@ CREATE TABLE VacationReviews (
 
 CREATE TABLE VacationActivities (
   vacationId INTEGER,
-  activityId INTEGER UNIQUE,
+  activityId INTEGER,
   FOREIGN KEY(vacationId) REFERENCES Vacation(id),
   FOREIGN KEY(activityId) REFERENCES Activity(id),
   PRIMARY KEY(vacationId,activityId)
