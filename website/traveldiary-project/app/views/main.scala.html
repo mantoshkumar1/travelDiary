@@ -19,7 +19,7 @@
                 </div>
                 <div id="navbar">
                     <form class="navbar-search navbar-form navbar-custom" ng-enter="addKeyword(currentKeyword)">
-                        <input type="text" class="form-control" ng-model="currentKeyword" typeahead="k as k.keyword for k in keywordList | filter:$viewValue" placeholder="Search...">
+                        <input type="text" class="form-control" ng-model="currentKeyword" typeahead="k as k.keyword for k in keywordList" placeholder="Search...">
                         <div ng-repeat="s in searchList">{{s}}</div>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
