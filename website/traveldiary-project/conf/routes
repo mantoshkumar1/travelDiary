@@ -2,22 +2,15 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 #
-#GET           /                     controllers.SearchControllerller.showAll()
-#GET           /addNew               controllers.SearchControllerller.addNew()
-#GET           /showGenre            controllers.SearchControllerller.showGenre(id: Integer ?= 0)
-
-#POST          /createMovie          controllers.SearchControllerller.createMovie()
 
 GET        /                     controllers.SearchController.index()
 
 GET        /api/vacation         controllers.SearchController.getAllVacations()
 
-GET           /api/keyword         controllers.SearchController.getAllKeywords()
-#GET           /api/movie/:id        controllers.SearchControllerller.getMovie(id: Integer)
-#POST          /api/movie            controllers.SearchControllerller.createMovie
-#PUT           /api/movie/:id        controllers.SearchControllerller.updateMovie(id: Integer)
-#DELETE        /api/movie/:id        controllers.SearchControllerller.deleteMovie(id: Integer)
+GET        /api/keyword          controllers.SearchController.getAllKeywords()
 
 # Map static resources from the /public folder to the /assets URL path
+
 GET        /assets/*file         controllers.Assets.at(path="/public", file)
 GET        /webjars/*file        controllers.WebJarAssets.at(file)
+

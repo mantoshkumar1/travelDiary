@@ -11,10 +11,10 @@ import javax.persistence.Id;
  * Created by Rike on 06.06.2015.
  */
 @Entity
-public abstract class Location {
+public class Location {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private long id;
 
     @Constraints.Required
@@ -23,12 +23,9 @@ public abstract class Location {
     @Constraints.Required
     private String description;
 
+
     private double longitude;
     private double latitude;
-
-    //@OneToOne(fetch= FetchType.LAZY)
-    //@JoinColumn(name="addressId")
-    //private Address address;
 
     public long getId() {
         return id;
@@ -69,12 +66,4 @@ public abstract class Location {
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
-
-//    public Address getAddress() {
-//        return address;
-//    }
-//
-//    public void setAddress(Address address) {
-//        this.address = address;
-//    }
 }

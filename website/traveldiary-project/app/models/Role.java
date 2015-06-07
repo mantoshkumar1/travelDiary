@@ -15,16 +15,16 @@ public class Role {
 
     @Id
     @GeneratedValue
-    private long roleId;
+    private long id;
     @Constraints.Required
     private String roleName;
 
-    public long getRoleId() {
-        return roleId;
+    public long getId() {
+        return id;
     }
 
-    public void setRoleId(long roleId) {
-        this.roleId = roleId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getRoleName() {

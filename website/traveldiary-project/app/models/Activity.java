@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
@@ -40,6 +41,7 @@ public class Activity {
 
     @ManyToOne
     @JoinColumn(name = "creatorId")
+    @JsonBackReference
     private User creator;
 
     @ManyToMany
