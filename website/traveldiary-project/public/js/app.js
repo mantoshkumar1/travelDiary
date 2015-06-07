@@ -1,5 +1,5 @@
 (function(){
-    var App = angular.module('travelDiary', ['ui.router', 'js-data']);
+    var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap']);
 
     App.factory('Movie', ['DS',function(DS){
         return DS.defineResource('movie');
@@ -116,4 +116,22 @@
             templateUrl: 'assets/templates/edit_bool.html'
         };
     });
-})()
+
+    App.controller('searchController', ["$scope", function($scope){
+        var currentKeyword = undefined;
+        var keywordList = [
+            {id: 123,
+            keyword: "Test"},
+            {id: 456,
+                keyword: "Beach"},
+            {id: 789,
+                keyword: "Hike"},
+            {id: 101,
+                keyword: "Ocean"},
+            {id: 112,
+                keyword: "Sun"}
+        ];
+
+
+    }]);
+})();
