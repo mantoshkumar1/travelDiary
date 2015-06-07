@@ -22,3 +22,13 @@
     float: left;
     margin: 5px;
 }
+
+.removeStyle{
+    font-size: 10px;
+    color: red;
+    margin-left: 3px;
+}
+
+[ng-click] {
+    cursor: pointer;
+}

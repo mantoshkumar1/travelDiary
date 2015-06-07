@@ -21,7 +21,7 @@
                     <div class="col-md-9">
                     <form class="navbar-form navbar-custom" ng-enter="addKeyword(currentKeyword)">
                         <input type="text" class="navbar-search form-control" ng-model="currentKeyword" typeahead="k as k.keyword for k in keywordList" placeholder="Search...">
-                        <div ng-repeat="s in searchList"><span class="badge">{{s.keyword}}</span></div>
+                        <div ng-repeat="s in searchList"><span class="badge">{{s.keyword}}<span ng-click="removeKeyword(s)" class="glyphicon glyphicon-remove removeStyle"></span></span></div>
                     </form>
                     </div>
                     <div class="col-md-3">
