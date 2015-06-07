@@ -18,6 +18,18 @@ INSERT INTO RoleVALUES (2,'Administrator');
 INSERT INTO LocationVALUES (1,'name1','description1',0.0,0.0);
 INSERT INTO LocationVALUES (2,'name2','description2',1.0,1.0);
 INSERT INTO LocationVALUES (3,'name3','description3',2.0,2.0);
+INSERT INTO LocationVALUES (4,'name4','description4',3.0,3.0);
+INSERT INTO LocationVALUES (5,'name5','description5',4.0,4.0);
+INSERT INTO LocationVALUES (6,'name6','description6',5.0,5.0);
+INSERT INTO LocationVALUES (7,'name7','description7',6.0,6.0);
+INSERT INTO LocationVALUES (8,'name8','description8',7.0,7.0);
+INSERT INTO LocationVALUES (9,'name9','description9',8.0,8.0);
+INSERT INTO LocationVALUES (10,'name10','description10',9.0,9.0);
+INSERT INTO LocationVALUES (11,'name11,'description11',10.0,10.0);
+INSERT INTO LocationVALUES (12,'name12','description12',11.0,11.0);
+INSERT INTO LocationVALUES (13,'name13','description13',12.0,12.0);
+INSERT INTO LocationVALUES (14,'name14','description14',13.0,13.0);
+INSERT INTO LocationVALUES (15,'name15','description15',14.0,14.0);
 
 -- inserting values into user entity
 INSERT INTO UserVALUES (1,'jd','John','Doe','SOMEHASHVALUE',1);
