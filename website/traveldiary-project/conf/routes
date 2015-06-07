@@ -3,11 +3,15 @@
 # ~~~~
 #
 
-GET        /                     controllers.SearchController.index()
+GET        /                     controllers.MainController.index()
 
-GET        /api/vacation         controllers.SearchController.getAllVacations()
-
-GET        /api/keyword          controllers.SearchController.getAllKeywords()
+GET        /api/vacation         controllers.MainController.getAllVacations()
+GET        /api/activity         controllers.MainController.getAllActivities()
+GET        /api/keyword          controllers.MainController.getAllKeywords()
+GET        /api/location         controllers.MainController.getAllLocations()
+GET        /api/user             controllers.MainController.getAllUsers()
+GET        /api/role             controllers.MainController.getAllRoles()
+GET        /api/review           controllers.MainController.getAllReviews()
 
 # Map static resources from the /public folder to the /assets URL path
 

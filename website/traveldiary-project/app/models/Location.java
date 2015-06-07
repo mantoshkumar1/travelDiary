@@ -1,11 +1,10 @@
 package models;
 
 import play.data.validation.Constraints;
+import play.db.jpa.JPA;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Rike on 06.06.2015.
@@ -65,5 +64,11 @@ public class Location {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public static List<Location> findAll() {
+        TypedQuery<Location> query = JPA.em().createQuery("SELECT m FROM Location m", Location.class);
+
+        return query.getResultList();
     }
 }

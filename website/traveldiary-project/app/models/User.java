@@ -2,6 +2,7 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.data.validation.Constraints;
+import play.db.jpa.JPA;
 
 import javax.persistence.*;
 import java.util.List;
@@ -118,5 +119,11 @@ public class User {
 
     public void setCreatedVacations(List<Vacation> createdVacations) {
         this.createdVacations = createdVacations;
+    }
+
+    public static List<User> findAll() {
+        TypedQuery<User> query = JPA.em().createQuery("SELECT m FROM User m", User.class);
+
+        return query.getResultList();
     }
 }
