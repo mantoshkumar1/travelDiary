@@ -11,7 +11,7 @@
 
         var add_new_config = {
             url: '/add_movie',
-            templateUrl: 'assets/templates/add_new.html',
+            templateUrl: 'assets/templates/show_all_vacations.html',
             controller: ['$scope', 'Movie', function($scope, Movie){
                 $scope.movie = Movie.createInstance();
                 $scope.success = false;

@@ -1,6 +1,7 @@
 package models;
 
 import play.data.validation.Constraints;
+import play.db.jpa.JPA;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -140,5 +141,11 @@ public class Vacation {
 
     public void setReviewsList(List<Review> reviewsList) {
         this.reviewsList = reviewsList;
+    }
+
+    public static List<Vacation> findAll() {
+        TypedQuery<Vacation> query = JPA.em().createQuery("SELECT m FROM Vacation m", Vacation.class);
+
+        return query.getResultList();
     }
 }

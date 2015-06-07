@@ -10,7 +10,7 @@
 
 GET            /                    controllers.SearchController.index()
 
-#GET           /api/movie            controllers.SearchControllerller.getMovies
+GET           /api/vacation         controllers.SearchController.getAllVacations()
 #GET           /api/movie/:id        controllers.SearchControllerller.getMovie(id: Integer)
 #POST          /api/movie            controllers.SearchControllerller.createMovie
 #PUT           /api/movie/:id        controllers.SearchControllerller.updateMovie(id: Integer)

@@ -51,7 +51,7 @@ CREATE TABLE Review (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title	TEXT NOT NULL,
   description TEXT NOT NULL,
-  date INTEGER,
+  date DATE,
   userId INTEGER,
   FOREIGN KEY(userId) REFERENCES User(id)
 );
