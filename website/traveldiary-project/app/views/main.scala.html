@@ -21,7 +21,7 @@
                     <div class="col-md-9">
                     <form class="navbar-form navbar-custom" ng-enter="addKeyword(currentKeyword)">
                         <input type="text" class="navbar-search form-control" ng-model="currentKeyword" typeahead="k as k.keyword for k in keywordList" placeholder="Search...">
-                        <div ng-repeat="s in searchList"><span class="badge">{{s.keyword}}<span ng-click="removeKeyword(s)" class="glyphicon glyphicon-remove removeStyle"></span></span></div>
+                        <div ng-repeat="s in searchList"><span class="badge searchBadge">{{s.keyword}}<span ng-click="removeKeyword(s)" class="glyphicon glyphicon-remove removeStyle"></span></span></div>
                     </form>
                     </div>
                     <div class="col-md-3">
@@ -36,22 +36,50 @@
         </nav></div>
 
         <div class="container-fluid">
-            <h1>All Vacations</h1>
+            <h3>Search Results:</h3>
             <div class="row">
-                <div class="col-xs-12">
-                    <table class="table table-striped table-hover">
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                        </tr>
-                        <tr ng-repeat="vacation in vacations">
-                            <td>{{vacation.id}}</td>
-                            <td>{{vacation.name}}</td>
-                        </tr>
-                    </table>
+                <div class="col-md-3">
+                    <div class="jumbotron searchResult">
+                        <img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle">
+                        <label class="myLabel">izouzrztriztriztuztiztrizrourzozriztrozriztriztritzrritzruztrzir</label>
+                    </div>
                 </div>
-                <div class="col-xs-12" ui-view>
-
+                <div class="col-md-3">
+                    <div class="jumbotron searchResult">
+                        <img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle">
+                        <label class="myLabel">izouzrztriztriztuztiztrizrourzozriztrozriztriztritzrritzruztrzir</label>
+                        <span class="badge">Beach</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="jumbotron searchResult">
+                        <img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle">
+                        <label class="myLabel">izouzrztriztriztuztiztrizrourzozriztrozriztriztritzrritzruztrzir</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="jumbotron searchResult">
+                        <img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle">
+                        <label class="myLabel">izouzrztriztriztuztiztrizrourzozriztrozriztriztritzrritzruztrzir</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="jumbotron searchResult">
+                        <img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle">
+                        <label class="myLabel">izouzrztriztriztuztiztrizrourzozriztrozriztriztritzrritzruztrzir</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="jumbotron searchResult">
+                        <img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle">
+                        <label class="myLabel">izouzrztriztriztuztiztrizrourzozriztrozriztriztritzrritzruztrzir</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="jumbotron searchResult">
+                        <img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle">
+                        <label class="myLabel">izouzrztriztriztuztiztrizrourzozriztrozriztriztritzrritzruztrzir</label>
+                    </div>
                 </div>
             </div>
         </div>
