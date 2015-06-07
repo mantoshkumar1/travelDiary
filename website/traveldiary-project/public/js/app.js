@@ -118,8 +118,9 @@
     });
 
     App.controller('searchController', ["$scope", function($scope){
-        var currentKeyword = undefined;
-        var keywordList = [
+        $scope.currentKeyword = undefined;
+        //$scope.keywordList = ["TEst", "Beach", "Hike", "Sun"];
+        $scope.keywordList = [
             {id: 123,
             keyword: "Test"},
             {id: 456,
@@ -132,6 +133,30 @@
                 keyword: "Sun"}
         ];
 
+        $scope.searchList = [];
+
+        $scope.addKeyword = function(newKeyword){
+            if(newKeyword != undefined) {
+                $scope.searchList.push(newKeyword);
+                $scope.keywordList.pop(newKeyword);
+                $scope.currentKeyword = undefined;
+            }
+        }
+
 
     }]);
+
+    App.directive('ngEnter', function () {
+        return function (scope, element, attrs) {
+            element.bind("keydown keypress", function (event) {
+                if(event.which === 13) {
+                    scope.$apply(function (){
+                        scope.$eval(attrs.ngEnter);
+                    });
+
+                    event.preventDefault();
+                }
+            });
+        };
+    });
 })();
