@@ -103,8 +103,8 @@ INSERT INTO activityreviews VALUES(4,8);
 INSERT INTO activityreviews VALUES(4,9);
 INSERT INTO activityreviews VALUES(4,10);
 
-INSERT INTO vacationactivities VALUES(1,13);
-INSERT INTO vacationactivities VALUES(2,14);
-INSERT INTO vacationactivities VALUES(3,11);
-INSERT INTO vacationactivities VALUES(4,12);
+INSERT INTO vacationreviews VALUES(1,13);
+INSERT INTO vacationreviews VALUES(2,14);
+INSERT INTO vacationreviews VALUES(3,11);
+INSERT INTO vacationreviews VALUES(4,12);
 # --- !Downs
