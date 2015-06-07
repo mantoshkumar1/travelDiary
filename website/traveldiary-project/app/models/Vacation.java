@@ -161,23 +161,30 @@ public class Vacation {
             return new ArrayList<Vacation>();
         }
 
-        String keywordQuery = "";
+        String keywordQuery;
 
         // Add filter for all keywords. Keywords referenced by :keyword<id>
-        for (int i = 0; i < keywords.length; i++) {
-            if (keywords[i] != null) {
-                keywordQuery += " AND Keyword" +
-                        ".keyword LIKE :keyword" + i;
+        if (keywords.length > 0) {
+
+            keywordQuery = " AND (k.keyword LIKE :keyword0";
+
+            for (int i = 1; i < keywords.length; i++) {
+                keywordQuery += " OR k.keyword LIKE :keyword" + i;
             }
+
+            keywordQuery += ")";
+        } else {
+            keywordQuery = "";
         }
 
-        String query = "SELECT * FROM Vacation WHERE " +
-                "EXISTS (SELECT * FROM VacationKeywords JOIN Keyword on VacationKeywords.keywordId = Keyword.id " +
-                "WHERE Vacation.id = VacationKeywords.vacationId" + keywordQuery + ");";
+
+
+        String query = "SELECT * FROM Vacation v WHERE " +
+                "v.id IN  (SELECT vkw.vacationId FROM VacationKeywords vkw JOIN Keyword k on vkw.keywordId = k.id " +
+                "WHERE v.id = vkw.vacationId" + keywordQuery + ")";
+
 
         Query searchQquery = JPA.em().createNativeQuery(query, Vacation.class);
-
-        System.out.println(query);
 
         // Fill statement with corresponding keywords values
         for (int i = 0; i < keywords.length; i++) {
