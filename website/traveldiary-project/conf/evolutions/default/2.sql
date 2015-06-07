@@ -25,7 +25,7 @@ INSERT INTO LocationVALUES (7,'name7','description7',6.0,6.0);
 INSERT INTO LocationVALUES (8,'name8','description8',7.0,7.0);
 INSERT INTO LocationVALUES (9,'name9','description9',8.0,8.0);
 INSERT INTO LocationVALUES (10,'name10','description10',9.0,9.0);
-INSERT INTO LocationVALUES (11,'name11,'description11',10.0,10.0);
+INSERT INTO LocationVALUES (11,'name11','description11',10.0,10.0);
 INSERT INTO LocationVALUES (12,'name12','description12',11.0,11.0);
 INSERT INTO LocationVALUES (13,'name13','description13',12.0,12.0);
 INSERT INTO LocationVALUES (14,'name14','description14',13.0,13.0);
