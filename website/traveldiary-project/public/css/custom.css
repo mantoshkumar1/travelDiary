@@ -1,5 +1,19 @@
 .navbar-search {
-    margin-left: 30%;
+    margin-left: 35%;
     width: 15%;
     display: inline-block;
+}
+
+.navbar {
+    border: none;
+    background-color: #0074bc;
+    color: #c5cee9;
+}
+
+.navbar-custom {
+    color: #c5cee9;
+}
+
+.navbar-custom:hover {
+    color: white;
 }
