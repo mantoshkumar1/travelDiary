@@ -119,18 +119,21 @@
 
     App.controller('searchController', ['$scope', 'Keyword', function($scope, Keyword){
         $scope.currentKeyword = undefined;
+        var keywords = Keyword.findAll();
+        console.log(keywords);
         $scope.keywordList = Keyword.findAll();
+       /* for(k in keywords){
+            $scope.keywordList.push(k);
+        }*/
         $scope.searchList = [];
 
         $scope.addKeyword = function(newKeyword){
             if(newKeyword != undefined) {
                 $scope.searchList.push(newKeyword);
-                $scope.keywordList.pop(newKeyword);
+                $scope.keywordList.slice(newKeyword);
                 $scope.currentKeyword = undefined;
             }
         }
-
-
     }]);
 
     App.directive('ngEnter', function () {
