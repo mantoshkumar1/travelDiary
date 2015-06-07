@@ -17,8 +17,42 @@
     background-color: #0074bc;
 }
 
-.badge {
+.searchBadge {
     background-color: #03024f;
     float: left;
     margin: 5px;
+}
+
+.searchResult {
+    margin: 3px;
+    padding: 5px;
+}
+
+.myLabel {
+    word-break: break-all;
+    margin-top: 5px;
+}
+
+.jumbotron .searchResult {
+    margin: 3px;
+    padding: 5px;
+}
+
+.container-fluid .searchResult {
+    margin: 3px;
+    padding: 5px;
+}
+
+.removeStyle{
+    font-size: 10px;
+    color: red;
+    margin-left: 3px;
+}
+
+[ng-click] {
+    cursor: pointer;
+}
+
+.imageStyle{
+    width: 100%;
 }
