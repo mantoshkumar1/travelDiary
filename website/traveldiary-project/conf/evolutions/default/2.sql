@@ -75,10 +75,8 @@ insert into vacationkeywords values(2,2);
 insert into vacationkeywords values(2,3);
 insert into vacationkeywords values(2,6);
 insert into vacationkeywords values(2,1);
-insert into vacationkeywords values(2,2);
 insert into vacationkeywords values(2,4);
 insert into vacationkeywords values(2,5);
-insert into vacationkeywords values(2,6);
 
 -- inserting values into vacationactivities entity
 INSERT INTO VACATIONACTIVITIES VALUES(1,1);
