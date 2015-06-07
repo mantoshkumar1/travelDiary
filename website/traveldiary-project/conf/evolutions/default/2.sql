@@ -33,19 +33,19 @@ INSERT INTO LocationVALUES (15,'name15','description15',14.0,14.0);
 
 -- inserting values into user entity
 INSERT INTO UserVALUES (1,'jd','John','Doe','SOMEHASHVALUE',1);
-INSERT INTO UserVALUES (2, ''jd1,'John','Doe','SOMEOTHERHASHVALUE',2);
+INSERT INTO UserVALUES (2, 'jd1','John','Doe','SOMEOTHERHASHVALUE',2);
 
 -- inserting values into vacation entity
 INSERT INTO VacationVALUES (1, 'Some Vacation1','Some Description1', 2.5, date('now'), date('now'), 1, 1);
 INSERT INTO VacationVALUES (2, 'Some Vacation2','Some Description2', 2.5, date('now'), date('now'), 1, 2);
 
 -- inserting values into activity entity
-INSERT INTO activity VALUES (1,	'Museum',	'Some Museum', date('now'), date(now),  1,  1);
-INSERT INTO activity VALUES (2,	'Stadium',	'Some Stadium', date('now'), date(now),  1,  1);
-INSERT INTO activity VALUES (3,	'Park',	'Some Park', date('now'), date(now),  1,  1);
-INSERT INTO activity VALUES (4,	'Museum',	'Some Museum', date('now'), date(now),  2,  1);
-INSERT INTO activity VALUES (5,	'Stadium',	'Some Stadium', date('now'), date(now),  2,  1);
-INSERT INTO activity VALUES (6,	'Beach',	'Some Beach', date('now'), date(now),  3,  1);
+INSERT INTO activity VALUES (1,	'Museum',	'Some Museum', date('now'), date('now'),  1,  1);
+INSERT INTO activity VALUES (2,	'Stadium',	'Some Stadium', date('now'), date('now'),  1,  1);
+INSERT INTO activity VALUES (3,	'Park',	'Some Park', date('now'), date('now'),  1,  1);
+INSERT INTO activity VALUES (4,	'Museum',	'Some Museum', date('now'), date('now'),  2,  1);
+INSERT INTO activity VALUES (5,	'Stadium',	'Some Stadium', date('now'), date('now'),  2,  1);
+INSERT INTO activity VALUES (6,	'Beach',	'Some Beach', date('now'), date('now'),  3,  1);
 
 -- inserting values into activitykeywords entity
 insert into activitykeywords values(1,3);
@@ -89,14 +89,14 @@ INSERT INTO VACATIONACTIVITIES VALUES(2,5);
 INSERT INTO VACATIONACTIVITIES VALUES(2,6);
 
 -- inserting values into review entity
-insert into review values(1, 'Some title1', 'Some description1',  date(now),  1);
-insert into review values(2, 'Some title2', 'Some description2',  date(now),  1);
-insert into review values(3, 'Some title3', 'Some description3',  date(now),  1);
-insert into review values(4, 'Some title4', 'Some description4',  date(now),  1);
-insert into review values(5, 'Some title5', 'Some description5',  date(now),  1);
-insert into review values(6, 'Some title6', 'Some description6',  date(now),  1);
-insert into review values(7, 'Some title7', 'Some description7',  date(now),  1);
-insert into review values(8, 'Some title8', 'Some description8',  date(now),  1);
+insert into review values(1, 'Some title1', 'Some description1',  date('now'),  1);
+insert into review values(2, 'Some title2', 'Some description2',  date('now'),  1);
+insert into review values(3, 'Some title3', 'Some description3',  date('now'),  1);
+insert into review values(4, 'Some title4', 'Some description4',  date('now'),  1);
+insert into review values(5, 'Some title5', 'Some description5',  date('now'),  1);
+insert into review values(6, 'Some title6', 'Some description6',  date('now'),  1);
+insert into review values(7, 'Some title7', 'Some description7',  date('now'),  1);
+insert into review values(8, 'Some title8', 'Some description8',  date('now'),  1);
 
 -- inserting values into vacationreviews entity
 insert into vacationreviews values(1,1);
