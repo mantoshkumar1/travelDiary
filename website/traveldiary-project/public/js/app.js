@@ -1,8 +1,8 @@
 (function(){
     var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap']);
 
-    App.factory('Movie', ['DS',function(DS){
-        return DS.defineResource('movie');
+    App.factory('Keyword', ['DS',function(DS){
+        return DS.defineResource('keyword');
     }])
 
     App.config(['$stateProvider', 'DSProvider',function($stateProvider, DSProvider){
@@ -117,22 +117,9 @@
         };
     });
 
-    App.controller('searchController', ["$scope", function($scope){
+    App.controller('searchController', ['$scope', 'Keyword', function($scope, Keyword){
         $scope.currentKeyword = undefined;
-        //$scope.keywordList = ["TEst", "Beach", "Hike", "Sun"];
-        $scope.keywordList = [
-            {id: 123,
-            keyword: "Test"},
-            {id: 456,
-                keyword: "Beach"},
-            {id: 789,
-                keyword: "Hike"},
-            {id: 101,
-                keyword: "Ocean"},
-            {id: 112,
-                keyword: "Sun"}
-        ];
-
+        $scope.keywordList = Keyword.findAll();
         $scope.searchList = [];
 
         $scope.addKeyword = function(newKeyword){
