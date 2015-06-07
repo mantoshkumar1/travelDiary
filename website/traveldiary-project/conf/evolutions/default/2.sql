@@ -12,32 +12,32 @@ INSERT INTO Keyword VALUES (6,'SUN');
 
 -- inserting values into role entity
 INSERT INTO Role VALUES (1,'User');
-INSERT INTO RoleVALUES (2,'Administrator');
+INSERT INTO Role VALUES (2,'Administrator');
 
 -- inserting values into location entity
-INSERT INTO LocationVALUES (1,'name1','description1',0.0,0.0);
-INSERT INTO LocationVALUES (2,'name2','description2',1.0,1.0);
-INSERT INTO LocationVALUES (3,'name3','description3',2.0,2.0);
-INSERT INTO LocationVALUES (4,'name4','description4',3.0,3.0);
-INSERT INTO LocationVALUES (5,'name5','description5',4.0,4.0);
-INSERT INTO LocationVALUES (6,'name6','description6',5.0,5.0);
-INSERT INTO LocationVALUES (7,'name7','description7',6.0,6.0);
-INSERT INTO LocationVALUES (8,'name8','description8',7.0,7.0);
-INSERT INTO LocationVALUES (9,'name9','description9',8.0,8.0);
-INSERT INTO LocationVALUES (10,'name10','description10',9.0,9.0);
-INSERT INTO LocationVALUES (11,'name11','description11',10.0,10.0);
-INSERT INTO LocationVALUES (12,'name12','description12',11.0,11.0);
-INSERT INTO LocationVALUES (13,'name13','description13',12.0,12.0);
-INSERT INTO LocationVALUES (14,'name14','description14',13.0,13.0);
-INSERT INTO LocationVALUES (15,'name15','description15',14.0,14.0);
+INSERT INTO Location VALUES (1,'name1','description1',0.0,0.0);
+INSERT INTO Location VALUES (2,'name2','description2',1.0,1.0);
+INSERT INTO Location VALUES (3,'name3','description3',2.0,2.0);
+INSERT INTO Location VALUES (4,'name4','description4',3.0,3.0);
+INSERT INTO Location VALUES (5,'name5','description5',4.0,4.0);
+INSERT INTO Location VALUES (6,'name6','description6',5.0,5.0);
+INSERT INTO Location VALUES (7,'name7','description7',6.0,6.0);
+INSERT INTO Location VALUES (8,'name8','description8',7.0,7.0);
+INSERT INTO Location VALUES (9,'name9','description9',8.0,8.0);
+INSERT INTO Location VALUES (10,'name10','description10',9.0,9.0);
+INSERT INTO Location VALUES (11,'name11','description11',10.0,10.0);
+INSERT INTO Location VALUES (12,'name12','description12',11.0,11.0);
+INSERT INTO Location VALUES (13,'name13','description13',12.0,12.0);
+INSERT INTO Location VALUES (14,'name14','description14',13.0,13.0);
+INSERT INTO Location VALUES (15,'name15','description15',14.0,14.0);
 
 -- inserting values into user entity
-INSERT INTO UserVALUES (1,'jd','John','Doe','SOMEHASHVALUE',1);
-INSERT INTO UserVALUES (2, 'jd1','John','Doe','SOMEOTHERHASHVALUE',2);
+INSERT INTO User VALUES (1,'jd','John','Doe','SOMEHASHVALUE',1);
+INSERT INTO User VALUES (2, 'jd1','John','Doe','SOMEOTHERHASHVALUE',2);
 
 -- inserting values into vacation entity
-INSERT INTO VacationVALUES (1, 'Some Vacation1','Some Description1', 2.5, date('now'), date('now'), 1, 1);
-INSERT INTO VacationVALUES (2, 'Some Vacation2','Some Description2', 2.5, date('now'), date('now'), 1, 2);
+INSERT INTO Vacation VALUES (1, 'Some Vacation1','Some Description1', 2.5, date('now'), date('now'), 1, 1);
+INSERT INTO Vacation VALUES (2, 'Some Vacation2','Some Description2', 2.5, date('now'), date('now'), 1, 2);
 
 -- inserting values into activity entity
 INSERT INTO activity VALUES (1,	'Museum',	'Some Museum', date('now'), date('now'),  1,  1);
@@ -74,11 +74,11 @@ insert into vacationkeywords values(1,6);
 insert into vacationkeywords values(2,2);
 insert into vacationkeywords values(2,3);
 insert into vacationkeywords values(2,6);
-insert into vacationkeywords values(3,1);
-insert into vacationkeywords values(3,2);
-insert into vacationkeywords values(3,4);
-insert into vacationkeywords values(3,5);
-insert into vacationkeywords values(3,6);
+insert into vacationkeywords values(2,1);
+insert into vacationkeywords values(2,2);
+insert into vacationkeywords values(2,4);
+insert into vacationkeywords values(2,5);
+insert into vacationkeywords values(2,6);
 
 -- inserting values into vacationactivities entity
 INSERT INTO VACATIONACTIVITIES VALUES(1,1);
