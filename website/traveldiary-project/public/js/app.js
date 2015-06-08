@@ -1,5 +1,5 @@
 (function(){
-    var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap']);
+    var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter']);
 
     App.factory('Keyword', ['DS',function(DS){
         return DS.defineResource('keyword');
@@ -98,6 +98,7 @@
             templateUrl: 'assets/templates/edit_text.html'
         };
     });
+
     App.directive('editBool', function() {
         return {
             restrict: 'E',
@@ -117,66 +118,6 @@
         };
     });
 
-    App.controller('searchController', ['$scope', 'Keyword', function($scope, Keyword){
-        $scope.currentKeyword = undefined;
-        var keywords = Keyword.findAll();
-        console.log(keywords);
-        $scope.keywordList = Keyword.findAll();
-     //   $scope.keywordList = [];
-      /* for(k in keywords){
-            $scope.keywordList.push(k);
-        }*/
-        $scope.searchList = [];
-
-        $scope.addKeyword = function(newKeyword){
-            if(newKeyword != undefined) {
-                console.log("keyword.id="+newKeyword.id);
-                if(!containsKeyword($scope.searchList, newKeyword)){
-                    $scope.searchList.push(newKeyword);
-                }
-                //$scope.keywordList.splice($scope.keywordList.indexOf(newKeyword), 1);
-               // $scope.keywordList = $scope.keywordList.filter( function(el) { return el.id != newKeyword.id; });
-                //$scope.keywordList.remove($scope.keywordList.indexOf(newKeyword).id);
-                $scope.currentKeyword = undefined;
-            }
-        };
-
-        $scope.removeKeyword = function(newKeyword){
-            if(newKeyword != undefined) {
-                if(containsKeyword($scope.searchList, newKeyword)){
-                    var index = $scope.searchList.indexOf(newKeyword);
-                    $scope.searchList.splice(index, 1);
-                }
-            }
-        };
-
-        var containsKeyword = function(list, keyword){
-            var found = false;
-            for(var i = 0; i < list.length; i++) {
-                if (list[i].id == keyword.id) {
-                    found = true;
-                    break;
-                }
-            }
-            return found;
-        };
-
-        $scope.getSearchFilter = function($viewValue) {
-            console.log("entered searchFilter");
-            var matching = [];
-            console.log($scope.keywordList);
-            console.log($scope.keywordList.length);
-            for (var i=0; i < $scope.keywordList.length; i++) {
-                console.log($scope.keywordList[i].keyword);
-                if ($scope.keywordList[i].keyword.toLowerCase().indexOf($viewValue.toLowerCase()) != -1){
-                    matching.push($scope.stuffs[i]);
-                }
-            }
-            console.log(matching);
-            return matching;
-        }
-    }]);
-
     App.directive('ngEnter', function () {
         return function (scope, element, attrs) {
             element.bind("keydown keypress", function (event) {
@@ -190,4 +131,72 @@
             });
         };
     });
+
+
+
+App.controller('searchController', ['$scope', 'Keyword', function($scope, Keyword){
+    $scope.budgetMax = undefined;
+    $scope.budgetMin = undefined;
+
+    $scope.currentKeyword = undefined;
+    $scope.keywordList = Keyword.findAll();
+    $scope.searchList = [];
+
+    $scope.addKeyword = function(newKeyword){
+        if(newKeyword != undefined) {
+            console.log("keyword.id="+newKeyword.id);
+            if(!containsKeyword($scope.searchList, newKeyword)){
+                $scope.searchList.push(newKeyword);
+            }
+            //$scope.keywordList.splice($scope.keywordList.indexOf(newKeyword), 1);
+            // $scope.keywordList = $scope.keywordList.filter( function(el) { return el.id != newKeyword.id; });
+            //$scope.keywordList.remove($scope.keywordList.indexOf(newKeyword).id);
+            $scope.currentKeyword = undefined;
+        }
+    };
+
+    $scope.removeKeyword = function(newKeyword){
+        if(newKeyword != undefined) {
+            if(containsKeyword($scope.searchList, newKeyword)){
+                var index = $scope.searchList.indexOf(newKeyword);
+                $scope.searchList.splice(index, 1);
+            }
+        }
+    };
+
+    var containsKeyword = function(list, keyword){
+        var found = false;
+        for(var i = 0; i < list.length; i++) {
+            if (list[i].id == keyword.id) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+    };
+
+    $scope.getSearchFilter = function($viewValue) {
+        console.log("entered searchFilter");
+        var matching = [];
+        console.log($scope.keywordList);
+        console.log($scope.keywordList.length);
+        for (var i=0; i < $scope.keywordList.length; i++) {
+            console.log($scope.keywordList[i].keyword);
+            if ($scope.keywordList[i].keyword.toLowerCase().indexOf($viewValue.toLowerCase()) != -1){
+                matching.push($scope.stuffs[i]);
+            }
+        }
+        console.log(matching);
+        return matching;
+    };
+
+    $scope.searchResults = [
+        {name: 'Some Vacation1', vacationKeywords: [{id: 1, keyword: 'BEACH'}, {id:2, keyword: 'SUNNY'}, {id:6, keyword: 'OCEAN'}]},
+        {name: 'Some Vacation2', vacationKeywords: [{id: 1, keyword: 'BEACH'}, {id:2, keyword: 'SUNNY'}, {id:6, keyword: 'OCEAN'}]},
+        {name: 'Some Vacation3', vacationKeywords: [{id: 1, keyword: 'BEACH'}, {id:2, keyword: 'SUNNY'}, {id:6, keyword: 'OCEAN'}]},
+        {name: 'Some Vacation4', vacationKeywords: [{id: 1, keyword: 'BEACH'}, {id:2, keyword: 'SUNNY'}, {id:6, keyword: 'OCEAN'}]},
+        {name: 'Some Vacation5', vacationKeywords: [{id: 1, keyword: 'BEACH'}, {id:2, keyword: 'SUNNY'}, {id:6, keyword: 'OCEAN'}]},
+        {name: 'Some Vacation6', vacationKeywords: [{id: 1, keyword: 'BEACH'}, {id:2, keyword: 'SUNNY'}, {id:6, keyword: 'OCEAN'}]}
+    ];
+}]);
 })();
