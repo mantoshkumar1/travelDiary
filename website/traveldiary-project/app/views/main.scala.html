@@ -20,7 +20,7 @@
                 <div id="navbar" class="col-md-9">
                     <div class="col-md-9">
                     <form class="navbar-form navbar-custom" ng-enter="addKeyword(currentKeyword)">
-                        <input type="text" class="navbar-search form-control" ng-model="currentKeyword" typeahead="k as k.keyword for k in keywordList | toArray | filter:$viewValue" placeholder="Search...">
+                        <input type="text" class="navbar-search form-control" ng-model="currentKeyword" typeahead="k as k.keyword for k in keywordList" placeholder="Search...">
                         <div ng-repeat="s in searchList"><span class="badge searchBadge">{{s.keyword}}<span ng-click="removeKeyword(s)" class="glyphicon glyphicon-remove removeStyle"></span></span></div>
                     </form>
                     </div>
@@ -35,30 +35,6 @@
             </div>
         </nav></div>
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6">
-                    <h3>Search Results:</h3>
-                </div>
-                <div class="col-md-6">
-                    <div style="float: right;">
-                        <label>Budget from</label>
-                        <input type="number" min="0" max="{{budgetMax}}" ng-Model="budgetMin">
-                        <label>to</label>
-                        <input type="number" min="{{budgetMin}}" ng-Model="budgetMax">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3" ng-repeat="v in searchResults">
-                    <div class="jumbotron searchResult">
-                        <img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle">
-                        <label class="myLabel">{{v.name}}</label>
-                        <span class="badge" ng-repeat="key in v.vacationKeywords">{{key.keyword}}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div ui-view></div>
 
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular.js"))"></script>

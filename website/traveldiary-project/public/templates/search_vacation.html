@@ -1,5 +1,25 @@
+<!DOCTYPE html>
 <div class="container-fluid">
-    <div ng-repeat="vacation in vacations">
-        {{vacation.name}}
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Search Results:</h3>
+        </div>
+        <div class="col-md-6">
+            <div style="float: right;">
+                <label>Budget from</label>
+                <input type="number" min="0" max="{{budgetMax}}" ng-Model="budgetMin">
+                <label>to</label>
+                <input type="number" min="{{budgetMin}}" ng-Model="budgetMax">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3" ng-repeat="v in vacations">
+            <div class="jumbotron searchResult">
+                <!--img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle" -->
+                <label class="myLabel">{{v.name}}</label>
+                <span class="badge" ng-repeat="key in v.vacationKeywords">{{key.keyword}}</span>
+            </div>
+        </div>
     </div>
 </div>

@@ -69,6 +69,8 @@
         $scope.keywordList = Keyword.findAll();
         $scope.searchList = [];
 
+        var keywordString = '';
+
         $scope.addKeyword = function(newKeyword){
             if(newKeyword != undefined) {
                 console.log("keyword.id="+newKeyword.id);
@@ -80,13 +82,16 @@
                 //$scope.keywordList.remove($scope.keywordList.indexOf(newKeyword).id);
                 $scope.currentKeyword = undefined;
 
-                keyStr = '';
+                keywordString = '';
 
                 $scope.searchList.forEach(function (keyword) {
-                    keyStr += keyword.keyword;
+                    if(keywordString!=''){
+                        keywordString += "+";
+                    }
+                    keywordString += keyword.keyword;
                 });
 
-                $state.go('search_vacation_config', {keyString: keyStr});
+                $state.go('search_vacation_config', {keyString: keywordString});
             }
         };
 
@@ -95,6 +100,23 @@
                 if(containsKeyword($scope.searchList, newKeyword)){
                     var index = $scope.searchList.indexOf(newKeyword);
                     $scope.searchList.splice(index, 1);
+
+                    console.log("keywordString:"+keywordString+" keyword:"+newKeyword.keyword);
+                    var replacementIndex = keywordString.indexOf(newKeyword.keyword);
+
+                    keywordString = keywordString.replace(newKeyword.keyword, "");
+
+                    console.log("keywordString after:"+keywordString);
+                    if(keywordString.trim() != "") {
+                        if(replacementIndex == 0){
+                            keywordString = keywordString.slice(1, keywordString.length);
+                        } else {
+                            keywordString = keywordString.substr(0, replacementIndex-1) + keywordString.substr(replacementIndex);
+                        }
+                        $state.go('search_vacation_config', {keyString: keywordString});
+                    } else {
+                        $state.go('default');
+                    }
                 }
             }
         };
