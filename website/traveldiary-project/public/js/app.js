@@ -15,52 +15,59 @@
 
         var index_config = {
             url: '',
-            templateUrl: 'assets/templates/index.html',
-            controller: [function() {}]
-        }
+            views: {
+                'navigation': {
+                    templateUrl: 'assets/templates/navigation.html',
+                    resolve: {
+                        keywords: ['Keyword',function (Keyword) {
+                            return Keyword.findAll();
+                        }]
+                    },
+                    controller: 'navigationController'
+                },
+                'content': {
+                    templateUrl: 'assets/templates/index.html',
+                    controller: [ '$scope', function ($scope) {} ]
+                }
+            }
+        };
 
         var search_vacation_config = {
             url: '/search_vacations/{keyString}',
-            templateUrl: 'assets/templates/search_vacation.html',
-            // Resolves the Promise Object.
-            resolve: {
-                keywords: ['$q','Keyword',function ($q,Keyword) {
-                    // Is this a hack?
-                    var defer = $q.defer();
-                    var unresolved = Keyword.findAll();
-                    defer.resolve(unresolved);
-                    // End hack?
-                    return defer.promise; }],
-                vacations: [ '$q', 'Vacation', '$stateParams', function ($q, Vacation,  $stateParams) {
-                    // Is this a hack?
-                    var defer = $q.defer();
-                    var unresolved = Vacation.find($stateParams.keyString);
-                    defer.resolve(unresolved);
-                    // End hack?
-                    return defer.promise; }]
-            },
-            controller: ['$scope', 'keywords', 'vacations', '$state', function($scope, keywords, vacations, $state){
-                // Binds the variables from the resource, e.g. /api/vacations, to the scope variables.
-                $scope.keywords = keywords;
-                $scope.vacations = vacations;
-
-                console.log(keywords);
-                console.log(vacations);
-            }]
-        };
+            views: {
+                'navigation': {
+                    templateUrl: 'assets/templates/navigation.html',
+                    resolve: {
+                        keywords: ['Keyword',function (Keyword) {
+                            return Keyword.findAll();
+                        }]
+                    },
+                    controller: 'navigationController'
+                },
+                'content': {
+                    templateUrl: 'assets/templates/search_vacation.html',
+                    resolve : {
+                        vacations: [ 'Vacation', '$stateParams', function (Vacation,  $stateParams) {
+                            return Vacation.find($stateParams.keyString); }]
+                    },
+                    controller: 'vacationSearchController'
+                }
+            }
+        }
 
         // Adds the config as a state.
         $stateProvider.state('default', index_config);
         $stateProvider.state('search_vacation_config', search_vacation_config);
     }]);
 
-    var controller = App.controller('searchController', ['$scope', 'Keyword', '$state', function($scope, Keyword, $state){
+    App.controller('vacationSearchController', [ '$scope', 'vacations', function($scope, vacations) {
+        $scope.vacations = vacations;
+    }]);
+
+    App.controller('navigationController', ['$scope','$state', 'keywords' , function($scope, $state, keywords){
         $scope.currentKeyword = undefined;
-        $scope.keywordList = Keyword.findAll();
-     //   $scope.keywordList = [];
-      /* for(k in keywords){
-            $scope.keywordList.push(k);
-        }*/
+        $scope.keywordList = keywords;
+
         $scope.searchList = [];
 
         $scope.addKeyword = function(newKeyword){
@@ -70,11 +77,11 @@
                     $scope.searchList.push(newKeyword);
                 }
                 //$scope.keywordList.splice($scope.keywordList.indexOf(newKeyword), 1);
-               // $scope.keywordList = $scope.keywordList.filter( function(el) { return el.id != newKeyword.id; });
+                // $scope.keywordList = $scope.keywordList.filter( function(el) { return el.id != newKeyword.id; });
                 //$scope.keywordList.remove($scope.keywordList.indexOf(newKeyword).id);
                 $scope.currentKeyword = undefined;
 
-                keyStr = ''
+                var keyStr = ''
 
                 $scope.searchList.forEach(function (keyword) {
                     keyStr += keyword.keyword;

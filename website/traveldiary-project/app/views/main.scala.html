@@ -11,90 +11,9 @@
     </head>
 
     <body ng-app="travelDiary">
-    <div ng-controller="searchController">
-        <nav class="navbar navbar-fixed" >
-            <div class="container-fluid">
-                <div class="navbar-header col-md-3">
-                    <a class="navbar-brand  navbar-custom" ui-sref="default">Travel Diary</a>
-                </div>
-                <div id="navbar" class="col-md-9">
-                    <div class="col-md-9">
-                    <form class="navbar-form navbar-custom" ng-enter="addKeyword(currentKeyword)">
-                        <input type="text" class="navbar-search form-control" ng-model="currentKeyword" typeahead="k as k.keyword for k in keywordList" placeholder="Search...">
-                        <div ng-repeat="s in searchList"><span class="badge searchBadge">{{s.keyword}}<span ng-click="removeKeyword(s)" class="glyphicon glyphicon-remove removeStyle"></span></span></div>
-                    </form>
-                    </div>
-                    <div class="col-md-3">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-calendar navbar-custom"></span></a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-bell navbar-custom"></span></a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-user navbar-custom"></span></a></li>
-                    </ul>
-                    </div>
-                </div>
-            </div>
-        </nav></div>
 
-@*<<<<<<< HEAD*@
-@*=======*@
-        @*<div class="container-fluid">*@
-            @*<div class="row">*@
-                @*<div class="col-md-6">*@
-                    @*<h3 style="vertical-align: top">Search Results:</h3>*@
-                @*</div>*@
-                @*<div class="col-md-6">*@
-                    @*<div style="float: right;">*@
-                        @*<label>Budget from</label>*@
-                        @*<input type="number" min="0" max="">*@
-                        @*<label>to</label>*@
-                        @*<input type="number" min="" max="">*@
-                    @*</div>*@
-                @*</div>*@
-            @*</div>*@
-            @*<div class="row">*@
-                @*<div class="col-md-3">*@
-                    @*<div class="jumbotron searchResult">*@
-                        @*<img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle">*@
-                        @*<label class="myLabel">izouzrztriztriztuztiztrizrourzozriztrozriztriztritzrritzruztrzir</label>*@
-                    @*</div>*@
-                @*</div>*@
-                @*<div class="col-md-3">*@
-                    @*<div class="jumbotron searchResult">*@
-                        @*<img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle">*@
-                        @*<label class="myLabel">izouzrztriztriztuztiztrizrourzozriztrozriztriztritzrritzruztrzir</label>*@
-                        @*<span class="badge">Beach</span>*@
-                    @*</div>*@
-                @*</div>*@
-                @*<div class="col-md-3">*@
-                    @*<div class="jumbotron searchResult">*@
-                        @*<img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle">*@
-                        @*<label class="myLabel">izouzrztriztriztuztiztrizrourzozriztrozriztriztritzrritzruztrzir</label>*@
-                    @*</div>*@
-                @*</div>*@
-                @*<div class="col-md-3">*@
-                    @*<div class="jumbotron searchResult">*@
-                        @*<img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle">*@
-                        @*<label class="myLabel">izouzrztriztriztuztiztrizrourzozriztrozriztriztritzrritzruztrzir</label>*@
-                    @*</div>*@
-                @*</div>*@
-                @*<div class="col-md-3">*@
-                    @*<div class="jumbotron searchResult">*@
-                        @*<img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle">*@
-                        @*<label class="myLabel">izouzrztriztriztuztiztrizrourzozriztrozriztriztritzrritzruztrzir</label>*@
-                    @*</div>*@
-                @*</div>*@
-                @*<div class="col-md-3">*@
-                    @*<div class="jumbotron searchResult">*@
-                        @*<img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle">*@
-                        @*<label class="myLabel">izouzrztriztriztuztiztrizrourzozriztrozriztriztritzrritzruztrzir</label>*@
-                    @*</div>*@
-                @*</div>*@
-
-            @*</div>*@
-        @*</div>*@
-
-@*>>>>>>> 1c60598a3c90e9c3c4874a39a9891333070f54a6*@
-        <div ui-view></div>
+        <div ui-view="navigation"></div>
+        <div ui-view="content"></div>
 
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-ui-router.js"))"></script>
