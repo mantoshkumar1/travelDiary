@@ -1,11 +1,28 @@
 .navbar-search {
-    margin-left: 35%;
+    width: 100% !important;
 }
 
 .navbar {
     border: none;
     background-color: #0074bc;
     color: #c5cee9;
+    margin: 0px;
+}
+
+.badge-container {
+    background-color: lightgrey;
+    margin: 5px;
+    border-radius: 10px;
+    padding: 0px;
+}
+
+.badge-inner-container {
+    padding: 5px;
+    margin: 0 auto;
+}
+
+.hr-no-border {
+    margin: 0px;
 }
 
 .navbar-custom {
@@ -23,14 +40,44 @@
     margin: 5px;
 }
 
+.result-headline {
+    position: absolute;
+    margin: 25px;
+    bottom: 0px;
+}
+
+.result-container {
+    margin: 20px;
+    padding: 10px;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.headline-gradient {
+    position: absolute;
+    bottom: 0px;
+    height: 50%;
+    width: 100%;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,0)),to(rgba(5,5,5,.9)));
+    background-image: -webkit-linear-gradient(top,rgba(0,0,0,0),rgba(5,5,5,.9));
+    background-image: linear-gradient(top,rgba(0,0,0,0),rgba(5,5,5,.9));
+}
+
 .searchResult {
+    position: relative;
     margin: 3px;
-    padding: 5px;
+    padding: 0px;
+    background-position: center;
+    height: 300px;
+    border: 1px solid black
 }
 
 .myLabel {
     word-break: break-all;
     margin-top: 5px;
+    color: white;
+    text-shadow: 2px 2px 1px black;
+    font-size: larger;
 }
 
 .jumbotron .searchResult {
@@ -43,7 +90,7 @@
     padding: 5px;
 }
 
-.removeStyle{
+.removeStyle {
     font-size: 10px;
     color: red;
     margin-left: 3px;
@@ -53,13 +100,13 @@
     cursor: pointer;
 }
 
-.imageStyle{
+.imageStyle {
     width: 100%;
 }
 
 /* For Firefox */
 input[type='number'] {
-    -moz-appearance:textfield;
+    -moz-appearance: textfield;
     border-radius: 5px;
 }
 

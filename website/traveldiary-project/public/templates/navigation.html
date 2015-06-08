@@ -6,8 +6,7 @@
         <div id="navbar" class="col-md-9">
             <div class="col-md-9">
                 <form class="navbar-form navbar-custom" ng-enter="addKeyword(currentKeyword)">
-                    <input type="text" class="navbar-search form-control" ng-model="currentKeyword" typeahead="k as k.keyword for k in keywordList" placeholder="Search...">
-                    <div ng-repeat="s in searchList"><span class="badge searchBadge">{{s.keyword}}<span ng-click="removeKeyword(s)" class="glyphicon glyphicon-remove removeStyle"></span></span></div>
+                    <input type="text" class="navbar-search form-control" ng-model="currentKeyword" typeahead="k as k.keyword for k in keywordList | filter:searchText" placeholder="Search...">
                 </form>
             </div>
             <div class="col-md-3">
@@ -20,3 +19,13 @@
         </div>
     </div>
 </nav>
+
+<div  class="container-fluid badge-container">
+    <div class="row badge-inner-container">
+        <div ng-repeat="s in searchList"><span class="badge searchBadge">{{s.keyword}}<span ng-click="removeKeyword(s)" class="glyphicon glyphicon-remove removeStyle"></span></span></div>
+    </div>
+    <hr class="hr-no-border"/>
+    <div class="row badge-inner-container">
+        <div ng-repeat="x in keywordList"><span class="badge searchBadge">{{x.keyword}}</span></div>
+    </div>
+</div>

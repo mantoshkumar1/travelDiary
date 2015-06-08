@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<div class="row">
-    <div class="col-md-3" ng-repeat="v in vacations">
-        <div class="jumbotron searchResult">
+<div class="row result-container">
+    <div class="col-md-4" ng-repeat="v in vacations">
+        <div class="jumbotron searchResult" style="background-image: url(assets/images/{{v.vacationKeywords[0].id}}.jpg)">
             <!--img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle" -->
-            <label class="myLabel">{{v.name}}</label>
-            <span class="badge" ng-repeat="key in v.vacationKeywords">{{key.keyword}}</span>
+            <!--<img width="100%" ng-src="assets/images/{{v.vacationKeywords[0].id}}.jpg">-->
+            <div class="headline-gradient">
+            </div>
+            <div class="result-headline">
+                <label class="myLabel">{{v.name}} </label>
+                <div class="container-fluid">
+                    <span class="badge" ng-repeat="key in v.vacationKeywords">{{key.keyword}}</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
