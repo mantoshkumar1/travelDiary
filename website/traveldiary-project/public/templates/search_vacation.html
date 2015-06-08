@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
-            <h3>Search Results:</h3>
+            <span class="badge searchBadge" ng-repeat="k in keywords" ng-click="addKeyword(k)">{{k.keyword}}</span>
         </div>
         <div class="col-md-6">
             <div style="float: right;">
@@ -11,6 +11,11 @@
                 <label>to</label>
                 <input type="number" min="{{budgetMin}}" ng-Model="budgetMax">
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Search Results:</h3>
         </div>
     </div>
     <div class="row">

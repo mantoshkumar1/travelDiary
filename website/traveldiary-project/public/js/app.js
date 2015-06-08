@@ -16,8 +16,22 @@
         var index_config = {
             url: '',
             templateUrl: 'assets/templates/index.html',
-            controller: [function() {}]
-        }
+            resolve: {
+                keywords: ['$q','Keyword',function ($q,Keyword) {
+                    // Is this a hack?
+                    var defer = $q.defer();
+                    var unresolved = Keyword.findAll();
+                    defer.resolve(unresolved);
+                    // End hack?
+                    return defer.promise; }],
+            },
+            controller: ['$scope', 'keywords', '$state', function($scope, keywords, $state){
+                // Binds the variables from the resource, e.g. /api/vacations, to the scope variables.
+                $scope.keywords = keywords;
+
+                console.log(keywords);
+            }]
+        };
 
         var search_vacation_config = {
             url: '/search_vacations/{keyString}',
@@ -146,15 +160,6 @@
             console.log(matching);
             return matching;
         };
-
-        $scope.searchResults = [
-            {name: 'Some Vacation1', vacationKeywords: [{id: 1, keyword: 'BEACH'}, {id:2, keyword: 'SUNNY'}, {id:6, keyword: 'OCEAN'}]},
-            {name: 'Some Vacation2', vacationKeywords: [{id: 1, keyword: 'BEACH'}, {id:2, keyword: 'SUNNY'}, {id:6, keyword: 'OCEAN'}]},
-            {name: 'Some Vacation3', vacationKeywords: [{id: 1, keyword: 'BEACH'}, {id:2, keyword: 'SUNNY'}, {id:6, keyword: 'OCEAN'}]},
-            {name: 'Some Vacation4', vacationKeywords: [{id: 1, keyword: 'BEACH'}, {id:2, keyword: 'SUNNY'}, {id:6, keyword: 'OCEAN'}]},
-            {name: 'Some Vacation5', vacationKeywords: [{id: 1, keyword: 'BEACH'}, {id:2, keyword: 'SUNNY'}, {id:6, keyword: 'OCEAN'}]},
-            {name: 'Some Vacation6', vacationKeywords: [{id: 1, keyword: 'BEACH'}, {id:2, keyword: 'SUNNY'}, {id:6, keyword: 'OCEAN'}]}
-        ];
     }]);
 
     App.directive('ngEnter', function () {
