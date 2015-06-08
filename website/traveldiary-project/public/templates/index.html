@@ -1,1 +1,15 @@
-<h1>Index page.</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Find Your Dream Vacation:</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <span class="badge searchBadge" ng-repeat="k in keywords" ng-click="addKeyword(k)">{{k.keyword}}</span>
+        </div>
+    </div>
+</div>
+
