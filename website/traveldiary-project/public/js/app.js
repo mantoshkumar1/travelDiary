@@ -1,5 +1,5 @@
 (function(){
-    var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap']);
+    var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter']);
 
     App.factory('Keyword', ['DS',function(DS){
         return DS.defineResource('keyword');
@@ -27,7 +27,7 @@
                 },
                 'content': {
                     templateUrl: 'assets/templates/index.html',
-                    controller: [ '$scope', function ($scope) {} ]
+                    controller: [ '$scope', function ($scope) {} ] // Empty controller
                 }
             }
         };
@@ -61,14 +61,17 @@
     }]);
 
     App.controller('vacationSearchController', [ '$scope', 'vacations', function($scope, vacations) {
+        // Add vacations to scope for displaying the content in search_vacation.html
         $scope.vacations = vacations;
     }]);
 
     App.controller('navigationController', ['$scope','$state', 'keywords' , function($scope, $state, keywords){
-        $scope.currentKeyword = undefined;
+        // Adds keywords to scope in variable keywordList for usage in navigation.html
         $scope.keywordList = keywords;
-
+        $scope.currentKeyword = undefined;
         $scope.searchList = [];
+
+        var keywordString = '';
 
         $scope.addKeyword = function(newKeyword){
             if(newKeyword != undefined) {
@@ -81,13 +84,16 @@
                 //$scope.keywordList.remove($scope.keywordList.indexOf(newKeyword).id);
                 $scope.currentKeyword = undefined;
 
-                var keyStr = ''
+                keywordString = '';
 
                 $scope.searchList.forEach(function (keyword) {
-                    keyStr += keyword.keyword;
+                    if(keywordString!=''){
+                        keywordString += "+";
+                    }
+                    keywordString += keyword.keyword;
                 });
 
-                $state.go('search_vacation_config', {keyString: keyStr});
+                $state.go('search_vacation_config', {keyString: keywordString});
             }
         };
 
@@ -96,6 +102,23 @@
                 if(containsKeyword($scope.searchList, newKeyword)){
                     var index = $scope.searchList.indexOf(newKeyword);
                     $scope.searchList.splice(index, 1);
+
+                    console.log("keywordString:"+keywordString+" keyword:"+newKeyword.keyword);
+                    var replacementIndex = keywordString.indexOf(newKeyword.keyword);
+
+                    keywordString = keywordString.replace(newKeyword.keyword, "");
+
+                    console.log("keywordString after:"+keywordString);
+                    if(keywordString.trim() != "") {
+                        if(replacementIndex == 0){
+                            keywordString = keywordString.slice(1, keywordString.length);
+                        } else {
+                            keywordString = keywordString.substr(0, replacementIndex-1) + keywordString.substr(replacementIndex);
+                        }
+                        $state.go('search_vacation_config', {keyString: keywordString});
+                    } else {
+                        $state.go('default');
+                    }
                 }
             }
         };
@@ -124,7 +147,7 @@
             }
             console.log(matching);
             return matching;
-        }
+        };
     }]);
 
     App.directive('ngEnter', function () {
@@ -140,4 +163,5 @@
             });
         };
     });
+
 })();

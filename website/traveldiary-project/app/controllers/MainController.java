@@ -18,13 +18,15 @@ public class MainController extends Controller {
     @Transactional(readOnly = true)
     public static Result getAllVacations() {
         List<Vacation> vacations = Vacation.findAll();
-        return ok(Json.toJson(vacations));
+        Vacation[] vacArray = vacations.toArray(new Vacation[vacations.size()]);
+        return ok(Json.toJson(vacArray));
     }
 
    @Transactional(readOnly = true)
     public static Result getAllKeywords() {
         List<Keyword> keywords = Keyword.findAll();
-        return ok(Json.toJson(keywords));
+       Keyword[] keyArray = keywords.toArray(new Keyword[keywords.size()]);
+        return ok(Json.toJson(keyArray));
     }
 
     @Transactional(readOnly = true)

@@ -10,7 +10,8 @@ libraryDependencies ++= Seq(
   "org.webjars.bower" % "angular" % "1.4.0-rc.2",
   "org.webjars.bower" % "angular-ui-router" % "0.2.14",
   "org.webjars.bower" % "js-data-angular" % "2.4.0",
-  "org.webjars.bower" % "angular-bootstrap" % "0.13.0")
+  "org.webjars.bower" % "angular-bootstrap" % "0.13.0",
+  "org.webjars.bower" % "angular-filter" % "0.5.4")
 
 libraryDependencies ++= Seq(
   javaJdbc,
