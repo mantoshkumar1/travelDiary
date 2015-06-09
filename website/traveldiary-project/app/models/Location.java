@@ -85,7 +85,6 @@ public class Location {
 
     public static List<Location> findAll() {
         TypedQuery<Location> query = JPA.em().createQuery("SELECT m FROM Location m", Location.class);
-
         return query.getResultList();
     }
 }
