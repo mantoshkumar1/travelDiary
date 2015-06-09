@@ -23,14 +23,20 @@
                             return Keyword.findAll();
                         }],
                         selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
-                            return [];
+                            return []; // Injects zero keywords
                         }]
                     },
                     controller: 'navigationController'
                 },
                 'content': {
                     templateUrl: 'assets/templates/index.html',
-                    controller: [ '$scope', function ($scope) {} ] // Empty controller
+                    resolve : {
+                        vacations: [ 'Vacation', function (Vacation,  $stateParams) {
+                            return Vacation.findAll(); }]
+                    },
+                    controller: [ '$scope', 'vacations' , function ($scope, vacations) {
+                        $scope.vacations = vacations;
+                    }] // Empty controller
                 }
             }
         };
@@ -75,8 +81,6 @@
         // Adds keywords to scope in variable keywordList for usage in navigation.html
         $scope.keywordList = keywords;
         $scope.searchList = selectedKeywords;
-
-        console.log(selectedKeywords);
 
         $scope.currentKeyword = undefined;
 

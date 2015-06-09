@@ -180,8 +180,8 @@ public class Vacation {
 
 
         String query = "SELECT * FROM Vacation v WHERE " +
-                "v.id IN  (SELECT vkw.vacationId FROM VacationKeywords vkw JOIN Keyword k on vkw.keywordId = k.id " +
-                "WHERE v.id = vkw.vacationId" + keywordQuery + ")";
+                "(SELECT COUNT(vkw.vacationId) FROM VacationKeywords vkw JOIN Keyword k on vkw.keywordId = k.id " +
+                "WHERE v.id = vkw.vacationId" + keywordQuery + ") = " + keywords.length;
 
 
         Query searchQquery = JPA.em().createNativeQuery(query, Vacation.class);

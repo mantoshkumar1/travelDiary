@@ -1,9 +1,24 @@
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h1>Find Your Dream Vacation!</h1>
+            <h1 class="centered-text badge-container">Find Your Dream Vacation by searching with keywords listed above!</h1>
         </div>
     </div>
 </div>
 
+<div class="row result-container">
+    <div class="col-md-4" ng-repeat="v in vacations">
+        <div class="jumbotron searchResult" style="background-image: url(assets/images/{{v.vacationKeywords[0].id}}.jpg); background-size: cover;">
+            <!--img src="@routes.Assets.at("images/beach.jpg")" class="img-rounded imageStyle" -->
+            <!--<img width="100%" ng-src="assets/images/{{v.vacationKeywords[0].id}}.jpg">-->
+            <div class="headline-gradient">
+            </div>
+            <div class="result-headline">
+                <label class="myLabel">{{v.name}} </label>
+                <div class="container-fluid">
+                    <span class="badge" ng-repeat="key in v.vacationKeywords">{{key.keyword}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
