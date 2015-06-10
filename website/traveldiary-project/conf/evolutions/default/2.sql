@@ -31,21 +31,21 @@ INSERT INTO User VALUES (2,'user2','name2','lname2','email2@mail.com','SOMEHASHV
 INSERT INTO User VALUES (3,'user3','name3','lname3','email3@mail.com','SOMEHASHVALUE3',1,3);
 INSERT INTO User VALUES (4,'user4','name4','lname4','email4@mail.com','SOMEHASHVALUE4',1,4);
 
-INSERT INTO Vacation VALUES (1, 'Ibiza','Some Description1', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 1, 1);
-INSERT INTO Vacation VALUES (2, 'Miami','Some Description2', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 2, 2);
-INSERT INTO Vacation VALUES (3, 'Louvre','Some Description3', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 3, 3);
-INSERT INTO Vacation VALUES (4, 'Ibiza','Some Description4', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 4, 4);
-INSERT INTO Vacation VALUES (5, 'Alps','Some Description5', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 1, 1);
-INSERT INTO Vacation VALUES (6, 'Andes','Some Description6', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 2, 2);
-INSERT INTO Vacation VALUES (7, 'Sevilla','Some Description7', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 3, 3);
-INSERT INTO Vacation VALUES (8, 'Amsterdam','Some Description8', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 4, 4);
-INSERT INTO Vacation VALUES (9, 'Munich','Some Description9', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 1, 1);
-INSERT INTO Vacation VALUES (10, 'Innsbruck','Some Description10', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 2, 2);
-INSERT INTO Vacation VALUES (11, 'Salzburg','Some Description11', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 3, 3);
-INSERT INTO Vacation VALUES (12, 'Munich','Some Description12', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 4, 4);
-INSERT INTO Vacation VALUES (13, 'Paris','Some Description13', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 1, 1);
-INSERT INTO Vacation VALUES (14, 'Zurich','Some Description14', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 2, 2);
-INSERT INTO Vacation VALUES (15, 'Deutsches Museum','Some Description15', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 3, 3);
+INSERT INTO Vacation VALUES (1, 'Partying in Ibiza','Some Description1', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 1, 1);
+INSERT INTO Vacation VALUES (2, 'Relaxing in Miami','Some Description2', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 2, 2);
+INSERT INTO Vacation VALUES (3, 'The Louvre and much More','Some Description3', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 3, 3);
+INSERT INTO Vacation VALUES (4, 'Relaxing Times in Italy','Some Description4', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 4, 4);
+INSERT INTO Vacation VALUES (5, 'Finding Yetis in the Alps','Some Description5', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 1, 1);
+INSERT INTO Vacation VALUES (6, 'Hiking across the Andes','Some Description6', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 2, 2);
+INSERT INTO Vacation VALUES (7, 'Diving in Hawaii','Some Description7', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 3, 3);
+INSERT INTO Vacation VALUES (8, 'The Grand Amsterdam Tour','Some Description8', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 4, 4);
+INSERT INTO Vacation VALUES (9, 'Munich for Families','Some Description9', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 1, 1);
+INSERT INTO Vacation VALUES (10, 'Innsbruck with Skiing','Some Description10', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 2, 2);
+INSERT INTO Vacation VALUES (11, 'Salzburg for Sports Enthusiasts','Some Description11', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 3, 3);
+INSERT INTO Vacation VALUES (12, 'Discovering German Beer in Munich','Some Description12', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 4, 4);
+INSERT INTO Vacation VALUES (13, 'Finding Love in Paris','Some Description13', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 1, 1);
+INSERT INTO Vacation VALUES (14, 'Discovering the Alps for Families','Some Description14', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 2, 2);
+INSERT INTO Vacation VALUES (15, 'An extensive tour through the Deutsches Museum','Some Description15', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 3, 3);
 
 
 INSERT INTO Activity VALUES(1,'Activity1','Activity description 1',strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'),1,1);
