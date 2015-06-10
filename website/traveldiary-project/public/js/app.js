@@ -111,7 +111,7 @@
         };
 
         $scope.addKeyword = function(newKeyword){
-            if(newKeyword != undefined) {
+            if(newKeyword != undefined && containsKeyword($scope.keywordList, newKeyword)) {
                 if(!containsKeyword($scope.searchList, newKeyword)){
                     $scope.searchList.push(newKeyword);
                 }
