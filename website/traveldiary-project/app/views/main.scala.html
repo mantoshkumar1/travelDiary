@@ -8,6 +8,9 @@
         <link rel='shortcut icon' type='image/png' href='@routes.Assets.at("images/favicon.png")'>
         <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.css"))'>
         <link rel='custom stylesheet' href='@routes.Assets.at("css/custom.css")'>
+        @*Add Angular Material css sheet and the fonts*@
+        <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("angular-material.min.css"))">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
     </head>
 
     <body ng-app="travelDiary">
@@ -15,12 +18,20 @@
         <div ui-view="navigation"></div>
         <div ui-view="content"></div>
 
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular.js"))"></script>
+        @*
+        Added a specific version for angular.js here because otherwise the compiler complains. I guess angular-material
+        loads version 1.3.15 as a dependency and we used another one. I will check this out again but for now this
+        should suffice.
+        *@
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("1.3.15/angular.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-ui-router.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("js-data.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("js-data-angular.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("ui-bootstrap-tpls.min.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-filter.min.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-animate.min.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-aria.min.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-material.min.js"))"></script>
 
         <script type="text/javascript" src="@routes.Assets.at("js/app.js")"></script>
     </body>

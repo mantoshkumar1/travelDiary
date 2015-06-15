@@ -1,5 +1,5 @@
 (function(){
-    var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter']);
+    var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter','ngMaterial']);
 
     App.factory('Keyword', ['DS',function(DS){
         return DS.defineResource('keyword');
