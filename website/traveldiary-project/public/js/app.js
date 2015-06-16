@@ -31,7 +31,7 @@
                 'content': {
                     templateUrl: 'assets/templates/index.html',
                     resolve : {
-                        vacations: [ 'Vacation', function (Vacation,  $stateParams) {
+                        vacations: [ 'Vacation', function (Vacation) {
                             return Vacation.findAll(); }]
                     },
                     controller: [ '$scope', 'vacations' , function ($scope, vacations) {
