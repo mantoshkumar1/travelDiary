@@ -22,8 +22,9 @@
 
 <div  class="container-fluid badge-container">
     <div class="row badge-inner-container">
+        <div ng-if="searchList.length != 0">
         <div class="col-md-2" style="text-align: right;">Selected keywords:
-        </div>
+        </div></div>
         <div class="col-md-9">
             <div ng-repeat="s in searchList">
                 <span class="badge searchBadge">{{s.keyword}}<span ng-click="removeKeyword(s)" class="glyphicon glyphicon-remove removeStyle"></span></span>
