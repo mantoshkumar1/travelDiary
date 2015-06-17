@@ -1,171 +1,122 @@
-(function(){
-    var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter','ngMaterial']);
+var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter','ngMaterial']);
 
-    App.factory('Keyword', ['DS',function(DS){
-        return DS.defineResource('keyword');
-    }]);
+App.factory('Keyword', ['DS',function(DS){
+    return DS.defineResource('keyword');
+}]);
 
-    App.factory('Vacation', ['DS',function(DS){
-        return DS.defineResource('vacation');
-    }]);
+App.factory('Vacation', ['DS',function(DS){
+    return DS.defineResource('vacation');
+}]);
 
-    App.config(['$stateProvider', 'DSProvider',function($stateProvider, DSProvider){
+App.config(['$stateProvider', 'DSProvider',function($stateProvider, DSProvider){
+    DSProvider.defaults.basePath = '/api';
 
-        DSProvider.defaults.basePath = '/api';
-
-        var index_config = {
-            url: '',
-            views: {
-                'navigation': {
-                    templateUrl: 'assets/templates/navigation.html',
-                    resolve: {
-                        keywords: ['Keyword',function (Keyword) {
-                            return Keyword.findAll();
-                        }],
-                        selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
-                            return []; // Injects zero keywords
-                        }]
-                    },
-                    controller: 'navigationController'
+    var index_config = {
+        url: '',
+        views: {
+            'navigation': {
+                templateUrl: 'assets/templates/navigation.html',
+                resolve: {
+                    keywords: ['Keyword',function (Keyword) {
+                        return Keyword.findAll();
+                    }],
+                    selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
+                        return []; // Injects zero keywords
+                    }]
                 },
-                'content': {
-                    templateUrl: 'assets/templates/index.html',
-                    resolve : {
-                        vacations: [ 'Vacation', function (Vacation) {
-                            return Vacation.findAll(); }]
-                    },
-                    controller: [ '$scope', 'vacations' , function ($scope, vacations) {
-                        $scope.vacations = vacations;
-                    }] // Empty controller
-                }
-            }
-        };
-
-        var search_vacation_config = {
-            url: '/search_vacations/{keyString}',
-            views: {
-                'navigation': {
-                    templateUrl: 'assets/templates/navigation.html',
-                    resolve: {
-                        keywords: ['Keyword',function (Keyword) {
-                            return Keyword.findAll();
-                        }],
-                        selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
-                            return Keyword.find($stateParams.keyString);
-                        }]
-                    },
-                    controller: 'navigationController'
+                controller: 'navigationController'
+            },
+            'content': {
+                templateUrl: 'assets/templates/index.html',
+                resolve : {
+                    vacations: [ 'Vacation', function (Vacation) {
+                        return Vacation.findAll(); }]
                 },
-                'content': {
-                    templateUrl: 'assets/templates/search_vacation.html',
-                    resolve : {
-                        vacations: [ 'Vacation', '$stateParams', function (Vacation,  $stateParams) {
-                            return Vacation.find($stateParams.keyString); }]
-                    },
-                    controller: 'vacationSearchController'
-                }
+                controller: [ '$scope', 'vacations' , function ($scope, vacations) {
+                    $scope.vacations = vacations;
+                }] // Empty controller
             }
         }
+    };
 
-        // Adds the config as a state.
-        $stateProvider.state('default', index_config);
-        $stateProvider.state('search_vacation_config', search_vacation_config);
-    }]);
-
-    App.controller('vacationSearchController', [ '$scope', 'vacations', function($scope, vacations) {
-        // Add vacations to scope for displaying the content in search_vacation.html
-        $scope.vacations = vacations;
-    }]);
-
-    App.controller('navigationController', ['$scope','$state', 'keywords', 'selectedKeywords', function($scope, $state, keywords, selectedKeywords){
-        // Adds keywords to scope in variable keywordList for usage in navigation.html
-        $scope.keywordList = keywords;
-        $scope.searchList = selectedKeywords;
-
-        $scope.currentKeyword = undefined;
-
-        var getKeywordString = function (kws) {
-            var result = '';
-
-            kws.forEach( function (k) {
-                    if (result != '') {
-                        result += '+';
-                    }
-
-                    result += k.keyword;
-                }
-            );
-
-            return result;
-        };
-
-        var containsKeyword = function(list, keyword){
-            var found = false;
-            for(var i = 0; i < list.length; i++) {
-                if (list[i].id == keyword.id) {
-                    found = true;
-                    break;
-                }
+    var search_vacation_config = {
+        url: '/search_vacations/{keyString}',
+        views: {
+            'navigation': {
+                templateUrl: 'assets/templates/navigation.html',
+                resolve: {
+                    keywords: ['Keyword',function (Keyword) {
+                        return Keyword.findAll();
+                    }],
+                    selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
+                        return Keyword.find($stateParams.keyString);
+                    }]
+                },
+                controller: 'navigationController'
+            },
+            'content': {
+                templateUrl: 'assets/templates/search_vacation.html',
+                resolve : {
+                    vacations: [ 'Vacation', '$stateParams', function (Vacation,  $stateParams) {
+                        return Vacation.find($stateParams.keyString); }]
+                },
+                controller: 'vacationSearchController'
             }
-            return found;
-        };
+        }
+    }
 
-        $scope.addKeyword = function(newKeyword){
-            if(newKeyword != undefined && containsKeyword($scope.keywordList, newKeyword)) {
-                if(!containsKeyword($scope.searchList, newKeyword)){
-                    $scope.searchList.push(newKeyword);
-                }
-
-                $scope.currentKeyword = undefined;
-
-                $state.go('search_vacation_config', {keyString: getKeywordString($scope.searchList)});
+    var vacation_details_config = {
+        url: '/vacation_details',
+        views: {
+            'navigation': {
+                templateUrl: 'assets/templates/navigation.html',
+                resolve: {
+                    keywords: ['Keyword',function (Keyword) {
+                        return Keyword.findAll();
+                    }],
+                    selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
+                        return []; // Injects zero keywords
+                    }]
+                },
+                controller: 'navigationController'
+            },
+            'content': {
+                templateUrl: 'assets/templates/vacation_details.html',
+                resolve : {
+                    vacations: [ 'Vacation', function (Vacation) {
+                        return Vacation.findAll(); }]
+                },
+                controller: [ '$scope', 'vacations' , function ($scope, vacations) {
+                    $scope.vacations = vacations;
+                    $scope.vacation = vacations[0];
+                    $scope.imagePath = "assets/images/1.jpg"
+                    console.log($scope.vacation);
+                }] // Empty controller
             }
-        };
+        }
+    };
 
-        $scope.removeKeyword = function(newKeyword){
-            if(newKeyword != undefined) {
-                if(containsKeyword($scope.searchList, newKeyword)){
-                    var index = $scope.searchList.indexOf(newKeyword);
-                    $scope.searchList.splice(index, 1);
-                    $scope.keywordString = getKeywordString($scope.searchList);
+    // Adds the config as a state.
+    $stateProvider.state('default', index_config);
+    $stateProvider.state('search_vacation_config', search_vacation_config);
+    $stateProvider.state('vacation_details_config', vacation_details_config);
+}]);
 
-                    if($scope.keywordString.trim() != "") {
-                        $state.go('search_vacation_config', {keyString: $scope.keywordString});
-                    } else {
-                        $state.go('default');
-                    }
-                }
+App.controller('vacationSearchController', [ '$scope', 'vacations', function($scope, vacations) {
+    // Add vacations to scope for displaying the content in search_vacation.html
+    $scope.vacations = vacations;
+}]);
+
+App.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.ngEnter);
+                });
+
+                event.preventDefault();
             }
-        };
-
-        $scope.getSearchFilter = function($viewValue) {
-            console.log("entered searchFilter");
-            var matching = [];
-            console.log($scope.keywordList);
-            console.log($scope.keywordList.length);
-            for (var i=0; i < $scope.keywordList.length; i++) {
-                console.log($scope.keywordList[i].keyword);
-                if ($scope.keywordList[i].keyword.toLowerCase().indexOf($viewValue.toLowerCase()) != -1){
-                    matching.push($scope.stuffs[i]);
-                }
-            }
-            console.log(matching);
-            return matching;
-        };
-    }]);
-
-    App.directive('ngEnter', function () {
-        return function (scope, element, attrs) {
-            element.bind("keydown keypress", function (event) {
-                if(event.which === 13) {
-                    scope.$apply(function (){
-                        scope.$eval(attrs.ngEnter);
-                    });
-
-                    event.preventDefault();
-                }
-            });
-        };
-    });
-
-})();
+        });
+    };
+});
