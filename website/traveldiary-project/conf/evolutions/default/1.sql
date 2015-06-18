@@ -107,16 +107,40 @@ CREATE TABLE VacationActivities (
   PRIMARY KEY(vacationId,activityId)
 );
 
+CREATE TABLE Images (
+  imageId INTEGER PRIMARY KEY AUTOINCREMENT,
+  URL	TEXT NOT NULL
+  );
+
+CREATE TABLE VacationImages (
+  vacationId INTEGER,
+  imageId INTEGER,
+  FOREIGN KEY(vacationId) REFERENCES Vacation(id),
+  FOREIGN KEY(imageId) REFERENCES Images(imageId),
+  PRIMARY KEY(vacationId,imageId)
+);
+
+CREATE TABLE ActivityImages (
+  activityId INTEGER,
+  imageId INTEGER,
+  FOREIGN KEY(activityId) REFERENCES Activity(id),
+  FOREIGN KEY(imageId) REFERENCES Images(imageId),
+  PRIMARY KEY(activityId,imageId)
+);
+
 # --- !Downs
 DROP TABLE VacationActivities;
 DROP TABLE VacationReviews;
 DROP TABLE VacationKeywords;
+DROP TABLE VacationImages;
 DROP TABLE Vacation;
 DROP TABLE ActivityReviews;
 DROP TABLE ActivityKeywords;
+DROP TABLE ActivityImages;
 DROP TABLE Review;
 DROP TABLE Activity;
 DROP TABLE User;
 DROP TABLE Role;
 DROP TABLE Keyword;
 DROP TABLE Location;
+DROP TABLE Images;

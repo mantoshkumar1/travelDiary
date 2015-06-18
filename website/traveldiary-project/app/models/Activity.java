@@ -51,6 +51,28 @@ public class Activity {
             inverseJoinColumns = {@JoinColumn(name = "keywordId", referencedColumnName = "id")})
     private List<Keyword> activityKeywords;
 
+    @ManyToMany
+    @JoinTable(name = "ActivityImages",
+            joinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "imageId")})
+    private List<Images> activityImages;
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public List<Images> getActivityImages() {
+        return activityImages;
+    }
+
+    public void setActivityImages(List<Images> activityImages) {
+        this.activityImages = activityImages;
+    }
+
     public List<Keyword> getActivityKeywords() {
         return activityKeywords;
     }
