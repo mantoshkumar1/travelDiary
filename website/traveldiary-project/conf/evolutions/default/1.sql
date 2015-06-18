@@ -117,7 +117,7 @@ CREATE TABLE VacationImages (
   imageId INTEGER,
   FOREIGN KEY(vacationId) REFERENCES Vacation(id),
   FOREIGN KEY(imageId) REFERENCES Images(imageId),
-  PRIMARY KEY(vacationId,imageId)
+  PRIMARY KEY(vacationId, imageId)
 );
 
 CREATE TABLE ActivityImages (
@@ -125,7 +125,7 @@ CREATE TABLE ActivityImages (
   imageId INTEGER,
   FOREIGN KEY(activityId) REFERENCES Activity(id),
   FOREIGN KEY(imageId) REFERENCES Images(imageId),
-  PRIMARY KEY(activityId,imageId)
+  PRIMARY KEY(activityId, imageId)
 );
 
 # --- !Downs
