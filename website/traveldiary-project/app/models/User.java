@@ -22,6 +22,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private String profilePicture;
     @Constraints.Required
     private String passwordHash;
 
@@ -42,6 +43,14 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "roleId")
     private Role role;
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 
     public Role getRole() {
         return role;

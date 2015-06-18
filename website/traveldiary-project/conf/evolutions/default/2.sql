@@ -26,10 +26,10 @@ INSERT INTO Location VALUES (2,'name2','description2',2.0,2.0,'address2','google
 INSERT INTO Location VALUES (3,'name3','description3',3.0,3.0,'address3','googleMapsLink3');
 INSERT INTO Location VALUES (4,'name4','description4',4.0,4.0,'address4','googleMapsLink4');
 
-INSERT INTO User VALUES (1,'user1','name1','lname1','email1@mail.com','SOMEHASHVALUE1',1,1);
-INSERT INTO User VALUES (2,'user2','name2','lname2','email2@mail.com','SOMEHASHVALUE2',1,2);
-INSERT INTO User VALUES (3,'user3','name3','lname3','email3@mail.com','SOMEHASHVALUE3',1,3);
-INSERT INTO User VALUES (4,'user4','name4','lname4','email4@mail.com','SOMEHASHVALUE4',1,4);
+INSERT INTO User VALUES (1,'user1','name1','lname1','email1@mail.com','','SOMEHASHVALUE1',1,1);
+INSERT INTO User VALUES (2,'user2','name2','lname2','email2@mail.com','','SOMEHASHVALUE2',1,2);
+INSERT INTO User VALUES (3,'user3','name3','lname3','email3@mail.com','','SOMEHASHVALUE3',1,3);
+INSERT INTO User VALUES (4,'user4','name4','lname4','email4@mail.com','','SOMEHASHVALUE4',1,4);
 
 INSERT INTO Vacation VALUES (1, 'Partying in Ibiza','Some Description1', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 1, 1);
 INSERT INTO Vacation VALUES (2, 'Relaxing in Miami','Some Description2', 2.5, strftime('%Y-%m-%d %H:%M:%f','now'),strftime('%Y-%m-%d %H:%M:%f','now'), 2, 2);

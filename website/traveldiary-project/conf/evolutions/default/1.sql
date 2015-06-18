@@ -25,6 +25,7 @@ CREATE TABLE User (
   firstName TEXT,
   lastName TEXT,
   email TEXT,
+  profilePicture TEXT,
   passwordHash TEXT,
   roleId INTEGER,
   locationId INTEGER,
