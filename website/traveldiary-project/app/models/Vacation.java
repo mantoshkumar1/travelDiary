@@ -181,35 +181,35 @@ public class Vacation {
         if (keywords.length > 0) {
 
             //commented by Chetan
-            //keywordQuery = " AND (k.keyword LIKE :keyword0";
+            keywordQuery = " AND (k.keyword LIKE :keyword0";
             //changed by Chetan to ckeck the new search
-            keywordQuery = " k.keyword LIKE :keyword0";
+            //keywordQuery = " k.keyword LIKE :keyword0";
 
             for (int i = 1; i < keywords.length; i++) {
                 keywordQuery += " OR k.keyword LIKE :keyword" + i;
             }
 
             //commented by Chetan
-            //keywordQuery += ")";
+            keywordQuery += ")";
         } else {
             keywordQuery = "";
         }
 
 
 
-        String query = "SELECT * from Vacation v inner JOIN" +
+       /* String query = "SELECT * from Vacation v inner JOIN" +
                 " VacationKeywords vkw on v.id = vkw.vacationId" +
-                " inner join Keyword k on vkw.keywordId = k.keywordId" +
-                " inner join ActivityKeywords akw on k.keyworkId = akw.keywordId" +
+                " left OUTER join Keyword k on vkw.keywordId = k.id" +
+                " LEFT OUTER join ActivityKeywords akw on k.id = akw.keywordId" +
                 " where " + keywordQuery;
 
         System.out.println("*************************************");
         System.out.println(query);
         System.out.println("*************************************");
-
-                /*"SELECT * FROM Vacation v WHERE " +
+*/
+                String query = "SELECT * FROM Vacation v WHERE " +
                 "(SELECT COUNT(vkw.vacationId) FROM VacationKeywords vkw JOIN Keyword k on vkw.keywordId = k.id " +
-                "WHERE v.id = vkw.vacationId" + keywordQuery + ") = " + keywords.length;*/
+                "WHERE v.id = vkw.vacationId" + keywordQuery + ") = " + keywords.length;
 
 
         Query searchQquery = JPA.em().createNativeQuery(query, Vacation.class);
