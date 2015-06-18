@@ -64,13 +64,13 @@ public class Vacation {
     @JoinTable(name = "VacationImages",
             joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "imageId", unique = true)})
-    private List<Images> images;
+    private List<Image> images;
 
-    public List<Images> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<Images> images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 
@@ -198,10 +198,10 @@ public class Vacation {
 
 
         String query = "SELECT * from Vacation v inner JOIN" +
-                "VacationKeywords vkw on v.id = vkw.vacationId" +
-                "inner join Keyword k on vkw.keywordId = k.keywordId" +
-                "inner join ActivityKeywords akw on k.keyworkId = akw.keywordId" +
-                "where " + keywordQuery;
+                " VacationKeywords vkw on v.id = vkw.vacationId" +
+                " inner join Keyword k on vkw.keywordId = k.keywordId" +
+                " inner join ActivityKeywords akw on k.keyworkId = akw.keywordId" +
+                " where " + keywordQuery;
 
         System.out.println("*************************************");
         System.out.println(query);

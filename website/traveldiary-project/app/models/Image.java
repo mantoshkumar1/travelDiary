@@ -7,7 +7,7 @@ import play.data.validation.Constraints;
  * Created by Chetan on 6/15/2015.
  */
 @Entity
-public class Images {
+public class Image {
     @Id
     @GeneratedValue
     private long imageId;
