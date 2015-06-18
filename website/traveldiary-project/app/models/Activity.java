@@ -55,7 +55,7 @@ public class Activity {
     @JoinTable(name = "ActivityImages",
             joinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "imageId", unique = true)})
-    private List<Images> activityImages;
+    private List<Images> images;
 
     public User getCreator() {
         return creator;
@@ -65,12 +65,12 @@ public class Activity {
         this.creator = creator;
     }
 
-    public List<Images> getActivityImages() {
-        return activityImages;
+    public List<Images> getImages() {
+        return images;
     }
 
-    public void setActivityImages(List<Images> activityImages) {
-        this.activityImages = activityImages;
+    public void setImages(List<Images> images) {
+        this.images = images;
     }
 
     public List<Keyword> getActivityKeywords() {

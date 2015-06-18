@@ -6,7 +6,6 @@ import play.db.jpa.JPA;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -65,14 +64,14 @@ public class Vacation {
     @JoinTable(name = "VacationImages",
             joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "imageId", unique = true)})
-    private List<Images> vacationImages;
+    private List<Images> images;
 
-    public List<Images> getVacationImages() {
-        return vacationImages;
+    public List<Images> getImages() {
+        return images;
     }
 
-    public void setVacationImages(List<Images> vacationImages) {
-        this.vacationImages = vacationImages;
+    public void setImages(List<Images> images) {
+        this.images = images;
     }
 
 
@@ -202,9 +201,11 @@ public class Vacation {
                 "VacationKeywords vkw on v.id = vkw.vacationId" +
                 "inner join Keyword k on vkw.keywordId = k.keywordId" +
                 "inner join ActivityKeywords akw on k.keyworkId = akw.keywordId" +
-                "where " + keywordQuery + " = " + keywords.length;
+                "where " + keywordQuery;
 
-
+        System.out.println("*************************************");
+        System.out.println(query);
+        System.out.println("*************************************");
 
                 /*"SELECT * FROM Vacation v WHERE " +
                 "(SELECT COUNT(vkw.vacationId) FROM VacationKeywords vkw JOIN Keyword k on vkw.keywordId = k.id " +

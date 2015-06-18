@@ -16,6 +16,7 @@ INSERT INTO Keyword VALUES (12,'WARM');
 INSERT INTO Keyword VALUES (13,'COLD');
 INSERT INTO Keyword VALUES (14,'SKIING');
 INSERT INTO Keyword VALUES (15,'BIKING');
+INSERT INTO Keyword VALUES (16,'SWIMMING');
 
 -- A small example
 INSERT INTO Role VALUES (1,'User');
@@ -69,6 +70,7 @@ INSERT INTO activitykeywords VALUES(4,2);
 INSERT INTO activitykeywords VALUES(4,4);
 INSERT INTO activitykeywords VALUES(4,5);
 INSERT INTO activitykeywords VALUES(4,6);
+INSERT INTO activitykeywords VALUES(4,16);
 
 INSERT INTO vacationkeywords VALUES(1,1);
 INSERT INTO vacationkeywords VALUES(1,2);

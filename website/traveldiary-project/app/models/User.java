@@ -3,7 +3,6 @@ package models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.data.validation.Constraints;
 import play.db.jpa.JPA;
-
 import javax.persistence.*;
 import java.util.List;
 

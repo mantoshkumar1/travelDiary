@@ -1,13 +1,12 @@
 package models;
 
+import javax.persistence.*;
 import play.data.validation.Constraints;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 /**
- * Created by JOY on 6/15/2015.
+ * Created by Chetan on 6/15/2015.
  */
+@Entity
 public class Images {
     @Id
     @GeneratedValue
