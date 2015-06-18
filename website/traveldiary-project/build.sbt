@@ -1,25 +1,34 @@
-import play.Project._
+import sbt._
+import Keys._
+import play.Play.autoImport._
 
-name := "hello-play-java"
+name := "traveldiary"
 
-version := "1.0-SNAPSHOT"
+version := "1.0"
+
+scalaVersion := "2.11.1"
 
 libraryDependencies ++= Seq(
-  "org.webjars" %% "webjars-play" % "2.2.2",
-  "org.webjars.bower" % "bootstrap" % "3.3.4",
-  "org.webjars.bower" % "angular" % "1.3.15",
-  "org.webjars.bower" % "angular-ui-router" % "0.2.14",
+  "org.webjars" %% "webjars-play" % "2.3.0-3",
+  // BEGIN NOTE
+  // We explicitly define both angular/angularjs libraries as dependencies. angularjs provides angular.js which is the
+  // one that will be imported and used in code. Since angular-ui-router etc. depend on the angular package we force
+  // them to use version 1.4.1 as well. We can then safely use the angular.js file from angularjs instead of angular.
+  "org.webjars" % "angularjs" % "1.4.0",
+  "org.webjars.bower" % "angular" % "1.4.0",
+  // END NOTE
+  "org.webjars" % "angular-ui-router" % "0.2.15",
+  "org.webjars" % "angular-material" % "0.10.0",
+  "org.webjars" % "bootstrap" % "3.3.5",
+  "org.webjars.bower" % "angular-animate" % "1.4.0",
+  "org.webjars.bower" % "angular-aria" % "1.4.0",
   "org.webjars.bower" % "js-data-angular" % "2.4.0",
   "org.webjars.bower" % "angular-bootstrap" % "0.13.0",
   "org.webjars.bower" % "angular-filter" % "0.5.4",
-  "org.webjars" % "angular-material" % "0.9.7")
-
-libraryDependencies ++= Seq(
   javaJdbc,
   "org.xerial" % "sqlite-jdbc" % "3.8.6",
   javaJpa.exclude("org.hibernate.javax.persistence", "hibernate-jpa-2.0-api"),
   "org.hibernate" % "hibernate-entitymanager" % "4.3.9.Final" // replace by your jpa implementation
 )
 
-
-playJavaSettings
+lazy val root = (project in file(".")).enablePlugins(PlayJava)

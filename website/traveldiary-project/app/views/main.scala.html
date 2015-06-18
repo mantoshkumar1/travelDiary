@@ -15,24 +15,34 @@
 
     <body ng-app="travelDiary">
 
+
+        @*
+        Two views. One for the navigation bar at the top of the page and one for the content below.
+        *@
         <div ui-view="navigation"></div>
         <div ui-view="content"></div>
 
         @*
-        Added a specific version for angular.js here because otherwise the compiler complains. I guess angular-material
-        loads version 1.3.15 as a dependency and we used another one. I will check this out again but for now this
-        should suffice.
-        *@
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("1.3.15/angular.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-ui-router.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("js-data.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("js-data-angular.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("ui-bootstrap-tpls.min.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-filter.min.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-animate.min.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-aria.min.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-material.min.js"))"></script>
+        Adding javascript app dependencies.
 
+        Note: Added a specific path for angular.min.js, angular-animate.min.js and angular-aria.min.js because because
+        some dependencies from org.webjars.bower require angular as a dependency. angular is a smaller version of
+        angularjs from org.webjars. Since both dependencies are available the used one has to be specified. Version
+        should correspond to the versions of the dependencies in build.sbt.
+        *@
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.4.0/angular.min.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.4.0/angular-animate.min.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.4.0/angular-aria.min.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-ui-router.min.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-filter.min.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-material.min.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("js-data.min.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("js-data-angular.min.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("ui-bootstrap-tpls.min.js"))"></script>
+
+        @*
+        Adding app javascript code.
+        *@
         <script type="text/javascript" src="@routes.Assets.at("js/app.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("js/navigationController.js")"></script>
     </body>
