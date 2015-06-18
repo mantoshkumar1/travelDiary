@@ -61,6 +61,21 @@ public class Vacation {
             inverseJoinColumns = {@JoinColumn(name = "keywordId", referencedColumnName = "id")})
     private List<Keyword> vacationKeywords;
 
+    @ManyToMany
+    @JoinTable(name = "VacationImages",
+            joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "imageId")})
+    private List<Images> vacationImages;
+
+    public List<Images> getVacationImages() {
+        return vacationImages;
+    }
+
+    public void setVacationImages(List<Images> vacationImages) {
+        this.vacationImages = vacationImages;
+    }
+
+
     public List<Keyword> getVacationKeywords() {
         return vacationKeywords;
     }
