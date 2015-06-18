@@ -51,10 +51,10 @@ public class Activity {
             inverseJoinColumns = {@JoinColumn(name = "keywordId", referencedColumnName = "id")})
     private List<Keyword> activityKeywords;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(name = "ActivityImages",
             joinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "imageId")})
+            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "imageId", unique = true)})
     private List<Images> activityImages;
 
     public User getCreator() {

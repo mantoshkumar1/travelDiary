@@ -61,10 +61,10 @@ public class Vacation {
             inverseJoinColumns = {@JoinColumn(name = "keywordId", referencedColumnName = "id")})
     private List<Keyword> vacationKeywords;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(name = "VacationImages",
             joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "imageId")})
+            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "imageId", unique = true)})
     private List<Images> vacationImages;
 
     public List<Images> getVacationImages() {
