@@ -1,19 +1,78 @@
 <div>
-    <md-content class="md-padding">
-        <md-card>
-            <div layout="row" layout-wrap>
-                <md-card-content>
-                    <div layout="row" layout-wrap>
-                    <div flex layout-margin layout-padding>
-                        <img ng-src="{{imagePath}}" class="md-card-image">
+    <md-content class="hide-sm">
+        <div class="cover-img" layout="row" style="height: 402px;"
+             ng-style="{'background-image': 'url(' + imagePath + ')'}">
+        </div>
+
+        <div layout-margin>
+            <div layout="row">
+                <div layout="column" layout-align="start start" flex>
+                    <div class="md-headline">{{vacation.name}}</div>
+                    <div class="md-subhead">by {{vacation.creator.username}}</div>
+                </div>
+                <div layout="row" layout-align="end start" flex>
+                    <div class="md-headline">{{vacation.startDate | date:'dd.MM.yyyy'}} to
+                        {{vacation.endDate | date:'dd.MM.yyyy'}}
                     </div>
-                    <div flex layout-margin layout-padding>
-                        <h2 class="md-title">{{vacation.name}}</h2>
-                    </div>
-                        </div>
-                </md-card-content>
+                </div>
             </div>
-        </md-card>
+        </div>
+
+        <div layout-margin>
+            <div layout="row">
+                <div flex="33" class="md-body-2">
+                    <div layout="row">
+                        <i class="material-icons">star</i>
+                        <i class="material-icons">star</i>
+                        <i class="material-icons">star</i>
+                        <i class="material-icons">star_half</i>
+                        <i class="material-icons">star_border</i>
+                    </div>
+                    <div layout="row">
+                        {{vacation.budget | currency}}
+                    </div>
+                </div>
+                <div flex="66">
+                    <div class="md-body-1" flex layout-padding>
+                        {{vacation.description}}
+                    </div>
+                </div>
+            </div>
+
+            <div layout-margin>
+                <div layout="row">
+                    <div class="md-title">Activities</div>
+                </div>
+                <div layout="row">
+                    <div flex="33" ng-repeat="activity in vacation.activitiesList">
+                        <md-card>
+                            <img ng-src="activity.images[0]"
+                                 ng-show="(activity.images !== undefined) && (activity.images.length > 0)">
+                            <md-card-content>
+                                <div class="md-title" flex>{{activity.name}}</div>
+                                <div class="md-body-2" flex style="float: right;">{{activity.startTime | date:'HH:mm'}}
+                                    to
+                                    {{activity.endTime | date:'HH:mm'}}
+                                </div>
+                                <div class="md-body-1">{{activity.description}}</div>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div layout-margin>
+            <div layout="row">
+                <div class="md-title">Reviews</div>
+            </div>
+            <div layout="row" ng-repeat="review in vacation.reviewsList">
+                {{review.title}}
+                {{review.description}}
+                <md-divider></md-divider>
+            </div>
+        </div>
+
     </md-content>
 </div>
 
