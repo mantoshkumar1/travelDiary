@@ -7,11 +7,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel='shortcut icon' type='image/png' href='@routes.Assets.at("images/favicon.png")'>
-        <link rel='custom stylesheet' href='@routes.Assets.at("stylesheets/main.css")'>
-        @*Add Angular Material css sheet and the fonts*@
+         @*Add Angular Material css sheet and the fonts*@
         <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("angular-material.min.css"))">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel='custom stylesheet' href='@routes.Assets.at("stylesheets/main.css")'>
     </head>
 
     <body ng-app="travelDiary">
@@ -20,9 +20,6 @@
         Two views. One for the navigation bar at the top of the page and one for the content below.
         *@
         <div ui-view="navigation"></div>
-
-        <md-divider></md-divider>
-
         <div ui-view="content"></div>
 
         @*

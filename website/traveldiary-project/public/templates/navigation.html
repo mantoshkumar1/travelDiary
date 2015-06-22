@@ -28,11 +28,11 @@
                             </md-not-found>
                         </md-autocomplete>
 
-                        <md-chip-template>
+                        <md-chip-template md-ink-ripple>
                             <span>{{$chip.keyword}}</span>
                         </md-chip-template>
-                        <button md-chip-remove ng-click="removeKeyword($chip)">
-                            <md-icon class="md-48 material-icons">close</md-icon>
+                        <button class="chipbutton" md-chip-remove ng-click="removeKeyword($chip)">
+                            <md-icon class="md-primary md-48 material-icons">close</md-icon>
                         </button>
                     </md-chips>
             </div>
@@ -52,23 +52,19 @@
     </md-toolbar>
 </nav>
 
-<md-content layout-padding>
-    <div layout-align="center center">
-        <md-chips id="suggestion-bar" ng-model="suggestedKeywords" readonly="true">
-            <md-chip-template>
-                <form ng-submit="addKeyword($chip)">
-                    <div layout="row" layout-align="center center">
-                        <div>
-                            <span>{{$chip.keyword}}</span>
-                        </div>
-                        <div layout-align="end">
-                            <button style="background: transparent; border: transparent">
-                                <md-icon class="md-accent md-24 material-icons">add_circle</md-icon>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </md-chip-template>
-        </md-chips>
-    </div>
-</md-content>
+<div ng-show="showSuggestions">
+    <md-content layout-padding>
+        <div layout-align="center center">
+            <md-chips id="suggestion-bar" ng-model="suggestedKeywords" readonly="true">
+                <md-chip-template>
+                    <span>{{$chip.keyword}}</span>
+                </md-chip-template>
+                <button class="md-accent chipbutton" md-chip-remove ng-click="addKeyword($chip)">
+                    <md-icon class="md-accent md-24 material-icons">add_circle</md-icon>
+                </button>
+            </md-chips>
+        </div>
+    </md-content>
+
+    <md-divider></md-divider>
+</div>

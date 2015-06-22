@@ -11,7 +11,43 @@
     height: 90%;
 }
 
-figure img {
-    height: 100%;
-    width: 100%;
+.md-chips .md-chip:hover {
+    background-color: darkgray;
+    color: white;
+}
+
+.md-chips .md-chip {
+    position: relative;
+    padding-right: 20px;
+}
+
+.md-chip .md-chip-remove-container {
+    position: absolute;
+    right: 6px;
+    top: 4px;
+    height: 24px;
+}
+
+.md-chip .md-chip-remove-container button.chipbutton {
+    position: relative;
+    height: 24px;
+    width: 24px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    transition: background 0.15s linear;
+    display: block;
+}
+
+.md-chip .md-chip-remove-container button.chipbutton md-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0) scale(0.7);
 }

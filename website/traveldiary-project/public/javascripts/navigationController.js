@@ -5,20 +5,36 @@ App.controller('navigationController', ['$scope','$state', 'keywords', 'selected
     $scope.noCache = false;
     $scope.autofocus = true;
     $scope.autoselect = true;
+    $scope.showSuggestions = true;
     $scope.searchText = undefined;
     $scope.selectedKeyword = undefined;
 
 
     self.keywords = keywords;
 
-    $scope.selectedKeywords = selectedKeywords.filter(function (keyword) {
-            return $.inArray(self.keywords,keyword);
+    // Filter invalid keywords from URL TODO: Maybe go to different URL
+    $scope.selectedKeywords = $.grep(selectedKeywords, function (keyword) {
+            return $.inArray(keyword,self.keywords < 0);
         }
     );
 
-    $scope.suggestedKeywords = self.keywords;
+    // Filter suggestions by removing selected keywords
+    $scope.suggestedKeywords = $.grep(self.keywords, function (keyword) {
+            return $.inArray(keyword, $scope.selectedKeywords) < 0;
+        }
+    );
 
-    $scope.$watch(selectedKeywords, function () { console.log('selected keywords changed'); });
+    function searchBarOnFocus () {
+        console.log('focus');
+
+        $scope.showSuggestions = true;
+    };
+
+    function searchBarOnBlur () {
+        console.log('blur');
+
+        $scope.showSuggestions = false;
+    };
 
     function getKeywordString (kws) {
         var result = '';
@@ -58,18 +74,23 @@ App.controller('navigationController', ['$scope','$state', 'keywords', 'selected
         return possiblities[0];
     }
 
-    $scope.addKeyword = function(keyword) {
-
-        var newKeyword = keyword;
-
+    $scope.addKeyword = function(newKeyword) {
         console.log(newKeyword);
 
-        if (keyword !== undefined && self.keywords.indexOf(newKeyword) >= 0) {
+        if (newKeyword !== undefined && self.keywords.indexOf(newKeyword) >= 0) {
             if ($scope.selectedKeywords.indexOf(newKeyword) >= 0) {
-                // TODO: show toast
+                // Shouldn't happen since we remove the keyword here first.
             } else {
-                $scope.selectedKeywords.push(keyword);
+                // Add new keyword to selected keywords
+                $scope.selectedKeywords.push(newKeyword);
+
+                //Remove keyword from suggestions
+                $scope.suggestedKeywords = $.grep($scope.suggestedKeywords,function(keyword) {return keyword !== newKeyword});
+
+                // Reset selected Keyword
                 $scope.selectedKeyword = undefined;
+
+                // Switch to new search url
                 $state.go('search_vacation_config', {keyString: getKeywordString($scope.selectedKeywords)});
             }
         }
@@ -77,12 +98,13 @@ App.controller('navigationController', ['$scope','$state', 'keywords', 'selected
 
     $scope.removeKeyword = function(removedKeyword) {
 
-        console.log(removedKeyword);
-
         if(removedKeyword != undefined) {
-            if($.inArray($scope.selectedKeywords,removedKeyword)){
+
+            if($.inArray(removedKeyword, $scope.selectedKeywords) >= 0){
 
                 $scope.selectedKeywords = $.grep($scope.selectedKeywords,function(keyword) {return keyword !== removedKeyword});
+
+                $scope.suggestedKeywords.push(removedKeyword);
 
                 $scope.keywordString = getKeywordString($scope.selectedKeywords);
 
