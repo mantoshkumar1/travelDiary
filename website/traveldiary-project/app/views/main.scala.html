@@ -7,11 +7,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel='shortcut icon' type='image/png' href='@routes.Assets.at("images/favicon.png")'>
-         @*Add Angular Material css sheet and the fonts*@
-        <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("angular-material.min.css"))">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+         @*Add Angular Material css sheet, fonts and icons*@
+        <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("angular-material.css"))">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        @*Add bootstrap for some nice dom elements*@
+        <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.css"))">
+        @*Add custom style sheets*@
         <link rel='custom stylesheet' href='@routes.Assets.at("stylesheets/main.css")'>
     </head>
 
@@ -31,7 +33,7 @@
         angularjs from org.webjars. Since both dependencies are available the used one has to be specified. Version
         should correspond to the versions of the dependencies in build.sbt.
         *@
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("2.1.4/jquery.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.4.0/angular.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.4.0/angular-animate.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.4.0/angular-aria.js"))"></script>
@@ -40,6 +42,7 @@
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-material.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("js-data.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("js-data-angular.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("ui-bootstrap-tpls.js"))"></script>
 
         @*

@@ -5,6 +5,7 @@ App.controller('navigationController', ['$scope','$state', 'keywords', 'selected
     $scope.noCache = false;
     $scope.autofocus = true;
     $scope.autoselect = true;
+    $scope.budget = 125;
     $scope.showSuggestions = true;
     $scope.searchText = undefined;
     $scope.selectedKeyword = undefined;
@@ -24,7 +25,7 @@ App.controller('navigationController', ['$scope','$state', 'keywords', 'selected
         }
     );
 
-    function searchBarOnFocus () {
+    $scope.searchBarOnFocus = function() {
         console.log('focus');
 
         $scope.showSuggestions = true;

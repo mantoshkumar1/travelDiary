@@ -13,6 +13,7 @@
                         <md-autocomplete class="md-light" md-search-text="searchText"
                                          md-items="keyword in getFilteredKeywords(searchText)"
                                          ng-disabled="isDisabled"
+                                         ng-focus="searchBarOnFocus()"
                                          md-no-cache="noCache"
                                          md-autofocus="autofocus"
                                          md-autoselect="autoselect"
@@ -53,18 +54,44 @@
 </nav>
 
 <div ng-show="showSuggestions">
-    <md-content layout-padding>
-        <div layout-align="center center">
-            <md-chips id="suggestion-bar" ng-model="suggestedKeywords" readonly="true">
-                <md-chip-template>
-                    <span>{{$chip.keyword}}</span>
-                </md-chip-template>
-                <button class="md-accent chipbutton" md-chip-remove ng-click="addKeyword($chip)">
-                    <md-icon class="md-accent md-24 material-icons">add_circle</md-icon>
-                </button>
-            </md-chips>
-        </div>
-    </md-content>
+    <md-tabs md-dynamic-height md-border-bottom md-center-tabs>
+        <md-tab label="Keyworeds">
+            <md-content layout-padding>
+                <div layout="row" layout-align="center center">
+                    <div flex="50">
+                        <md-chips id="suggestion-bar" ng-model="suggestedKeywords" readonly="true">
+                            <md-chip-template>
+                                <span>{{$chip.keyword}}</span>
+                            </md-chip-template>
+                            <button class="md-accent chipbutton" md-chip-remove ng-click="addKeyword($chip)">
+                                <md-icon class="md-accent md-24 material-icons">add_circle</md-icon>
+                            </button>
+                        </md-chips>
+                    </div>
+                </div>
+            </md-content>
+        </md-tab>
+        <md-tab label="Budget">
+            <div layout="row" layout-align="center center">
+                <div flex="50" layout="row" layout-align="center center">
+                    <div flex>
+                        <md-slider flex min="0" max="1000" ng-model="budget" aria-label="budget"></md-slider>
+                    </div>
+                    <div flex="20" layout layout-align="center center">
+                        <md-input-container>
+                            <label>Budget in €</label>
+                            <input type="number" ng-model="budget">
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+            <div layout="row">
+
+            </div>
+            </md-slider>
+
+        </md-tab>
+    </md-tabs>
 
     <md-divider></md-divider>
 </div>

@@ -113,17 +113,3 @@ App.controller('vacationSearchController', [ '$scope', 'vacations', function($sc
     // Add vacations to scope for displaying the content in search_vacation.html
     $scope.vacations = vacations;
 }]);
-
-App.directive('ngEnter', function () {
-    return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-            if(event.which === 13) {
-                scope.$apply(function (){
-                    scope.$eval(attrs.ngEnter);
-                });
-
-                event.preventDefault();
-            }
-        });
-    };
-});
