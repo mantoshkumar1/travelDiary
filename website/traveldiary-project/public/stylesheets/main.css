@@ -1,0 +1,24 @@
+.nav-padding {
+    padding: 5px;
+}
+
+#suggestion-bar md-chips-wrap {
+    box-shadow: none;
+}
+
+#search-bar md-chips-wrap {
+    background-color: white;
+    height: 90%;
+}
+
+figure img {
+    height: 100%;
+    width: 100%;
+}
+
+.cover-img {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    width: 100%;
+}

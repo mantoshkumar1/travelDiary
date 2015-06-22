@@ -1,15 +1,30 @@
 App.controller('navigationController', ['$scope','$state', 'keywords', 'selectedKeywords', function($scope, $state, keywords, selectedKeywords){
     // Adds keywords to scope in variable keywordList for usage in navigation.html
-    $scope.keywordList = keywords;
-    $scope.searchList = selectedKeywords;
 
-    $scope.currentKeyword = undefined;
+    $scope.isDisabled = false;
+    $scope.noCache = false;
+    $scope.autofocus = true;
+    $scope.autoselect = true;
+    $scope.searchText = undefined;
+    $scope.selectedKeyword = undefined;
 
-    var getKeywordString = function (kws) {
+
+    self.keywords = keywords;
+
+    $scope.selectedKeywords = selectedKeywords.filter(function (keyword) {
+            return $.inArray(self.keywords,keyword);
+        }
+    );
+
+    $scope.suggestedKeywords = self.keywords;
+
+    $scope.$watch(selectedKeywords, function () { console.log('selected keywords changed'); });
+
+    function getKeywordString (kws) {
         var result = '';
 
         kws.forEach( function (k) {
-                if (result != '') {
+                if (result !== '') {
                     result += '+';
                 }
 
@@ -20,37 +35,58 @@ App.controller('navigationController', ['$scope','$state', 'keywords', 'selected
         return result;
     };
 
-    var containsKeyword = function(list, keyword){
-        var found = false;
-        for(var i = 0; i < list.length; i++) {
-            if (list[i].id == keyword.id) {
-                found = true;
-                break;
-            }
-        }
-        return found;
-    };
-
-    $scope.addKeyword = function(newKeyword){
-        if(newKeyword != undefined && containsKeyword($scope.keywordList, newKeyword)) {
-            if(!containsKeyword($scope.searchList, newKeyword)){
-                $scope.searchList.push(newKeyword);
-            }
-
-            $scope.currentKeyword = undefined;
-
-            $state.go('search_vacation_config', {keyString: getKeywordString($scope.searchList)});
+    function createKeywordFilter(searchText) {
+        var lowerCaseSearchText = angular.lowercase(searchText);
+        return function(keyword) {
+            var lowerCaseKeyword = angular.lowercase(keyword.keyword);
+            return (lowerCaseKeyword.indexOf(lowerCaseSearchText) === 0);
         }
     };
 
-    $scope.removeKeyword = function(newKeyword){
-        if(newKeyword != undefined) {
-            if(containsKeyword($scope.searchList, newKeyword)){
-                var index = $scope.searchList.indexOf(newKeyword);
-                $scope.searchList.splice(index, 1);
-                $scope.keywordString = getKeywordString($scope.searchList);
+    $scope.getFilteredKeywords = function (searchText) {
+        var results = searchText ? self.keywords.filter( createKeywordFilter(searchText) ) : self.keywords;
 
-                if($scope.keywordString.trim() != "") {
+        console.log("getFilteredKeywords called");
+
+        return results;
+    };
+
+
+    function getKeywordFor(searchText) {
+        var possiblities = $.grep(self.keywords,function(keyword) {return keyword.keyword === searchText});
+
+        return possiblities[0];
+    }
+
+    $scope.addKeyword = function(keyword) {
+
+        var newKeyword = keyword;
+
+        console.log(newKeyword);
+
+        if (keyword !== undefined && self.keywords.indexOf(newKeyword) >= 0) {
+            if ($scope.selectedKeywords.indexOf(newKeyword) >= 0) {
+                // TODO: show toast
+            } else {
+                $scope.selectedKeywords.push(keyword);
+                $scope.selectedKeyword = undefined;
+                $state.go('search_vacation_config', {keyString: getKeywordString($scope.selectedKeywords)});
+            }
+        }
+    }
+
+    $scope.removeKeyword = function(removedKeyword) {
+
+        console.log(removedKeyword);
+
+        if(removedKeyword != undefined) {
+            if($.inArray($scope.selectedKeywords,removedKeyword)){
+
+                $scope.selectedKeywords = $.grep($scope.selectedKeywords,function(keyword) {return keyword !== removedKeyword});
+
+                $scope.keywordString = getKeywordString($scope.selectedKeywords);
+
+                if($scope.keywordString.trim() !== "") {
                     $state.go('search_vacation_config', {keyString: $scope.keywordString});
                 } else {
                     $state.go('default');

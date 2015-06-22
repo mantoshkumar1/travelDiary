@@ -5,13 +5,14 @@
     <head>
         <title>Travel Diary</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <link rel='shortcut icon' type='image/png' href='@routes.Assets.at("images/favicon.png")'>
-        <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.css"))'>
-        <link rel='custom stylesheet' href='@routes.Assets.at("stylesheets/custom.css")'>
+        <link rel='custom stylesheet' href='@routes.Assets.at("stylesheets/main.css")'>
         @*Add Angular Material css sheet and the fonts*@
         <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("angular-material.min.css"))">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     </head>
 
     <body ng-app="travelDiary">
@@ -20,6 +21,9 @@
         Two views. One for the navigation bar at the top of the page and one for the content below.
         *@
         <div ui-view="navigation"></div>
+
+        <md-divider></md-divider>
+
         <div ui-view="content"></div>
 
         @*
@@ -30,15 +34,16 @@
         angularjs from org.webjars. Since both dependencies are available the used one has to be specified. Version
         should correspond to the versions of the dependencies in build.sbt.
         *@
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.4.0/angular.min.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.4.0/angular-animate.min.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.4.0/angular-aria.min.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-ui-router.min.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-filter.min.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-material.min.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("js-data.min.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("js-data-angular.min.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("ui-bootstrap-tpls.min.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.4.0/angular.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.4.0/angular-animate.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.4.0/angular-aria.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-ui-router.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-filter.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-material.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("js-data.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("js-data-angular.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("ui-bootstrap-tpls.js"))"></script>
 
         @*
         Adding app javascript code.

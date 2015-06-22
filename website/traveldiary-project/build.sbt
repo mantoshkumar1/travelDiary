@@ -26,6 +26,7 @@ libraryDependencies ++= Seq(
   "org.webjars.bower" % "js-data-angular" % "2.4.0",
   "org.webjars.bower" % "angular-bootstrap" % "0.13.0",
   "org.webjars.bower" % "angular-filter" % "0.5.4",
+  "org.webjars" % "jquery" % "2.1.4",
   javaJdbc,
   "org.xerial" % "sqlite-jdbc" % "3.8.6",
   javaJpa.exclude("org.hibernate.javax.persistence", "hibernate-jpa-2.0-api"),
