@@ -8,11 +8,15 @@ App.factory('Vacation', ['DS',function(DS){
     return DS.defineResource('vacation');
 }]);
 
-App.config(['$stateProvider', 'DSProvider',function($stateProvider, DSProvider){
+App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProvider',function($stateProvider, DSProvider,$mdThemingProvider,$urlRouterProvider){
     DSProvider.defaults.basePath = '/api';
 
+    $mdThemingProvider.theme('default')
+        .primaryPalette('blue')
+        .accentPalette('deep-orange');
+
     var index_config = {
-        url: '',
+        url: '/index',
         views: {
             'navigation': {
                 templateUrl: 'assets/templates/navigation.html',
@@ -100,6 +104,9 @@ App.config(['$stateProvider', 'DSProvider',function($stateProvider, DSProvider){
     $stateProvider.state('default', index_config);
     $stateProvider.state('search_vacation_config', search_vacation_config);
     $stateProvider.state('vacation_details_config', vacation_details_config);
+
+    // Move to index page in any other case
+    $urlRouterProvider.otherwise('/index');
 }]);
 
 App.controller('vacationSearchController', [ '$scope', 'vacations', function($scope, vacations) {

@@ -1,39 +1,74 @@
-<nav class="navbar navbar-fixed" >
-    <div class="container-fluid">
-        <div class="navbar-header col-md-3">
-            <a class="navbar-brand  navbar-custom" ui-sref="default">Travel Diary</a>
-        </div>
-        <div id="navbar" class="col-md-9">
-            <div class="col-md-9">
-                <form class="navbar-form navbar-custom" ng-enter="addKeyword(currentKeyword)">
-                    <input type="text" class="navbar-search form-control" ng-model="currentKeyword" typeahead="k as k.keyword for k in keywordList | filter:$viewValue" placeholder="Search...">
-                </form>
+<nav>
+    <md-toolbar md-scroll-shrink class="md-raised">
+        <div layout="row" layout-sm="column" layout-align="center center" class="nav-padding">
+            <div flex="25" flex-sm="100">
+                Travel Diary
             </div>
-            <div class="col-md-3">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-calendar navbar-custom"></span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-bell navbar-custom"></span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-user navbar-custom"></span></a></li>
-                </ul>
+            <div flex="50" flex-sm="100">
+                    <md-chips ng-enter="addKeyword(selectedKeyword)"
+                              id="search-bar"
+                              ng-model="selectedKeywords"
+                              md-on-append="addKeyword($chip)"
+                              md-autocomplete-snap md-require-match>
+                        <md-autocomplete class="md-light" md-search-text="searchText"
+                                         md-items="keyword in getFilteredKeywords(searchText)"
+                                         ng-disabled="isDisabled"
+                                         md-no-cache="noCache"
+                                         md-autofocus="autofocus"
+                                         md-autoselect="autoselect"
+                                         md-selected-item="selectedKeyword"
+                                         md-item-text="keyword.keyword"
+                                         placeholder="Search here with keywords..."
+                                         secondary-placeholder="">
+                            <md-item-template>
+                                <span md-highlight-text="searchText">{{keyword.keyword}}</span>
+                            </md-item-template>
+                            <md-not-found>
+                                No matches found.
+                            </md-not-found>
+                        </md-autocomplete>
+
+                        <md-chip-template>
+                            <span>{{$chip.keyword}}</span>
+                        </md-chip-template>
+                        <button md-chip-remove ng-click="removeKeyword($chip)">
+                            <md-icon class="md-48 material-icons">close</md-icon>
+                        </button>
+                    </md-chips>
+            </div>
+            <div flex="25" flex-sm="100" layout="row" layout-align="end center" layout-align-sm="center center">
+                <div>
+                    <md-button  class="md-icon-button">
+                        <md-icon class="md-48 material-icons">event_available</md-icon>
+                    </md-button>
+                </div>
+                <div>
+                    <md-button  class="md-icon-button">
+                        <md-icon class="md-48 material-icons">home</md-icon>
+                    </md-button>
+                </div>
             </div>
         </div>
-    </div>
+    </md-toolbar>
 </nav>
 
-<div  class="container-fluid badge-container">
-    <div class="row badge-inner-container">
-        <div ng-if="searchList.length != 0">
-            <div class="col-md-2" style="text-align: right;">Selected keywords:
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div ng-repeat="s in searchList">
-                <span class="badge searchBadge">{{s.keyword}}<span ng-click="removeKeyword(s)" class="glyphicon glyphicon-remove removeStyle"></span></span>
-            </div>
-        </div>
+<md-content layout-padding>
+    <div layout-align="center center">
+        <md-chips id="suggestion-bar" ng-model="suggestedKeywords" readonly="true">
+            <md-chip-template>
+                <form ng-submit="addKeyword($chip)">
+                    <div layout="row" layout-align="center center">
+                        <div>
+                            <span>{{$chip.keyword}}</span>
+                        </div>
+                        <div layout-align="end">
+                            <button style="background: transparent; border: transparent">
+                                <md-icon class="md-accent md-24 material-icons">add_circle</md-icon>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </md-chip-template>
+        </md-chips>
     </div>
-    <hr class="hr-no-border"/>
-    <div class="row badge-inner-container">
-        <div ng-repeat="x in keywordList"><span class="badge searchBadge">{{x.keyword}}</span></div>
-    </div>
-</div>
+</md-content>
