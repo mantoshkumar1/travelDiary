@@ -108,7 +108,13 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
     $urlRouterProvider.otherwise('/index');
 }]);
 
-App.controller('vacationSearchController', [ '$scope', 'vacations', function($scope, vacations) {
+App.controller('vacationSearchController', [ '$state', '$scope', 'vacations', function($state,$scope, vacations) {
     // Add vacations to scope for displaying the content in search_vacation.html
     $scope.vacations = vacations;
+
+    $scope.loadVacation = function (vacation) {
+        $state.go('vacation_details_config');
+    }
+
+
 }]);

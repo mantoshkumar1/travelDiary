@@ -52,6 +52,11 @@
     transform: translate3d(-50%, -50%, 0) scale(0.7);
 }
 
+md-grid
+md-grid-tile.shadows {
+    box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.5);
+}
+
 figure img {
     height: 100%;
     width: 100%;

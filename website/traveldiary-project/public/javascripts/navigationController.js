@@ -6,7 +6,7 @@ App.controller('navigationController', ['$scope','$state', 'keywords', 'selected
     $scope.autofocus = true;
     $scope.autoselect = true;
     $scope.budget = 125;
-    $scope.showSuggestions = true;
+    $scope.showSuggestions = false;
     $scope.searchText = undefined;
     $scope.selectedKeyword = undefined;
 
