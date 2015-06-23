@@ -1,12 +1,8 @@
 package controllers;
 
-import models.Vacation;
 import play.db.jpa.Transactional;
-import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-
-import java.util.List;
 
 /**
  * Created by mk on 23.06.15.
@@ -14,13 +10,14 @@ import java.util.List;
 public class RegisterController extends Controller {
 
     @Transactional(readOnly = true)
-    public static Result createUser(String keyString) {
+    public static Result createUser(String username, String firstname, String lastname, String email, String passwordhash) {
 
-        String[] keywords = keyString.split("\\+");
+        //List<Vacation> matchingVacations = Vacation.findVacationsFor(keywords);
 
-        List<Vacation> matchingVacations = Vacation.findVacationsFor(keywords);
+        System.out.println("hello");
+        return ok("hello");
+        //return ok(Json.toJson(matchingVacations));
 
-        return ok(Json.toJson(matchingVacations));
     }
 
 }
