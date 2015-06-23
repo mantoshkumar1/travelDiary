@@ -1,5 +1,6 @@
 package controllers;
 
+import dao.TravelDiaryDAO;
 import models.Keyword;
 import models.Vacation;
 import play.db.jpa.Transactional;
@@ -21,7 +22,7 @@ public class SearchController extends Controller {
 
         String[] keywords = keyString.split("\\+");
 
-        List<Vacation> matchingVacations = Vacation.findVacationsFor(keywords);
+        List<Vacation> matchingVacations = TravelDiaryDAO.findVacationsFor(keywords);
 
         return ok(Json.toJson(matchingVacations));
     }
@@ -37,7 +38,7 @@ public class SearchController extends Controller {
         } else {
             String[] keywords = keyStr.split("\\+");
 
-            matchingKeywords = Keyword.findKeyWordsFor(keywords);
+            matchingKeywords = TravelDiaryDAO.findKeyWordsFor(keywords);
         }
 
         return ok(Json.toJson(matchingKeywords));

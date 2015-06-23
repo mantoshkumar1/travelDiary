@@ -1,10 +1,8 @@
 package models;
 
 import play.data.validation.Constraints;
-import play.db.jpa.JPA;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by Rike on 06.06.2015.
@@ -81,10 +79,5 @@ public class Location {
 
     public void setGoogleMapsLink(String googleMapsLink) {
         this.googleMapsLink = googleMapsLink;
-    }
-
-    public static List<Location> findAll() {
-        TypedQuery<Location> query = JPA.em().createQuery("SELECT m FROM Location m", Location.class);
-        return query.getResultList();
     }
 }
