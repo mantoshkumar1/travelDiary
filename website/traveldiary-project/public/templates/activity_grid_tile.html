@@ -1,5 +1,7 @@
-<figure>
-    <img ng-src="http://www.joomlaworks.net/images/demos/galleries/abstract/7.jpg" width="100%" height="100%">
+<figure ng-switch on="activity.images.length">
+    <img ng-switch-when="0" ng-src="assets/images/1.jpg">
+    <!-- TODO: Why is trim necessary? There are no spaces in the DB.-->
+    <img ng-switch-default ng-src="{{activity.images[0].url.trim()}}">
 </figure>
 <md-grid-tile-footer>
     <h3>

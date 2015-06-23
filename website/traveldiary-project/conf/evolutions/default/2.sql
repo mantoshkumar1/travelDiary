@@ -157,4 +157,10 @@ INSERT INTO vacationreviews VALUES(1,13);
 INSERT INTO vacationreviews VALUES(2,14);
 INSERT INTO vacationreviews VALUES(3,11);
 INSERT INTO vacationreviews VALUES(4,12);
+
+INSERT INTO Image VALUES(1,'assets/images/1.jpg');
+INSERT INTO Image VALUES(2,'assets/images/2.jpg');
+
+INSERT INTO VacationImages VALUES (1,1);
+INSERT INTO VacationImages VALUES (2,2);
 # --- !Downs

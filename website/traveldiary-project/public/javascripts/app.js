@@ -19,21 +19,23 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
         .primaryPalette('blue')
         .accentPalette('deep-orange');
 
+    var navigation_view_no_selection = {
+        templateUrl: 'assets/templates/navigation.html',
+        resolve: {
+            keywords: ['Keyword',function (Keyword) {
+                return Keyword.findAll();
+            }],
+            selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
+                return []; // Injects zero keywords
+            }]
+        },
+        controller: 'navigationController'
+    };
+
     var index_config = {
         url: '/index',
         views: {
-            'navigation': {
-                templateUrl: 'assets/templates/navigation.html',
-                resolve: {
-                    keywords: ['Keyword',function (Keyword) {
-                        return Keyword.findAll();
-                    }],
-                    selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
-                        return []; // Injects zero keywords
-                    }]
-                },
-                controller: 'navigationController'
-            },
+            'navigation': navigation_view_no_selection,
             'content': {
                 templateUrl: 'assets/templates/index.html',
                 resolve: {
@@ -75,18 +77,7 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
     var vacation_details_config = {
         url: '/vacation_details',
         views: {
-            'navigation': {
-                templateUrl: 'assets/templates/navigation.html',
-                resolve: {
-                    keywords: ['Keyword',function (Keyword) {
-                        return Keyword.findAll();
-                    }],
-                    selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
-                        return []; // Injects zero keywords
-                    }]
-                },
-                controller: 'navigationController'
-            },
+            'navigation': navigation_view_no_selection,
             'content': {
                 templateUrl: 'assets/templates/vacation_details.html',
                 resolve : {
@@ -144,8 +135,10 @@ App.controller('vacationSearchController', [ '$state', '$scope', 'vacations', fu
     $scope.vacations = vacations;
 
     $scope.loadVacation = function (vacation) {
+        console.log('changing to details view');
+
         $state.go('vacation_details_config');
-    }
+    };
 
 
 }]);

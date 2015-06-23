@@ -2,7 +2,6 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import play.data.validation.Constraints;
-import play.db.jpa.JPA;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -54,7 +53,7 @@ public class Activity {
     @OneToMany
     @JoinTable(name = "ActivityImages",
             joinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "imageId", unique = true)})
+            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "id", unique = true)})
     private List<Image> images;
 
     public User getCreator() {
@@ -135,11 +134,5 @@ public class Activity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public static List<Activity> findAll() {
-        TypedQuery<Activity> query = JPA.em().createQuery("SELECT m FROM Activity m", Activity.class);
-
-        return query.getResultList();
     }
 }

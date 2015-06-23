@@ -2,11 +2,9 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import play.data.validation.Constraints;
-import play.db.jpa.JPA;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Rike on 06.06.2015.
@@ -80,9 +78,5 @@ public class Review {
         this.rating = rating;
     }
 
-    public static List<Review> findAll() {
-        TypedQuery<Review> query = JPA.em().createQuery("SELECT m FROM Review m", Review.class);
 
-        return query.getResultList();
-    }
 }

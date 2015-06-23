@@ -2,11 +2,9 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import play.data.validation.Constraints;
-import play.db.jpa.JPA;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -63,7 +61,7 @@ public class Vacation {
     @OneToMany
     @JoinTable(name = "VacationImages",
             joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "imageId", unique = true)})
+            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "id", unique = true)})
     private List<Image> images;
 
     public List<Image> getImages() {
@@ -161,66 +159,5 @@ public class Vacation {
 
     public void setReviewsList(List<Review> reviewsList) {
         this.reviewsList = reviewsList;
-    }
-
-    public static List<Vacation> findAll() {
-        TypedQuery<Vacation> query = JPA.em().createQuery("SELECT m FROM Vacation m", Vacation.class);
-
-        return query.getResultList();
-    }
-
-    public static List<Vacation> findVacationsFor(String[] keywords) {
-
-        if (keywords == null) {
-            return new ArrayList<Vacation>();
-        }
-
-        String keywordQuery;
-
-        // Add filter for all keywords. Keywords referenced by :keyword<id>
-        if (keywords.length > 0) {
-
-            //commented by Chetan
-            keywordQuery = " AND (k.keyword LIKE :keyword0";
-            //changed by Chetan to ckeck the new search
-            //keywordQuery = " k.keyword LIKE :keyword0";
-
-            for (int i = 1; i < keywords.length; i++) {
-                keywordQuery += " OR k.keyword LIKE :keyword" + i;
-            }
-
-            //commented by Chetan
-            keywordQuery += ")";
-        } else {
-            keywordQuery = "";
-        }
-
-
-
-       /* String query = "SELECT * from Vacation v inner JOIN" +
-                " VacationKeywords vkw on v.id = vkw.vacationId" +
-                " left OUTER join Keyword k on vkw.keywordId = k.id" +
-                " LEFT OUTER join ActivityKeywords akw on k.id = akw.keywordId" +
-                " where " + keywordQuery;
-
-        System.out.println("*************************************");
-        System.out.println(query);
-        System.out.println("*************************************");
-*/
-                String query = "SELECT * FROM Vacation v WHERE " +
-                "(SELECT COUNT(vkw.vacationId) FROM VacationKeywords vkw JOIN Keyword k on vkw.keywordId = k.id " +
-                "WHERE v.id = vkw.vacationId" + keywordQuery + ") = " + keywords.length;
-
-
-        Query searchQquery = JPA.em().createNativeQuery(query, Vacation.class);
-
-        // Fill statement with corresponding keywords values
-        for (int i = 0; i < keywords.length; i++) {
-            if (keywords[i] != null) {
-                searchQquery.setParameter("keyword" + i, keywords[i]);
-            }
-        }
-
-        return (List<Vacation>) searchQquery.getResultList();
     }
 }

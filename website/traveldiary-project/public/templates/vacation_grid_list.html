@@ -8,8 +8,8 @@
                       md-colspan="1"
                       ng-mouseenter="hover = true"
                       ng-mouseleave="hover=false"
-                      ng-click="loadVacation(vacation)">
-            <vacation-grid-tile></vacation-grid-tile>
+                      ng-click="clickAction(vacation)">
+            <vacation-grid-tile vacation-src="vacation"></vacation-grid-tile>
         </md-grid-tile>
     </md-grid-list>
 </md-content>
