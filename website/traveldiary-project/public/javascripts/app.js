@@ -32,13 +32,12 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
             },
             'content': {
                 templateUrl: 'assets/templates/index.html',
-                resolve : {
-                    vacations: [ 'Vacation', function (Vacation) {
-                        return Vacation.findAll(); }]
+                resolve: {
+                    vacations: ['Vacation', function (Vacation) {
+                        return Vacation.findAll();
+                    }]
                 },
-                controller: [ '$scope', 'vacations' , function ($scope, vacations) {
-                    $scope.vacations = vacations;
-                }] // Empty controller
+                controller: 'vacationSearchController'
             }
         }
     };

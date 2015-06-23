@@ -1,0 +1,15 @@
+.slide-in-out-vertically.ng-hide-add.ng-hide-add-active,
+.slide-in-out-vertically.ng-hide-remove.ng-hide-remove-active {
+    overflow-y: hidden;
+    -moz-transition: max-height 0.5s ease-in-out;
+    -o-transition: max-height 0.5s ease-in-out;
+    -webkit-transition: max-height 0.5s ease-in-out;
+    transition: max-height 0.5s ease-in-out;
+}
+.slide-in-out-vertically {
+    max-height: 400px;
+}
+
+.slide-in-out-vertically.ng-hide {
+    max-height: 0px;
+}

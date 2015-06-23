@@ -13,7 +13,6 @@
                         <md-autocomplete class="md-light" md-search-text="searchText"
                                          md-items="keyword in getFilteredKeywords(searchText)"
                                          ng-disabled="isDisabled"
-                                         ng-focus="searchBarOnFocus()"
                                          md-no-cache="noCache"
                                          md-autofocus="autofocus"
                                          md-autoselect="autoselect"
@@ -53,12 +52,14 @@
     </md-toolbar>
 </nav>
 
-<div ng-show="showSuggestions">
-    <md-tabs md-dynamic-height md-border-bottom md-center-tabs>
+
+
+<div ng-show="showSuggestions" class="slide-in-out-vertically">
+    <md-tabs md-border-bottom md-center-tabs md-swipe-content>
         <md-tab label="Keyworeds">
             <md-content layout-padding>
                 <div layout="row" layout-align="center center">
-                    <div flex="50">
+                    <div flex="50" flex-sm="90" flex-md="70">
                         <md-chips id="suggestion-bar" ng-model="suggestedKeywords" readonly="true">
                             <md-chip-template>
                                 <span>{{$chip.keyword}}</span>
@@ -73,7 +74,7 @@
         </md-tab>
         <md-tab label="Budget">
             <div layout="row" layout-align="center center">
-                <div flex="50" layout="row" layout-align="center center">
+                <div flex="50" flex-sm="90" flex-md="70" layout="row" layout-align="center center">
                     <div flex>
                         <md-slider flex min="0" max="1000" ng-model="budget" aria-label="budget"></md-slider>
                     </div>
@@ -89,9 +90,10 @@
 
             </div>
             </md-slider>
-
         </md-tab>
     </md-tabs>
 
     <md-divider></md-divider>
 </div>
+
+Show hide keywords: <input type="checkbox" aria-label="Toggle ngHide" ng-model="showSuggestions">
