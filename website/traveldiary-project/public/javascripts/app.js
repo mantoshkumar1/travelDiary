@@ -8,6 +8,10 @@ App.factory('Vacation', ['DS',function(DS){
     return DS.defineResource('vacation');
 }]);
 
+App.factory('User', ['DS',function(DS){
+    return DS.defineResource('user');
+}]);
+
 App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProvider',function($stateProvider, DSProvider,$mdThemingProvider,$urlRouterProvider){
     DSProvider.defaults.basePath = '/api';
 
@@ -100,10 +104,37 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
         }
     };
 
+    var registration_config = {
+        url: '/register',
+        views: {
+            'navigation': {
+                templateUrl: 'assets/templates/navigation.html',
+                resolve: {
+                    keywords: ['Keyword',function (Keyword) {
+                        return Keyword.findAll();
+                    }],
+                    selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
+                        return []; // Injects zero keywords
+                    }]
+                },
+                controller: 'navigationController'
+            },
+            'content': {
+                templateUrl: 'assets/templates/registerUser.html',
+                resolve : {
+                    users: [ 'User', function (User) {
+                        return User.findAll(); }]
+                },
+                controller: 'registerController'
+            }
+        }
+    };
+
     // Adds the config as a state.
     $stateProvider.state('default', index_config);
     $stateProvider.state('search_vacation_config', search_vacation_config);
     $stateProvider.state('vacation_details_config', vacation_details_config);
+    $stateProvider.state('registration_config', registration_config);
 
     // Move to index page in any other case
     $urlRouterProvider.otherwise('/index');

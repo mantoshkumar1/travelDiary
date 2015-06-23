@@ -18,10 +18,17 @@ public class User {
 
     @Constraints.Required
     private String username;
+
+    @Constraints.Required
     private String firstName;
+
     private String lastName;
+
+    @Constraints.Required
     private String email;
+
     private String profilePicture;
+
     @Constraints.Required
     private String passwordHash;
 
