@@ -54,7 +54,7 @@ public class Activity {
     @OneToMany
     @JoinTable(name = "ActivityImages",
             joinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "imageId", unique = true)})
+            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "id", unique = true)})
     private List<Image> images;
 
     public User getCreator() {

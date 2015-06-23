@@ -109,24 +109,24 @@ CREATE TABLE VacationActivities (
 );
 
 CREATE TABLE Image (
-  imageId INTEGER PRIMARY KEY AUTOINCREMENT,
-  URL	TEXT NOT NULL
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  url	TEXT NOT NULL
   );
 
 CREATE TABLE VacationImages (
   vacationId INTEGER,
   imageId INTEGER,
   FOREIGN KEY(vacationId) REFERENCES Vacation(id),
-  FOREIGN KEY(imageId) REFERENCES Image(imageId),
-  PRIMARY KEY(imageId)
+  FOREIGN KEY(imageId) REFERENCES Image(id),
+  UNIQUE (imageId)
 );
 
 CREATE TABLE ActivityImages (
   activityId INTEGER,
   imageId INTEGER,
   FOREIGN KEY(activityId) REFERENCES Activity(id),
-  FOREIGN KEY(imageId) REFERENCES Image(imageId),
-  PRIMARY KEY(imageId)
+  FOREIGN KEY(imageId) REFERENCES Image(id),
+  UNIQUE (imageId)
 );
 
 # --- !Downs

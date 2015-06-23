@@ -1,5 +1,6 @@
-<figure>
-    <img ng-src="http://www.joomlaworks.net/images/demos/galleries/abstract/7.jpg" width="100%" height="100%">
+<figure ng-switch on="activity.images">
+    <img ng-switch-when="activity.images.length > 0" ng-src="activity.images[0].URL">
+    <img ng-switch-default ng-src="assets/images/1.jpg">
 </figure>
 <md-grid-tile-footer>
     <h3>

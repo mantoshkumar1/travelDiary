@@ -63,7 +63,7 @@ public class Vacation {
     @OneToMany
     @JoinTable(name = "VacationImages",
             joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "imageId", unique = true)})
+            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "id", unique = true)})
     private List<Image> images;
 
     public List<Image> getImages() {
