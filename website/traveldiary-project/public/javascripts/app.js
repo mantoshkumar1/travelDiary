@@ -117,24 +117,24 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
     $urlRouterProvider.otherwise('/index');
 }]);
 
-App.service('KeywordCallbackStore', function () {
-    return { keywords: [], callbacks: [] };
-});
+App.service('SelectedKeywordsChangeNotifier',function () {
 
-App.service('SelectedKeywordsChangeNotifier',[ 'KeywordCallbackStore', function (KeywordCallbackStore) {
+    var keywords = [];
+    var callbacks = []
+
     return {
         registerCallback: (function (callback) {
-            KeywordCallbackStore.callbacks.push(callback);
+            callbacks.push(callback);
         }),
         updateSelectedKeywords: (function (newSelectedKeywords) {
-            KeywordCallbackStore.keywords = newSelectedKeywords;
+            keywords = newSelectedKeywords;
 
-            KeywordCallbackStore.callbacks.forEach(function (callback) {
-                callback(KeywordCallbackStore.keywords);
+            callbacks.forEach(function (callback) {
+                callback(keywords);
             });
         })
     }
-}]);
+});
 
 App.controller('vacationSearchController', ['SelectedKeywordsChangeNotifier', 'Vacation', '$state', '$scope', 'selectedKeywords', 'vacations', function (SelectedKeywordsChangeNotifier, Vacation, $state, $scope, selectedKeywords, vacations) {
     // Add vacations to scope for displaying the content in search_vacation.html
