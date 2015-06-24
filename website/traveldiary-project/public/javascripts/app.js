@@ -87,7 +87,7 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
                 controller: [ '$scope', 'vacations' , function ($scope, vacations) {
                     $scope.vacations = vacations;
                     $scope.vacation = vacations[0];
-                    $scope.imagePath = "assets/images/1.jpg"
+                    $scope.imagePath = "assets/images/1.jpg";
                     console.log($scope.vacation);
                 }] // Empty controller
             }
