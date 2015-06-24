@@ -15,9 +15,9 @@ App.controller('registerController', ['$scope', function($scope){
             params : {
                 'callback' : 'JSON_CALLBACK',
                 'username' : $scope.username,
-                'email' : $scope.email,
                 'firstName' : $scope.firstName,
                 'lastName' : $scope.lastName,
+                 'email' : $scope.email,
                 'passwordHash' : $scope.passwordHash
             },
         };
