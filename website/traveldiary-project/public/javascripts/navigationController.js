@@ -97,7 +97,7 @@ App.controller('navigationController', ['$scope','$state', 'keywords', 'selected
         }
     }
 
-    $scope.clickHome = function($event) {
+    $scope.clickRegister = function($event) {
         $state.go('registration_config', {keyString: $scope.keywordString});
     }
     $scope.removeKeyword = function(removedKeyword) {

@@ -1,37 +1,48 @@
+<head>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+</head>
+
+<body class="container">
+
+
 <div data-ng-controller="registerController">
     <div id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></div>
     <div data-ng-show="progress.active()" style="color: red; font-size: 50px;">Sending&hellip;</div>
-    <form name="helpForm" novalidate role="form">
+    <form name="userForm" novalidate role="form">
         <div class="form-group">
             <label for="username">User name </label>
-            <span class="label label-danger" data-ng-show="submitted && helpForm.name.$error.required">Required!</span>
+            <span class="label label-danger" data-ng-show="submitted && userForm.username.$error.required">Required!</span>
             <input type="text" name="username" data-ng-model="username" class="form-control" required />
         </div>
 
         <div class="form-group">
             <label for="firstName">First name</label>
-            <span class="label label-danger" data-ng-show="submitted && helpForm.name.$error.required">Required!</span>
+            <span class="label label-danger" data-ng-show="submitted && userForm.firstName.$error.required">Required!</span>
             <input type="text" name="firstName" data-ng-model="firstName" class="form-control" required />
         </div>
 
         <div class="form-group">
-            <label for="lastName">First name</label>
+            <label for="lastName">Last name</label>
             <input type="text" name="lastName" data-ng-model="lastName" class="form-control" required />
         </div>
 
         <div class="form-group">
             <label for="email">E-mail</label>
-            <span class="label label-danger" data-ng-show="submitted && helpForm.email.$error.required">Required!</span>
-            <span class="label label-danger" data-ng-show="submitted && helpForm.$error.email">Invalid email!</span>
+            <span class="label label-danger" data-ng-show="submitted && userForm.email.$error.required">Required!</span>
+            <span class="label label-danger" data-ng-show="submitted && userForm.$error.email">Invalid email!</span>
             <input type="email" name="email" data-ng-model="email" class="form-control" required />
         </div>
 
         <div class="form-group">
             <label for="passwordHash">Password</label>
-            <span class="label label-danger" data-ng-show="submitted && helpForm.subjectList.$error.required">Required!</span>
+            <span class="label label-danger" data-ng-show="submitted && userForm.passwordHash.$error.required">Required!</span>
             <input type="password" name="passwordHash" data-ng-model="passwordHash" class="form-control" required />
         </div>
 
-        <button data-ng-disabled="progress.active()" data-ng-click="submit(helpForm)" class="btn btn-default">Submit</button>
+        <br>
+
+        <button data-ng-disabled="progress.active()" data-ng-click="submit(userForm)" class="btn btn-default">Submit</button>
+        <a href="#/" class="btn">Cancel</a>
     </form>
 </div>
+</body>
