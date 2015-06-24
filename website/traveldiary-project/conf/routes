@@ -14,7 +14,7 @@ GET        /api/location                   controllers.MainController.getAllLoca
 GET        /api/user                       controllers.MainController.getAllUsers()
 GET        /api/role                       controllers.MainController.getAllRoles()
 GET        /api/review                     controllers.MainController.getAllReviews()
-GET        /api/register                   controllers.RegisterController.createUser(username: String, firstname: String, lastname: String, email: String, passwordhash: String)
+POST        /api/user                      controllers.RegisterController.createUser()
 
 # Map static resources from the /public folder to the /assets URL path
 

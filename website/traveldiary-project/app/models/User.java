@@ -2,6 +2,8 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.data.validation.Constraints;
+import play.db.jpa.JPA;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -135,5 +137,11 @@ public class User {
         this.createdVacations = createdVacations;
     }
 
+    public void save() {
+        JPA.em().persist(this);
+    }
 
+    public static User findById(long id) {
+        return JPA.em().find(User.class, id);
+    }
 }

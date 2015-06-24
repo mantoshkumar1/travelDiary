@@ -1,26 +1,19 @@
-App.controller('registerController', ['$scope', function($scope){
+App.controller('registerController', ['$scope', 'User', function($scope, User){
 
     // Form submit handler.
-    $scope.submit = function(form) {
-        // Trigger validation flag.
-        $scope.submitted = true;
+    $scope.save = function() {
 
-        // If form is invalid, return and let AngularJS show validation errors.
-        if (form.$invalid) {
-            return;
+        $scope.user = User.createInstance();
+
+        $scope.success = false;
+
+        $scope.save = function() {
+            $scope.user.DSCreate().then(function(){
+                $scope.user = User.createInstance();
+                // Trigger validation flag.
+                $scope.success = true;
+            })
         }
-
-        // Default values for the request.
-        var config = {
-            params : {
-                'callback' : 'JSON_CALLBACK',
-                'username' : $scope.username,
-                'firstName' : $scope.firstName,
-                'lastName' : $scope.lastName,
-                 'email' : $scope.email,
-                'passwordHash' : $scope.passwordHash
-            },
-        };
     };
 }]);
 

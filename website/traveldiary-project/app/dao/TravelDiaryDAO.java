@@ -2,11 +2,16 @@ package dao;
 
 import models.*;
 import play.db.jpa.JPA;
+import play.libs.Json;
+import play.mvc.Result;
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
+
+
+import play.db.jpa.Transactional;
 
 /**
  * Created by albert on 23.06.15.
