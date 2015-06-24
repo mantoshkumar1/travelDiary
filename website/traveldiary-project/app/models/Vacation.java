@@ -56,7 +56,7 @@ public class Vacation {
     @JoinTable(name = "VacationKeywords",
             joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "keywordId", referencedColumnName = "id")})
-    private List<Keyword> vacationKeywords;
+    private List<Keyword> keywords;
 
     @OneToMany
     @JoinTable(name = "VacationImages",
@@ -73,12 +73,12 @@ public class Vacation {
     }
 
 
-    public List<Keyword> getVacationKeywords() {
-        return vacationKeywords;
+    public List<Keyword> getKeywords() {
+        return keywords;
     }
 
-    public void setVacationKeywords(List<Keyword> vacationKeywords) {
-        this.vacationKeywords = vacationKeywords;
+    public void setKeywords(List<Keyword> vacationKeywords) {
+        this.keywords = vacationKeywords;
     }
 
     public Date getStartDate() {

@@ -8,6 +8,12 @@ App.directive('tdClick', function() {
     }
 });
 
+App.directive('tdFilter', function() {
+    return {
+        controller: function($scope) {}
+    }
+});
+
 App.directive('vacationSrc', function() {
     return {
         controller: function($scope) {}
@@ -61,7 +67,8 @@ App.directive('vacationGridList', function () {
         templateUrl: 'assets/templates/vacation_grid_list.html',
         scope: {
             vacations: "=vacationsSrc",
-            clickAction: "=tdClick"
+            clickAction: "=tdClick",
+            tdFilter: '=tdFilter'
         }
     };
 });
@@ -95,7 +102,8 @@ App.directive('activityGridList', function () {
         templateUrl: 'assets/templates/activity_grid_list.html',
         scope: {
             activities: "=activitiesSrc",
-            clickAction: "=tdClick"
+            clickAction: "=tdClick",
+            tdFilter: '=tdFilter'
         }
     };
 });

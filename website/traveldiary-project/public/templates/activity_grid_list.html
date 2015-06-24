@@ -3,7 +3,7 @@
                   md-gutter="8px" md-gutter-gt-sm="4px"
                   md-row-height="4:3">
         <md-grid-tile ng-class="{shadows: hover}"
-                      ng-repeat="activity in activities"
+                      ng-repeat="activity in activities | filter:tdFilter"
                       md-rowspan="1"
                       md-colspan="1"
                       ng-mouseenter="hover = true"

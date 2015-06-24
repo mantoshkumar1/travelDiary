@@ -1,4 +1,4 @@
-App.controller('navigationController', ['$scope','$state', 'keywords', 'selectedKeywords', function($scope, $state, keywords, selectedKeywords){
+App.controller('navigationController', ['$rootScope','$scope','$state', 'keywords', 'SelectedKeywordsChangeNotifier', function($rootScope, $scope, $state, keywords,SelectedKeywordsChangeNotifier){
     // Adds keywords to scope in variable keywordList for usage in navigation.html
 
     $scope.isDisabled = false;
@@ -11,13 +11,14 @@ App.controller('navigationController', ['$scope','$state', 'keywords', 'selected
     $scope.selectedKeyword = undefined;
 
 
+    SelectedKeywordsChangeNotifier.registerCallback( function (newSelectedKeywords) {
+        $scope.selectedKeywords = newSelectedKeywords;
+    });
+
     self.keywords = keywords;
 
-    // Filter invalid keywords from URL TODO: Maybe go to different URL
-    $scope.selectedKeywords = $.grep(selectedKeywords, function (keyword) {
-            return $.inArray(keyword,self.keywords < 0);
-        }
-    );
+    // Use the keywords already shared before
+    $scope.selectedKeywords = SelectedKeywordsChangeNotifier.currentKeywords;
 
     // Filter suggestions by removing selected keywords
     $scope.suggestedKeywords = $.grep(self.keywords, function (keyword) {
@@ -92,7 +93,7 @@ App.controller('navigationController', ['$scope','$state', 'keywords', 'selected
                 $scope.selectedKeyword = undefined;
 
                 // Switch to new search url
-                $state.go('search_vacation_config', {keyString: getKeywordString($scope.selectedKeywords)});
+                $state.go('main.vacation.search', {keyString: getKeywordString($scope.selectedKeywords)});
             }
         }
     }
@@ -110,9 +111,9 @@ App.controller('navigationController', ['$scope','$state', 'keywords', 'selected
                 $scope.keywordString = getKeywordString($scope.selectedKeywords);
 
                 if($scope.keywordString.trim() !== "") {
-                    $state.go('search_vacation_config', {keyString: $scope.keywordString});
+                    $state.go('main.vacation.search', {keyString: $scope.keywordString});
                 } else {
-                    $state.go('default');
+                    $state.go('main.index');
                 }
             }
         }
