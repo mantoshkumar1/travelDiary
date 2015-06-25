@@ -16,9 +16,7 @@ App.controller('globalController', [ 'Util', '$scope', '$state', '$log', 'keywor
         }
 
         return $.grep(keywordsToFilter, function (keyword) {
-            return $.grep(filterList, function (filterKeyword) {
-                return keyword.id === filterKeyword.id;
-            }).length === 0;
+            return !containsKeyword(keyword, filterList);
         });
     }
 

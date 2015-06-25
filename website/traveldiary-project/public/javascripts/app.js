@@ -64,6 +64,10 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
             })
         },
         views: {
+            'navigation@': {
+                templateUrl: 'assets/templates/navigation.html',
+                controller: 'globalController'
+            },
             'content': {
                 templateUrl: 'assets/templates/search_vacation.html',
                 controller: 'vacationSearchController'
