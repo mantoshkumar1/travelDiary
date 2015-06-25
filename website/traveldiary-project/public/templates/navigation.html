@@ -5,36 +5,35 @@
                 Travel Diary
             </div>
             <div flex="50" flex-sm="100">
-                    <md-chips ng-enter="addKeyword(selectedKeyword)"
-                              id="search-bar"
-                              ng-model="selectedKeywords"
-                              md-on-append="addKeyword($chip)"
-                              md-autocomplete-snap md-require-match>
-                        <md-autocomplete class="md-light" md-search-text="searchText"
+                <div id="search-bar" class="flexbox" layout="row" layout-align="start center">
+                    <div ng-repeat="keyword in selectedKeywords">
+                        <keyword-chip keyword-src="keyword" td-on-click="removeKeywordFromSelection" td-button-icon="close"></keyword-chip>
+                    </div>
+                    <div>
+                        <md-autocomplete class="md-light"
+                                         md-search-text="searchText"
                                          md-items="keyword in getFilteredKeywords(searchText)"
                                          ng-disabled="isDisabled"
                                          md-no-cache="noCache"
                                          md-autofocus="autofocus"
                                          md-autoselect="autoselect"
                                          md-selected-item="selectedKeyword"
+                                         onfocus="searchBarOnFocus()"
+                                         onblur="searchBarOnBlur()"
+                                         ng-enter="addKeywordToSelection(selectedKeyword)"
                                          md-item-text="keyword.keyword"
                                          placeholder="Search here with keywords..."
                                          secondary-placeholder="">
                             <md-item-template>
-                                <span md-highlight-text="searchText">{{keyword.keyword}}</span>
+                                <span md-highlight-text="searchText" ng-click="addKeywordToSelection(keyword)">{{keyword.keyword}}</span>
                             </md-item-template>
                             <md-not-found>
                                 No matches found.
                             </md-not-found>
                         </md-autocomplete>
+                    </div>
 
-                        <md-chip-template md-ink-ripple>
-                            <span>{{$chip.keyword}}</span>
-                        </md-chip-template>
-                        <button class="chipbutton" md-chip-remove ng-click="removeKeyword($chip)">
-                            <md-icon class="md-primary md-48 material-icons">close</md-icon>
-                        </button>
-                    </md-chips>
+                </div>
             </div>
             <div flex="25" flex-sm="100" layout="row" layout-align="end center" layout-align-sm="center center">
                 <div>
@@ -52,22 +51,15 @@
     </md-toolbar>
 </nav>
 
-
-
 <div ng-show="showSuggestions" class="slide-in-out-vertically">
     <md-tabs md-border-bottom md-center-tabs md-swipe-content>
-        <md-tab label="Keyworeds">
+        <md-tab label="Keywords">
             <md-content layout-padding>
                 <div layout="row" layout-align="center center">
-                    <div flex="50" flex-sm="90" flex-md="70">
-                        <md-chips id="suggestion-bar" ng-model="suggestedKeywords" readonly="true">
-                            <md-chip-template>
-                                <span>{{$chip.keyword}}</span>
-                            </md-chip-template>
-                            <button class="md-accent chipbutton" md-chip-remove ng-click="addKeyword($chip)">
-                                <md-icon class="md-accent md-24 material-icons">add_circle</md-icon>
-                            </button>
-                        </md-chips>
+                    <div layout="row" flex="50" flex-sm="90" flex-md="70" class="flexbox">
+                        <div ng-repeat="keyword in suggestedKeywords">
+                            <keyword-chip keyword-src="keyword" td-on-click="addKeywordToSelection" td-button-icon="add_new"></keyword-chip>
+                        </div>
                     </div>
                 </div>
             </md-content>
@@ -97,3 +89,5 @@
 </div>
 
 Show hide keywords: <input type="checkbox" aria-label="Toggle ngHide" ng-model="showSuggestions">
+
+<div ui-view="content"></div>

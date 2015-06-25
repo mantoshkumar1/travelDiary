@@ -2,54 +2,33 @@
     padding: 5px;
 }
 
-#suggestion-bar md-chips-wrap {
-    box-shadow: none;
-}
-
-#search-bar md-chips-wrap {
+#search-bar {
     background-color: white;
+    color: black;
     height: 90%;
 }
 
-.md-chips .md-chip:hover {
-    background-color: darkgray;
-    color: white;
+.flexbox {
+    display: -webkit-flex;
+    -webkit-flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    height: auto;
+    min-height: inherit;
 }
 
-.md-chips .md-chip {
-    position: relative;
-    padding-right: 20px;
+.keyword-chip {
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background-color: lightgray;
+    padding: 0px 0px 0px 16px;
+    height: 30px;
+    margin: 4px;
 }
 
-.md-chip .md-chip-remove-container {
-    position: absolute;
-    right: 6px;
-    top: 4px;
-    height: 24px;
-}
-
-.md-chip .md-chip-remove-container button.chipbutton {
-    position: relative;
-    height: 24px;
-    width: 24px;
-    line-height: 30px;
-    text-align: center;
-    border-radius: 50%;
-    border: none;
-    background: transparent;
-    background-color: transparent;
-    box-shadow: none;
-    padding: 0;
-    margin: 0;
-    transition: background 0.15s linear;
-    display: block;
-}
-
-.md-chip .md-chip-remove-container button.chipbutton md-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate3d(-50%, -50%, 0) scale(0.7);
+.keyword-chip-button {
+    height: inherit;
+    width: 5px;
 }
 
 md-grid

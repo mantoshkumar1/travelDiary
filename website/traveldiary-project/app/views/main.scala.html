@@ -20,11 +20,7 @@
 
     <body ng-app="travelDiary">
 
-        @*
-        Two views. One for the navigation bar at the top of the page and one for the content below.
-        *@
         <div ui-view="navigation"></div>
-        <div ui-view="content"></div>
 
         @*
         Adding javascript app dependencies.
@@ -50,8 +46,10 @@
         Adding app javascript code.
         *@
         <script type="text/javascript" src="@routes.Assets.at("javascripts/app.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("javascripts/navigationController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/services.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/globalController.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/registerController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/vacationSearchController.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/directives.js")"></script>
 
     </body>
