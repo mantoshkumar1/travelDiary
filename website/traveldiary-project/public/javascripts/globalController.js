@@ -7,15 +7,44 @@ App.controller('globalController', [ 'Util', '$scope', '$state', '$log', 'keywor
 
     self.keywords = keywords;
 
+    console.log(selectedKeywords);
+
+    function filterKeywords(keywordsToFilter, filterList) {
+
+        if (keywordsToFilter == undefined || filterList == undefined) {
+            $log.error('Can\'t use undefined arguments:' + keywordsToFilter + ", " + filterList);
+        }
+
+        return $.grep(keywordsToFilter, function (keyword) {
+            return $.grep(filterList, function (filterKeyword) {
+                return keyword.id === filterKeyword.id;
+            }).length === 0;
+        });
+    }
+
+    function containsKeyword(theKeyword, keywords) {
+        if (theKeyword === undefined || keywords === undefined) {
+            $log.error('Can\'t use undefined arguments:' + theKeyword + ", " + keywords);
+
+            return false;
+        }
+
+        return $.grep(keywords, function (keyword) {
+            return keyword.id === theKeyword.id;
+        }).length > 0;
+    }
+
     $scope.setSuggestedKeywords = function (newSuggestedKeywords) {
-        if (newSuggestedKeywords == undefined) {
+        if (newSuggestedKeywords === undefined) {
             $log.error('Can\'t set new keyword Suggestion' + newSuggestedKeywords);
         }
 
         // Filter out all already selected keywords
-        $scope.suggestedKeywords = $.grep(newSuggestedKeywords, function (keyword) {
-            return $.inArray(keyword, $scope.selectedKeywords) < 0;
-        });
+        if ($scope.selectedKeywords === undefined) {
+            $log.error('Selected keywords undefined');
+        } else {
+            $scope.suggestedKeywords = filterKeywords(newSuggestedKeywords, $scope.selectedKeywords);
+        }
     };
 
     $scope.setSelectedKeyWords = function (newSelectedKeywords) {
@@ -24,53 +53,73 @@ App.controller('globalController', [ 'Util', '$scope', '$state', '$log', 'keywor
 
         $scope.selectedKeywords = newSelectedKeywords;
 
-        // Filter out all already selected keywords
-        $scope.suggestedKeywords = $.grep($scope.selectedKeywords, function (keyword) {
-            return $.inArray(keyword, $scope.selectedKeywords) < 0;
-        });
+        // Filter out all already selected keywords from suggestions
+        if ($scope.suggestedKeywords !== undefined) {
+            $scope.suggestedKeywords = filterKeywords($scope.suggestedKeywords, $scope.selectedKeywords);
+        }
     };
 
     $scope.setSelectedKeyWords(selectedKeywords);
     $scope.setSuggestedKeywords(keywords);
 
-    $scope.addKeywordToSelection = function () {
+    $scope.$watch('selectedKeywords', function () {
+        console.log('Selected keywords changed.');
+        console.log($scope.selectedKeywords);
+    });
 
-        var newKeyword = $scope.selectedKeyword;
+    $scope.$watch('suggestedKeywords', function () {
+        console.log('Suggested keywords changed.');
+        console.log($scope.suggestedKeywords);
+    });
+
+
+    $scope.addKeywordToSelection = function (newKeyword) {
 
         console.log('Adding keyword ' + newKeyword);
 
         if (newKeyword != undefined) {
-            $scope.selectedKeywords.push(newKeyword);
+            if (!containsKeyword(newKeyword, $scope.selectedKeywords)) {
+                $scope.selectedKeywords.push(newKeyword);
 
-            // Filter out all already selected keywords
-            $scope.suggestedKeywords = $.grep($scope.suggestedKeywords, function (keyword) {
-                return $.inArray(keyword, $scope.selectedKeywords) < 0;
-            });
+                // Filter out all already selected keywords
+                $scope.suggestedKeywords = filterKeywords($scope.suggestedKeywords, $scope.selectedKeywords)
+            } else {
+                console.log('Keyword' + newKeyword + "already contained in selection.")
+            }
+
         } else {
             $log.error('Can\'t add keyword ' + newKeyword);
         }
+
+        $scope.searchText = '';
 
         loadResultPage();
     };
 
     $scope.removeKeywordFromSelection = function (removedKeyword) {
 
-        console.log('Removing keyword ' + removedKeyword.keyword);
+        console.log('Removing keyword ' + removedKeyword);
 
-        var result = $.grep($scope.selectedKeywords, function (keyword) {
-            return keyword != removedKeyword;
-        });
+        if (removedKeyword !== undefined) {
+            var result = filterKeywords($scope.selectedKeywords, [removedKeyword]);
 
-        if (result.length === $scope.selectedKeywords.length) {
-            console.log('Keyword (' + removedKeyword + ') to remove from selected keywords is not in current selection.');
+            console.log('Removing resulted in');
+
+            console.log(result);
+
+            if (result.length === $scope.selectedKeywords.length) {
+                console.log('Keyword (' + removedKeyword + ') to remove from selected keywords is not in current selection.');
+            } else {
+                $scope.selectedKeywords = result;
+
+                // Add it back to the suggestions TODO: Make this based on previous suggestions
+                $scope.suggestedKeywords.push(removedKeyword);
+
+                loadResultPage();
+            }
         } else {
-            $scope.selectedKeywords = result;
+            $log.error('Can\'t remove keyword ' + removedKeyword);
         }
-
-        // Add it back to the suggestions TODO: Make this based on previous suggestions
-        $scope.suggestedKeywords.push(removedKeyword);
-
-        loadResultPage();
     };
 
     $scope.clickRegister = function($event) {
@@ -85,10 +134,14 @@ App.controller('globalController', [ 'Util', '$scope', '$state', '$log', 'keywor
     };
 
     function loadResultPage() {
+        console.log('Loading page with keywords');
+        console.log($scope.selectedKeywords);
+
         var keyStrings = Util.getKeywordString($scope.selectedKeywords);
 
-        if (keyStrings !== '') {
-            $state.go('main.vacation.search', {keywordStrings: keyStrings});
+        if (keyStrings.trim() !== '') {
+            $state.go
+            ('main.vacation.search', {keywordStrings: keyStrings});
         } else {
             $state.go('main.vacation');
         }

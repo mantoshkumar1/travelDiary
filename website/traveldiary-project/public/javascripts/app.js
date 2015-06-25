@@ -21,16 +21,17 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
 
     var main_config = {
         abstract: true,
+        resolve: {
+            keywords: ['Keyword', function (Keyword) {
+                return Keyword.findAll();
+            }],
+            selectedKeywords: (function () {
+                return [];
+            })
+        },
         views: {
             'navigation': {
                 templateUrl: 'assets/templates/navigation.html',
-                resolve: {
-                    keywords: ['Keyword', function (Keyword) {
-                        return Keyword.findAll();
-                    }],
-                    selectedKeywords: (function () {
-                        return [];
-                    })                },
                 controller: 'globalController'
             }
         }
@@ -39,17 +40,14 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
 
     var index_config = {
         url: '/index',
+        resolve: {
+            vacations: ['Vacation', function (Vacation) {
+                return Vacation.findAll();
+            }]
+        },
         views: {
             'content': {
                 templateUrl: 'assets/templates/index.html',
-                resolve: {
-                    vacations: ['Vacation', function (Vacation) {
-                        return Vacation.findAll();
-                    }],
-                    selectedKeywords: (function () {
-                        return [];
-                    })
-                },
                 controller: 'vacationSearchController'
             }
         }
@@ -57,14 +55,17 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
 
     var vacation_config = {
         url: '/vacation',
+        resolve: {
+            vacations: ['Vacation', function (Vacation) {
+                return Vacation.findAll();
+            }],
+            selectedKeywords: (function () {
+                return [];
+            })
+        },
         views: {
             'content': {
                 templateUrl: 'assets/templates/search_vacation.html',
-                resolve: {
-                    vacations: ['Vacation', function (Vacation) {
-                        return Vacation.findAll();
-                    }]
-                },
                 controller: 'vacationSearchController'
             }
         }
@@ -72,30 +73,22 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
 
     var vacation_search_config = {
         url: '/search/{keywordStrings}',
+        resolve: {
+            selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
+                if ($stateParams.keywordStrings === '') {
+                    return [];
+                } else {
+                    return Keyword.find($stateParams.keywordStrings);
+                }
+            }]
+        },
         views: {
             'navigation@': {
                 templateUrl: 'assets/templates/navigation.html',
-                resolve: {
-                    keywords: ['Keyword', function (Keyword) {
-                        return Keyword.findAll();
-                    }],
-                    selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
-                            if ($stateParams.keywordStrings === '') {
-                                return [];
-                            } else {
-                                return Keyword.find($stateParams.keywordStrings);
-                            }
-                        }]
-                },
                 controller: 'globalController'
             },
             'content@main': {
                 templateUrl: 'assets/templates/search_vacation.html',
-                resolve: {
-                    vacations: ['Vacation', function (Vacation) {
-                        return Vacation.findAll();
-                    }]
-                },
                 controller: 'vacationSearchController'
             }
         }
@@ -107,11 +100,6 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
         views: {
             'content@main': {
                 templateUrl: 'assets/templates/vacation_details.html',
-                resolve: {
-                    vacations: ['Vacation', function (Vacation) {
-                        return Vacation.findAll();
-                    }]
-                },
                 controller: ['$scope', 'vacations', function ($scope, vacations) {
                     $scope.vacations = vacations;
                     $scope.vacation = vacations[0];
@@ -124,13 +112,13 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
 
     var register_config = {
         url: '/register',
+        resolve : {
+            users: [ 'User', function (User) {
+                return User.findAll(); }]
+        },
         views: {
             'content': {
                 templateUrl: 'assets/templates/registerUser.html',
-                resolve : {
-                    users: [ 'User', function (User) {
-                        return User.findAll(); }]
-                },
                 controller: 'registerController'
             }
         }
