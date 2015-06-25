@@ -6,9 +6,22 @@
     box-shadow: none;
 }
 
-#search-bar md-chips-wrap {
+#search-bar {
     background-color: white;
+    color: black;
     height: 90%;
+}
+
+.td-chip {
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background-color: lightgray;
+    padding: 10px;
+}
+
+.td-chip:hover {
+    background-color: darkgray;
 }
 
 .md-chips .md-chip:hover {

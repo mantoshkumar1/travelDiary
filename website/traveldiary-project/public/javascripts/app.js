@@ -23,9 +23,11 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
                 resolve: {
                     keywords: ['Keyword', function (Keyword) {
                         return Keyword.findAll();
-                    }]
-                },
-                controller: 'navigationController'
+                    }],
+                    selectedKeywords: (function () {
+                        return [];
+                    })                },
+                controller: 'globalController'
             }
         }
     };
@@ -34,7 +36,7 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
     var index_config = {
         url: '/index',
         views: {
-            'content@': {
+            'content': {
                 templateUrl: 'assets/templates/index.html',
                 resolve: {
                     vacations: ['Vacation', function (Vacation) {
@@ -52,15 +54,12 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
     var vacation_config = {
         url: '/vacation',
         views: {
-            'content@': {
+            'content': {
                 templateUrl: 'assets/templates/search_vacation.html',
                 resolve: {
                     vacations: ['Vacation', function (Vacation) {
                         return Vacation.findAll();
-                    }],
-                    selectedKeywords: (function () {
-                        return [];
-                    })
+                    }]
                 },
                 controller: 'vacationSearchController'
             }
@@ -70,14 +69,27 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
     var vacation_search_config = {
         url: '/search/{keywordStrings}',
         views: {
-            'content@': {
+            'navigation@': {
+                templateUrl: 'assets/templates/navigation.html',
+                resolve: {
+                    keywords: ['Keyword', function (Keyword) {
+                        return Keyword.findAll();
+                    }],
+                    selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
+                            if ($stateParams.keywordStrings === '') {
+                                return [];
+                            } else {
+                                return Keyword.find($stateParams.keywordStrings);
+                            }
+                        }]
+                },
+                controller: 'globalController'
+            },
+            'content': {
                 templateUrl: 'assets/templates/search_vacation.html',
                 resolve: {
                     vacations: ['Vacation', function (Vacation) {
                         return Vacation.findAll();
-                    }],
-                    selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
-                        return Keyword.find($stateParams.keywordStrings);
                     }]
                 },
                 controller: 'vacationSearchController'
@@ -89,7 +101,7 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
     var vacation_details_config = {
         url: '/details',
         views: {
-            'content@': {
+            'content': {
                 templateUrl: 'assets/templates/vacation_details.html',
                 resolve: {
                     vacations: ['Vacation', function (Vacation) {
@@ -114,63 +126,8 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
     $stateProvider.state('main.vacation.details', vacation_details_config);
 
     // Move to index page in any other case
+    $urlRouterProvider.when('/vacation','/vacation/search');
+    $urlRouterProvider.when('/vacation','/vacation/search/');
     $urlRouterProvider.otherwise('/index');
-}]);
-
-App.service('SelectedKeywordsChangeNotifier',function () {
-
-    var keywords = [];
-    var callbacks = []
-
-    return {
-        registerCallback: (function (callback) {
-            callbacks.push(callback);
-        }),
-        updateSelectedKeywords: (function (newSelectedKeywords) {
-            keywords = newSelectedKeywords;
-
-            callbacks.forEach(function (callback) {
-                callback(keywords);
-            });
-        })
-    }
-});
-
-App.controller('vacationSearchController', ['SelectedKeywordsChangeNotifier', 'Vacation', '$state', '$scope', 'selectedKeywords', 'vacations', function (SelectedKeywordsChangeNotifier, Vacation, $state, $scope, selectedKeywords, vacations) {
-    // Add vacations to scope for displaying the content in search_vacation.html
-
-    $scope.budget = 10000000;
-
-    SelectedKeywordsChangeNotifier.registerCallback( function (newSelectedKeywords) {
-        $scope.selectedKeywords = newSelectedKeywords;
-    });
-
-    // When this controller is loaded the injected selectedKeywords are the current value of keywords
-    SelectedKeywordsChangeNotifier.updateSelectedKeywords(selectedKeywords);
-
-    $scope.vacations = vacations;
-
-    $scope.hasAllSelectedKeywords = function (vacation) {
-        var lena = $.grep(vacation.keywords, function (keyword) {
-            console.log(keyword);
-            return $.grep($scope.selectedKeywords, function (selectedKeyword) {
-                    keyword.id === selectedKeyword.id;
-                }).length >= 0;
-        }).length;
-
-        var lenb = $scope.selectedKeywords.length;
-
-        console.log(lena);
-        console.log(lenb);
-
-        return lena == lenb;
-    };
-
-    $scope.loadVacation = function (vacation) {
-        console.log('changing to details view');
-
-        $state.go('main.vacation.details');
-    };
-
 
 }]);
