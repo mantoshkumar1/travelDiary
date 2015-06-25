@@ -32,23 +32,8 @@ App.controller('globalController', [ 'Util', '$scope', '$state', '$log', 'keywor
         loadResultPage();
     };
 
-    $scope.inputSelectedKeywords = selectedKeywords;
-
     $scope.setSelectedKeyWords(selectedKeywords);
     $scope.setSuggestedKeywords(keywords);
-
-
-    $scope.$watch('selectedKeywords', function () {
-        console.log('selection changed')
-    });
-
-    $scope.$watch('suggestedKeywords', function () {
-        console.log('suggestion changed')
-    });
-
-    $scope.$watch('inputSelectedKeywords', function () {
-        console.log('selection input changed')
-    });
 
     $scope.addKeywordToSelection = function () {
 
@@ -72,7 +57,7 @@ App.controller('globalController', [ 'Util', '$scope', '$state', '$log', 'keywor
 
     $scope.removeKeywordFromSelection = function (removedKeyword) {
 
-        console.log('Removing keyword ' + removedKeyword);
+        console.log('Removing keyword ' + removedKeyword.keyword);
 
         var result = $.grep($scope.selectedKeywords, function (keyword) {
             return keyword != removedKeyword;

@@ -5,14 +5,9 @@
                 Travel Diary
             </div>
             <div flex="50" flex-sm="100">
-                <div id="search-bar" layout="row" layout-align="start center">
+                <div id="search-bar" class="flexbox" layout="row" layout-align="start center">
                     <div ng-repeat="keyword in selectedKeywords">
-                        <div layout="row" class="td-chip" layout-align="center center">
-                            <span ng-click="">{{keyword.keyword}}</span>
-                            <md-button ng-click="removeKeywordFromSelection(keyword)">
-                                <md-icon class="md-primary md-48 material-icons">close</md-icon>
-                            </md-button>
-                        </div>
+                        <keyword-chip keyword-src="keyword" td-on-click="removeKeywordFromSelection" td-button-icon="close"></keyword-chip>
                     </div>
                     <div>
                         <md-autocomplete class="md-light"
@@ -59,14 +54,9 @@
         <md-tab label="Keywords">
             <md-content layout-padding>
                 <div layout="row" layout-align="center center">
-                    <div layout="row" flex="50" flex-sm="90" flex-md="70">
+                    <div layout="row" flex="50" flex-sm="90" flex-md="70" class="flexbox">
                         <div ng-repeat="keyword in suggestedKeywords">
-                            <div layout="row" class="td-chip" layout-align="center center">
-                                <span ng-click="">{{keyword.keyword}}</span>
-                                <md-button ng-click="addKeywordToSelection(keyword)">
-                                    <md-icon class="md-primary md-48 material-icons">add_circle</md-icon>
-                                </md-button>
-                            </div>
+                            <keyword-chip keyword-src="keyword" td-on-click="addKeywordToSelection" td-button-icon="add_new"></keyword-chip>
                         </div>
                     </div>
                 </div>

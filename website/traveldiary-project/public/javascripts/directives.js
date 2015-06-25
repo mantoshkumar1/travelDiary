@@ -4,24 +4,28 @@
 
 App.directive('tdClick', function() {
     return {
+        restrict: 'C',
         controller: function($scope) {}
     }
 });
 
 App.directive('tdFilter', function() {
     return {
+        restrict: 'C',
         controller: function($scope) {}
     }
 });
 
 App.directive('vacationSrc', function() {
     return {
+        restrict: 'C',
         controller: function($scope) {}
     }
 });
 
 App.directive('vacationsSrc', function() {
     return {
+        restrict: 'C',
         controller: function($scope) {}
     }
 });
@@ -29,14 +33,57 @@ App.directive('vacationsSrc', function() {
 
 App.directive('activitySrc', function() {
     return {
+        restrict: 'C',
         controller: function($scope) {}
     }
 });
 
-App.directive('activitiesSrc', function() {
+App.directive('keywordSrc', function() {
     return {
+        restrict: 'C',
         controller: function($scope) {}
     }
+});
+
+App.directive('tdOnClick', function() {
+    return {
+        restrict: 'C',
+        controller: function($scope) {}
+    }
+});
+
+App.directive('tdButtonIcon', function() {
+    return {
+        restrict: 'C',
+        controller: function($scope) {}
+    }
+});
+
+App.directive('keywordChip', function () {
+    return  {
+        restrict: 'E',
+        require: '^keywordSrc',
+        templateUrl: 'assets/templates/chip_template.html',
+        scope: {
+            keyword: "=keywordSrc",
+            onClick: "=tdOnClick"
+        },
+        controller: [ '$scope', '$attrs', function ($scope, $attrs) {
+            if ($attrs.tdOnClick === undefined) {
+                $scope.hasOnClick = false;
+            } else {
+                $scope.hasOnClick = true;
+            }
+
+            if ($attrs.tdButtonIcon === undefined) {
+                $scope.hasIcon = false;
+                $scope.icon = undefined;
+            } else {
+                $scope.hasIcon = true;
+                $scope.icon = $attrs.tdButtonIcon;
+            }
+        }]
+    };
 });
 
 /*
