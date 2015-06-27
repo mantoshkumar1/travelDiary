@@ -13,11 +13,8 @@ import play.mvc.Result;
  */
 public class RegisterController extends Controller {
 
-    //public static Result createUser(String username, String firstname, String lastname, String email, String passwordhash)
-
     @Transactional(readOnly = false)
     public static Result createUser() {
-        System.out.println(request().body().asJson());
         User newUser = Json.fromJson(request().body().asJson(), User.class);
         InsertDAO.insertUser(newUser);
         return created(Json.toJson(newUser));
