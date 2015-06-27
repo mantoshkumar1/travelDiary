@@ -175,7 +175,7 @@ App.directive('searchBarFix', function() {
         compile: function compile(tElement, tAttrs, transclude) {
             return {
                 post: function compile(tElement, tAttrs, transclude) {
-                    var searchBar = $("#search");
+                    var searchBar = $("#search").find("md-autocomplete-wrap").find("input");
                 }
             }
         }

@@ -55,8 +55,48 @@ public class MainController extends Controller {
     }
 
     @Transactional(readOnly = true)
-    public static Result getAllReviews() {
-        List<Review> activities = TravelDiaryDAO.findAllReviews();
-        return ok(Json.toJson(activities));
+    public static Result getAllVacationReviews() {
+        List<VacationReview> reviews = TravelDiaryDAO.findAllVacationReviews();
+        return ok(Json.toJson(reviews));
+    }
+
+    @Transactional(readOnly = true)
+    public static Result getAllActivityReviews() {
+        List<ActivityReview> reviews = TravelDiaryDAO.findAllActivityReviews();
+        return ok(Json.toJson(reviews));
+    }
+
+    public static Result getVacation(int id) {
+        return ok(Json.toJson(TravelDiaryDAO.getVacation(id)));
+    }
+
+    public static Result getActivity(int id) {
+
+        return ok(Json.toJson(TravelDiaryDAO.getActivity(id)));
+    }
+
+    public static Result getKeyword(int id) {
+        return ok(Json.toJson(TravelDiaryDAO.getKeyword(id)));
+    }
+
+    public static Result getLocation(int id) {
+        return ok(Json.toJson(TravelDiaryDAO.getLocation(id)));
+    }
+
+    public static Result getRole(int id) {
+        return ok(Json.toJson(TravelDiaryDAO.getRole(id)));
+    }
+
+
+    public static Result getUser(int id) {
+        return ok(Json.toJson(TravelDiaryDAO.getUser(id)));
+    }
+
+    public static Result getActivityReview(int id) {
+        return ok(Json.toJson(TravelDiaryDAO.getActivityReview(id)));
+    }
+
+    public static Result getVacationReview(int id) {
+        return ok(Json.toJson(TravelDiaryDAO.getVacationReview(id)));
     }
 }

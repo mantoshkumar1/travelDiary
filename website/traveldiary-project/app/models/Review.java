@@ -1,7 +1,9 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import play.data.validation.Constraints;
+import util.RatingSerializer;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,11 +12,11 @@ import java.util.Date;
  * Created by Rike on 06.06.2015.
  */
 @Entity
-public class Review {
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public abstract class Review {
 
     @Id
-    @GeneratedValue
-    private long id;
+    private int id;
 
     @Constraints.Required
     private String title;
@@ -22,7 +24,8 @@ public class Review {
     @Constraints.Required
     private String description;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
+    @JsonSerialize(using = RatingSerializer.class)
     private Rating rating;
 
     @ManyToOne
@@ -56,11 +59,11 @@ public class Review {
         this.title = title;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -77,6 +80,4 @@ public class Review {
     public void setRating(Rating rating) {
         this.rating = rating;
     }
-
-
 }

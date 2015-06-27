@@ -12,7 +12,7 @@ public class Keyword {
 
     @Id
     @GeneratedValue
-    private long id;
+    private int id;
 
     @Constraints.Required
     private String keyword;
@@ -25,11 +25,11 @@ public class Keyword {
         this.keyword = keyword;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

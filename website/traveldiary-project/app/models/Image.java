@@ -10,16 +10,16 @@ import play.data.validation.Constraints;
 public class Image {
     @Id
     @GeneratedValue
-    private long id;
+    private int id;
 
     @Constraints.Required
     private String url;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

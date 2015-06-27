@@ -15,7 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    private long id;
+    private int id;
 
     @Constraints.Required
     private String username;
@@ -47,9 +47,15 @@ public class User {
     @JoinColumn(name = "locationId")
     private Location location = new Location(); //default location
 
+    @Transient
+    private long locationId;
+
     @ManyToOne
     @JoinColumn(name = "roleId")
     private Role role = new Role(); //default role
+
+    @Transient
+    private long roleId;
 
     public String getProfilePicture() {
         return profilePicture;
@@ -115,9 +121,9 @@ public class User {
         this.location = location;
     }
 
-    public long getId() { return id; }
+    public int getId() { return id; }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -143,5 +149,11 @@ public class User {
 
     public static User findById(long id) {
         return JPA.em().find(User.class, id);
+    }
+
+    @PostLoad
+    private void onLoad() {
+        roleId = role.getId();
+        locationId = location.getId();
     }
 }
