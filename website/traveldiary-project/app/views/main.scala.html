@@ -21,6 +21,7 @@
     <body ng-app="travelDiary">
 
         <div ui-view="navigation"></div>
+        <div ui-view="content"></div>
 
         @*
         Adding javascript app dependencies.
@@ -47,10 +48,9 @@
         *@
         <script type="text/javascript" src="@routes.Assets.at("javascripts/app.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/services.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("javascripts/globalController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/navigationController.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/registerController.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/vacationSearchController.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/directives.js")"></script>
-
     </body>
 </html>

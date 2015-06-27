@@ -6,31 +6,37 @@
             </div>
             <div flex="50" flex-sm="100">
                 <div id="search-bar" class="flexbox" layout="row" layout-align="start center">
-                    <div ng-repeat="keyword in selectedKeywords">
-                        <keyword-chip keyword-src="keyword" td-on-click="removeKeywordFromSelection" td-button-icon="close"></keyword-chip>
+                    <div ng-repeat="keyword in navCtrl.selectedKeywords">
+                        <keyword-chip keyword-src="keyword"
+                                      td-on-click="navCtrl.removeKeyword"
+                                      td-button-icon="close">
+                        </keyword-chip>
                     </div>
                     <div>
-                        <md-autocomplete class="md-light"
-                                         md-search-text="searchText"
-                                         md-items="keyword in getFilteredKeywords(searchText)"
-                                         ng-disabled="isDisabled"
-                                         md-no-cache="noCache"
-                                         md-autofocus="autofocus"
-                                         md-autoselect="autoselect"
-                                         md-selected-item="selectedKeyword"
-                                         ng-enter="addKeywordToSelection(selectedKeyword)"
+                        <md-autocomplete id="search"
+                                         class="md-light search-bar-fix"
+                                         md-search-text="navCtrl.searchText"
+                                         md-items="keyword in navCtrl.getFilteredKeywords(navCtrl.searchText)"
+                                         ng-disabled="navCtrl.isDisabled"
+                                         md-no-cache="navCtrl.noCache"
+                                         md-autofocus="navCtrl.autofocus"
+                                         md-autoselect="navCtrl.autoselect"
+                                         md-selected-item="navCtrl.selectedKeyword"
+                                         ng-enter="navCtrl.addKeyword(navCtrl.selectedKeyword)"
                                          md-item-text="keyword.keyword"
                                          placeholder="Search here with keywords..."
                                          secondary-placeholder="">
                             <md-item-template>
-                                <span md-highlight-text="searchText" ng-click="addKeywordToSelection(keyword)">{{keyword.keyword}}</span>
+                                <span md-highlight-text="searchText"
+                                      ng-click="navCtrl.addKeyword(keyword)">
+                                    {{keyword.keyword}}
+                                </span>
                             </md-item-template>
                             <md-not-found>
                                 No matches found.
                             </md-not-found>
                         </md-autocomplete>
                     </div>
-
                 </div>
             </div>
             <div flex="25" flex-sm="100" layout="row" layout-align="end center" layout-align-sm="center center">
@@ -40,52 +46,56 @@
                     </md-button>
                 </div>
                 <div>
-                    <md-button ng-click="clickRegister($event)" class="md-icon-button">
+                    <md-button ng-click="navCtrl.clickRegister()" class="md-icon-button">
                         <md-icon class="md-48 material-icons">home</md-icon>
                     </md-button>
                 </div>
             </div>
         </div>
     </md-toolbar>
-</nav>
 
-<div ng-show="showSuggestions" class="slide-in-out-vertically">
-    <md-tabs md-border-bottom md-center-tabs md-swipe-content>
-        <md-tab label="Keywords">
-            <md-content layout-padding>
+    <div ng-show="navCtrl.showSuggestions" class="slide-in-out-vertically">
+        <md-tabs md-border-bottom md-center-tabs md-swipe-content>
+            <md-tab label="Keywords">
+                <md-content layout-padding>
+                    <div layout="row" layout-align="center center">
+                        <div layout="row" flex="50" flex-sm="90" flex-md="70" class="flexbox">
+                            <div ng-repeat="keyword in navCtrl.suggestedKeywords">
+                                <keyword-chip keyword-src="keyword"
+                                              td-on-click="navCtrl.addKeyword"
+                                              td-button-icon="add_new">
+                                </keyword-chip>
+                            </div>
+                        </div>
+                    </div>
+                </md-content>
+            </md-tab>
+            <md-tab label="Budget">
                 <div layout="row" layout-align="center center">
-                    <div layout="row" flex="50" flex-sm="90" flex-md="70" class="flexbox">
-                        <div ng-repeat="keyword in suggestedKeywords">
-                            <keyword-chip keyword-src="keyword" td-on-click="addKeywordToSelection" td-button-icon="add_new"></keyword-chip>
+                    <div flex="50" flex-sm="90" flex-md="70" layout="row" layout-align="center center">
+                        <div flex>
+                            <md-slider flex min="0"
+                                       max="1000"
+                                       ng-model="navCtrl.budget"
+                                       aria-label="budget"></md-slider>
+                        </div>
+                        <div flex="20" layout layout-align="center center">
+                            <md-input-container>
+                                <label>Budget in €</label>
+                                <input type="number" ng-model="budget">
+                            </md-input-container>
                         </div>
                     </div>
                 </div>
-            </md-content>
-        </md-tab>
-        <md-tab label="Budget">
-            <div layout="row" layout-align="center center">
-                <div flex="50" flex-sm="90" flex-md="70" layout="row" layout-align="center center">
-                    <div flex>
-                        <md-slider flex min="0" max="1000" ng-model="budget" aria-label="budget"></md-slider>
-                    </div>
-                    <div flex="20" layout layout-align="center center">
-                        <md-input-container>
-                            <label>Budget in €</label>
-                            <input type="number" ng-model="budget">
-                        </md-input-container>
-                    </div>
+                <div layout="row">
+
                 </div>
-            </div>
-            <div layout="row">
+                </md-slider>
+            </md-tab>
+        </md-tabs>
 
-            </div>
-            </md-slider>
-        </md-tab>
-    </md-tabs>
+        <md-divider></md-divider>
+    </div>
 
-    <md-divider></md-divider>
-</div>
-
-Show hide keywords: <input type="checkbox" aria-label="Toggle ngHide" ng-model="showSuggestions">
-
-<div ui-view="content"></div>
+    Show hide keywords: <input type="checkbox" aria-label="Toggle ngHide" ng-model="navCtrl.showSuggestions">
+</nav>

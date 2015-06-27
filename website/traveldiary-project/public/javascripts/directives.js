@@ -168,3 +168,16 @@ App.directive('ngEnter', function() {
         });
     };
 });
+
+App.directive('searchBarFix', function() {
+    return {
+        restrict: 'C',
+        compile: function compile(tElement, tAttrs, transclude) {
+            return {
+                post: function compile(tElement, tAttrs, transclude) {
+                    var searchBar = $("#search");
+                }
+            }
+        }
+    }}
+);

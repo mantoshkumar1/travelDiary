@@ -24,15 +24,12 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
         resolve: {
             keywords: ['Keyword', function (Keyword) {
                 return Keyword.findAll();
-            }],
-            selectedKeywords: (function () {
-                return [];
-            })
+            }]
         },
         views: {
             'navigation': {
                 templateUrl: 'assets/templates/navigation.html',
-                controller: 'globalController'
+                controller: 'navigationControllerWithoutSelection'
             }
         }
     };
@@ -40,15 +37,10 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
 
     var index_config = {
         url: '/index',
-        resolve: {
-            vacations: ['Vacation', function (Vacation) {
-                return Vacation.findAll();
-            }]
-        },
         views: {
-            'content': {
+            'content@': {
                 templateUrl: 'assets/templates/index.html',
-                controller: 'vacationSearchController'
+                controller: (function () {})
             }
         }
     };
@@ -58,19 +50,13 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
         resolve: {
             vacations: ['Vacation', function (Vacation) {
                 return Vacation.findAll();
-            }],
-            selectedKeywords: (function () {
-                return [];
-            })
+            }]
         },
         views: {
-            'navigation@': {
-                templateUrl: 'assets/templates/navigation.html',
-                controller: 'globalController'
-            },
-            'content': {
+            'content@': {
                 templateUrl: 'assets/templates/search_vacation.html',
-                controller: 'vacationSearchController'
+                controller: 'vacationSearchController',
+                controllerAs: 'vacCtrl'
             }
         }
     };
@@ -89,11 +75,7 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
         views: {
             'navigation@': {
                 templateUrl: 'assets/templates/navigation.html',
-                controller: 'globalController'
-            },
-            'content@main': {
-                templateUrl: 'assets/templates/search_vacation.html',
-                controller: 'vacationSearchController'
+                controller: 'navigationControllerWithSelection'
             }
         }
     };
@@ -102,7 +84,7 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
     var vacation_details_config = {
         url: '/details',
         views: {
-            'content@main': {
+            'content@': {
                 templateUrl: 'assets/templates/vacation_details.html',
                 controller: ['$scope', 'vacations', function ($scope, vacations) {
                     $scope.vacations = vacations;
@@ -121,7 +103,7 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
                 return User.findAll(); }]
         },
         views: {
-            'content': {
+            'content@': {
                 templateUrl: 'assets/templates/registerUser.html',
                 controller: 'registerController'
             }

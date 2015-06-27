@@ -3,27 +3,30 @@
  */
 
 
-App.controller('vacationSearchController', ['Vacation', '$state', '$scope', 'vacations', function (Vacation, $state, $scope, vacations) {
-    $scope.budget = 10000000;
+App.controller('vacationSearchController', ['$scope', '$state', 'KeywordService', 'vacations', function ($scope, $state,KeywordService, vacations) {
+
+    var thisCtrl = this;
+
+    var keywordService = KeywordService;
+
+    var selectedKeywords = keywordService.selectedKeywords;
 
     // Add vacations to scope for displaying the content in search_vacation.html
-    $scope.vacations = vacations;
+    thisCtrl.vacations = vacations;
 
-    $scope.hasAllSelectedKeywords = function (vacation) {
+    thisCtrl.hasAllSelectedKeywords = function (vacation) {
+
+        var matches = keywordService.findMatchingKeywords(selectedKeywords, vacation.keywords);
 
         // Take all selected keywords that are in the vacation keywords
-        var actualMatches = $.grep($scope.selectedKeywords, function (selectedKeyword) {
-            return $.grep(vacation.keywords, function (vacationKeyword) {
-                return vacationKeyword == selectedKeyword;
-            })
-        }).length;
+        var actualMatches = matches.length;
 
-        var neededMatches = $scope.selectedKeywords.length;
+        var neededMatches = selectedKeywords.length;
 
-        return actualMatches == neededMatches;
+        return actualMatches === neededMatches;
     };
 
-    $scope.loadVacation = function (vacation) {
+    thisCtrl.loadVacation = function (vacation) {
         console.log('changing to details view');
 
         $state.go('main.vacation.details');
