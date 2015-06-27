@@ -4,7 +4,7 @@
     </h1>
 </md-toolbar>
 
-<div class="alert alert-success" role='alert' ng-show="success">Your account has been created successfully</div>
+<div class="alert alert-success" role='alert' ng-show="$scope.success">Your account has been created successfully</div>
 
 <form class="form-horizontal" name="userForm">
 
@@ -45,9 +45,9 @@
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-xs-10">
-            <button type="submit" class="btn btn-default" ng-click="save()">
+            <md-button type="submit" class="md-raised" md-ripple-size ng-click="save()">
                 <span class="glyphicon glyphicon-plus"></span> Sign up
-            </button>
+            </md-button>
             <a href="#/" class="btn"> Cancel</a>
         </div>
     </div>

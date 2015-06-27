@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.data.validation.Constraints;
 import play.db.jpa.JPA;
@@ -11,6 +12,7 @@ import java.util.List;
  * Created by Rike on 06.06.2015.
  */
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     @Id
@@ -43,7 +45,7 @@ public class User {
     @JsonManagedReference
     private List<Vacation> createdVacations;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "locationId")
     private Location location;
 
@@ -147,10 +149,6 @@ public class User {
 
     public void setCreatedVacations(List<Vacation> createdVacations) {
         this.createdVacations = createdVacations;
-    }
-
-    public void save() {
-        JPA.em().persist(this);
     }
 
     @PostLoad

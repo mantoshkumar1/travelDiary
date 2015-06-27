@@ -17,9 +17,9 @@ public class RegisterController extends Controller {
 
     @Transactional(readOnly = false)
     public static Result createUser() {
+        System.out.println(request().body().asJson());
         User newUser = Json.fromJson(request().body().asJson(), User.class);
-        newUser.save();
-        System.out.println("hello"); //for debugging purpose...delete it later on
+        InsertDAO.insertUser(newUser);
         return created(Json.toJson(newUser));
     }
 
