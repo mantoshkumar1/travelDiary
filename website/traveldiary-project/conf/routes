@@ -37,7 +37,7 @@ GET         /api/vacationkeyword/:aId/:kId          controllers.JoinTableControl
 #POST        /api/vacation                           controllers.RegisterController.createVaction()
 #POST        /api/activity                           controllers.RegisterController.createActivity()
 #POST        /api/keyword                            controllers.RegisterController.createKeyword()
-#POST        /api/location                           controllers.RegisterController.createLocation()
+POST        /api/location                           controllers.RegisterController.createLocation()
 POST        /api/user                               controllers.RegisterController.createUser()
 #POST        /api/vacationreview                     controllers.RegisterController.createVacationReview()
 #POST        /api/activityreview                     controllers.RegisterController.createActivityReview()

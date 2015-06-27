@@ -34,12 +34,5 @@ public class Role {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
-
-    //default values
-    public Role(){
-        this.id = 1;
-        this.roleName = "User";
-    }
-
-
+    
 }
