@@ -9,7 +9,6 @@ import javax.persistence.*;
  */
 @Entity
 @JsonIgnoreProperties({"vacation"})
-
 public class VacationImage extends Image {
 
     @ManyToOne

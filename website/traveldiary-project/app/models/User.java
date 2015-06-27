@@ -57,6 +57,10 @@ public class User {
     @Transient
     private long roleId;
 
+    public static User findById(long id) {
+        return JPA.em().find(User.class, id);
+    }
+
     public String getProfilePicture() {
         return profilePicture;
     }
@@ -121,7 +125,9 @@ public class User {
         this.location = location;
     }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -145,10 +151,6 @@ public class User {
 
     public void save() {
         JPA.em().persist(this);
-    }
-
-    public static User findById(long id) {
-        return JPA.em().find(User.class, id);
     }
 
     @PostLoad

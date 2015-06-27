@@ -12,7 +12,7 @@ import java.util.Date;
  * Created by Rike on 06.06.2015.
  */
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Review {
 
     @Id
@@ -75,7 +75,9 @@ public abstract class Review {
         this.description = description;
     }
 
-    public Rating getRating() { return rating; }
+    public Rating getRating() {
+        return rating;
+    }
 
     public void setRating(Rating rating) {
         this.rating = rating;

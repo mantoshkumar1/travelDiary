@@ -1,13 +1,8 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import play.data.validation.Constraints;
-import util.RatingSerializer;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created by albert on 27.06.15.

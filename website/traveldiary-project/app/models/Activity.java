@@ -138,5 +138,6 @@ public class Activity {
     @PostLoad
     private void onLoad() {
         creatorId = creator.getId();
+        locationId = location.getId();
     }
 }

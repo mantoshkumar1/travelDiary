@@ -3,7 +3,7 @@
  */
 
 
-App.controller('vacationSearchController', ['$scope', '$state', 'KeywordService', 'vacations', function ($scope, $state,KeywordService, vacations) {
+App.controller('vacationSearchController', ['$scope', '$state', 'KeywordService', 'vacations', function ($scope, $state, KeywordService, vacations) {
 
     var thisCtrl = this;
 

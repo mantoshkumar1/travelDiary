@@ -28,6 +28,12 @@ GET         /api/vacationimage/:id                  controllers.MainController.g
 GET         /api/activityimage                      controllers.MainController.getAllActivityImages()
 GET         /api/activityimage/:id                  controllers.MainController.getActivityImage(id: Integer)
 
+# All api functions related to the jointables for many to many relationships
+GET         /api/vacationkeyword                    controllers.JoinTableController.getAllVacationKeywordsEntries()
+GET         /api/vacationkeyword/:vId/:kId          controllers.JoinTableController.getVacationKeywordEntry(vId: Integer, kId: Integer)
+GET         /api/activitykeyword                    controllers.JoinTableController.getAllVacationKeywordsEntries()
+GET         /api/vacationkeyword/:aId/:kId          controllers.JoinTableController.getVacationKeywordEntry(aId: Integer, kId: Integer)
+
 # Basic api POST functions for js-data
 POST        /api/user                               controllers.RegisterController.createUser()
 

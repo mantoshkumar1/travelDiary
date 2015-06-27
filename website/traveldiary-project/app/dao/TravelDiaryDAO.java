@@ -2,17 +2,11 @@ package dao;
 
 import models.*;
 import play.db.jpa.JPA;
-import play.libs.Json;
-import play.mvc.Result;
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
-
-
-import play.db.jpa.Transactional;
-import scala.reflect.internal.Trees;
 
 /**
  * Created by albert on 23.06.15.
@@ -158,7 +152,7 @@ public class TravelDiaryDAO {
 
     public static Vacation getVacation(Integer id) {
 
-        return JPA.em().find(Vacation.class,id);
+        return JPA.em().find(Vacation.class, id);
     }
 
 
