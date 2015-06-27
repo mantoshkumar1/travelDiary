@@ -13,7 +13,7 @@ public class Vacation {
 
     @Id
     @GeneratedValue
-    private long id;
+    private int id;
 
     @Constraints.Required
     private String name;
@@ -25,27 +25,28 @@ public class Vacation {
     @JsonBackReference
     private User creator;
 
+    @Transient
+    private long creatorId;
+
     @ManyToMany
     @JoinTable(name = "VacationActivities",
             joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")})
-    private List<Activity> activitiesList;
+    private List<Activity> activities;
 
     @OneToMany
-    @JoinTable
-            (
-                    name = "VacationReviews",
-                    joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
-                    inverseJoinColumns = {@JoinColumn(name = "reviewId", referencedColumnName = "id", unique = true)}
-            )
-    private List<Review> reviewsList;
+    @JoinColumn(name = "vacationId")
+    private List<VacationReview> reviews;
 
     @Column(precision = 5, scale = 2)
     private BigDecimal budget;
 
     @ManyToOne
     @JoinColumn(name = "locationId")
-    private Location locationId;
+    private Location location;
+
+    @Transient
+    private long locationId;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
@@ -97,19 +98,19 @@ public class Vacation {
         this.endDate = endDate;
     }
 
-    public Location getLocationId() {
-        return locationId;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setLocationId(Location locationId) {
-        this.locationId = locationId;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -145,19 +146,25 @@ public class Vacation {
         this.budget = budget;
     }
 
-    public List<Activity> getActivitiesList() {
-        return activitiesList;
+    public List<Activity> getActivities() {
+        return activities;
     }
 
-    public void setActivitiesList(List<Activity> activitiesList) {
-        this.activitiesList = activitiesList;
+    public void setActivities(List<Activity> activitiesList) {
+        this.activities = activitiesList;
     }
 
-    public List<Review> getReviewsList() {
-        return reviewsList;
+    public List<VacationReview> getReviews() {
+        return reviews;
     }
 
-    public void setReviewsList(List<Review> reviewsList) {
-        this.reviewsList = reviewsList;
+    public void setReviews(List<VacationReview> reviewsList) {
+        this.reviews = reviewsList;
+    }
+
+    @PostLoad
+    private void onLoad() {
+        creatorId = creator.getId();
+        locationId = location.getId();
     }
 }

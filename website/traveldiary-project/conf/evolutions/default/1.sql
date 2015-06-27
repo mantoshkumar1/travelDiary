@@ -53,22 +53,16 @@ CREATE TABLE ActivityKeywords (
   PRIMARY KEY(activityId,keywordId)
 );
 
-CREATE TABLE Review (
+CREATE TABLE ActivityReview (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
+  activityId INTEGER,
   title	TEXT NOT NULL,
   description TEXT NOT NULL,
   date DATE,
   userId INTEGER,
-  rating TEXT,
+  rating INTEGER,
+  FOREIGN KEY (activityId) REFERENCES Activity(id),
   FOREIGN KEY(userId) REFERENCES User(id)
-);
-
-CREATE TABLE ActivityReviews (
-  activityId INTEGER,
-  reviewId INTEGER UNIQUE,
-  FOREIGN KEY(activityId) REFERENCES Activity(id),
-  FOREIGN KEY(reviewId) REFERENCES Review(id),
-  PRIMARY KEY(activityId,reviewId)
 );
 
 CREATE TABLE Vacation (
@@ -92,12 +86,16 @@ CREATE TABLE VacationKeywords (
   PRIMARY KEY(vacationId,keywordId)
 );
 
-CREATE TABLE VacationReviews (
+CREATE TABLE VacationReview (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   vacationId INTEGER,
-  reviewId INTEGER UNIQUE,
-  FOREIGN KEY(vacationId) REFERENCES Vacation(id),
-  FOREIGN KEY(reviewId) REFERENCES Review(id),
-  PRIMARY KEY(vacationId,reviewId)
+  title	TEXT NOT NULL,
+  description TEXT NOT NULL,
+  date DATE,
+  userId INTEGER,
+  rating INTEGER,
+  FOREIGN KEY (vacationId) REFERENCES Vacation(id),
+  FOREIGN KEY(userId) REFERENCES User(id)
 );
 
 CREATE TABLE VacationActivities (
@@ -131,14 +129,13 @@ CREATE TABLE ActivityImages (
 
 # --- !Downs
 DROP TABLE VacationActivities;
-DROP TABLE VacationReviews;
+DROP TABLE VacationReview;
 DROP TABLE VacationKeywords;
 DROP TABLE VacationImages;
 DROP TABLE Vacation;
-DROP TABLE ActivityReviews;
+DROP TABLE ActivityReview;
 DROP TABLE ActivityKeywords;
 DROP TABLE ActivityImages;
-DROP TABLE Review;
 DROP TABLE Activity;
 DROP TABLE User;
 DROP TABLE Role;

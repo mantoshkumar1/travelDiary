@@ -1,15 +1,152 @@
 var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter', 'ngMaterial']);
 
 App.factory('Keyword', ['DS', function (DS) {
-    return DS.defineResource('keyword');
+    return DS.defineResource(
+        {
+            name :'keyword'
+        });
+}]);
+
+App.factory('Image', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'image'
+        });
+}]);
+
+App.factory('Location', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+        name: 'location'
+    });
+}]);
+
+App.factory('ActivityReview', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'activityreview'
+        });
+}]);
+
+App.factory('VacationReview', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'vacationreview'
+        });
+}]);
+
+App.factory('Role', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'role'
+        });
+}]);
+
+
+App.factory('User', ['DS',function(DS){
+    return DS.defineResource(
+        {
+            name: 'user',
+            relations: {
+                hasOne: [{
+                    role: {
+                        localField: "role",
+                        foreignKey: "roleId"
+                    }
+                }, {
+                    location: {
+                        localField: "location",
+                        foreignKey: "locationId"
+                    }
+                }],
+                hasMany: [{
+                    vacation: {
+                        localField: "createdVacations",
+                        foreignKey: "creatorId"
+                    }
+                },{
+                    activity: {
+                        localField: "createdActivities",
+                        foreignKey: "creatorId"
+                    }
+                }]
+            }
+        });
 }]);
 
 App.factory('Vacation', ['DS', function (DS) {
-    return DS.defineResource('vacation');
+    return DS.defineResource( {
+        name: 'vacation',
+        relations: {
+            hasOne: [{
+                user: {
+                    localField: "creator",
+                    foreignKey: "creatorId"
+                }
+            },{
+                location: {
+                    localField: "location",
+                    foreignKey: "locationId"
+                }
+            }],
+            hasMany: {
+                vacationreview: {
+                    localField: "reviews",
+                    foreignKey: "vacationId"
+                }
+            }
+        },
+        computed: {
+            rating: ['reviews', function (reviews) {
+                var rating = 0.0;
+
+                reviews.forEach(function (review) {
+                        rating += review.rating.value;
+                    });
+
+                if (reviews.length > 0) {
+                    rating = rating / reviews.length;
+                }
+
+                return rating;
+            }]
+        }
+    });
 }]);
 
-App.factory('User', ['DS',function(DS){
-    return DS.defineResource('user');
+App.factory('Activity', ['DS', function (DS) {
+    return DS.defineResource( {
+        name: 'activity',
+        relations: {
+            hasOne: {
+                user: {
+                    localField: "creator",
+                    foreignKey: "creatorId"
+                }
+            },
+            hasMany: {
+                activityreview: {
+                    localField: "reviews",
+                    foreignKey: "activityId"
+                }
+            }
+        },
+        computed: {
+            rating: ['reviews', function (reviews) {
+                var rating = 0.0;
+
+                reviews.forEach(function (review) {
+                    rating += review.rating.value;
+                });
+
+                if (reviews.length > 0) {
+                    rating = rating / reviews.length;
+                }
+
+                return rating;
+            }]
+        }
+    });
 }]);
 
 App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProvider',function($stateProvider, DSProvider,$mdThemingProvider,$urlRouterProvider){
@@ -65,11 +202,17 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
         url: '/search/{keywordStrings}',
         resolve: {
             selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
-                if ($stateParams.keywordStrings === '') {
-                    return [];
-                } else {
-                    return Keyword.find($stateParams.keywordStrings);
-                }
+                var keywordsWithoutId = $stateParams.keywordStrings.split("+");
+
+                console.log(keywordsWithoutId);
+
+                return Keyword.filter( {
+                    where: {
+                        keyword: {
+                            'in': keywordsWithoutId
+                        }
+                    }
+                });
             }]
         },
         views: {
@@ -120,4 +263,6 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
 
     // Move to index page in any other case
     $urlRouterProvider.otherwise('/index');
+}]).run([ 'Activity', 'Vacation','User','Role','Location','ActivityReview','VacationReview','Image','Keyword', function (Activity, Vacation,User,Role,Location,ActivityReview,VacationReview,Image,Keyword) {
+    // Just loading all factories because otherwise we get resource undefined errors because of the defined relations.
 }]);

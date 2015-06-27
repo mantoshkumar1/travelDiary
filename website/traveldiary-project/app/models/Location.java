@@ -12,7 +12,7 @@ public class Location {
 
     @Id
     @GeneratedValue
-    private long id;
+    private int id;
 
     @Constraints.Required
     private String name;
@@ -25,11 +25,11 @@ public class Location {
     private String address;
     private String googleMapsLink;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
