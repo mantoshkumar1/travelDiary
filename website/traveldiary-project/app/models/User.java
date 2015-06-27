@@ -45,11 +45,11 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "locationId")
-    private Location location;
+    private Location location = new Location(); //default location
 
     @ManyToOne
     @JoinColumn(name = "roleId")
-    private Role role;
+    private Role role = new Role(); //default role
 
     public String getProfilePicture() {
         return profilePicture;

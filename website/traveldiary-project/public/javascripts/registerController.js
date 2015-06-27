@@ -1,4 +1,4 @@
-App.controller('registerController', ['$scope', 'User', function($scope, User){
+App.controller('registerController', ['$scope', '$state', 'User', function($scope, $state, User){
 
     // Form submit handler.
     $scope.save = function() {
@@ -13,6 +13,7 @@ App.controller('registerController', ['$scope', 'User', function($scope, User){
                 // Trigger validation flag.
                 $scope.success = true;
             })
+            //$state.go('main.vacation');
         }
     };
 }]);
