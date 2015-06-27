@@ -35,7 +35,26 @@ GET         /api/activitykeyword                    controllers.JoinTableControl
 GET         /api/vacationkeyword/:aId/:kId          controllers.JoinTableController.getVacationKeywordEntry(aId: Integer, kId: Integer)
 
 # Basic api POST functions for js-data
+#POST        /api/vacation                           controllers.RegisterController.createVaction()
+#POST        /api/activity                           controllers.RegisterController.createActivity()
+#POST        /api/keyword                            controllers.RegisterController.createKeyword()
+#POST        /api/location                           controllers.RegisterController.createLocation()
 POST        /api/user                               controllers.RegisterController.createUser()
+#POST        /api/vacationreview                     controllers.RegisterController.createVacationReview()
+#POST        /api/activityreview                     controllers.RegisterController.createActivityReview()
+#POST        /api/vacationimage                      controllers.RegisterController.createVacationImage()
+#POST        /api/activityimage                      controllers.RegisterController.createActivityImage()
+
+# Basic ap update functions for single items
+#PUT         /api/vacation/:id                       controllers.RegisterController.updateVacation(id: Integer)
+#PUT         /api/activity/:id                       controllers.RegisterController.updateActivity(id: Integer)
+#PUT         /api/keyword/:id                        controllers.RegisterController.updateKeyword(id: Integer)
+#PUT         /api/location/:id                       controllers.RegisterController.updateLocation(id: Integer)
+#PUT         /api/user/:id                           controllers.RegisterController.updateUser(id: Integer)
+#PUT         /api/activityreview/:id                 controllers.RegisterController.updateActivityReview(id: Integer)
+#PUT         /api/vacationreview/:id                 controllers.RegisterController.updateVacationReview(id: Integer)
+#PUT         /api/vacationimage/:id                  controllers.RegisterController.updateVacationImage(id: Integer)
+#PUT         /api/activityimage/:id                  controllers.RegisterController.updateActivityImage(id: Integer)
 
 # Additional apis for special use cases
 GET         /api/keywordsbystring/:keyString        controllers.SearchController.getKeywordsFor(keyString: String)
