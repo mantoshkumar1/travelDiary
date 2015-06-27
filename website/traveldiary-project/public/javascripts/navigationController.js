@@ -49,6 +49,10 @@ App.controller('navigationController',
             thisCtrl.searchText = undefined;
             thisCtrl.selectedKeyword = undefined;
 
+            thisCtrl.toggleSuggestions = function () {
+                thisCtrl.showSuggestions = !thisCtrl.showSuggestions;
+            }
+
             thisCtrl.addKeyword = function (keyword) {
                 keywordService.addKeywordToSelection(keyword);
 
