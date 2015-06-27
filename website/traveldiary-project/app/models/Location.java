@@ -82,4 +82,14 @@ public class Location {
     public void setGoogleMapsLink(String googleMapsLink) {
         this.googleMapsLink = googleMapsLink;
     }
+
+    //default values
+    public Location(){
+        this.name = "Mysore Palace";
+        this.description = "Beautiful Laser show";
+        this.longitude = 12;
+        this.latitude = 76;
+        this.address = "Mysore";
+        this.googleMapsLink = "https://www.google.de/maps/dir/''/Mysore+Palace";
+    }
 }

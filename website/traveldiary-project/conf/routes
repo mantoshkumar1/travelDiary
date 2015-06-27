@@ -5,7 +5,6 @@
 #Home Page
 GET         /                                       controllers.MainController.index()
 
-
 # Basic api GET functions for js-data
 GET         /api/vacation                           controllers.MainController.getAllVacations()
 GET         /api/vacation/:id                       controllers.MainController.getVacation(id: Integer)

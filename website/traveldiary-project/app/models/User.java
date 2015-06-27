@@ -45,14 +45,14 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "locationId")
-    private Location location;
+    private Location location = new Location(); //default location
 
     @Transient
     private long locationId;
 
     @ManyToOne
     @JoinColumn(name = "roleId")
-    private Role role;
+    private Role role = new Role(); //default role
 
     @Transient
     private long roleId;

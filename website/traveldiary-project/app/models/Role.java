@@ -35,5 +35,11 @@ public class Role {
         this.roleName = roleName;
     }
 
+    //default values
+    public Role(){
+        this.id = 1;
+        this.roleName = "User";
+    }
+
 
 }
