@@ -2,65 +2,73 @@
  * Created by albert on 23.06.15.
  */
 
-App.directive('tdClick', function() {
+App.directive('tdClick', function () {
     return {
         restrict: 'C',
-        controller: function($scope) {}
+        controller: function ($scope) {
+        }
     }
 });
 
-App.directive('tdFilter', function() {
+App.directive('tdFilter', function () {
     return {
         restrict: 'C',
-        controller: function($scope) {}
+        controller: function ($scope) {
+        }
     }
 });
 
-App.directive('vacationSrc', function() {
+App.directive('vacationSrc', function () {
     return {
         restrict: 'C',
-        controller: function($scope) {}
+        controller: function ($scope) {
+        }
     }
 });
 
-App.directive('vacationsSrc', function() {
+App.directive('vacationsSrc', function () {
     return {
         restrict: 'C',
-        controller: function($scope) {}
+        controller: function ($scope) {
+        }
     }
 });
 
 
-App.directive('activitySrc', function() {
+App.directive('activitySrc', function () {
     return {
         restrict: 'C',
-        controller: function($scope) {}
+        controller: function ($scope) {
+        }
     }
 });
 
-App.directive('keywordSrc', function() {
+App.directive('keywordSrc', function () {
     return {
         restrict: 'C',
-        controller: function($scope) {}
+        controller: function ($scope) {
+        }
     }
 });
 
-App.directive('tdOnClick', function() {
+App.directive('tdOnClick', function () {
     return {
         restrict: 'C',
-        controller: function($scope) {}
+        controller: function ($scope) {
+        }
     }
 });
 
-App.directive('tdButtonIcon', function() {
+App.directive('tdButtonIcon', function () {
     return {
         restrict: 'C',
-        controller: function($scope) {}
+        controller: function ($scope) {
+        }
     }
 });
 
 App.directive('keywordChip', function () {
-    return  {
+    return {
         restrict: 'E',
         require: '^keywordSrc',
         templateUrl: 'assets/templates/chip_template.html',
@@ -68,7 +76,7 @@ App.directive('keywordChip', function () {
             keyword: "=keywordSrc",
             onClick: "=tdOnClick"
         },
-        controller: [ '$scope', '$attrs', function ($scope, $attrs) {
+        controller: ['$scope', '$attrs', function ($scope, $attrs) {
             if ($attrs.tdOnClick === undefined) {
                 $scope.hasOnClick = false;
             } else {
@@ -92,7 +100,7 @@ App.directive('keywordChip', function () {
  * Example: <vacation-grid-tile vacation-src="myVacation"></ vacation-grid-tile>
  * */
 App.directive('vacationGridTile', function () {
-    return  {
+    return {
         restrict: 'E',
         require: '^vacationSrc',
         templateUrl: 'assets/templates/vacation_grid_tile.html',
@@ -108,7 +116,7 @@ App.directive('vacationGridTile', function () {
  * Example: <vacation-grid-list vacations-src="myVacations"></vacation-grid-list>
  * */
 App.directive('vacationGridList', function () {
-    return  {
+    return {
         restrict: 'E',
         require: ["^vacationsSrc"],
         templateUrl: 'assets/templates/vacation_grid_list.html',
@@ -126,7 +134,7 @@ App.directive('vacationGridList', function () {
  * Example: <activity-grid-tile activitiy-src="vacations"></activity-grid-tile>
  * */
 App.directive('activityGridTile', function () {
-    return  {
+    return {
         restrict: 'E',
         require: "^activitySrc",
         templateUrl: 'assets/templates/activity_grid_tile.html',
@@ -137,13 +145,13 @@ App.directive('activityGridTile', function () {
 });
 
 /*
-* DOM Element activity-grid-list. Specify activities-src as the list of source activities to display.
-* To specify the click behavior pass a function to td-click which takes one activity as an argument.
-*
-* Example: <activity-grid-list activities-src="myActivities"></activity-grid-list>
-* */
+ * DOM Element activity-grid-list. Specify activities-src as the list of source activities to display.
+ * To specify the click behavior pass a function to td-click which takes one activity as an argument.
+ *
+ * Example: <activity-grid-list activities-src="myActivities"></activity-grid-list>
+ * */
 App.directive('activityGridList', function () {
-    return  {
+    return {
         restrict: 'E',
         require: "^activitiesSrc",
         templateUrl: 'assets/templates/activity_grid_list.html',
@@ -155,11 +163,11 @@ App.directive('activityGridList', function () {
     };
 });
 
-App.directive('ngEnter', function() {
-    return function(scope, element, attrs) {
-        element.bind("keydown keypress", function(event) {
-            if(event.which === 13) {
-                scope.$apply(function(){
+App.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if (event.which === 13) {
+                scope.$apply(function () {
                     scope.$eval(attrs.ngEnter);
                 });
 
@@ -169,15 +177,16 @@ App.directive('ngEnter', function() {
     };
 });
 
-App.directive('searchBarFix', function() {
-    return {
-        restrict: 'C',
-        compile: function compile(tElement, tAttrs, transclude) {
-            return {
-                post: function compile(tElement, tAttrs, transclude) {
-                    var searchBar = $("#search").find("md-autocomplete-wrap").find("input");
+App.directive('searchBarFix', function () {
+        return {
+            restrict: 'C',
+            compile: function compile(tElement, tAttrs, transclude) {
+                return {
+                    post: function compile(tElement, tAttrs, transclude) {
+                        var searchBar = $("#search").find("md-autocomplete-wrap").find("input");
+                    }
                 }
             }
         }
-    }}
+    }
 );

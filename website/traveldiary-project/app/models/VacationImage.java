@@ -9,23 +9,14 @@ import javax.persistence.*;
  */
 @Entity
 @JsonIgnoreProperties({"vacation"})
-public class VacationReview extends Review {
+public class VacationImage extends Image {
 
     @ManyToOne
     @JoinColumn(name = "vacationId")
     private Vacation vacation;
 
     @Transient
-    private long vacationId;
-
-
-    public Vacation getVacation() {
-        return vacation;
-    }
-
-    public void setVacation(Vacation vacation) {
-        this.vacation = vacation;
-    }
+    private int vacationId;
 
     @PostLoad
     private void onLoad() {

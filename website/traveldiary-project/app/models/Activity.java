@@ -1,7 +1,6 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
@@ -30,7 +29,7 @@ public class Activity {
     private Location location;
 
     @Transient
-    private long locationId;
+    private int locationId;
 
     @OneToMany
     @JoinColumn(name = "activityId")
@@ -50,13 +49,11 @@ public class Activity {
     @JoinTable(name = "ActivityKeywords",
             joinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "keywordId", referencedColumnName = "id")})
-    private List<Keyword> activityKeywords;
+    private List<Keyword> keywords;
 
     @OneToMany
-    @JoinTable(name = "ActivityImages",
-            joinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "id", unique = true)})
-    private List<Image> images;
+    @JoinColumn(name = "activityId")
+    private List<ActivityImage> images;
 
     public User getCreator() {
         return creator;
@@ -66,20 +63,20 @@ public class Activity {
         this.creator = creator;
     }
 
-    public List<Image> getImages() {
+    public List<ActivityImage> getImages() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImages(List<ActivityImage> images) {
         this.images = images;
     }
 
-    public List<Keyword> getActivityKeywords() {
-        return activityKeywords;
+    public List<Keyword> getKeywords() {
+        return keywords;
     }
 
-    public void setActivityKeywords(List<Keyword> activityKeywords) {
-        this.activityKeywords = activityKeywords;
+    public void setKeywords(List<Keyword> keywords) {
+        this.keywords = keywords;
     }
 
     public Date getStartTime() {
@@ -141,5 +138,6 @@ public class Activity {
     @PostLoad
     private void onLoad() {
         creatorId = creator.getId();
+        locationId = location.getId();
     }
 }

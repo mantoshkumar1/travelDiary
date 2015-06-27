@@ -9,26 +9,17 @@ import javax.persistence.*;
  */
 @Entity
 @JsonIgnoreProperties({"activity"})
-public class ActivityReview extends Review {
+public class ActivityImage extends Image {
 
     @ManyToOne
     @JoinColumn(name = "activityId")
     private Activity activity;
 
     @Transient
-    private long activityId;
-
-    public Activity getActivity() {
-        return activity;
-    }
-
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
+    private int activityId;
 
     @PostLoad
     private void onLoad() {
         activityId = activity.getId();
     }
-
 }

@@ -1,24 +1,46 @@
 var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter', 'ngMaterial']);
 
-App.factory('Keyword', ['DS', function (DS) {
+App.factory('VacationKeywordJoinTableEntry', ['DS', function (DS) {
     return DS.defineResource(
         {
-            name :'keyword'
+            name: 'vacationkeyword'
         });
 }]);
 
-App.factory('Image', ['DS', function (DS) {
+App.factory('ActivityKeywordJoinTableEntry', ['DS', function (DS) {
     return DS.defineResource(
         {
-            name: 'image'
+            name: 'activitykeyword'
+        });
+}]);
+
+
+App.factory('Keyword', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'keyword'
+        });
+}]);
+
+App.factory('ActivityImage', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'activityimage'
+        });
+}]);
+
+App.factory('VacationImage', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'vacationimage'
         });
 }]);
 
 App.factory('Location', ['DS', function (DS) {
     return DS.defineResource(
         {
-        name: 'location'
-    });
+            name: 'location'
+        });
 }]);
 
 App.factory('ActivityReview', ['DS', function (DS) {
@@ -43,7 +65,7 @@ App.factory('Role', ['DS', function (DS) {
 }]);
 
 
-App.factory('User', ['DS',function(DS){
+App.factory('User', ['DS', function (DS) {
     return DS.defineResource(
         {
             name: 'user',
@@ -64,7 +86,7 @@ App.factory('User', ['DS',function(DS){
                         localField: "createdVacations",
                         foreignKey: "creatorId"
                     }
-                },{
+                }, {
                     activity: {
                         localField: "createdActivities",
                         foreignKey: "creatorId"
@@ -75,7 +97,7 @@ App.factory('User', ['DS',function(DS){
 }]);
 
 App.factory('Vacation', ['DS', function (DS) {
-    return DS.defineResource( {
+    return DS.defineResource({
         name: 'vacation',
         relations: {
             hasOne: [{
@@ -83,53 +105,23 @@ App.factory('Vacation', ['DS', function (DS) {
                     localField: "creator",
                     foreignKey: "creatorId"
                 }
-            },{
+            }, {
                 location: {
                     localField: "location",
                     foreignKey: "locationId"
                 }
             }],
-            hasMany: {
+            hasMany: [{
                 vacationreview: {
                     localField: "reviews",
                     foreignKey: "vacationId"
                 }
-            }
-        },
-        computed: {
-            rating: ['reviews', function (reviews) {
-                var rating = 0.0;
-
-                reviews.forEach(function (review) {
-                        rating += review.rating.value;
-                    });
-
-                if (reviews.length > 0) {
-                    rating = rating / reviews.length;
+            }, {
+                images: {
+                    localField: "images",
+                    foreignKey: "vacationId"
                 }
-
-                return rating;
             }]
-        }
-    });
-}]);
-
-App.factory('Activity', ['DS', function (DS) {
-    return DS.defineResource( {
-        name: 'activity',
-        relations: {
-            hasOne: {
-                user: {
-                    localField: "creator",
-                    foreignKey: "creatorId"
-                }
-            },
-            hasMany: {
-                activityreview: {
-                    localField: "reviews",
-                    foreignKey: "activityId"
-                }
-            }
         },
         computed: {
             rating: ['reviews', function (reviews) {
@@ -149,7 +141,47 @@ App.factory('Activity', ['DS', function (DS) {
     });
 }]);
 
-App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProvider',function($stateProvider, DSProvider,$mdThemingProvider,$urlRouterProvider){
+App.factory('Activity', ['DS', function (DS) {
+    return DS.defineResource({
+        name: 'activity',
+        relations: {
+            hasOne: {
+                user: {
+                    localField: "creator",
+                    foreignKey: "creatorId"
+                }
+            },
+            hasMany: [{
+                activityreview: {
+                    localField: "reviews",
+                    foreignKey: "activityId"
+                }
+            }, {
+                images: {
+                    localField: "images",
+                    foreignKey: "vacationId"
+                }
+            }]
+        },
+        computed: {
+            rating: ['reviews', function (reviews) {
+                var rating = 0.0;
+
+                reviews.forEach(function (review) {
+                    rating += review.rating.value;
+                });
+
+                if (reviews.length > 0) {
+                    rating = rating / reviews.length;
+                }
+
+                return rating;
+            }]
+        }
+    });
+}]);
+
+App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterProvider', function ($stateProvider, DSProvider, $mdThemingProvider, $urlRouterProvider) {
     DSProvider.defaults.basePath = '/api';
 
     $mdThemingProvider.theme('default')
@@ -177,7 +209,8 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
         views: {
             'content@': {
                 templateUrl: 'assets/templates/index.html',
-                controller: (function () {})
+                controller: (function () {
+                })
             }
         }
     };
@@ -206,7 +239,7 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
 
                 console.log(keywordsWithoutId);
 
-                return Keyword.filter( {
+                return Keyword.filter({
                     where: {
                         keyword: {
                             'in': keywordsWithoutId
@@ -254,11 +287,15 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
     $stateProvider.state('main.vacation', vacation_config);
     $stateProvider.state('main.vacation.search', vacation_search_config);
     $stateProvider.state('main.vacation.details', vacation_details_config);
-    $stateProvider.state('main.register',register_config);
+    $stateProvider.state('main.register', register_config);
 
 
     // Move to index page in any other case
     $urlRouterProvider.otherwise('/index');
-}]).run([ 'Activity', 'Vacation','User','Role','Location','ActivityReview','VacationReview','Image','Keyword', function (Activity, Vacation,User,Role,Location,ActivityReview,VacationReview,Image,Keyword) {
-    // Just loading all factories because otherwise we get resource undefined errors because of the defined relations.
-}]);
+}]).run(
+    ['Activity', 'Vacation', 'User', 'Role', 'Location', 'ActivityReview', 'VacationReview', 'VacationImage',
+        'ActivityImage', 'Keyword', 'ActivityKeywordJoinTableEntry', 'VacationKeywordJoinTableEntry',
+        function (Activity, Vacation, User, Role, Location, ActivityReview, VacationReview, VacationImage, ActivityImage,
+                  Keyword, ActivityKeywordJoinTableEntry, VacationKeywordJoinTableEntry) {
+            // Just loading all factories because otherwise we get resource undefined errors because of the defined relations.
+        }]);

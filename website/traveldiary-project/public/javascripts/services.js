@@ -2,24 +2,25 @@
  * Created by albert on 24.06.15.
  */
 
-App.service('Util',function () {
+App.service('Util', function () {
 
     return {
         getKeywordString: (function (kws) {
-        var result = '';
+            var result = '';
 
-        kws.forEach( function (k) {
-                if (result !== '') {
-                    result += '+';
+            kws.forEach(function (k) {
+                    if (result !== '') {
+                        result += '+';
+                    }
+
+                    result += k.keyword;
                 }
+            );
 
-                result += k.keyword;
-            }
-        );
-
-        return result;
-    })
-}});
+            return result;
+        })
+    }
+});
 
 App.service('KeywordService', function () {
 
@@ -28,7 +29,7 @@ App.service('KeywordService', function () {
     thisService.selectedKeywords = [];
     thisService.suggestedKeywords = [];
 
-    thisService.filterKeywords = function(keywordsToFilter, filterList) {
+    thisService.filterKeywords = function (keywordsToFilter, filterList) {
 
         if (keywordsToFilter === undefined || filterList === undefined) {
             $log.error('Can\'t use undefined arguments: ' + keywordsToFilter + ", " + filterList);
@@ -74,7 +75,7 @@ App.service('KeywordService', function () {
         if (thisService.selectedKeywords === undefined) {
             $log.error('Selected keywords undefined');
         } else {
-            angular.copy(thisService.filterKeywords(newSuggestedKeywords, thisService.selectedKeywords),thisService.suggestedKeywords);
+            angular.copy(thisService.filterKeywords(newSuggestedKeywords, thisService.selectedKeywords), thisService.suggestedKeywords);
         }
     };
 
@@ -86,7 +87,7 @@ App.service('KeywordService', function () {
 
         // Filter out all already selected keywords from suggestions
         if (thisService.suggestedKeywords !== undefined) {
-            angular.copy(thisService.filterKeywords(thisService.suggestedKeywords, thisService.selectedKeywords),thisService.suggestedKeywords);
+            angular.copy(thisService.filterKeywords(thisService.suggestedKeywords, thisService.selectedKeywords), thisService.suggestedKeywords);
         }
     };
 
@@ -99,7 +100,7 @@ App.service('KeywordService', function () {
                 thisService.selectedKeywords.push(newKeyword);
 
                 // Filter out all already selected keywords
-                angular.copy(thisService.filterKeywords(thisService.suggestedKeywords, thisService.selectedKeywords),thisService.suggestedKeywords);
+                angular.copy(thisService.filterKeywords(thisService.suggestedKeywords, thisService.selectedKeywords), thisService.suggestedKeywords);
             } else {
                 console.log('Keyword' + newKeyword + "already contained in selection.")
             }

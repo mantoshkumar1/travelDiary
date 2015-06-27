@@ -1,15 +1,20 @@
 package models;
 
-import javax.persistence.*;
 import play.data.validation.Constraints;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 /**
  * Created by Chetan on 6/15/2015.
  */
 @Entity
-public class Image {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Image {
+
     @Id
-    @GeneratedValue
     private int id;
 
     @Constraints.Required
