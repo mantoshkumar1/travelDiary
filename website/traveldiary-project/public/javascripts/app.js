@@ -7,10 +7,17 @@ App.factory('Keyword', ['DS', function (DS) {
         });
 }]);
 
-App.factory('Image', ['DS', function (DS) {
+App.factory('ActivityImage', ['DS', function (DS) {
     return DS.defineResource(
         {
-            name: 'image'
+            name: 'activityimage'
+        });
+}]);
+
+App.factory('VacationImage', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'vacationimage'
         });
 }]);
 
@@ -89,12 +96,17 @@ App.factory('Vacation', ['DS', function (DS) {
                     foreignKey: "locationId"
                 }
             }],
-            hasMany: {
+            hasMany: [{
                 vacationreview: {
                     localField: "reviews",
                     foreignKey: "vacationId"
                 }
-            }
+            }, {
+                images: {
+                    localField: "images",
+                    foreignKey: "vacationId"
+                }
+            }]
         },
         computed: {
             rating: ['reviews', function (reviews) {
@@ -124,12 +136,16 @@ App.factory('Activity', ['DS', function (DS) {
                     foreignKey: "creatorId"
                 }
             },
-            hasMany: {
+            hasMany: [{
                 activityreview: {
                     localField: "reviews",
                     foreignKey: "activityId"
                 }
-            }
+            },{
+                images: {
+                    localField: "images",
+                    foreignKey: "vacationId"
+            }}]
         },
         computed: {
             rating: ['reviews', function (reviews) {
@@ -263,6 +279,8 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
 
     // Move to index page in any other case
     $urlRouterProvider.otherwise('/index');
-}]).run([ 'Activity', 'Vacation','User','Role','Location','ActivityReview','VacationReview','Image','Keyword', function (Activity, Vacation,User,Role,Location,ActivityReview,VacationReview,Image,Keyword) {
+}]).run(
+    [ 'Activity', 'Vacation','User','Role','Location','ActivityReview','VacationReview','VacationImage', 'ActivityImage','Keyword',
+        function (Activity, Vacation,User,Role,Location,ActivityReview,VacationReview,VacationImage, ActivityImage,Keyword) {
     // Just loading all factories because otherwise we get resource undefined errors because of the defined relations.
 }]);

@@ -3,34 +3,38 @@
 # ~~~~
 
 #Home Page
-GET         /                              controllers.MainController.index()
+GET         /                                       controllers.MainController.index()
 
 
 # Basic api GET functions for js-data
-GET         /api/vacation                  controllers.MainController.getAllVacations()
-GET         /api/vacation/:id              controllers.MainController.getVacation(id: Integer)
-GET         /api/activity                  controllers.MainController.getAllActivities()
-GET         /api/activity/:id              controllers.MainController.getActivity(id: Integer)
-GET         /api/keyword                   controllers.MainController.getAllKeywords()
-GET         /api/keyword/:id               controllers.MainController.getKeyword(id: Integer)
-GET         /api/location                  controllers.MainController.getAllLocations()
-GET         /api/location/:id              controllers.MainController.getLocation(id: Integer)
-GET         /api/role                      controllers.MainController.getAllRoles()
-GET         /api/role/:id                  controllers.MainController.getRole(id: Integer)
-GET         /api/user                      controllers.MainController.getAllUsers()
-GET         /api/user/:id                  controllers.MainController.getUser(id: Integer)
-GET         /api/activityreview            controllers.MainController.getAllActivityReviews()
-GET         /api/activityreview/:id        controllers.MainController.getActivityReview(id: Integer)
-GET         /api/vacationreview            controllers.MainController.getAllVacationReviews()
-GET         /api/vacationreview/:id        controllers.MainController.getVacationReview(id: Integer)
+GET         /api/vacation                           controllers.MainController.getAllVacations()
+GET         /api/vacation/:id                       controllers.MainController.getVacation(id: Integer)
+GET         /api/activity                           controllers.MainController.getAllActivities()
+GET         /api/activity/:id                       controllers.MainController.getActivity(id: Integer)
+GET         /api/keyword                            controllers.MainController.getAllKeywords()
+GET         /api/keyword/:id                        controllers.MainController.getKeyword(id: Integer)
+GET         /api/location                           controllers.MainController.getAllLocations()
+GET         /api/location/:id                       controllers.MainController.getLocation(id: Integer)
+GET         /api/role                               controllers.MainController.getAllRoles()
+GET         /api/role/:id                           controllers.MainController.getRole(id: Integer)
+GET         /api/user                               controllers.MainController.getAllUsers()
+GET         /api/user/:id                           controllers.MainController.getUser(id: Integer)
+GET         /api/activityreview                     controllers.MainController.getAllActivityReviews()
+GET         /api/activityreview/:id                 controllers.MainController.getActivityReview(id: Integer)
+GET         /api/vacationreview                     controllers.MainController.getAllVacationReviews()
+GET         /api/vacationreview/:id                 controllers.MainController.getVacationReview(id: Integer)
+GET         /api/vacationimage                      controllers.MainController.getAllVacationImages()
+GET         /api/vacationimage/:id                  controllers.MainController.getVacationImage(id: Integer)
+GET         /api/activityimage                      controllers.MainController.getAllActivityImages()
+GET         /api/activityimage/:id                  controllers.MainController.getActivityImage(id: Integer)
 
 # Basic api POST functions for js-data
-POST        /api/user                      controllers.RegisterController.createUser()
+POST        /api/user                               controllers.RegisterController.createUser()
 
 # Additional apis for special use cases
 GET         /api/keywordsbystring/:keyString        controllers.SearchController.getKeywordsFor(keyString: String)
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                  controllers.Assets.at(path="/public", file)
-GET         /webjars/*file                 controllers.WebJarAssets.at(file)
+GET         /assets/*file                           controllers.Assets.at(path="/public", file)
+GET         /webjars/*file                          controllers.WebJarAssets.at(file)
 

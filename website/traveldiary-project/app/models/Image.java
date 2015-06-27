@@ -7,9 +7,10 @@ import play.data.validation.Constraints;
  * Created by Chetan on 6/15/2015.
  */
 @Entity
-public class Image {
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public abstract class Image {
+
     @Id
-    @GeneratedValue
     private int id;
 
     @Constraints.Required

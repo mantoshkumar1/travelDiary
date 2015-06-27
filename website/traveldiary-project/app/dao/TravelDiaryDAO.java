@@ -12,6 +12,7 @@ import java.util.List;
 
 
 import play.db.jpa.Transactional;
+import scala.reflect.internal.Trees;
 
 /**
  * Created by albert on 23.06.15.
@@ -187,5 +188,24 @@ public class TravelDiaryDAO {
 
     public static VacationReview getVacationReview(Integer id) {
         return JPA.em().find(VacationReview.class, id);
+    }
+
+    public static List<VacationImage> findAllVacationImages() {
+        TypedQuery<VacationImage> query = JPA.em().createQuery("SELECT i FROM VacationImage i", VacationImage.class);
+        return query.getResultList();
+    }
+
+    public static List<ActivityImage> findAllActivityImages() {
+        TypedQuery<ActivityImage> query = JPA.em().createQuery("SELECT i FROM VacationImage i", ActivityImage.class);
+
+        return query.getResultList();
+    }
+
+    public static VacationImage getVacationImage(Integer id) {
+        return JPA.em().find(VacationImage.class, id);
+    }
+
+    public static ActivityImage getActivityImage(Integer id) {
+        return JPA.em().find(ActivityImage.class, id);
     }
 }

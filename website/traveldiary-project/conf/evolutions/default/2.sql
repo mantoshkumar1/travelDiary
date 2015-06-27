@@ -143,9 +143,6 @@ INSERT INTO vacationreview VALUES(12,4,'review12','review description12',strftim
 INSERT INTO vacationreview VALUES(13,1,'review13','review description13',strftime('%Y-%m-%d %H:%M:%f','now'),1,1);
 INSERT INTO vacationreview VALUES(14,2,'review14','review description14',strftime('%Y-%m-%d %H:%M:%f','now'),2,4);
 
-INSERT INTO Image VALUES(1,'assets/images/1.jpg');
-INSERT INTO Image VALUES(2,'assets/images/2.jpg');
-
-INSERT INTO VacationImages VALUES (1,1);
-INSERT INTO VacationImages VALUES (2,2);
+INSERT INTO vacationimage VALUES(1,'assets/images/1.jpg',1);
+INSERT INTO vacationimage VALUES(2,'assets/images/2.jpg',2);
 # --- !Downs

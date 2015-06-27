@@ -19,15 +19,15 @@ public class MainController extends Controller {
     @Transactional(readOnly = true)
     public static Result getAllVacations() {
         List<Vacation> vacations = TravelDiaryDAO.findAllVacations();
-        Vacation[] vacArray = vacations.toArray(new Vacation[vacations.size()]);
-        return ok(Json.toJson(vacArray));
+
+        return ok(Json.toJson(vacations));
     }
 
    @Transactional(readOnly = true)
     public static Result getAllKeywords() {
         List<Keyword> keywords = TravelDiaryDAO.findAllKeywords();
-       Keyword[] keyArray = keywords.toArray(new Keyword[keywords.size()]);
-        return ok(Json.toJson(keyArray));
+
+        return ok(Json.toJson(keywords));
     }
 
     @Transactional(readOnly = true)
@@ -98,5 +98,21 @@ public class MainController extends Controller {
 
     public static Result getVacationReview(int id) {
         return ok(Json.toJson(TravelDiaryDAO.getVacationReview(id)));
+    }
+
+    public static Result getAllVacationImages() {
+        return ok(Json.toJson(TravelDiaryDAO.findAllVacationImages()));
+    }
+
+    public static Result getVacationImage(int id) {
+        return ok(Json.toJson(TravelDiaryDAO.getVacationImage(id)));
+    }
+
+    public static Result getAllActivityImages() {
+        return ok(Json.toJson(TravelDiaryDAO.findAllActivityImages()));
+    }
+
+    public static Result getActivityImage(int id) {
+        return ok(Json.toJson(TravelDiaryDAO.getActivityImage(id)));
     }
 }

@@ -26,7 +26,7 @@ public class Vacation {
     private User creator;
 
     @Transient
-    private long creatorId;
+    private int creatorId;
 
     @ManyToMany
     @JoinTable(name = "VacationActivities",
@@ -46,7 +46,7 @@ public class Vacation {
     private Location location;
 
     @Transient
-    private long locationId;
+    private int locationId;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
@@ -60,16 +60,14 @@ public class Vacation {
     private List<Keyword> keywords;
 
     @OneToMany
-    @JoinTable(name = "VacationImages",
-            joinColumns = {@JoinColumn(name = "vacationId", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "id", unique = true)})
-    private List<Image> images;
+    @JoinColumn(name = "vacationId")
+    private List<VacationImage> images;
 
-    public List<Image> getImages() {
+    public List<VacationImage> getImages() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImages(List<VacationImage> images) {
         this.images = images;
     }
 
