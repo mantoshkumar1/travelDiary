@@ -4,7 +4,6 @@ App.controller('registerController', ['$scope', '$state', 'User', function($scop
     $scope.save = function() {
 
         $scope.user = User.createInstance();
-
         $scope.success = false;
 
         $scope.save = function() {

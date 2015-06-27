@@ -241,10 +241,6 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
 
     var register_config = {
         url: '/register',
-        resolve : {
-            users: [ 'User', function (User) {
-                return User.findAll(); }]
-        },
         views: {
             'content@': {
                 templateUrl: 'assets/templates/registerUser.html',
