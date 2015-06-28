@@ -21,21 +21,11 @@ App.controller('registerController', ['$scope', '$state', 'User', 'Location', 'r
 
 
             $scope.user.location.DSCreate().then( function () {
-                //$scope.user = User.createInstance();
                 $scope.user.DSCreate().then(function() {
                     $scope.user = User.createInstance();
-                    $scope.succes = true;
+                    $scope.success = true;
                 })
             });
-
-        //$scope.save = function () {
-        //    $scope.user.DSCreate().then(function () {
-        //        $scope.user = User.createInstance();
-        //        // Trigger validation flag.
-        //        $scope.success = true;
-        //    });
-            //$state.go('main.vacation');
-
     };
 }]);
 
