@@ -1,6 +1,9 @@
 /**
  * Created by albert on 23.06.15.
  */
+(function() {
+
+var App = angular.module("travelDiary");
 
 App.directive('tdClick', function () {
     return {
@@ -190,3 +193,5 @@ App.directive('searchBarFix', function () {
         }
     }
 );
+
+}());
