@@ -1,6 +1,7 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
@@ -22,7 +23,7 @@ public class Vacation {
 
     @ManyToOne
     @JoinColumn(name = "creatorId")
-    @JsonBackReference
+    @JsonManagedReference
     private User creator;
 
     @Transient
