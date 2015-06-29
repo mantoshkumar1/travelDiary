@@ -262,9 +262,35 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
     var vacation_details_config = {
         url: '/details/{id}',
         resolve: {
-          vacationId: ['$stateParams', function($stateParams) {
-              return $stateParams.id;
-          }]},
+          vacation: ['$stateParams', 'Vacation', 'User', function($stateParams, Vacation, User) {
+              console.log("resolving vacation "+$stateParams.id);
+              var vac;
+              return Vacation.find($stateParams.id).then(function(vacation){
+                  vac = vacation;
+                  console.log("Vacation");
+                  console.log(vac);
+                  return vac;
+              /*}).then(function(vacation){
+                  console.log("load RElations of ");
+                  console.log(vacation);
+                  return Vacation.loadRelations(vacation, ['user']);*/
+              });
+          }],
+            user:['$stateParams', 'Vacation', 'User', function($stateParams, Vacation, User) {
+                console.log("resolving vacation "+$stateParams.id);
+                var vac;
+                return User.find(2).then(function(user){
+                    vac = user;
+                    console.log("User");
+                    console.log(vac);
+                    return vac;
+                    }).then(function(user){
+                     console.log("load RElations of user ");
+                     console.log(user);
+                     return User.loadRelations(user, ['vacation']);
+                });
+            }]
+        },
         views: {
             'content@': {
                 templateUrl: 'assets/templates/vacation_details.html',

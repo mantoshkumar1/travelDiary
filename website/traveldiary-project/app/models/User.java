@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.data.validation.Constraints;
@@ -35,14 +36,14 @@ public class User {
     @Constraints.Required
     private String passwordHash;
 
-    @OneToMany
-    @JoinColumn(name = "creatorId")
+    @OneToMany(mappedBy = "creator")
+    //@JoinColumn(name = "creatorId")
     @JsonManagedReference
     private List<Activity> createdActivites;
 
-    @OneToMany
-    @JoinColumn(name = "creatorId")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "creator")
+    //@JoinColumn(name = "creatorId")
+    @JsonBackReference
     private List<Vacation> createdVacations;
 
     @ManyToOne(cascade=CascadeType.ALL)
