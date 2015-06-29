@@ -1,3 +1,5 @@
+(function() {
+
 var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter', 'ngMaterial']);
 
 App.factory('VacationKeywordJoinTableEntry', ['DS', function (DS) {
@@ -258,16 +260,15 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
 
 
     var vacation_details_config = {
-        url: '/details',
+        url: '/details/{id}',
+        resolve: {
+          vacationId: ['$stateParams', function($stateParams) {
+              return $stateParams.id;
+          }]},
         views: {
             'content@': {
                 templateUrl: 'assets/templates/vacation_details.html',
-                controller: ['$scope', 'vacations', function ($scope, vacations) {
-                    $scope.vacations = vacations;
-                    $scope.vacation = vacations[0];
-                    $scope.imagePath = "assets/images/1.jpg";
-                    console.log($scope.vacation);
-                }] // Empty controller
+                controller: 'vacationDetailsController'
             }
         }
     };
@@ -321,3 +322,4 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
                   Keyword, ActivityKeywordJoinTableEntry, VacationKeywordJoinTableEntry) {
             // Just loading all factories because otherwise we get resource undefined errors because of the defined relations.
         }]);
+}());

@@ -11,15 +11,10 @@
         <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("angular-material.css"))">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        @*Add bootstrap for some nice dom elements*@
-        @*<link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.css"))">*@
-        @*Add custom style sheets*@
         <link rel='custom stylesheet' href='@routes.Assets.at("stylesheets/main.css")'>
-        <link rel='custom stylesheet' href='@routes.Assets.at("stylesheets/animation.css")'>
     </head>
 
     <body ng-app="travelDiary">
-
         <div ui-view="navigation"></div>
         <div ui-view="content"></div>
 
@@ -51,7 +46,9 @@
         <script type="text/javascript" src="@routes.Assets.at("javascripts/navigationController.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/registerController.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/vacationSearchController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/vacationDetailsController.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/directives.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/login.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/starRating.js")"></script>
     </body>
 </html>

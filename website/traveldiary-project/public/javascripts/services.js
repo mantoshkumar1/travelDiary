@@ -1,6 +1,9 @@
 /**
  * Created by albert on 24.06.15.
  */
+(function() {
+
+var App = angular.module("travelDiary");
 
 App.service('Util', function () {
 
@@ -135,3 +138,5 @@ App.service('KeywordService', function () {
     };
 
 });
+
+}());

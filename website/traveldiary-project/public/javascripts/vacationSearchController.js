@@ -1,7 +1,9 @@
 /**
  * Created by albert on 24.06.15.
  */
+(function() {
 
+var App = angular.module("travelDiary");
 
 App.controller('vacationSearchController', ['$scope', '$state', 'KeywordService', 'vacations', function ($scope, $state, KeywordService, vacations) {
 
@@ -29,6 +31,8 @@ App.controller('vacationSearchController', ['$scope', '$state', 'KeywordService'
     thisCtrl.loadVacation = function (vacation) {
         console.log('changing to details view');
 
-        $state.go('main.vacation.details');
+        $state.go('main.vacation.details', {id: vacation.id});
     };
 }]);
+
+}());

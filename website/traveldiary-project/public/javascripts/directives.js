@@ -1,6 +1,9 @@
 /**
  * Created by albert on 23.06.15.
  */
+(function() {
+
+var App = angular.module("travelDiary");
 
 App.directive('tdClick', function () {
     return {
@@ -177,6 +180,39 @@ App.directive('ngEnter', function () {
     };
 });
 
+App.directive('fixedNav', function ($window) {
+    return function (scope, element, attrs) {
+        angular.element($window).bind("scroll", function (event) {
+            var window_top = $(window).scrollTop();
+            var div_top = document.getElementById('sticky').offsetTop;
+            if (window_top > div_top) {
+                element.addClass('stick');
+            } else {
+                element.removeClass('stick');
+            }
+        })
+    };
+});
+
+App.directive('scrollOnClick', function() {
+    return {
+        link: function(scope, $elm, attrs) {
+            console.log("scroll");
+            var idToScroll = attrs.scrollTo;
+            console.log("id to scroll"+idToScroll);
+            $elm.on('click', function() {
+                var $target;
+                if (idToScroll) {
+                    $target = $(idToScroll);
+                } else {
+                    $target = $elm;
+                }
+                $("body").animate({scrollTop: $target.offset().top}, "slow");
+            });
+        }
+    }
+});
+
 App.directive('searchBarFix', function () {
         return {
             restrict: 'C',
@@ -190,3 +226,4 @@ App.directive('searchBarFix', function () {
         }
     }
 );
+}());
