@@ -1,6 +1,6 @@
-import sbt._
-import Keys._
 import play.Play.autoImport._
+import sbt.Keys._
+import sbt._
 
 name := "traveldiary"
 

@@ -18,12 +18,18 @@ public enum Rating {
     @Override
     public String toString() {
         switch (this) {
-            case LOVED_IT: return "Loved It";
-            case REALLY_LIKED_IT: return "Really Liked It";
-            case LIKED_IT: return "Liked It";
-            case DID_NOT_LIKE_IT: return "Didn't Like It";
-            case HATED_IT: return "Hated It";
-            default: return "Unknown Rating";
+            case LOVED_IT:
+                return "Loved It";
+            case REALLY_LIKED_IT:
+                return "Really Liked It";
+            case LIKED_IT:
+                return "Liked It";
+            case DID_NOT_LIKE_IT:
+                return "Didn't Like It";
+            case HATED_IT:
+                return "Hated It";
+            default:
+                return "Unknown Rating";
         }
     }
 }

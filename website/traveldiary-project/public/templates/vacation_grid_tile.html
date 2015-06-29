@@ -1,10 +1,16 @@
 <figure ng-switch on="vacation.images.length">
+    <md-grid-tile-header>
+        <div ng-repeat="keyword in vacation.keywords">
+            {{keyword.keyword}}
+        </div>
+
+    </md-grid-tile-header>
     <img ng-switch-when="0" ng-src="assets/images/1.jpg">
     <!-- TODO: Why is trim necessary? There are no spaces in the DB.-->
     <img ng-switch-default ng-src="{{vacation.images[0].url.trim()}}">
 </figure>
 <md-grid-tile-footer>
     <h3>
-        {{vacation.name}}
+        {{vacation.name}} {{vacation.rating2}}
     </h3>
 </md-grid-tile-footer>

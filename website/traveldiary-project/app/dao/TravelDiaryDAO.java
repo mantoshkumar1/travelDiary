@@ -2,16 +2,11 @@ package dao;
 
 import models.*;
 import play.db.jpa.JPA;
-import play.libs.Json;
-import play.mvc.Result;
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
-
-
-import play.db.jpa.Transactional;
 
 /**
  * Created by albert on 23.06.15.
@@ -138,14 +133,73 @@ public class TravelDiaryDAO {
         return query.getResultList();
     }
 
-    public static List<Review> findAllReviews() {
-        TypedQuery<Review> query = JPA.em().createQuery("SELECT m FROM Review m", Review.class);
+    public static List<Location> findAllLocations() {
+        TypedQuery<Location> query = JPA.em().createQuery("SELECT m FROM Location m", Location.class);
+        return query.getResultList();
+    }
+
+    public static List<VacationReview> findAllVacationReviews() {
+        TypedQuery<VacationReview> query = JPA.em().createQuery("SELECT r FROM VacationReview r", VacationReview.class);
 
         return query.getResultList();
     }
 
-    public static List<Location> findAllLocations() {
-        TypedQuery<Location> query = JPA.em().createQuery("SELECT m FROM Location m", Location.class);
+    public static List<ActivityReview> findAllActivityReviews() {
+        TypedQuery<ActivityReview> query = JPA.em().createQuery("SELECT r FROM ActivityReview r", ActivityReview.class);
+
         return query.getResultList();
+    }
+
+    public static Vacation getVacation(Integer id) {
+
+        return JPA.em().find(Vacation.class, id);
+    }
+
+
+    public static Activity getActivity(Integer id) {
+        return JPA.em().find(Activity.class, id);
+    }
+
+    public static Keyword getKeyword(Integer id) {
+        return JPA.em().find(Keyword.class, id);
+    }
+
+    public static Location getLocation(Integer id) {
+        return JPA.em().find(Location.class, id);
+    }
+
+    public static Role getRole(Integer id) {
+        return JPA.em().find(Role.class, id);
+    }
+
+    public static User getUser(Integer id) {
+        return JPA.em().find(User.class, id);
+    }
+
+    public static ActivityReview getActivityReview(Integer id) {
+        return JPA.em().find(ActivityReview.class, id);
+    }
+
+    public static VacationReview getVacationReview(Integer id) {
+        return JPA.em().find(VacationReview.class, id);
+    }
+
+    public static List<VacationImage> findAllVacationImages() {
+        TypedQuery<VacationImage> query = JPA.em().createQuery("SELECT i FROM VacationImage i", VacationImage.class);
+        return query.getResultList();
+    }
+
+    public static List<ActivityImage> findAllActivityImages() {
+        TypedQuery<ActivityImage> query = JPA.em().createQuery("SELECT i FROM VacationImage i", ActivityImage.class);
+
+        return query.getResultList();
+    }
+
+    public static VacationImage getVacationImage(Integer id) {
+        return JPA.em().find(VacationImage.class, id);
+    }
+
+    public static ActivityImage getActivityImage(Integer id) {
+        return JPA.em().find(ActivityImage.class, id);
     }
 }

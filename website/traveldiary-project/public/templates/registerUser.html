@@ -1,54 +1,56 @@
-
 <md-toolbar class="md-primary">
     <h1 class="md-toolbar-tools">
-        User registration
+        New user registration
     </h1>
 </md-toolbar>
 
-<div class="alert alert-success" role='alert' ng-show="$scope.success">Your account has been created successfully </div>
+<div class="alert alert-success" role='alert' ng-show="$scope.success">Your account has been created successfully</div>
 
-<div layout="column" class="slide-in-out-vertically">
-<md-content layout-padding="">
-    <form name="userForm">
+<form class="form-horizontal" name="userForm">
 
-        <div layout="" layout-sm="column">
-            <md-input-container flex="">
-                <label>First name</label>
-                <input required="" ng-model="user.firstName" type="text">
-                <div ng-messages="userForm.firstName.$error">
-                    <div ng-message="required">Mandatory field</div>
-                </div>
-            </md-input-container>
+    <div class="form-group" layout="" layout-sm="column">
+        <md-input-container flex="">
+            <label for="firstName" class="col-xs-2 control-label">First name</label>
+            <input class="form-control" id="firstName" required="" ng-model="user.firstName" type="text">
+        </md-input-container>
 
-            <md-input-container flex="">
-                <label>Last Name</label>
-                <input ng-model="user.lastName" type="text">
-            </md-input-container>
+        <md-input-container flex="">
+            <label for="lastName" class="col-xs-2 control-label">Last Name</label>
+            <input class="form-control" id="lastName" ng-model="user.lastName" type="text">
+        </md-input-container>
+    </div>
+
+    <div class="form-group">
+        <md-input-container flex="">
+            <label for="username" class="col-xs-2 control-label">User name</label>
+            <input class="form-control" id="username" required="" ng-model="user.username" type="text">
+        </md-input-container>
+    </div>
+
+    <div class="form-group">
+        <md-input-container flex="">
+            <label for="email" class="col-xs-2 control-label">Email</label>
+            <input class="form-control" id="email" required="" ng-model="user.email" type="email">
+        </md-input-container>
+    </div>
+
+    <div class="form-group">
+        <md-input-container flex="">
+            <label for="password" class="col-xs-2 control-label">Password</label>
+            <input class="form-control" id="password" required="" ng-model="user.passwordHash" type="password">
+        </md-input-container>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-xs-10">
+            <md-button type="submit" class="md-raised" md-ripple-size ng-click="save()">
+                <span class="glyphicon glyphicon-plus"></span> Sign up
+            </md-button>
+            <a href="#/" class="btn"> Cancel</a>
         </div>
+    </div>
 
-        <md-input-container flex="">
-            <label>User name</label>
-            <input required="" ng-model="user.username" type="text">
-            <div ng-messages="userForm.username.$error">
-                <div ng-message="required">Mandatory field</div>
-            </div>
-        </md-input-container>
+</form>
 
-        <md-input-container flex="">
-            <label>Email</label>
-            <input required="" ng-model="user.email" type="email">
-            <div ng-messages="userForm.email.$error">
-                <div ng-message="required">Mandatory field</div>
-            </div>
-        </md-input-container>
-
-        <md-input-container flex="">
-            <label>Password</label>
-            <input required="" ng-model="user.passwordHash" type="password">
-            <div ng-messages="userForm.passwordHash.$error">
-                <div ng-message="required">Mandatory field</div>
-            </div>
-        </md-input-container>
-    </form>
-</md-content>
-</div>

@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.data.validation.Constraints;
 import play.db.jpa.JPA;
@@ -11,11 +12,12 @@ import java.util.List;
  * Created by Rike on 06.06.2015.
  */
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     @Id
     @GeneratedValue
-    private long id;
+    private int id;
 
     @Constraints.Required
     private String username;
@@ -43,13 +45,23 @@ public class User {
     @JsonManagedReference
     private List<Vacation> createdVacations;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "locationId")
     private Location location;
+
+    @Transient
+    private long locationId;
 
     @ManyToOne
     @JoinColumn(name = "roleId")
     private Role role;
+
+    @Transient
+    private long roleId;
+
+    public static User findById(long id) {
+        return JPA.em().find(User.class, id);
+    }
 
     public String getProfilePicture() {
         return profilePicture;
@@ -115,9 +127,11 @@ public class User {
         this.location = location;
     }
 
-    public long getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -137,11 +151,9 @@ public class User {
         this.createdVacations = createdVacations;
     }
 
-    public void save() {
-        JPA.em().persist(this);
-    }
-
-    public static User findById(long id) {
-        return JPA.em().find(User.class, id);
+    @PostLoad
+    private void onLoad() {
+        roleId = role.getId();
+        locationId = location.getId();
     }
 }

@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel='shortcut icon' type='image/png' href='@routes.Assets.at("images/favicon.png")'>
-         @*Add Angular Material css sheet, fonts and icons*@
+        @*Add Angular Material css sheet, fonts and icons*@
         <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("angular-material.css"))">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -21,6 +21,7 @@
     <body ng-app="travelDiary">
 
         <div ui-view="navigation"></div>
+        <div ui-view="content"></div>
 
         @*
         Adding javascript app dependencies.
@@ -47,11 +48,10 @@
         *@
         <script type="text/javascript" src="@routes.Assets.at("javascripts/app.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/services.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("javascripts/globalController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/navigationController.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/registerController.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/vacationSearchController.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/vacationDetailsController.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/directives.js")"></script>
-
     </body>
 </html>

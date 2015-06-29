@@ -1,18 +1,187 @@
 var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter', 'ngMaterial']);
 
+App.factory('VacationKeywordJoinTableEntry', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'vacationkeyword'
+        });
+}]);
+
+App.factory('ActivityKeywordJoinTableEntry', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'activitykeyword'
+        });
+}]);
+
+
 App.factory('Keyword', ['DS', function (DS) {
-    return DS.defineResource('keyword');
+    return DS.defineResource(
+        {
+            name: 'keyword'
+        });
+}]);
+
+App.factory('ActivityImage', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'activityimage'
+        });
+}]);
+
+App.factory('VacationImage', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'vacationimage'
+        });
+}]);
+
+App.factory('Location', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'location'
+        });
+}]);
+
+App.factory('ActivityReview', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'activityreview'
+        });
+}]);
+
+App.factory('VacationReview', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'vacationreview'
+        });
+}]);
+
+App.factory('Role', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'role'
+        });
+}]);
+
+
+App.factory('User', ['DS', function (DS) {
+    return DS.defineResource(
+        {
+            name: 'user',
+            relations: {
+                hasOne: [{
+                    role: {
+                        localField: "role",
+                        foreignKey: "roleId"
+                    }
+                }, {
+                    location: {
+                        localField: "location",
+                        foreignKey: "locationId"
+                    }
+                }],
+                hasMany: [{
+                    vacation: {
+                        localField: "createdVacations",
+                        foreignKey: "creatorId"
+                    }
+                }, {
+                    activity: {
+                        localField: "createdActivities",
+                        foreignKey: "creatorId"
+                    }
+                }]
+            }
+        });
 }]);
 
 App.factory('Vacation', ['DS', function (DS) {
-    return DS.defineResource('vacation');
+    return DS.defineResource({
+        name: 'vacation',
+        relations: {
+            hasOne: [{
+                user: {
+                    localField: "creator",
+                    foreignKey: "creatorId"
+                }
+            }, {
+                location: {
+                    localField: "location",
+                    foreignKey: "locationId"
+                }
+            }],
+            hasMany: [{
+                vacationreview: {
+                    localField: "reviews",
+                    foreignKey: "vacationId"
+                }
+            }, {
+                images: {
+                    localField: "images",
+                    foreignKey: "vacationId"
+                }
+            }]
+        },
+        computed: {
+            rating: ['reviews', function (reviews) {
+                var rating = 0.0;
+
+                reviews.forEach(function (review) {
+                    rating += review.rating.value;
+                });
+
+                if (reviews.length > 0) {
+                    rating = rating / reviews.length;
+                }
+
+                return rating;
+            }]
+        }
+    });
 }]);
 
-App.factory('User', ['DS',function(DS){
-    return DS.defineResource('user');
+App.factory('Activity', ['DS', function (DS) {
+    return DS.defineResource({
+        name: 'activity',
+        relations: {
+            hasOne: {
+                user: {
+                    localField: "creator",
+                    foreignKey: "creatorId"
+                }
+            },
+            hasMany: [{
+                activityreview: {
+                    localField: "reviews",
+                    foreignKey: "activityId"
+                }
+            }, {
+                images: {
+                    localField: "images",
+                    foreignKey: "vacationId"
+                }
+            }]
+        },
+        computed: {
+            rating: ['reviews', function (reviews) {
+                var rating = 0.0;
+
+                reviews.forEach(function (review) {
+                    rating += review.rating.value;
+                });
+
+                if (reviews.length > 0) {
+                    rating = rating / reviews.length;
+                }
+
+                return rating;
+            }]
+        }
+    });
 }]);
 
-App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProvider',function($stateProvider, DSProvider,$mdThemingProvider,$urlRouterProvider){
+App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterProvider', function ($stateProvider, DSProvider, $mdThemingProvider, $urlRouterProvider) {
     DSProvider.defaults.basePath = '/api';
 
     $mdThemingProvider.theme('default')
@@ -24,15 +193,12 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
         resolve: {
             keywords: ['Keyword', function (Keyword) {
                 return Keyword.findAll();
-            }],
-            selectedKeywords: (function () {
-                return [];
-            })
+            }]
         },
         views: {
             'navigation': {
                 templateUrl: 'assets/templates/navigation.html',
-                controller: 'globalController'
+                controller: 'navigationControllerWithoutSelection'
             }
         }
     };
@@ -40,15 +206,11 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
 
     var index_config = {
         url: '/index',
-        resolve: {
-            vacations: ['Vacation', function (Vacation) {
-                return Vacation.findAll();
-            }]
-        },
         views: {
-            'content': {
+            'content@': {
                 templateUrl: 'assets/templates/index.html',
-                controller: 'vacationSearchController'
+                controller: (function () {
+                })
             }
         }
     };
@@ -58,19 +220,13 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
         resolve: {
             vacations: ['Vacation', function (Vacation) {
                 return Vacation.findAll();
-            }],
-            selectedKeywords: (function () {
-                return [];
-            })
+            }]
         },
         views: {
-            'navigation@': {
-                templateUrl: 'assets/templates/navigation.html',
-                controller: 'globalController'
-            },
-            'content': {
+            'content@': {
                 templateUrl: 'assets/templates/search_vacation.html',
-                controller: 'vacationSearchController'
+                controller: 'vacationSearchController',
+                controllerAs: 'vacCtrl'
             }
         }
     };
@@ -79,30 +235,36 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
         url: '/search/{keywordStrings}',
         resolve: {
             selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
-                if ($stateParams.keywordStrings === '') {
-                    return [];
-                } else {
-                    return Keyword.find($stateParams.keywordStrings);
-                }
+                var keywordsWithoutId = $stateParams.keywordStrings.split("+");
+
+                console.log(keywordsWithoutId);
+
+                return Keyword.filter({
+                    where: {
+                        keyword: {
+                            'in': keywordsWithoutId
+                        }
+                    }
+                });
             }]
         },
         views: {
             'navigation@': {
                 templateUrl: 'assets/templates/navigation.html',
-                controller: 'globalController'
-            },
-            'content@main': {
-                templateUrl: 'assets/templates/search_vacation.html',
-                controller: 'vacationSearchController'
+                controller: 'navigationControllerWithSelection'
             }
         }
     };
 
 
     var vacation_details_config = {
-        url: '/details',
+        url: '/details/{id}',
+        resolve: {
+          vacationId: ['$stateParams', function($stateParams) {
+              return $stateParams.id;
+          }]},
         views: {
-            'content': {
+            'content@': {
                 templateUrl: 'assets/templates/vacation_details.html',
                 controller: 'vacationDetailsController'
             }
@@ -111,12 +273,13 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
 
     var register_config = {
         url: '/register',
-        resolve : {
-            users: [ 'User', function (User) {
-                return User.findAll(); }]
+        resolve: {
+            roles: ['Role', function (Role) {
+                return Role.findAll();
+            }]
         },
         views: {
-            'content': {
+            'content@': {
                 templateUrl: 'assets/templates/registerUser.html',
                 controller: 'registerController'
             }
@@ -128,9 +291,15 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
     $stateProvider.state('main.vacation', vacation_config);
     $stateProvider.state('main.vacation.search', vacation_search_config);
     $stateProvider.state('main.vacation.details', vacation_details_config);
-    $stateProvider.state('main.register',register_config);
+    $stateProvider.state('main.register', register_config);
 
 
     // Move to index page in any other case
     $urlRouterProvider.otherwise('/index');
-}]);
+}]).run(
+    ['Activity', 'Vacation', 'User', 'Role', 'Location', 'ActivityReview', 'VacationReview', 'VacationImage',
+        'ActivityImage', 'Keyword', 'ActivityKeywordJoinTableEntry', 'VacationKeywordJoinTableEntry',
+        function (Activity, Vacation, User, Role, Location, ActivityReview, VacationReview, VacationImage, ActivityImage,
+                  Keyword, ActivityKeywordJoinTableEntry, VacationKeywordJoinTableEntry) {
+            // Just loading all factories because otherwise we get resource undefined errors because of the defined relations.
+        }]);

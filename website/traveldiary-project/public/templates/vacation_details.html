@@ -14,12 +14,13 @@
                 <md-button> Keywords</md-button>
                 <md-button> Reviews</md-button>
                 <span flex></span>
-                <md-button aria-label="Copy">
+                <md-button aria-label="Copy" ng-click="createVacation()">
                     <md-icon class="material-icons">favorite_border</md-icon>
                     Copy
                 </md-button>
-                <md-button class="md-icon-button" aria-label="More" ng-click="createVacation()">
-                    <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+                <md-button aria-label="Review">
+                    <md-icon class="material-icons">star_border</md-icon>
+                    Review
                 </md-button>
             </div>
         </md-toolbar>
@@ -31,6 +32,10 @@
                 <div layout="column" layout-align="start start" flex>
                     <div class="md-headline">{{vacation.name}}</div>
                     <div class="md-subhead">by {{vacation.creator.username}}</div>
+                    <div layout="row">
+                        <i class="material-icons" ng-repeat="n in [] | range:vacation.rating">star</i>
+                        <i class="material-icons" ng-repeat="n in [] | range:(5-vacation.rating)">star_border</i>
+                    </div>
                 </div>
                 <div layout="row" layout-align="end start" flex>
                     <div class="md-headline">{{vacation.startDate | date:'dd.MM.yyyy'}} to
@@ -38,6 +43,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <div id="overview" layout="row">
 
@@ -46,7 +52,6 @@
                     <carousel interval="5000">
                         <slide ng-repeat="image in images">
                             <img ng-src="{{image}}" style="width: 100%">
-
                             <div class="carousel-caption">
                                 <h4>Slide {{$index}}</h4>
                             </div>
@@ -89,16 +94,10 @@
         </div>
 
         <md-content class="md-padding">
-            <div class="md-title">Reviews</div>
-            <div layout="row">
-                <i class="material-icons">star</i>
-                <i class="material-icons">star</i>
-                <i class="material-icons">star</i>
-                <i class="material-icons">star_half</i>
-                <i class="material-icons">star_border</i>
-            </div>
+            <div class="md-title">Reviews</div><div> ({{vacation.reviews.length}})</div>
+
             <md-list>
-                <md-list-item class="md-3-line" ng-repeat="review in vacation.reviewsList">
+                <md-list-item class="md-3-line" ng-repeat="review in vacation.reviews">
                     <div class="md-list-item-text">
                         <h3>{{review.title}}</h3>
                         <h4>by {{review.user.username}}UserName</h4>
@@ -113,7 +112,7 @@
         <md-content class="md-padding">
             <div class="md-title">Activities</div>
             <div layout="row">
-                <div flex="33" ng-repeat="activity in vacation.activitiesList">
+                <div flex="33" ng-repeat="activity in vacation.activities">
                     <md-card>
                         <img ng-src="activity.images[0]"
                              ng-show="(activity.images !== undefined) && (activity.images.length > 0)">

@@ -16,6 +16,15 @@
     min-height: inherit;
 }
 
+#suggestionToogleButton {
+    outline: none;
+}
+
+#suggestionToogleButton:hover {
+    outline: none;
+    background-color: lightgray;
+}
+
 .keyword-chip {
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;

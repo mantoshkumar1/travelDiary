@@ -16,7 +16,7 @@ public class Activity {
 
     @Id
     @GeneratedValue
-    private long id;
+    private int id;
 
     @Constraints.Required
     private String name;
@@ -28,14 +28,12 @@ public class Activity {
     @JoinColumn(name = "locationId")
     private Location location;
 
+    @Transient
+    private int locationId;
+
     @OneToMany
-    @JoinTable
-            (
-                    name = "ActivityReviews",
-                    joinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")},
-                    inverseJoinColumns = {@JoinColumn(name = "reviewId", referencedColumnName = "id", unique = true)}
-            )
-    private List<Review> reviews;
+    @JoinColumn(name = "activityId")
+    private List<ActivityReview> reviews;
     private Date startTime;
     private Date endTime;
 
@@ -44,17 +42,18 @@ public class Activity {
     @JsonBackReference
     private User creator;
 
+    @Transient
+    private long creatorId;
+
     @ManyToMany
     @JoinTable(name = "ActivityKeywords",
             joinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "keywordId", referencedColumnName = "id")})
-    private List<Keyword> activityKeywords;
+    private List<Keyword> keywords;
 
     @OneToMany
-    @JoinTable(name = "ActivityImages",
-            joinColumns = {@JoinColumn(name = "activityId", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "imageId", referencedColumnName = "id", unique = true)})
-    private List<Image> images;
+    @JoinColumn(name = "activityId")
+    private List<ActivityImage> images;
 
     public User getCreator() {
         return creator;
@@ -64,20 +63,20 @@ public class Activity {
         this.creator = creator;
     }
 
-    public List<Image> getImages() {
+    public List<ActivityImage> getImages() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImages(List<ActivityImage> images) {
         this.images = images;
     }
 
-    public List<Keyword> getActivityKeywords() {
-        return activityKeywords;
+    public List<Keyword> getKeywords() {
+        return keywords;
     }
 
-    public void setActivityKeywords(List<Keyword> activityKeywords) {
-        this.activityKeywords = activityKeywords;
+    public void setKeywords(List<Keyword> keywords) {
+        this.keywords = keywords;
     }
 
     public Date getStartTime() {
@@ -96,11 +95,11 @@ public class Activity {
         this.endTime = endTime;
     }
 
-    public List<Review> getReviews() {
+    public List<ActivityReview> getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<Review> reviews) {
+    public void setReviews(List<ActivityReview> reviews) {
         this.reviews = reviews;
     }
 
@@ -112,11 +111,11 @@ public class Activity {
         this.location = location;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -134,5 +133,11 @@ public class Activity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @PostLoad
+    private void onLoad() {
+        creatorId = creator.getId();
+        locationId = location.getId();
     }
 }
