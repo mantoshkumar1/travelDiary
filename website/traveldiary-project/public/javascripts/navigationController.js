@@ -39,6 +39,10 @@ App.controller('navigationController',
                 $state.go('main.register');
             };
 
+            thisCtrl.clickLogin = function () {
+                $state.go('main.login');
+            };
+
             // Search input
             thisCtrl.isDisabled = false;
             thisCtrl.noCache = true;

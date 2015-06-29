@@ -287,12 +287,29 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
         }
     };
 
+
+    var login_config = {
+        url: '/login',
+        resolve: {
+            roles: ['User', function (User) {
+                return User.findAll();
+            }]
+        },
+        views: {
+            'content@': {
+                templateUrl: 'assets/templates/login.html',
+                controller: 'loginController'
+            }
+        }
+    };
+
     $stateProvider.state('main', main_config);
     $stateProvider.state('main.index', index_config);
     $stateProvider.state('main.vacation', vacation_config);
     $stateProvider.state('main.vacation.search', vacation_search_config);
     $stateProvider.state('main.vacation.details', vacation_details_config);
     $stateProvider.state('main.register', register_config);
+    $stateProvider.state('main.login', login_config);
 
 
     // Move to index page in any other case
