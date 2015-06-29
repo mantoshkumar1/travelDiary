@@ -1,3 +1,7 @@
+(function() {
+
+var App = angular.module("travelDiary");
+
 App.controller('vacationDetailsController', ['$scope', 'vacations', 'vacationId', function ($scope, vacations, vacationId) {
     $scope.vacations = vacations;
     $scope.vacation = vacations[vacationId-1];
@@ -39,3 +43,5 @@ App.filter('range', function() {
         return val;
     };
 });
+
+}());

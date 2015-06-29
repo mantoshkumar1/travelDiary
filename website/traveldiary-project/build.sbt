@@ -33,4 +33,6 @@ libraryDependencies ++= Seq(
   "org.hibernate" % "hibernate-entitymanager" % "4.3.9.Final" // replace by your jpa implementation
 )
 
-lazy val root = (project in file(".")).enablePlugins(PlayJava)
+includeFilter in (Assets, LessKeys.less) := "main.less"
+
+lazy val root = (project in file(".")).enablePlugins(PlayJava,SbtWeb)

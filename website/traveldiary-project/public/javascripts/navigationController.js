@@ -1,7 +1,9 @@
 /**
  * Created by albert on 24.06.15.
  */
+(function() {
 
+var App = angular.module("travelDiary");
 
 App.controller('navigationController',
     ['Util', 'KeywordService', '$scope', '$state', '$log', 'keywords', 'selectedKeywords',
@@ -110,3 +112,4 @@ App.controller('navigationControllerWithSelection',
                 selectedKeywords: selectedKeywords
             });
         }]);
+}());

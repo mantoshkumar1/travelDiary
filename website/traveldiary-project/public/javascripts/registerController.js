@@ -1,3 +1,7 @@
+(function() {
+
+var App = angular.module("travelDiary");
+
 App.controller('registerController', ['$scope', '$state', 'User', 'Location', 'roles', function($scope, $state, User, Location, roles){
     // Form submit handler.
 
@@ -28,4 +32,7 @@ App.controller('registerController', ['$scope', '$state', 'User', 'Location', 'r
             });
     };
 }]);
+
+
+}());
 

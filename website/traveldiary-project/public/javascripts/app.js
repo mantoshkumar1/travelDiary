@@ -1,3 +1,5 @@
+(function() {
+
 var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter', 'ngMaterial']);
 
 App.factory('VacationKeywordJoinTableEntry', ['DS', function (DS) {
@@ -320,3 +322,4 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
                   Keyword, ActivityKeywordJoinTableEntry, VacationKeywordJoinTableEntry) {
             // Just loading all factories because otherwise we get resource undefined errors because of the defined relations.
         }]);
+}());
