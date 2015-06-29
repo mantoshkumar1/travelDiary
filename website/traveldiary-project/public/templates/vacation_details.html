@@ -1,9 +1,31 @@
-<div>
-    <md-content>
-        <div class="cover-img hide-sm" layout="row" style="height: 402px;"
-             ng-style="{'background-image': 'url(' + imagePath + ')'}">
-        </div>
+<md-content>
+    <!--div class="cover-img hide-sm" layout="row" style="height: 402px;"
+         ng-style="{'background-image': 'url(' + imagePath + ')'}">
+    </div-->
+    <md-divider></md-divider>
 
+    <md-content>
+        <span id="sticky" style="position: fixed;"></span>
+        <md-toolbar id="sub-nav-toolbar" fixed-nav>
+            <div class="md-toolbar-tools" class="md-whiteframe-z1"
+                 style="width: 80%; margin-left: auto; margin-right: auto;">
+                <md-button> Overview</md-button>
+                <md-button> Activities</md-button>
+                <md-button> Keywords</md-button>
+                <md-button> Reviews</md-button>
+                <span flex></span>
+                <md-button aria-label="Copy">
+                    <md-icon class="material-icons">favorite_border</md-icon>
+                    Copy
+                </md-button>
+                <md-button class="md-icon-button" aria-label="More" ng-click="createVacation()">
+                    <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+    </md-content>
+
+    <div class="md-whiteframe-z1" style="width: 80%; margin-left: auto; margin-right: auto;">
         <div layout-margin layout-padding>
             <div layout="row">
                 <div layout="column" layout-align="start start" flex>
@@ -17,80 +39,98 @@
                 </div>
             </div>
         </div>
+        <div id="overview" layout="row">
 
-        <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
-            <md-tab label="Description">
-                <md-content class="md-padding">
-                    <div layout-align="center">{{vacation.description}}</div>
-                </md-content>
-            </md-tab>
-            <md-tab label="Rating">
-                <md-content class="md-padding">
-                    <div layout="row">
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star_half</i>
-                        <i class="material-icons">star_border</i>
-                    </div>
-                </md-content>
-                <md-content class="md-padding">
-                    <md-list>
-                        <md-list-item class="md-3-line" ng-repeat="review in vacation.reviewsList">
-                            <div class="md-list-item-text">
-                                <h3>{{review.title}}</h3>
-                                <h4>by {{review.user.username}}UserName</h4>
-                                <p>{{review.description}}</p>
+            <md-content class="md-padding" flex>
+                <!--div style="height: 305px">
+                    <carousel interval="5000">
+                        <slide ng-repeat="image in images">
+                            <img ng-src="{{image}}" style="width: 100%">
+
+                            <div class="carousel-caption">
+                                <h4>Slide {{$index}}</h4>
                             </div>
-                            <md-divider></md-divider>
-                        </md-list-item>
+                        </slide>
+                    </carousel>
+                </div-->
+                <img ng-src="{{images[0]}}" style="width: 100%">
+            </md-content>
 
-                    </md-list>
+            <md-content class="md-padding" flex>
+                <div class="md-padding">
+                    <div class="md-title">Description</div>
+                    <div layout-align="center">{{vacation.description}}</div>
+                </div>
 
-
-                </md-content>
-            </md-tab>
-            <md-tab label="{{vacation.budget | currency}}">
-                <md-content class="md-padding">
+                <div class="md-padding">
+                    <div class="md-title">Budget</div>
                     <div layout="row">
-                        <div layout="column" flex="15">
-                            <div>Hotel</div>
-                            <div>Activity 1</div>
-                            <div>Activity 2</div>
-                            <div>Activity 3</div>
-                        </div>
-                        <div layout="column">
-                            <div>$50</div>
-                            <div>$4</div>
-                            <div>$23</div>
-                            <div>$5</div>
-                        </div>
+                        <table>
+                            <thead>
+                            <th>Overall</th>
+                            <th>{{vacation.budget}}</th>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Hotel</td>
+                                <td align="right">$34</td>
+                            </tr><tr>
+                                <td>Activity 1</td>
+                                <td align="right">$3</td>
+                            </tr><tr>
+                                <td>Activity 2</td>
+                                <td align="right">$4</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </md-content>
-            </md-tab>
-            <md-tab label="Activities">
-                <md-content class="md-padding">
-                    <div layout="row">
-                        <div flex="33" ng-repeat="activity in vacation.activitiesList">
-                            <md-card>
-                                <img ng-src="activity.images[0]"
-                                     ng-show="(activity.images !== undefined) && (activity.images.length > 0)">
-                                <md-card-content>
-                                    <div class="md-title" flex>{{activity.name}}</div>
-                                    <div class="md-body-2" flex style="float: right;">{{activity.startTime |
-                                        date:'HH:mm'}}
-                                        to
-                                        {{activity.endTime | date:'HH:mm'}}
-                                    </div>
-                                    <div class="md-body-1">{{activity.description}}</div>
-                                </md-card-content>
-                            </md-card>
-                        </div>
-                    </div>
-                </md-content>
-            </md-tab>
-        </md-tabs>
+                </div>
+            </md-content>
+        </div>
 
-    </md-content>
+        <md-content class="md-padding">
+            <div class="md-title">Reviews</div>
+            <div layout="row">
+                <i class="material-icons">star</i>
+                <i class="material-icons">star</i>
+                <i class="material-icons">star</i>
+                <i class="material-icons">star_half</i>
+                <i class="material-icons">star_border</i>
+            </div>
+            <md-list>
+                <md-list-item class="md-3-line" ng-repeat="review in vacation.reviewsList">
+                    <div class="md-list-item-text">
+                        <h3>{{review.title}}</h3>
+                        <h4>by {{review.user.username}}UserName</h4>
+
+                        <p>{{review.description}}</p>
+                    </div>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-content>
+
+        <md-content class="md-padding">
+            <div class="md-title">Activities</div>
+            <div layout="row">
+                <div flex="33" ng-repeat="activity in vacation.activitiesList">
+                    <md-card>
+                        <img ng-src="activity.images[0]"
+                             ng-show="(activity.images !== undefined) && (activity.images.length > 0)">
+                        <md-card-content>
+                            <div class="md-title" flex>{{activity.name}}</div>
+                            <div class="md-body-2" flex style="float: right;">{{activity.startTime |
+                                date:'HH:mm'}}
+                                to
+                                {{activity.endTime | date:'HH:mm'}}
+                            </div>
+                            <div class="md-body-1">{{activity.description}}</div>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </div>
+        </md-content>
+    </div>
+</md-content>
 </div>
 

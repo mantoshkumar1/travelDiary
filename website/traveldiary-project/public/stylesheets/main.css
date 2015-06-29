@@ -47,3 +47,8 @@ figure img {
     background-position: 50% 50%;
     width: 100%;
 }
+
+.stick{
+    position: fixed;
+    top: 0px;
+}

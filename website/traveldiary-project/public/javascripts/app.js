@@ -102,14 +102,9 @@ App.config(['$stateProvider', 'DSProvider','$mdThemingProvider', '$urlRouterProv
     var vacation_details_config = {
         url: '/details',
         views: {
-            'content@main': {
+            'content': {
                 templateUrl: 'assets/templates/vacation_details.html',
-                controller: ['$scope', 'vacations', function ($scope, vacations) {
-                    $scope.vacations = vacations;
-                    $scope.vacation = vacations[0];
-                    $scope.imagePath = "assets/images/1.jpg";
-                    console.log($scope.vacation);
-                }] // Empty controller
+                controller: 'vacationDetailsController'
             }
         }
     };
