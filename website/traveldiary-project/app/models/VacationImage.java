@@ -1,6 +1,8 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 
@@ -16,10 +18,10 @@ public class VacationImage extends Image {
     private Vacation vacation;
 
     @Transient
-    private int vacationId;
-
-    @PostLoad
-    private void onLoad() {
-        vacationId = vacation.getId();
+    @JsonSerialize
+    @JsonProperty("vacationId")
+    public int getVacationId() {
+        return vacation.getId();
     }
+
 }

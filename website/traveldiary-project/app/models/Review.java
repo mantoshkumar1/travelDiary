@@ -1,6 +1,7 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import play.data.validation.Constraints;
 import util.RatingSerializer;
@@ -81,5 +82,12 @@ public abstract class Review {
 
     public void setRating(Rating rating) {
         this.rating = rating;
+    }
+
+    @Transient
+    @JsonSerialize
+    @JsonProperty("userId")
+    public int getUserId() {
+        return user.getId();
     }
 }

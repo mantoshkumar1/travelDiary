@@ -1,6 +1,8 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 
@@ -16,19 +18,9 @@ public class VacationReview extends Review {
     private Vacation vacation;
 
     @Transient
-    private long vacationId;
-
-
-    public Vacation getVacation() {
-        return vacation;
-    }
-
-    public void setVacation(Vacation vacation) {
-        this.vacation = vacation;
-    }
-
-    @PostLoad
-    private void onLoad() {
-        vacationId = vacation.getId();
+    @JsonSerialize
+    @JsonProperty("vacationId")
+    public int getVacationId() {
+        return vacation.getId();
     }
 }

@@ -1,6 +1,8 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
@@ -28,9 +30,6 @@ public class Activity {
     @JoinColumn(name = "locationId")
     private Location location;
 
-    @Transient
-    private int locationId;
-
     @OneToMany
     @JoinColumn(name = "activityId")
     private List<ActivityReview> reviews;
@@ -41,9 +40,6 @@ public class Activity {
     @JoinColumn(name = "creatorId")
     @JsonBackReference
     private User creator;
-
-    @Transient
-    private long creatorId;
 
     @ManyToMany
     @JoinTable(name = "ActivityKeywords",
@@ -135,9 +131,17 @@ public class Activity {
         this.description = description;
     }
 
-    @PostLoad
-    private void onLoad() {
-        creatorId = creator.getId();
-        locationId = location.getId();
+    @Transient
+    @JsonSerialize
+    @JsonProperty("creatorId")
+    public int getCreatorId() {
+        return creator.getId();
+    }
+
+    @Transient
+    @JsonSerialize
+    @JsonProperty("locationId")
+    public int getLocationId() {
+        return location.getId();
     }
 }

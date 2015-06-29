@@ -1,6 +1,8 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 
@@ -16,19 +18,10 @@ public class ActivityReview extends Review {
     private Activity activity;
 
     @Transient
-    private long activityId;
-
-    public Activity getActivity() {
-        return activity;
-    }
-
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
-    @PostLoad
-    private void onLoad() {
-        activityId = activity.getId();
+    @JsonSerialize
+    @JsonProperty("activityId")
+    public int getActivityId() {
+        return activity.getId();
     }
 
 }

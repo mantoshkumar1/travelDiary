@@ -1,6 +1,8 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 
@@ -16,10 +18,9 @@ public class ActivityImage extends Image {
     private Activity activity;
 
     @Transient
-    private int activityId;
-
-    @PostLoad
-    private void onLoad() {
-        activityId = activity.getId();
+    @JsonSerialize
+    @JsonProperty("activityId")
+    public int getActivityId() {
+        return activity.getId();
     }
 }

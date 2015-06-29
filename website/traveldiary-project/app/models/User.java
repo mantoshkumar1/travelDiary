@@ -3,6 +3,8 @@ package models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import play.data.validation.Constraints;
 import play.db.jpa.JPA;
 
@@ -36,29 +38,23 @@ public class User {
     @Constraints.Required
     private String passwordHash;
 
-    @OneToMany(mappedBy = "creator")
-    //@JoinColumn(name = "creatorId")
+    @OneToMany
+    @JoinColumn(name = "creatorId")
     @JsonManagedReference
     private List<Activity> createdActivites;
 
-    @OneToMany(mappedBy = "creator")
-    //@JoinColumn(name = "creatorId")
-    @JsonBackReference
+    @OneToMany
+    @JoinColumn(name = "creatorId")
+    @JsonManagedReference
     private List<Vacation> createdVacations;
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "locationId")
     private Location location;
 
-    @Transient
-    private long locationId;
-
     @ManyToOne
     @JoinColumn(name = "roleId")
     private Role role;
-
-    @Transient
-    private long roleId;
 
     public static User findById(long id) {
         return JPA.em().find(User.class, id);
@@ -152,9 +148,17 @@ public class User {
         this.createdVacations = createdVacations;
     }
 
-    @PostLoad
-    private void onLoad() {
-        roleId = role.getId();
-        locationId = location.getId();
+    @Transient
+    @JsonSerialize
+    @JsonProperty("roleId")
+    public int getRoleId() {
+        return role.getId();
+    }
+
+    @Transient
+    @JsonSerialize
+    @JsonProperty("locationId")
+    public int locationId() {
+        return location.getId();
     }
 }

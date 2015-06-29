@@ -72,28 +72,27 @@ App.factory('User', ['DS', function (DS) {
         {
             name: 'user',
             relations: {
-                hasOne: [{
+                belongsTo: {
                     role: {
                         localField: "role",
-                        foreignKey: "roleId"
+                        localKey: "roleId"
                     }
-                }, {
+                ,
                     location: {
                         localField: "location",
-                        foreignKey: "locationId"
+                        localKey: "locationId"
                     }
-                }],
-                hasMany: [{
+                },
+                hasMany: {
                     vacation: {
                         localField: "createdVacations",
                         foreignKey: "creatorId"
-                    }
-                }, {
+                    },
                     activity: {
                         localField: "createdActivities",
                         foreignKey: "creatorId"
                     }
-                }]
+                }
             }
         });
 }]);
@@ -102,28 +101,26 @@ App.factory('Vacation', ['DS', function (DS) {
     return DS.defineResource({
         name: 'vacation',
         relations: {
-            hasOne: [{
+            belongsTo: {
                 user: {
                     localField: "creator",
-                    foreignKey: "creatorId"
-                }
-            }, {
+                    localKey: "creatorId"
+                },
                 location: {
                     localField: "location",
-                    foreignKey: "locationId"
+                    localKey: "locationId"
                 }
-            }],
-            hasMany: [{
+            },
+            hasMany: {
                 vacationreview: {
                     localField: "reviews",
                     foreignKey: "vacationId"
-                }
-            }, {
-                images: {
+                },
+                vacationimage: {
                     localField: "images",
                     foreignKey: "vacationId"
                 }
-            }]
+            }
         },
         computed: {
             rating: ['reviews', function (reviews) {
@@ -147,23 +144,27 @@ App.factory('Activity', ['DS', function (DS) {
     return DS.defineResource({
         name: 'activity',
         relations: {
-            hasOne: {
+            belongsTo: {
                 user: {
                     localField: "creator",
-                    foreignKey: "creatorId"
+                    localKey: "creatorId"
+                },
+                location: {
+                    localField: "location",
+                    localKey: "locationId"
                 }
             },
-            hasMany: [{
+            hasMany: {
                 activityreview: {
                     localField: "reviews",
                     foreignKey: "activityId"
                 }
-            }, {
-                images: {
+            ,
+                activityimage: {
                     localField: "images",
                     foreignKey: "vacationId"
                 }
-            }]
+            }
         },
         computed: {
             rating: ['reviews', function (reviews) {
@@ -262,33 +263,11 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
     var vacation_details_config = {
         url: '/details/{id}',
         resolve: {
-          vacation: ['$stateParams', 'Vacation', 'User', function($stateParams, Vacation, User) {
-              console.log("resolving vacation "+$stateParams.id);
-              var vac;
-              return Vacation.find($stateParams.id).then(function(vacation){
-                  vac = vacation;
-                  console.log("Vacation");
-                  console.log(vac);
-                  return vac;
-              /*}).then(function(vacation){
-                  console.log("load RElations of ");
-                  console.log(vacation);
-                  return Vacation.loadRelations(vacation, ['user']);*/
-              });
-          }],
-            user:['$stateParams', 'Vacation', 'User', function($stateParams, Vacation, User) {
-                console.log("resolving vacation "+$stateParams.id);
-                var vac;
-                return User.find(2).then(function(user){
-                    vac = user;
-                    console.log("User");
-                    console.log(vac);
-                    return vac;
-                    }).then(function(user){
-                     console.log("load RElations of user ");
-                     console.log(user);
-                     return User.loadRelations(user, ['vacation']);
-                });
+            //vacationWithoutUser: [ '$stateParams', 'Vacation', function ($stateParams,Vacation) {
+            //    return Vacation.find($stateParams.id);
+            //}],
+            vacation: ['$stateParams', 'Vacation', function ($stateParams, Vacation) {
+                return Vacation.find($stateParams.id);
             }]
         },
         views: {

@@ -2,6 +2,8 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
@@ -23,11 +25,8 @@ public class Vacation {
 
     @ManyToOne
     @JoinColumn(name = "creatorId")
-    @JsonManagedReference
+    @JsonBackReference
     private User creator;
-
-    @Transient
-    private int creatorId;
 
     @ManyToMany
     @JoinTable(name = "VacationActivities",
@@ -45,9 +44,6 @@ public class Vacation {
     @ManyToOne
     @JoinColumn(name = "locationId")
     private Location location;
-
-    @Transient
-    private int locationId;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
@@ -161,9 +157,17 @@ public class Vacation {
         this.reviews = reviewsList;
     }
 
-    @PostLoad
-    private void onLoad() {
-        creatorId = creator.getId();
-        locationId = location.getId();
+    @Transient
+    @JsonSerialize
+    @JsonProperty("creatorId")
+    public int getCreatorId() {
+        return creator.getId();
+    }
+
+    @Transient
+    @JsonSerialize
+    @JsonProperty("locationId")
+    public int getLocationId() {
+        return location.getId();
     }
 }
