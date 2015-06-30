@@ -5,10 +5,6 @@
     App.controller('vacationDetailsController', ['$scope', 'vacation','Vacation', function ($scope, vacation,Vacation) {
         $scope.vacation = vacation;
 
-        Vacation.loadRelations($scope.vacation,['creator','location']).then(function (vacation) {
-            $scope.vacation = vacation;
-        });
-
         imagePath = "assets/images/1.jpg";
         imagePath2 = "assets/images/2.jpg";
         $scope.images = [imagePath, imagePath2];

@@ -264,11 +264,11 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
     var vacation_details_config = {
         url: '/details/{id}',
         resolve: {
-            //vacationWithoutUser: [ '$stateParams', 'Vacation', function ($stateParams,Vacation) {
-            //    return Vacation.find($stateParams.id);
-            //}],
-            vacation: ['$stateParams', 'Vacation', function ($stateParams, Vacation) {
+            vacationWithoutUser: [ '$stateParams', 'Vacation', function ($stateParams,Vacation) {
                 return Vacation.find($stateParams.id);
+            }],
+            vacation: ['vacationWithoutUser', 'Vacation', function (vacationWithoutUser, Vacation) {
+                return Vacation.loadRelations(vacationWithoutUser,['creator']);
             }]
         },
         views: {
