@@ -44,7 +44,7 @@ POST        /api/user                                controllers.RegisterControl
 #POST        /api/vacationimage                      controllers.RegisterController.createVacationImage()
 #POST        /api/activityimage                      controllers.RegisterController.createActivityImage()
 
-# Basic ap update functions for single items
+# Basic api update functions for single items
 #PUT         /api/vacation/:id                       controllers.RegisterController.updateVacation(id: Integer)
 #PUT         /api/activity/:id                       controllers.RegisterController.updateActivity(id: Integer)
 #PUT         /api/keyword/:id                        controllers.RegisterController.updateKeyword(id: Integer)

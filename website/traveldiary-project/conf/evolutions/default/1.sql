@@ -121,14 +121,14 @@ CREATE TABLE ActivityImage (
 );
 
 # --- !Downs
+DROP TABLE ActivityImage;
+DROP TABLE VacationImage;
 DROP TABLE VacationActivities;
 DROP TABLE VacationReview;
 DROP TABLE VacationKeywords;
-DROP TABLE VacationImage;
 DROP TABLE Vacation;
 DROP TABLE ActivityReview;
-DROP TABLE ActivityKeywords;
-DROP TABLE ActivityImage;
+DROP TABLE ActivityKeywords;;
 DROP TABLE Activity;
 DROP TABLE User;
 DROP TABLE Role;

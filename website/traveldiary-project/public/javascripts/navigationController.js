@@ -6,8 +6,8 @@
 var App = angular.module("travelDiary");
 
 App.controller('navigationController',
-    ['Util', 'KeywordService', '$scope', '$state', '$log', 'keywords', 'selectedKeywords',
-        function (Util, KeywordService, $scope, $state, $log, injectedKeywords, injectedSelectedKeywords) {
+    ['Util', 'SearchService', '$scope', '$state', '$log', 'keywords', 'selectedKeywords', 'maxBudget',
+        function (Util, SearchService, $scope, $state, $log, injectedKeywords, injectedSelectedKeywords,maxBudget) {
 
             // Use alias to avoid scope clashes
             var thisCtrl = this;
@@ -16,13 +16,17 @@ App.controller('navigationController',
             var keywords = injectedKeywords;
 
             // Private, but shared, keyword service.
-            var keywordService = KeywordService;
+            var searchService = SearchService;
 
-            keywordService.setSelectedKeyWords(injectedSelectedKeywords);
-            keywordService.setSuggestedKeywords(keywords);
+            searchService.budgetContainer.currentBudget = maxBudget;
+            thisCtrl.budgetContainer = SearchService.budgetContainer;
+            thisCtrl.maxBudget = maxBudget;
 
-            thisCtrl.selectedKeywords = keywordService.selectedKeywords;
-            thisCtrl.suggestedKeywords = keywordService.suggestedKeywords;
+            searchService.setSelectedKeyWords(injectedSelectedKeywords);
+            searchService.setSuggestedKeywords(keywords);
+
+            thisCtrl.selectedKeywords = searchService.selectedKeywords;
+            thisCtrl.suggestedKeywords = searchService.suggestedKeywords;
 
             function loadResultPage() {
                 console.log('Loading page with keywords');
@@ -50,8 +54,7 @@ App.controller('navigationController',
             thisCtrl.noCache = true;
             thisCtrl.autofocus = true;
             thisCtrl.autoselect = true;
-            thisCtrl.budget = 125;
-            thisCtrl.showSuggestions = true;
+            thisCtrl.showSuggestions = false;
             thisCtrl.searchText = undefined;
             thisCtrl.selectedKeyword = undefined;
 
@@ -60,7 +63,7 @@ App.controller('navigationController',
             }
 
             thisCtrl.addKeyword = function (keyword) {
-                keywordService.addKeywordToSelection(keyword);
+                searchService.addKeywordToSelection(keyword);
 
                 thisCtrl.searchText = '';
 
@@ -68,7 +71,7 @@ App.controller('navigationController',
             };
 
             thisCtrl.removeKeyword = function (keyword) {
-                keywordService.removeKeywordFromSelection(keyword);
+                searchService.removeKeywordFromSelection(keyword);
 
                 loadResultPage();
             };
@@ -98,18 +101,23 @@ App.controller('navigationController',
     ]);
 
 App.controller('navigationControllerWithoutSelection',
-    ['keywords', '$controller', '$scope',
-        function (keywords, $controller, $scope) {
-            $controller('navigationController as navCtrl', {$scope: $scope, keywords: keywords, selectedKeywords: []});
-        }]);
-
-App.controller('navigationControllerWithSelection',
-    ['keywords', '$controller', '$scope', 'selectedKeywords',
-        function (keywords, $controller, $scope, selectedKeywords) {
+    ['keywords', '$controller', '$scope','maxBudget',
+        function (keywords, $controller, $scope, maxBudget) {
             $controller('navigationController as navCtrl', {
                 $scope: $scope,
                 keywords: keywords,
-                selectedKeywords: selectedKeywords
+                selectedKeywords: [],
+                maxBudget: maxBudget});
+        }]);
+
+App.controller('navigationControllerWithSelection',
+    ['keywords', '$controller', '$scope', 'selectedKeywords', 'maxBudget',
+        function (keywords, $controller, $scope, selectedKeywords, maxBudget) {
+            $controller('navigationController as navCtrl', {
+                $scope: $scope,
+                keywords: keywords,
+                selectedKeywords: selectedKeywords,
+                maxBudget: maxBudget
             });
         }]);
 }());

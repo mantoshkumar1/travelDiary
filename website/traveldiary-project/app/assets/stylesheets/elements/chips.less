@@ -1,11 +1,11 @@
 @color-not-selected: lightgray;
-@color-selected: darken(@color-not-selected, 20%);
+@color-selected: darken(@color-not-selected, 10%);
 
 .keyword-chip {
   border-radius: 20px;
   background-color: @color-not-selected;
   padding: 0px 0px 0px 16px;
-  height: 15px;
+  height: 20px;
   margin: 4px;
 
   &:hover {
@@ -14,6 +14,7 @@
 }
 
 .keyword-chip-button {
+  position: relative;
   height: inherit;
   width: 5px;
 }

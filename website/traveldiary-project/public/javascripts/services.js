@@ -21,16 +21,29 @@ App.service('Util', function () {
             );
 
             return result;
-        })
+        }),
+        getMaxBudget: ( function (vacations) {
+            var max = 0.0;
+
+            vacations.forEach(function (vacation) {
+                if (vacation.budget > max) {
+                    max = vacation.budget;
+                }
+            })
+
+            return max;
+        }
+    )
     }
 });
 
-App.service('KeywordService', function () {
+App.service('SearchService', function () {
 
     var thisService = this;
 
     thisService.selectedKeywords = [];
     thisService.suggestedKeywords = [];
+    thisService.budgetContainer = { currentBudget: 0.0 };
 
     thisService.filterKeywords = function (keywordsToFilter, filterList) {
 
@@ -136,7 +149,6 @@ App.service('KeywordService', function () {
             $log.error('Can\'t remove keyword ' + removedKeyword);
         }
     };
-
 });
 
 }());

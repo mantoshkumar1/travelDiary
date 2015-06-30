@@ -5,27 +5,29 @@
 
 var App = angular.module("travelDiary");
 
-App.controller('vacationSearchController', ['$scope', '$state', 'KeywordService', 'vacations', function ($scope, $state, KeywordService, vacations) {
+App.controller('vacationSearchController', ['$scope', '$state', 'SearchService', 'vacations','SearchService', function ($scope, $state, SearchService, vacations, SearchService) {
 
     var thisCtrl = this;
 
-    var keywordService = KeywordService;
+    var searchService = SearchService;
 
-    var selectedKeywords = keywordService.selectedKeywords;
+    thisCtrl.budgetContainer = searchService.budgetContainer;
+
+    var selectedKeywords = searchService.selectedKeywords;
 
     // Add vacations to scope for displaying the content in search_vacation.html
     thisCtrl.vacations = vacations;
 
     thisCtrl.hasAllSelectedKeywords = function (vacation) {
 
-        var matches = keywordService.findMatchingKeywords(selectedKeywords, vacation.keywords);
+        var matches = searchService.findMatchingKeywords(selectedKeywords, vacation.keywords);
 
         // Take all selected keywords that are in the vacation keywords
         var actualMatches = matches.length;
 
         var neededMatches = selectedKeywords.length;
 
-        return actualMatches === neededMatches;
+        return actualMatches === neededMatches && vacation.budget <= searchService.budgetContainer.currentBudget;
     };
 
     thisCtrl.loadVacation = function (vacation) {

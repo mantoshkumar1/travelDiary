@@ -196,6 +196,12 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
         resolve: {
             keywords: ['Keyword', function (Keyword) {
                 return Keyword.findAll();
+            }],
+            vacations: ['Vacation', function (Vacation) {
+                return Vacation.findAll();
+            }],
+            maxBudget: ['vacations','Util', function (vacations, Util) {
+                return Util.getMaxBudget(vacations);
             }]
         },
         views: {
@@ -220,11 +226,6 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
 
     var vacation_config = {
         url: '/vacation',
-        resolve: {
-            vacations: ['Vacation', function (Vacation) {
-                return Vacation.findAll();
-            }]
-        },
         views: {
             'content@': {
                 templateUrl: 'assets/templates/search_vacation.html',

@@ -1,12 +1,12 @@
 <md-content layout-padding>
     <md-grid-list md-cols="4" md-cols-md="2" md-cols-sm="1"
-                  md-gutter="8px" md-gutter-gt-sm="4px"
+                  md-gutter="10px"
                   md-row-height="4:3">
-        <md-grid-tile md-ink-ripple
-                      data-ng-repeat="vacation in vacations | filter:tdFilter"
+        <md-grid-tile class="grow" md-ink-ripple
+                      data-ng-repeat="vacation in vacations | filter:tdFilter | orderBy:'-rating'"
                       md-rowspan="1"
                       md-colspan="1"
-                      ng-mouseenter="hover = true"
+                      ng-mouseenter="hover=true"
                       ng-mouseleave="hover=false"
                       ng-click="clickAction(vacation)">
             <vacation-grid-tile vacation-src="vacation"></vacation-grid-tile>

@@ -15,7 +15,7 @@
                         </div>
                         <div>
                             <md-autocomplete id="search"
-                                             class="md-light search-bar-fix"
+                                             class="md-light"
                                              md-search-text="navCtrl.searchText"
                                              md-items="keyword in navCtrl.getFilteredKeywords(navCtrl.searchText)"
                                              ng-disabled="navCtrl.isDisabled"
@@ -54,7 +54,6 @@
                 </div>
             </div>
         </md-toolbar>
-
         <div ng-show="navCtrl.showSuggestions" class="slide-in-out-vertically">
             <md-tabs md-border-bottom md-center-tabs md-swipe-content>
                 <md-tab label="Keywords">
@@ -75,15 +74,17 @@
                     <div layout="row" layout-align="center center">
                         <div flex="50" flex-sm="90" flex-md="70" layout="row" layout-align="center center">
                             <div flex>
-                                <md-slider flex min="0"
-                                           max="1000"
-                                           ng-model="navCtrl.budget"
-                                           aria-label="budget"></md-slider>
+                                <md-slider flex
+                                           min="0"
+                                           max="{{navCtrl.maxBudget}}"
+                                           ng-model="navCtrl.budgetContainer.currentBudget"
+                                           aria-label="budget">
+                                </md-slider>
                             </div>
                             <div flex="20" layout layout-align="center center">
                                 <md-input-container>
                                     <label>Budget in €</label>
-                                    <input type="number" ng-model="navCtrl.budget">
+                                    <input type="number" ng-model="navCtrl.budgetContainer.currentBudget">
                                 </md-input-container>
                             </div>
                         </div>

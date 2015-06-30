@@ -74,7 +74,7 @@ App.directive('keywordChip', function () {
     return {
         restrict: 'E',
         require: '^keywordSrc',
-        templateUrl: 'assets/templates/chip_template.html',
+        templateUrl: 'assets/templates/elements/chip_template.html',
         scope: {
             keyword: "=keywordSrc",
             onClick: "=tdOnClick"
@@ -106,7 +106,7 @@ App.directive('vacationGridTile', function () {
     return {
         restrict: 'E',
         require: '^vacationSrc',
-        templateUrl: 'assets/templates/vacation_grid_tile.html',
+        templateUrl: 'assets/templates/elements/vacation_grid_tile.html',
         scope: {
             vacation: "=vacationSrc"
         }
@@ -122,7 +122,7 @@ App.directive('vacationGridList', function () {
     return {
         restrict: 'E',
         require: ["^vacationsSrc"],
-        templateUrl: 'assets/templates/vacation_grid_list.html',
+        templateUrl: 'assets/templates/elements/vacation_grid_list.html',
         scope: {
             vacations: "=vacationsSrc",
             clickAction: "=tdClick",
@@ -140,7 +140,7 @@ App.directive('activityGridTile', function () {
     return {
         restrict: 'E',
         require: "^activitySrc",
-        templateUrl: 'assets/templates/activity_grid_tile.html',
+        templateUrl: 'assets/templates/elements/activity_grid_tile.html',
         scope: {
             activity: "=activitySrc"
         }
@@ -157,7 +157,7 @@ App.directive('activityGridList', function () {
     return {
         restrict: 'E',
         require: "^activitiesSrc",
-        templateUrl: 'assets/templates/activity_grid_list.html',
+        templateUrl: 'assets/templates/elements/activity_grid_list.html',
         scope: {
             activities: "=activitiesSrc",
             clickAction: "=tdClick",
@@ -219,7 +219,11 @@ App.directive('searchBarFix', function () {
             compile: function compile(tElement, tAttrs, transclude) {
                 return {
                     post: function compile(tElement, tAttrs, transclude) {
-                        var searchBar = $("#search").find("md-autocomplete-wrap").find("input");
+                        var searchInput = angular.element('[input]');
+                        var controller = searchInput.controller();
+
+                        console.log(searchInput);
+
                     }
                 }
             }

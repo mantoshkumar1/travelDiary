@@ -1,11 +1,15 @@
-md-grid-tile.shadows {
-  box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.5);
+@header-fotter-background: rgba(0, 0, 0, 0.4);
+
+md-grid-tile {
+  figure img {
+    height: 100%;
+    width: 100%;
+  }
+  md-grid-tile-footer {
+    background: @header-fotter-background !important;
+  }
+  md-grid-tile-header {
+    background: @header-fotter-background !important;
+  }
 }
 
-md-grid-tile-footer {
-    background: rgba(0, 0, 0, 0.5);
-}
-
-md-grid-tile-header {
-    background: rgba(0, 0, 0, 0.5);
-}
