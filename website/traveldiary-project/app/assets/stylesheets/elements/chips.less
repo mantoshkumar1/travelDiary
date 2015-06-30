@@ -1,20 +1,23 @@
 @color-not-selected: lightgray;
 @color-selected: darken(@color-not-selected, 10%);
 
+@button-size: 21px;
+
 .keyword-chip {
   border-radius: 20px;
   background-color: @color-not-selected;
-  padding: 0px 0px 0px 16px;
-  height: 20px;
+  padding: 2px 2px 2px 16px;
+  height: auto;
   margin: 4px;
 
   &:hover {
     background-color: @color-selected;
   }
-}
-
-.keyword-chip-button {
-  position: relative;
-  height: inherit;
-  width: 5px;
+  .md-button.md-icon-button {
+    line-height: @button-size;
+    height: @button-size;
+    width: @button-size;
+    min-width: @button-size;
+    padding-right: 16px;
+  }
 }

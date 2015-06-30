@@ -48,14 +48,30 @@ App.factory('Location', ['DS', function (DS) {
 App.factory('ActivityReview', ['DS', function (DS) {
     return DS.defineResource(
         {
-            name: 'activityreview'
+            name: 'activityreview',
+            relations: {
+                belongsTo: {
+                    user: {
+                        localField: "activity",
+                        localKey: "userId"
+                    }
+                }
+            }
         });
 }]);
 
 App.factory('VacationReview', ['DS', function (DS) {
     return DS.defineResource(
         {
-            name: 'vacationreview'
+            name: 'vacationreview',
+            relations: {
+                belongsTo: {
+                    user: {
+                        localField: "activity",
+                        localKey: "userId"
+                    }
+                }
+            }
         });
 }]);
 
@@ -125,12 +141,11 @@ App.factory('Vacation', ['DS', function (DS) {
         computed: {
             rating: ['reviews', function (reviews) {
                 var rating = 0.0;
-
-                reviews.forEach(function (review) {
-                    rating += review.rating.value;
-                });
-
                 if (reviews.length > 0) {
+                    reviews.forEach(function (review) {
+                        rating += review.rating.value;
+                    });
+
                     rating = rating / reviews.length;
                 }
 
@@ -170,11 +185,11 @@ App.factory('Activity', ['DS', function (DS) {
             rating: ['reviews', function (reviews) {
                 var rating = 0.0;
 
-                reviews.forEach(function (review) {
-                    rating += review.rating.value;
-                });
-
                 if (reviews.length > 0) {
+                    reviews.forEach(function (review) {
+                        rating += review.rating.value;
+                    });
+
                     rating = rating / reviews.length;
                 }
 
@@ -218,8 +233,7 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
         views: {
             'content@': {
                 templateUrl: 'assets/templates/index.html',
-                controller: (function () {
-                })
+                controller: (function () {})
             }
         }
     };
@@ -240,8 +254,6 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
         resolve: {
             selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
                 var keywordsWithoutId = $stateParams.keywordStrings.split("+");
-
-                console.log(keywordsWithoutId);
 
                 return Keyword.filter({
                     where: {
