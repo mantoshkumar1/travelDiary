@@ -4,19 +4,19 @@
     </h1>
 </md-toolbar>
 
-<form class="form-horizontal" name="loginForm" ng-controller="loginController" ng-submit="login(credentials)" novalidate>>
+<form class="form-horizontal" name="userForm">
 
     <div class="form-group">
         <md-input-container flex="">
             <label for="email" class="col-xs-2 control-label">Email</label>
-            <input class="form-control" id="email" required="" ng-model="credentials.email" type="email">
+            <input class="form-control" id="email" required="" ng-model="user.email" type="email">
         </md-input-container>
     </div>
 
     <div class="form-group">
         <md-input-container flex="">
             <label for="passwordHash" class="col-xs-2 control-label">Password</label>
-            <input class="form-control" id="passwordHash" required="" ng-model="credentials.passwordHash" type="password">
+            <input class="form-control" id="passwordHash" required="" ng-model="user.passwordHash" type="password">
         </md-input-container>
     </div>
 
@@ -24,7 +24,7 @@
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-xs-10">
-            <md-button type="submit" class="md-raised" md-ripple-size>
+            <md-button type="submit" class="md-raised" md-ripple-size ng-click="login()">
                 <span class="glyphicon glyphicon-plus"></span> Login
             </md-button>
             <a href="#/" class="btn"> Cancel</a>
