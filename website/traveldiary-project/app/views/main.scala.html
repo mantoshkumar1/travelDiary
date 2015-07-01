@@ -1,7 +1,7 @@
 @()
 
 <!DOCTYPE html>
-<html>
+<html ng-app="travelDiary">
     <head>
         <title>Travel Diary</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +14,7 @@
         <link rel='custom stylesheet' href='@routes.Assets.at("stylesheets/main.css")'>
     </head>
 
-    <body ng-app="travelDiary">
+    <body ng-controller="SessionController">
         <div ui-view="navigation"></div>
         <div ui-view="content"></div>
 
@@ -49,6 +49,7 @@
         <script type="text/javascript" src="@routes.Assets.at("javascripts/vacationDetailsController.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/directives.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/login.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/sessionController.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/starRating.js")"></script>
     </body>
 </html>

@@ -39,7 +39,7 @@ POST        /api/vacation                           controllers.VacationControll
 #POST        /api/keyword                            controllers.RegisterController.createKeyword()
 POST        /api/location                           controllers.RegisterController.createLocation()
 POST        /api/user                               controllers.RegisterController.createUser()
-POST        /api/login                              controllers.LoginController.login(email: String, passwordHash: String)
+POST        /api/login                              controllers.LoginController.login()
 POST        /api/logout                               controllers.LoginController.logout()
 #POST        /api/vacationreview                     controllers.RegisterController.createVacationReview()
 #POST        /api/activityreview                     controllers.RegisterController.createActivityReview()

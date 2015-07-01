@@ -3,6 +3,7 @@ package dao;
 import models.*;
 import play.db.jpa.JPA;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
@@ -201,5 +202,17 @@ public class TravelDiaryDAO {
 
     public static ActivityImage getActivityImage(Integer id) {
         return JPA.em().find(ActivityImage.class, id);
+    }
+
+    public static User getUserByMail(String email) {
+        TypedQuery<User> query = JPA.em().createQuery("SELECT u FROM User u WHERE u.email=:useremail",User.class);
+
+        query.setParameter("useremail", email);
+
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 }
