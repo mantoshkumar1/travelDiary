@@ -194,25 +194,6 @@ App.directive('fixedNav', function ($window) {
     };
 });
 
-App.directive('scrollOnClick', function() {
-    return {
-        link: function(scope, $elm, attrs) {
-            console.log("scroll");
-            var idToScroll = attrs.scrollTo;
-            console.log("id to scroll"+idToScroll);
-            $elm.on('click', function() {
-                var $target;
-                if (idToScroll) {
-                    $target = $(idToScroll);
-                } else {
-                    $target = $elm;
-                }
-                $("body").animate({scrollTop: $target.offset().top}, "slow");
-            });
-        }
-    }
-});
-
 App.directive('searchBarFix', function () {
         return {
             restrict: 'C',

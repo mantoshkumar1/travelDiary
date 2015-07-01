@@ -1,46 +1,72 @@
 <md-content>
-    <!--div class="cover-img hide-sm" layout="row" style="height: 402px;"
-         ng-style="{'background-image': 'url(' + imagePath + ')'}">
-    </div-->
     <md-divider></md-divider>
+    <!--md-content style="z-index: 1000;"-->
+    <span id="sticky" style="position: fixed;"></span>
 
-    <md-content>
-        <span id="sticky" style="position: fixed;"></span>
-        <md-toolbar id="sub-nav-toolbar" fixed-nav>
-            <div class="md-toolbar-tools" class="md-whiteframe-z1"
-                 style="width: 80%; margin-left: auto; margin-right: auto;">
-                <md-button> Overview</md-button>
-                <md-button> Activities</md-button>
-                <md-button> Keywords</md-button>
-                <md-button> Reviews</md-button>
-                <span flex></span>
-                <md-button aria-label="Copy" ng-click="createVacation()">
+    <div fixed-nav>
+        <div layout="row" style="width: 80%; margin-left: auto; margin-right: auto;">
+            <div flex="66">
+                <md-tabs>
+                    <md-tab><span ng-click="scrollToElement('overview')">Overview</span></md-tab>
+                    <md-tab><span ng-click="scrollToElement('keywords')">Keywords</span></md-tab>
+                    <md-tab><span ng-click="scrollToElement('activities')">Activities</span></md-tab>
+                    <md-tab><span ng-click="scrollToElement('reviews')">Reviews</span></md-tab>
+                </md-tabs>
+            </div>
+            <div layout="row" layout-align="end center" flex>
+                <md-button aria-label="Copy" ng-click="createVacation()"
+                           ng-if="!creator">
                     <md-icon class="material-icons">favorite_border</md-icon>
                     Copy
                 </md-button>
-                <md-button aria-label="Review">
+                <md-button aria-label="Review" ng-if="!creator">
                     <md-icon class="material-icons">star_border</md-icon>
                     Review
                 </md-button>
+                <md-button aria-label="Review" ng-if="creator">
+                    <md-icon class="material-icons">share</md-icon>
+                    Share
+                </md-button>
+                <md-button aria-label="Review" ng-if="creator" ng-click="deleteVacation()">
+                    <md-icon class="material-icons">delete</md-icon>
+                    Delete
+                </md-button>
             </div>
-        </md-toolbar>
-    </md-content>
+        </div>
+    </div>
+    <!--/md-content-->
 
     <div class="md-whiteframe-z1" style="width: 80%; margin-left: auto; margin-right: auto;">
         <div layout-margin layout-padding>
             <div layout="row">
                 <div layout="column" layout-align="start start" flex>
-                    <div class="md-headline">{{vacation.name}}</div>
+                    <div class="md-headline">
+                        <div ng-show="!creator">
+                            {{vacation.name}}
+                        </div>
+                        <md-input-container class="inline-input" ng-show="creator">
+                            <input ng-model="vacation.name">
+                        </md-input-container>
+                    </div>
                     <div class="md-subhead">by {{vacation.creator.username}}</div>
-                    <div layout="row">
+                    <div layout="row" style="color: #90caf9;">
                         <i class="material-icons" ng-repeat="n in [] | range:vacation.rating">star</i>
                         <i class="material-icons" ng-repeat="n in [] | range:(5-vacation.rating)">star_border</i>
                     </div>
                 </div>
                 <div layout="row" layout-align="end start" flex>
-                    <div class="md-headline">{{vacation.startDate | date:'dd.MM.yyyy'}} to
-                        {{vacation.endDate | date:'dd.MM.yyyy'}}
-                    </div>
+                    <div class="md-headline">
+                        <div ng-show="!creator">
+                            {{vacation.startDate | date:'dd.MM.yyyy'}} to
+                            {{vacation.endDate | date:'dd.MM.yyyy'}}
+                        </div>
+                        <md-input-container class="inline-input" ng-show="creator">
+                            <input ng-model="vacation.startDate">
+                        </md-input-container>
+                        <md-input-container class="inline-input" ng-show="creator">
+                            <input ng-model="vacation.endDate">
+                        </md-input-container>
+
                 </div>
             </div>
 
@@ -48,6 +74,7 @@
         <div id="overview" layout="row">
 
             <md-content class="md-padding" flex>
+                <div class="md-title">Overview</div>
                 <!--div style="height: 305px">
                     <carousel interval="5000">
                         <slide ng-repeat="image in images">
@@ -79,10 +106,12 @@
                             <tr>
                                 <td>Hotel</td>
                                 <td align="right">$34</td>
-                            </tr><tr>
+                            </tr>
+                            <tr>
                                 <td>Activity 1</td>
                                 <td align="right">$3</td>
-                            </tr><tr>
+                            </tr>
+                            <tr>
                                 <td>Activity 2</td>
                                 <td align="right">$4</td>
                             </tr>
@@ -93,8 +122,9 @@
             </md-content>
         </div>
 
-        <md-content class="md-padding">
-            <div class="md-title">Reviews</div><div> ({{vacation.reviews.length}})</div>
+        <md-content id="reviews" class="md-padding">
+            <div class="md-title">Reviews</div>
+            <div> ({{vacation.reviews.length}})</div>
 
             <md-list>
                 <md-list-item class="md-3-line" ng-repeat="review in vacation.reviews">
@@ -109,7 +139,7 @@
             </md-list>
         </md-content>
 
-        <md-content class="md-padding">
+        <md-content id="activities" class="md-padding">
             <div class="md-title">Activities</div>
             <div layout="row">
                 <div flex="33" ng-repeat="activity in vacation.activities">

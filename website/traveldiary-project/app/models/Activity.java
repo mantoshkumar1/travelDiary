@@ -1,6 +1,7 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import play.data.validation.Constraints;
@@ -14,6 +15,7 @@ import java.util.List;
  */
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Activity {
 
     @Id
@@ -33,6 +35,7 @@ public class Activity {
     @OneToMany
     @JoinColumn(name = "activityId")
     private List<ActivityReview> reviews;
+
     private Date startTime;
     private Date endTime;
 

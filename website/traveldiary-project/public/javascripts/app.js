@@ -141,7 +141,7 @@ App.factory('Vacation', ['DS', function (DS) {
         computed: {
             rating: ['reviews', function (reviews) {
                 var rating = 0.0;
-                if (reviews.length > 0) {
+                if (reviews != undefined && reviews.length > 0) {
                     reviews.forEach(function (review) {
                         rating += review.rating.value;
                     });
