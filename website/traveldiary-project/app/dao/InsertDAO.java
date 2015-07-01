@@ -2,6 +2,7 @@ package dao;
 
 import models.Location;
 import models.User;
+import models.Vacation;
 import play.db.jpa.JPA;
 
 /**
@@ -15,6 +16,10 @@ public class InsertDAO {
 
     public static void insertUser(User newUser) {
         JPA.em().persist(newUser);
+    }
+
+    public static void insertVacation(Vacation newVacation) {
+        JPA.em().persist(newVacation);
     }
 
 }

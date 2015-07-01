@@ -34,7 +34,7 @@ GET         /api/activitykeyword                    controllers.JoinTableControl
 GET         /api/vacationkeyword/:aId/:kId          controllers.JoinTableController.getVacationKeywordEntry(aId: Integer, kId: Integer)
 
 # Basic api POST functions for js-data
-#POST        /api/vacation                           controllers.RegisterController.createVaction()
+POST        /api/vacation                           controllers.VacationController.createVacation()
 #POST        /api/activity                           controllers.RegisterController.createActivity()
 #POST        /api/keyword                            controllers.RegisterController.createKeyword()
 POST        /api/location                            controllers.RegisterController.createLocation()
