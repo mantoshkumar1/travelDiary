@@ -1,6 +1,5 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -146,6 +145,10 @@ public class User {
 
     public void setCreatedVacations(List<Vacation> createdVacations) {
         this.createdVacations = createdVacations;
+    }
+
+    public static User findByEmail(String email){
+        return (User) JPA.em().createNativeQuery("SELECT * FROM User WHERE email='"+email+"'",User.class).getSingleResult();
     }
 
     @Transient
