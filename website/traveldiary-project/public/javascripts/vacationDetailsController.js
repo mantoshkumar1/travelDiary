@@ -2,7 +2,8 @@
 
     var App = angular.module("travelDiary");
 
-    App.controller('vacationDetailsController', ['$scope', '$location', 'anchorSmoothScroll', 'vacation', 'Vacation', function ($scope, $location, anchorSmoothScroll, vacation, Vacation) {
+    App.controller('vacationDetailsController', ['$scope', '$location', 'anchorSmoothScroll', 'vacation', 'Vacation', 'VacationReview',
+        function ($scope, $location, anchorSmoothScroll, vacation, Vacation, VacationReview) {
         $scope.vacation = vacation;
         $scope.creator = false;
 
@@ -51,6 +52,21 @@
             anchorSmoothScroll.scrollTo(eID);
 
         };
+
+        $scope.addReview = function (vacation) {
+            var newReview = VacationReview.createInstance();
+
+            newReview.title = "SomeTitle";
+            newReview.description = "SomeDescription2";
+            newReview.userId = 2;
+            newReview.vacationId = vacation.id;
+            newReview.rating = 3;
+            newReview.date = Date.now();
+
+            newReview.DSCreate().then(function (review) {
+                console.log(review);
+            })
+        }
 
 
     }]);

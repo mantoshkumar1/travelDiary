@@ -67,8 +67,11 @@ App.factory('VacationReview', ['DS', function (DS) {
             relations: {
                 belongsTo: {
                     user: {
-                        localField: "activity",
+                        localField: "vacation",
                         localKey: "userId"
+                    },
+                    vacation: {
+                        localField: ""
                     }
                 }
             }
@@ -287,6 +290,22 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
             'content@': {
                 templateUrl: 'assets/templates/vacation_details.html',
                 controller: 'vacationDetailsController'
+            }
+        }
+    };
+
+    var activity_config = {
+        url: '/activity',
+        resolve: {
+            activities: ['vacationWithoutUser', 'Activity', function (vacationWithoutUser, Activity) {
+                return Activity.findAll();
+            }]
+        },
+        views: {
+            'content@': {
+                templateUrl: 'assets/templates/search_activity.html',
+                controller: 'activitySearchController',
+                controllerAs: 'actCtrl'
             }
         }
     };

@@ -41,7 +41,7 @@ POST        /api/location                           controllers.RegisterControll
 POST        /api/user                               controllers.RegisterController.createUser()
 POST        /api/login                              controllers.LoginController.login()
 POST        /api/logout                               controllers.LoginController.logout()
-#POST        /api/vacationreview                     controllers.RegisterController.createVacationReview()
+POST        /api/vacationreview                     controllers.CreateController.createVacationReview()
 #POST        /api/activityreview                     controllers.RegisterController.createActivityReview()
 #POST        /api/vacationimage                      controllers.RegisterController.createVacationImage()
 #POST        /api/activityimage                      controllers.RegisterController.createActivityImage()
