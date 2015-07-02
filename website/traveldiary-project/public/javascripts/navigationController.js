@@ -12,6 +12,12 @@ App.controller('navigationController',
             // Use alias to avoid scope clashes
             var thisCtrl = this;
 
+            if ($state.includes('main.vacation')) {
+                thisCtrl.showBudget = true;
+            } else if ($state.includes('main.activity')) {
+                thisCtrl.showBudget = false;
+            }
+
             // Private list of all keywords.
             var keywords = injectedKeywords;
 
@@ -35,9 +41,18 @@ App.controller('navigationController',
                 var keyStrings = Util.getKeywordString(thisCtrl.selectedKeywords);
 
                 if (keyStrings.trim() !== '') {
-                    $state.go('main.vacation.search', {keywordStrings: keyStrings});
+                    if ($state.includes('main.vacation')) {
+                        $state.go('main.vacation.search', {keywordStrings: keyStrings});
+                    } else if ($state.includes('main.activity')) {
+                        $state.go('main.activity.search', {keywordStrings: keyStrings});
+                    }
+
                 } else {
-                    $state.go('main.vacation');
+                    if ($state.includes('main.vacation')) {
+                        $state.go('main.vacation');
+                    } else if ($state.includes('main.activity')) {
+                        $state.go('main.activity');
+                    }
                 }
             }
 
