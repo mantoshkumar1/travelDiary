@@ -4,14 +4,14 @@
 
 (function() {
 angular.module('travelDiary')
-    .controller('SessionController', [ '$scope', 'AuthService', function($scope, AuthService) {
-        $scope.currentUser = null;
+    .controller('SessionController', [ '$scope', 'AuthService','$sessionStorage', function($scope, AuthService, $sessionStorage) {
+        $scope.currentUser = $sessionStorage.currentUser || null;
         $scope.isAuthorized = AuthService.isAuthorized;
 
         $scope.setCurrentUser = function (user) {
             console.log("Setting user");
             console.log(user);
-
+            $sessionStorage.currentUser = user;
             $scope.currentUser = user;
         };
 

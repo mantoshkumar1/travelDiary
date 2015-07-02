@@ -71,7 +71,7 @@
 
             newReview.title = "SomeTitle";
             newReview.description = "SomeDescription2";
-            newReview.userId = 2;
+            newReview.userId = $scope.currentUser.id;
             newReview.vacationId = vacation.id;
             newReview.rating = 3;
             newReview.date = Date.now();

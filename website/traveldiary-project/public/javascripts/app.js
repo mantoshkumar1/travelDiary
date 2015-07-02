@@ -1,6 +1,6 @@
 (function() {
 
-var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter', 'ngMaterial']);
+var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter', 'ngMaterial', 'ngStorage']);
 
 App.factory('VacationKeywordJoinTableEntry', ['DS', function (DS) {
     return DS.defineResource(
