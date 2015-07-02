@@ -6,17 +6,17 @@
             </h2>
     </md-toolbar>
     <md-dialog-content class="review-dialog-content">
-        <form name="reviewForm" ng-submit="submit(review)">
+        <form name="reviewForm" ng-submit="saveVacation(review)">
             <md-input-container>
                 <label>Title</label>
-                <input required name="title" ng-model="review.title">
+                <input type="text" required name="title" ng-model="review.title">
                 <div ng-messages="reviewForm.title.$error">
                     <div ng-message="required">Title is required.</div>
                 </div>
             </md-input-container>
             <md-input-container>
                 <label>Your Opinion</label>
-                <textarea required rows="5" name="description" ng-model="review.description"></textarea>
+                <textarea type="text" required rows="5" name="description" ng-model="review.description"></textarea>
                 <div ng-messages="reviewForm.description.$error">
                     <div ng-message="required">Description is required.</div>
                 </div>
