@@ -41,6 +41,9 @@
                     </div>
                 </div>
                 <div flex="25" flex-sm="100" layout="row" layout-align="end center" layout-align-sm="center center">
+                    <div ng-if="currentUser != null">
+                        Welcome {{currentUser.username}}
+                    </div>
                     <div>
                         <md-button ng-click="navCtrl.clickLogin()" class="md-icon-button">
                             <md-icon class="md-48 material-icons">event_available</md-icon>
