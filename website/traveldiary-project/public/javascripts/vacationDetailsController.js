@@ -2,8 +2,9 @@
 
     var App = angular.module("travelDiary");
 
-    App.controller('vacationDetailsController', ['$scope', '$location', 'anchorSmoothScroll', 'vacation', 'Vacation', 'VacationReview',
-        function ($scope, $location, anchorSmoothScroll, vacation, Vacation, VacationReview) {
+    App.controller('vacationDetailsController',
+        ['$scope', '$state', '$location', 'anchorSmoothScroll', 'vacation', 'Vacation', 'VacationReview','$mdDialog',
+        function ($scope, $state, $location, anchorSmoothScroll, vacation, Vacation, VacationReview,$mdDialog) {
         $scope.vacation = vacation;
         $scope.creator = false;
 
@@ -80,20 +81,75 @@
             $scope.budgetList.splice(index, 1);
         };
 
-        $scope.addReview = function (vacation) {
-            var newReview = VacationReview.createInstance();
 
-            newReview.title = "SomeTitle";
-            newReview.description = "SomeDescription2";
-            newReview.userId = $scope.currentUser.id;
-            newReview.vacationId = vacation.id;
-            newReview.rating = 3;
-            newReview.date = Date.now();
+        $scope.currentUserReview = getReviewForUser($scope.vacation.reviews, $scope.currentUser)
 
-            newReview.DSCreate().then(function (review) {
-                console.log(review);
-            })
+
+
+        $scope.showReviewDialog = function (user, review, vacation) {
+
+            var hasReview = review !== null;
+
+
+            $mdDialog.show( {
+                parent: angular.element(document.body),
+                locals: {
+                    review: {
+                        title: hasReview ? review.title : '',
+                        description: hasReview ? review.description : '',
+                        rating: hasReview ? review.rating : ''
+                    }
+                },
+                templateUrl: 'assets/templates/dialogs/review_dialog.html',
+                controller: 'VacationReviewController'
+            }).then( function (newReview) {
+
+                console.log(newReview)
+
+
+
+                if (hasReview) {
+                    newReview.userId = user.id;
+                    newReview.vacationId = vacation.id;
+                    VacationReview.update(review.id, newReview);
+
+                } else {
+                    var reviewToInsert = VacationReview.createInstance();
+
+                    reviewToInsert.title = newReview.title;
+                    reviewToInsert.description = newReview.description;
+                    reviewToInsert.rating = newReview.rating;
+                    reviewToInsert.date = newReview.date;
+                    reviewToInsert.userId = user.id;
+                    reviewToInsert.vacationId = vacation.id;
+                    reviewToInsert.DSCreate().then(function (review) {
+
+                        $state.reload();
+                    });
+
+                }
+            });
+
+
         };
+
+        $scope.deleteReview = function (review) {
+            VacationReview.destroy(review.id);
+
+            $state.reload();
+        };
+
+        function getReviewForUser (reviews,user) {
+                if (reviews && user) {
+                    for (i = 0; i < reviews.length; i++) {
+                        if (reviews[i].userId === user.id) {
+                            return reviews[i];
+                        }
+                    }
+                }
+
+                return null;
+            }
 
     }]);
 

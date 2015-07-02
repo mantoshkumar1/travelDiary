@@ -6,9 +6,9 @@
                       ng-repeat="activity in activities | filter:tdFilter"
                       md-rowspan="1"
                       md-colspan="1"
-                      ng-mouseenter="hover = true"
+                      ng-mouseenter="hover=true"
                       ng-mouseleave="hover=false"
-                      ng-click="clickAction(vacation)">
+                      ng-click="clickAction(activity)">
             <activity-grid-tile activity-src="activity"></activity-grid-tile>
         </md-grid-tile>
     </md-grid-list>

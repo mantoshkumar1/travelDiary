@@ -1,6 +1,6 @@
 (function () {
 
-    var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter', 'ngMaterial', 'ngStorage']);
+    var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter', 'ngMaterial', 'ngStorage', 'ngMessages']);
 
     App.factory('VacationKeywordJoinTableEntry', ['DS', function (DS) {
         return DS.defineResource(
@@ -55,66 +55,15 @@
                             localField: "user",
                             localKey: "userId"
                         },
-                        activity: {
-                            localField: "activity",
-                            localKey: "activityId"
-                        }
-                    }
-                }
-            });
-    }]);
-
-    App.factory('VacationReview', ['DS', function (DS) {
-        return DS.defineResource(
-            {
-                name: 'vacationreview',
-                relations: {
-                    belongsTo: {
-                        user: {
-                            localField: "user",
-                            localKey: "userId"
-                        },
-                        vacation: {
-                            localField: "vacation",
-                            localKey: "vacationId"
-                        }
-                    }
-                }
-            });
-    }]);
-
-    App.factory('Role', ['DS', function (DS) {
-        return DS.defineResource(
-            {
-                name: 'role'
-            });
-    }]);
-
-
-    App.factory('User', ['DS', function (DS) {
-        return DS.defineResource(
-            {
-                name: 'user',
-                relations: {
-                    belongsTo: {
-                        role: {
-                            localField: "role",
-                            localKey: "roleId"
-                        }
-                        ,
-                        location: {
-                            localField: "location",
-                            localKey: "locationId"
-                        }
-                    },
-                    hasMany: {
-                        vacation: {
-                            localField: "createdVacations",
-                            foreignKey: "creatorId"
-                        },
-                        activity: {
-                            localField: "createdActivities",
-                            foreignKey: "creatorId"
+                        hasMany: {
+                            vacation: {
+                                localField: "createdVacations",
+                                foreignKey: "creatorId"
+                            },
+                            activity: {
+                                localField: "createdActivities",
+                                foreignKey: "creatorId"
+                            }
                         }
                     }
                 }

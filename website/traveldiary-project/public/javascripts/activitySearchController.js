@@ -27,10 +27,10 @@ angular.module("travelDiary")
 
             var neededMatches = selectedKeywords.length;
 
-            return actualMatches === neededMatches && activity.budget <= searchService.budgetContainer.currentBudget;
+            return actualMatches === neededMatches;
         };
 
-        thisCtrl.loadVacation = function (activity) {
+        thisCtrl.loadActivity = function (activity) {
             console.log('changing to details view');
 
             $state.go('main.activity.details', {id: activity.id});
