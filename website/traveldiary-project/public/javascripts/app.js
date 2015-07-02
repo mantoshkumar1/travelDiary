@@ -302,7 +302,7 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
     var activity_config = {
         url: '/activity',
         resolve: {
-            activities: ['vacationWithoutUser', 'Activity', function (vacationWithoutUser, Activity) {
+            activities: ['Activity', function (Activity) {
                 return Activity.findAll();
             }]
         },
@@ -311,6 +311,47 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
                 templateUrl: 'assets/templates/search_activity.html',
                 controller: 'activitySearchController',
                 controllerAs: 'actCtrl'
+            }
+        }
+    };
+
+    var activity_search_config = {
+        url: '/search/{keywordStrings}',
+        resolve: {
+            selectedKeywords: ['Keyword', '$stateParams', function (Keyword, $stateParams) {
+                var keywordsWithoutId = $stateParams.keywordStrings.split("+");
+
+                return Keyword.filter({
+                    where: {
+                        keyword: {
+                            'in': keywordsWithoutId
+                        }
+                    }
+                });
+            }]
+        },
+        views: {
+            'navigation@': {
+                templateUrl: 'assets/templates/navigation.html',
+                controller: 'navigationControllerWithSelection'
+            }
+        }
+    };
+
+    var activity_details_config = {
+        url: '/details/{id}',
+        resolve: {
+            activityWithoutUser: [ '$stateParams', 'Activity', function ($stateParams,Activity) {
+                return Activity.find($stateParams.id);
+            }],
+            activity: ['activityWithoutUser', 'Activity', function (activityWithoutUser, Activity) {
+                return Activity.loadRelations(activityWithoutUser,['creator']);
+            }]
+        },
+        views: {
+            'content@': {
+                templateUrl: 'assets/templates/activity_details.html',
+                controller: 'activityDetailsController'
             }
         }
     };
@@ -351,6 +392,9 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
     $stateProvider.state('main.vacation', vacation_config);
     $stateProvider.state('main.vacation.search', vacation_search_config);
     $stateProvider.state('main.vacation.details', vacation_details_config);
+    $stateProvider.state('main.activity', activity_config);
+    $stateProvider.state('main.activity.search', activity_search_config);
+    $stateProvider.state('main.activity.details', activity_details_config);
     $stateProvider.state('main.register', register_config);
     $stateProvider.state('main.login', login_config);
 

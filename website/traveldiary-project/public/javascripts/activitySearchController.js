@@ -4,8 +4,8 @@
 (function() {
 
 angular.module("travelDiary")
-    .controller('activitySearchController', ['$scope', '$state', 'SearchService', 'activites','SearchService',
-        function ($scope, $state, SearchService, vacations, SearchService) {
+    .controller('activitySearchController', ['$scope', '$state', 'SearchService', 'activities','SearchService',
+        function ($scope, $state, SearchService, activities, SearchService) {
 
         var thisCtrl = this;
 
@@ -16,7 +16,7 @@ angular.module("travelDiary")
         var selectedKeywords = searchService.selectedKeywords;
 
         // Add vacations to scope for displaying the content in search_vacation.html
-        thisCtrl.activites = activites;
+        thisCtrl.activities = activities;
 
         thisCtrl.hasAllSelectedKeywords = function (activity) {
 
@@ -30,10 +30,10 @@ angular.module("travelDiary")
             return actualMatches === neededMatches && activity.budget <= searchService.budgetContainer.currentBudget;
         };
 
-        thisCtrl.loadVacation = function (vacation) {
+        thisCtrl.loadVacation = function (activity) {
             console.log('changing to details view');
 
-            $state.go('main.activity.details', {id: vacation.id});
+            $state.go('main.activity.details', {id: activity.id});
         };
     }]);
 
