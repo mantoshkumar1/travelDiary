@@ -55,15 +55,66 @@
                             localField: "user",
                             localKey: "userId"
                         },
-                        hasMany: {
-                            vacation: {
-                                localField: "createdVacations",
-                                foreignKey: "creatorId"
-                            },
-                            activity: {
-                                localField: "createdActivities",
-                                foreignKey: "creatorId"
-                            }
+                        activity: {
+                            localField: "activity",
+                            localKey: "activityId"
+                        }
+                    }
+                }
+            });
+    }]);
+
+    App.factory('VacationReview', ['DS', function (DS) {
+        return DS.defineResource(
+            {
+                name: 'vacationreview',
+                relations: {
+                    belongsTo: {
+                        user: {
+                            localField: "user",
+                            localKey: "userId"
+                        },
+                        vacation: {
+                            localField: "vacation",
+                            localKey: "vacationId"
+                        }
+                    }
+                }
+            });
+    }]);
+
+    App.factory('Role', ['DS', function (DS) {
+        return DS.defineResource(
+            {
+                name: 'role'
+            });
+    }]);
+
+
+    App.factory('User', ['DS', function (DS) {
+        return DS.defineResource(
+            {
+                name: 'user',
+                relations: {
+                    belongsTo: {
+                        role: {
+                            localField: "role",
+                            localKey: "roleId"
+                        }
+                        ,
+                        location: {
+                            localField: "location",
+                            localKey: "locationId"
+                        }
+                    },
+                    hasMany: {
+                        vacation: {
+                            localField: "createdVacations",
+                            foreignKey: "creatorId"
+                        },
+                        activity: {
+                            localField: "createdActivities",
+                            foreignKey: "creatorId"
                         }
                     }
                 }
@@ -291,17 +342,11 @@
         var activity_details_config = {
             url: '/details/{id}',
             resolve: {
-                /*activityWithoutUser: [ '$stateParams', 'Activity', function ($stateParams,Activity) {
+                activityWithoutUser: [ '$stateParams', 'Activity', function ($stateParams,Activity) {
                  return Activity.find($stateParams.id);
-                 }],*/
-                activity: ['Activity', '$stateParams', function (Activity, $stateParams) {
-                    console.log("resolve activity");
-                    console.log($stateParams.id);
-                    return Activity.find($stateParams.id).then(function (activityWithoutUser) {
-                        console.log("resolved: ");
-                        console.log(activityWithoutUser);
-                        return Activity.loadRelations(activityWithoutUser, ['creator']);
-                    })
+                 }],
+                activity: ['Activity', 'activityWithoutUser', function (Activity, activityWithoutUser) {
+                    return Activity.loadRelations(activityWithoutUser, ['creator']);
                 }]
             },
             views: {
