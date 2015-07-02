@@ -64,7 +64,7 @@ App.controller('loginController', ['$scope', '$state', '$rootScope', 'AuthServic
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
             // Function defined in SessionController
             $scope.setCurrentUser(user);
-            $state.go("main");
+            $state.go("main.index");
         }, function () {
             $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
         });

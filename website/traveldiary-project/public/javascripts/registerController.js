@@ -28,7 +28,7 @@ App.controller('registerController', ['$scope', '$state', 'User', 'Location', 'r
                 $scope.user.DSCreate().then(function() {
                     $scope.user = User.createInstance();
                     $scope.success = true;
-                    $scope.go("main.login");
+                    $state.go("main.login");
                 })
             });
     };

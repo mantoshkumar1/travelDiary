@@ -18,10 +18,10 @@ public class LoginController extends Controller {
         Credentials credentials = Json.fromJson(request().body().asJson(), Credentials.class);
 
         User user = TravelDiaryDAO.getUserByMail(credentials.email);
-        String providedPasswordHash = PasswordUtil.calculateHashString(credentials.password);
+        //String inputPassword = PasswordUtil.calculateHashString(credentials.password);
+        boolean valid_password = PasswordUtil.comparePassword(credentials.password, user.getPasswordHash());
 
-        if (user != null &&
-                user.getPasswordHash().equals(providedPasswordHash)) {
+        if ((user != null) && (true == valid_password)) {
             // Success. Create new session
             session(LOGIN_SESSION, credentials.email);
             // Return user
