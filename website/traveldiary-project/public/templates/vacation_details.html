@@ -26,7 +26,7 @@
                     </md-button>
                     <md-menu-content>
                         <md-menu-item ng-if="currentUserReview">
-                            <md-button ng-click="showReviewDialog(currentUser, currentUserReview, vacation)"
+                            <md-button ng-click="showReviewEditDialog()"
                                        aria-label="Edit My Review">
                                 Edit My Review
                             </md-button>
@@ -37,7 +37,7 @@
                             </md-button>
                         </md-menu-item>
                         <md-menu-item ng-if="!currentUserReview">
-                            <md-button ng-click="showReviewDialog(currentUser, currentUserReview, vacation)"
+                            <md-button ng-click="showReviewCreateDialog()"
                                     aria-label="Add Review">
                                 Add Review
                             </md-button>
