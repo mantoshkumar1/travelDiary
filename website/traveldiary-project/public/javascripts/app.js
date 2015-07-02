@@ -52,8 +52,12 @@ App.factory('ActivityReview', ['DS', function (DS) {
             relations: {
                 belongsTo: {
                     user: {
-                        localField: "activity",
+                        localField: "user",
                         localKey: "userId"
+                    },
+                    activity: {
+                        localField: "activity",
+                        localKey: "activityId"
                     }
                 }
             }
@@ -67,11 +71,12 @@ App.factory('VacationReview', ['DS', function (DS) {
             relations: {
                 belongsTo: {
                     user: {
-                        localField: "vacation",
+                        localField: "user",
                         localKey: "userId"
                     },
                     vacation: {
-                        localField: ""
+                        localField: "vacation",
+                        localKey: "vacationId"
                     }
                 }
             }
@@ -146,7 +151,7 @@ App.factory('Vacation', ['DS', function (DS) {
                 var rating = 0.0;
                 if (reviews != undefined && reviews.length > 0) {
                     reviews.forEach(function (review) {
-                        rating += review.rating.value;
+                        rating += review.rating;
                     });
 
                     rating = rating / reviews.length;

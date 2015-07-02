@@ -15,10 +15,7 @@ public class RatingSerializer extends JsonSerializer<Rating> {
 
     @Override
     public void serialize(Rating value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
-        jgen.writeStartObject();
-        jgen.writeFieldName("value");
         // Actual rating is between 1 and 5
         jgen.writeNumber(value.ordinal() + 1);
-        jgen.writeEndObject();
     }
 }
