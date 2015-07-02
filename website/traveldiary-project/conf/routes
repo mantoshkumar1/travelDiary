@@ -53,9 +53,12 @@ POST        /api/vacationreview                     controllers.CreateController
 #PUT         /api/location/:id                       controllers.RegisterController.updateLocation(id: Integer)
 #PUT         /api/user/:id                           controllers.RegisterController.updateUser(id: Integer)
 #PUT         /api/activityreview/:id                 controllers.RegisterController.updateActivityReview(id: Integer)
-#PUT         /api/vacationreview/:id                 controllers.RegisterController.updateVacationReview(id: Integer)
+PUT         /api/vacationreview/:id                 controllers.UpdateController.updateVacationReview(id: Integer)
 #PUT         /api/vacationimage/:id                  controllers.RegisterController.updateVacationImage(id: Integer)
 #PUT         /api/activityimage/:id                  controllers.RegisterController.updateActivityImage(id: Integer)
+
+# Basic api delete functions for single items
+DELETE      /api/vacationreview/:id                  controllers.DeleteController.deleteVacationReview(id: Integer)
 
 # Additional apis for special use cases
 GET         /api/keywordsbystring/:keyString        controllers.SearchController.getKeywordsFor(keyString: String)

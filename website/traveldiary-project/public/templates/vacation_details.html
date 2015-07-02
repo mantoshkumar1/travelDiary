@@ -19,14 +19,32 @@
                     <md-icon class="material-icons">favorite_border</md-icon>
                     Copy
                 </md-button>
-                <md-button aria-label="Review" ng-if="!creator">
-                    <md-icon class="material-icons">star_border</md-icon>
-                    Review
-                </md-button>
-                <md-button aria-label="Review" ng-if="creator">
-                    <md-icon class="material-icons">share</md-icon>
-                    Share
-                </md-button>
+                <md-menu>
+                    <md-button aria-label="My Review" ng-click="$mdOpenMenu()">
+                        <md-icon md-menu-origin ng-if="!currentUserReview" class="material-icons">star_border</md-icon>
+                        <md-icon md-menu-origin ng-if="currentUserReview" class="material-icons">star</md-icon>
+                        My Review
+                    </md-button>
+                    <md-menu-content>
+                        <md-menu-item ng-if="currentUserReview">
+                            <md-button ng-click="showReviewDialog(currentUser, currentUserReview, vacation)"
+                                       aria-label="Edit My Review">
+                                Edit My Review
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item ng-if="currentUserReview" aria-label="Delete My Review">
+                            <md-button ng-click="deleteReview(currentUserReview)">
+                                Delete My Review
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item ng-if="!currentUserReview">
+                            <md-button ng-click="showReviewDialog(currentUser, currentUserReview, vacation)"
+                                    aria-label="Add Review">
+                                Add Review
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
                 <md-button aria-label="Review" ng-if="creator" ng-click="deleteVacation()">
                     <md-icon class="material-icons">delete</md-icon>
                     Delete
@@ -154,9 +172,6 @@
                 </div>
             </md-content>
         </div>
-
-
-        <md-button class="md-primary" ng-click="addReview(vacation)">Insert Review</md-button>
 
         <md-content id="keywords" class="md-padding">
             <div class="md-title">Keywords</div>
