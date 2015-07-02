@@ -1,6 +1,3 @@
-/**
- * Created by albert on 02.07.15.
- */
 (function () {
 
     var App = angular.module("travelDiary");
