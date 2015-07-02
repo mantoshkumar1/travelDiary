@@ -112,4 +112,16 @@ public class ActivityReview {
         return activity.getId();
     }
 
+    @JsonIgnore
+    @JsonProperty("activityId")
+    public void ActivityId(int id) {}
+
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
 }

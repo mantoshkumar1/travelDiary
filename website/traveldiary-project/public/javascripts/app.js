@@ -2,211 +2,6 @@
 
     var App = angular.module('travelDiary', ['ui.router', 'js-data', 'ui.bootstrap', 'angular.filter', 'ngMaterial', 'ngStorage', 'ngMessages']);
 
-    App.factory('VacationKeywordJoinTableEntry', ['DS', function (DS) {
-        return DS.defineResource(
-            {
-                name: 'vacationkeyword'
-            });
-    }]);
-
-    App.factory('ActivityKeywordJoinTableEntry', ['DS', function (DS) {
-        return DS.defineResource(
-            {
-                name: 'activitykeyword'
-            });
-    }]);
-
-
-    App.factory('Keyword', ['DS', function (DS) {
-        return DS.defineResource(
-            {
-                name: 'keyword'
-            });
-    }]);
-
-    App.factory('ActivityImage', ['DS', function (DS) {
-        return DS.defineResource(
-            {
-                name: 'activityimage'
-            });
-    }]);
-
-    App.factory('VacationImage', ['DS', function (DS) {
-        return DS.defineResource(
-            {
-                name: 'vacationimage'
-            });
-    }]);
-
-    App.factory('Location', ['DS', function (DS) {
-        return DS.defineResource(
-            {
-                name: 'location'
-            });
-    }]);
-
-    App.factory('ActivityReview', ['DS', function (DS) {
-        return DS.defineResource(
-            {
-                name: 'activityreview',
-                relations: {
-                    belongsTo: {
-                        user: {
-                            localField: "user",
-                            localKey: "userId"
-                        },
-                        activity: {
-                            localField: "activity",
-                            localKey: "activityId"
-                        }
-                    }
-                }
-            });
-    }]);
-
-    App.factory('VacationReview', ['DS', function (DS) {
-        return DS.defineResource(
-            {
-                name: 'vacationreview',
-                relations: {
-                    belongsTo: {
-                        user: {
-                            localField: "user",
-                            localKey: "userId"
-                        },
-                        vacation: {
-                            localField: "vacation",
-                            localKey: "vacationId"
-                        }
-                    }
-                }
-            });
-    }]);
-
-    App.factory('Role', ['DS', function (DS) {
-        return DS.defineResource(
-            {
-                name: 'role'
-            });
-    }]);
-
-
-    App.factory('User', ['DS', function (DS) {
-        return DS.defineResource(
-            {
-                name: 'user',
-                relations: {
-                    belongsTo: {
-                        role: {
-                            localField: "role",
-                            localKey: "roleId"
-                        }
-                        ,
-                        location: {
-                            localField: "location",
-                            localKey: "locationId"
-                        }
-                    },
-                    hasMany: {
-                        vacation: {
-                            localField: "createdVacations",
-                            foreignKey: "creatorId"
-                        },
-                        activity: {
-                            localField: "createdActivities",
-                            foreignKey: "creatorId"
-                        }
-                    }
-                }
-            });
-    }]);
-
-    App.factory('Vacation', ['DS', function (DS) {
-        return DS.defineResource({
-            name: 'vacation',
-            relations: {
-                belongsTo: {
-                    user: {
-                        localField: "creator",
-                        localKey: "creatorId"
-                    },
-                    location: {
-                        localField: "location",
-                        localKey: "locationId"
-                    }
-                },
-                hasMany: {
-                    vacationreview: {
-                        localField: "reviews",
-                        foreignKey: "vacationId"
-                    },
-                    vacationimage: {
-                        localField: "images",
-                        foreignKey: "vacationId"
-                    }
-                }
-            },
-            computed: {
-                rating: ['reviews', function (reviews) {
-                    var rating = 0.0;
-                    if (reviews != undefined && reviews.length > 0) {
-                        reviews.forEach(function (review) {
-                            rating += review.rating;
-                        });
-
-                        rating = rating / reviews.length;
-                    }
-
-                    return rating;
-                }]
-            }
-        });
-    }]);
-
-    App.factory('Activity', ['DS', function (DS) {
-        return DS.defineResource({
-            name: 'activity',
-            relations: {
-                belongsTo: {
-                    user: {
-                        localField: "creator",
-                        localKey: "creatorId"
-                    },
-                    location: {
-                        localField: "location",
-                        localKey: "locationId"
-                    }
-                },
-                hasMany: {
-                    activityreview: {
-                        localField: "reviews",
-                        foreignKey: "activityId"
-                    }
-                    ,
-                    activityimage: {
-                        localField: "images",
-                        foreignKey: "vacationId"
-                    }
-                }
-            },
-            computed: {
-                rating: ['reviews', function (reviews) {
-                    var rating = 0.0;
-
-                    if (reviews.length > 0) {
-                        reviews.forEach(function (review) {
-                            rating += review.rating.value;
-                        });
-
-                        rating = rating / reviews.length;
-                    }
-
-                    return rating;
-                }]
-            }
-        });
-    }]);
-
     App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterProvider', function ($stateProvider, DSProvider, $mdThemingProvider, $urlRouterProvider) {
         DSProvider.defaults.basePath = '/api';
 
@@ -300,6 +95,16 @@
             }
         };
 
+        var vacation_details_edit_config = {
+            url: '/edit',
+            views: {
+                'content@': {
+                    templateUrl: 'assets/templates/vacation_edit.html',
+                    controller: 'VacationEditController'
+                }
+            }
+        };
+
         var activity_config = {
             url: '/activity',
             resolve: {
@@ -343,7 +148,7 @@
             url: '/details/{id}',
             resolve: {
                 activityWithoutUser: [ '$stateParams', 'Activity', function ($stateParams,Activity) {
-                 return Activity.find($stateParams.id);
+                    return Activity.find($stateParams.id);
                  }],
                 activity: ['Activity', 'activityWithoutUser', function (Activity, activityWithoutUser) {
                     return Activity.loadRelations(activityWithoutUser, ['creator']);
@@ -393,6 +198,7 @@
         $stateProvider.state('main.vacation', vacation_config);
         $stateProvider.state('main.vacation.search', vacation_search_config);
         $stateProvider.state('main.vacation.details', vacation_details_config);
+        $stateProvider.state('main.vacation.details.edit', vacation_details_edit_config);
         $stateProvider.state('main.activity', activity_config);
         $stateProvider.state('main.activity.search', activity_search_config);
         $stateProvider.state('main.activity.details', activity_details_config);

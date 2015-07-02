@@ -139,7 +139,7 @@
                             <th align="right">{{vacation.budget}}</th>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="budget in budgetList">
+                            <!--tr ng-repeat="budget in budgetList">
                                 <td>{{budget.title}}</td>
                                 <td align="right">{{budget.budget}}</td>
                                 <td align="center" ng-show="creator"><md-icon class="material-icons" ng-click="removeBudget($index)">remove_circle</md-icon></td>
@@ -152,16 +152,17 @@
                                     <input type="number" ng-model="budget" style="-moz-appearance:textfield;" />
                                 </md-input-container></td>
                                 <td align="center"><md-icon class="material-icons" ng-click="addBudget()">add_circle</md-icon></td>
+                            </tr-->
+                            <tr>
+                            <td>Vacation (Hotel, Flight etc.) </td>
+                            <td align="right">{{vacation.budget}}</td>
+                            <td align="right"></td>
                             </tr>
                             <th>Activities</th>
                             <th></th>
-                            <tr>
-                                <td>Activity 1</td>
-                                <td align="right">$3</td>
-                            </tr>
-                            <tr>
-                                <td>Activity 2</td>
-                                <td align="right">$4</td>
+                            <tr ng-repeat="activity in vacation.activities">
+                                <td>{{activity.name}}</td>
+                                <td align="right">{{activity.budget}}</td>
                             </tr>
                             <tr class="hide" id="rowTemplate">
                                 <td name="title"></td>
