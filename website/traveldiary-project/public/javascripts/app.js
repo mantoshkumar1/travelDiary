@@ -52,8 +52,12 @@ App.factory('ActivityReview', ['DS', function (DS) {
             relations: {
                 belongsTo: {
                     user: {
-                        localField: "activity",
+                        localField: "user",
                         localKey: "userId"
+                    },
+                    activity: {
+                        localField: "activity",
+                        localKey: "activityId"
                     }
                 }
             }
@@ -67,8 +71,12 @@ App.factory('VacationReview', ['DS', function (DS) {
             relations: {
                 belongsTo: {
                     user: {
-                        localField: "activity",
+                        localField: "user",
                         localKey: "userId"
+                    },
+                    vacation: {
+                        localField: "vacation",
+                        localKey: "vacationId"
                     }
                 }
             }
@@ -143,7 +151,7 @@ App.factory('Vacation', ['DS', function (DS) {
                 var rating = 0.0;
                 if (reviews != undefined && reviews.length > 0) {
                     reviews.forEach(function (review) {
-                        rating += review.rating.value;
+                        rating += review.rating;
                     });
 
                     rating = rating / reviews.length;
@@ -287,6 +295,22 @@ App.config(['$stateProvider', 'DSProvider', '$mdThemingProvider', '$urlRouterPro
             'content@': {
                 templateUrl: 'assets/templates/vacation_details.html',
                 controller: 'vacationDetailsController'
+            }
+        }
+    };
+
+    var activity_config = {
+        url: '/activity',
+        resolve: {
+            activities: ['vacationWithoutUser', 'Activity', function (vacationWithoutUser, Activity) {
+                return Activity.findAll();
+            }]
+        },
+        views: {
+            'content@': {
+                templateUrl: 'assets/templates/search_activity.html',
+                controller: 'activitySearchController',
+                controllerAs: 'actCtrl'
             }
         }
     };

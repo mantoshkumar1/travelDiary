@@ -4,11 +4,11 @@ package models;
  * Created by Rike on 06.06.2015.
  */
 public enum Rating {
-    LOVED_IT,
-    REALLY_LIKED_IT,
-    LIKED_IT,
+    HATED_IT,
     DID_NOT_LIKE_IT,
-    HATED_IT;
+    LIKED_IT,
+    REALLY_LIKED_IT,
+    LOVED_IT;
 
     /*
     * Return a more readable String for Ratings.
