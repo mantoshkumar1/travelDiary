@@ -37,6 +37,7 @@ CREATE TABLE Activity (
   id          INTEGER PRIMARY KEY AUTOINCREMENT,
   name        TEXT NOT NULL,
   description TEXT NOT NULL,
+  budget      DECIMAL(5, 2) NOT NULL,
   startTime   DATE,
   endTime     DATE,
   locationId  INTEGER,
