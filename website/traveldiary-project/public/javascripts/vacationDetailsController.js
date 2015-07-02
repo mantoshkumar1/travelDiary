@@ -47,11 +47,23 @@
             // set the location.hash to the id of
             // the element you wish to scroll to.
             $location.hash(eID);
-
             anchorSmoothScroll.scrollTo(eID);
-
         };
 
+
+        $scope.openEnd = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.openedEnd = true;
+        };
+
+        $scope.openStart = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.openedStart = true;
+        };
 
     }]);
 

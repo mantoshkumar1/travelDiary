@@ -54,50 +54,66 @@
                         <i class="material-icons" ng-repeat="n in [] | range:(5-vacation.rating)">star_border</i>
                     </div>
                 </div>
-                <div layout="row" layout-align="end start" flex>
+                <div layout="row" layout-align="end start">
                     <div class="md-headline">
                         <div ng-show="!creator">
                             {{vacation.startDate | date:'dd.MM.yyyy'}} to
                             {{vacation.endDate | date:'dd.MM.yyyy'}}
                         </div>
-                        <md-input-container class="inline-input" ng-show="creator">
-                            <input ng-model="vacation.startDate">
-                        </md-input-container>
-                        <md-input-container class="inline-input" ng-show="creator">
-                            <input ng-model="vacation.endDate">
-                        </md-input-container>
-
+                        <div class="md-headline" layout="row" ng-show="creator">
+                            <md-input-container class="inline-input">
+                                <div layout="row">
+                                    <input class=" md-headline" flex flex-order="1" type="text"
+                                           is-open="openedStart" datepicker-popup="{{dd.MM.yyyy}}"
+                                           ng-model="vacation.startDate" show-weeks="false" show-button-bar="false" style="width: 130px;" ng-click="openStart($event)"/>
+                                </div>
+                            </md-input-container>
+                            <div class="md-headline" style="padding-left: 2px; padding-right: 2px;"> to </div>
+                            <md-input-container class="inline-input md-headline">
+                                <div layout="row">
+                                    <input class=" md-headline" flex-order="1" type="text"
+                                           class="form-control" is-open="openedEnd" datepicker-popup="{{dd.MM.yyyy}}"
+                                           ng-model="vacation.endDate" show-weeks="false" show-button-bar="false" style="width: 130px;" ng-click="openEnd($event)"/>
+                                </div>
+                            </md-input-container>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
-        <div id="overview" layout="row">
 
+        <div id="overview" layout="row">
             <md-content class="md-padding" flex>
                 <div class="md-title">Overview</div>
-                <!--div style="height: 305px">
+                <div style="height: 320px; overflow: hidden;">
                     <carousel interval="5000">
-                        <slide ng-repeat="image in images">
-                            <img ng-src="{{image}}" style="width: 100%">
-                            <div class="carousel-caption">
-                                <h4>Slide {{$index}}</h4>
-                            </div>
+                        <slide ng-repeat="image in vacation.images">
+                            <img ng-src="{{image.url}}" style="width: 100%">
+                            <!--div class="carousel-caption">
+                                <h4>{{image.name}}</h4>
+                            </div-->
                         </slide>
                     </carousel>
-                </div-->
-                <img ng-src="{{images[0]}}" style="width: 100%">
+                </div>
+                <md-button aria-label="Upload" ng-if="creator" base-sixty-four-input>
+                    <md-icon class="material-icons">image</md-icon>
+                    Upload
+                </md-button>
             </md-content>
 
             <md-content class="md-padding" flex>
                 <div class="md-padding">
                     <div class="md-title">Description</div>
-                    <div layout-align="center">{{vacation.description}}</div>
+                    <div layout-align="center" ng-show="!creator">{{vacation.description}}</div>
+                    <md-input-container class="inline-input" ng-show="creator">
+                            <textarea type="text" ng-model="vacation.description" />
+                    </md-input-container>
                 </div>
 
                 <div class="md-padding">
                     <div class="md-title">Budget</div>
                     <div layout="row">
-                        <table>
+                        <table class="table">
                             <thead>
                             <th>Overall</th>
                             <th>{{vacation.budget}}</th>
@@ -122,21 +138,14 @@
             </md-content>
         </div>
 
-        <md-content id="reviews" class="md-padding">
-            <div class="md-title">Reviews</div>
-            <div> ({{vacation.reviews.length}})</div>
-
-            <md-list>
-                <md-list-item class="md-3-line" ng-repeat="review in vacation.reviews">
-                    <div class="md-list-item-text">
-                        <h3>{{review.title}}</h3>
-                        <h4>by {{review.user.username}}UserName</h4>
-
-                        <p>{{review.description}}</p>
-                    </div>
-                    <md-divider></md-divider>
-                </md-list-item>
-            </md-list>
+        <md-content id="keywords" class="md-padding">
+            <div class="md-title">Keywords</div>
+            <div layout="row" layout-align="center center">
+                <div flex ng-repeat="keyword in vacation.keywords">
+                    <keyword-chip keyword-src="keyword">
+                    </keyword-chip>
+                </div>
+            </div>
         </md-content>
 
         <md-content id="activities" class="md-padding">
@@ -159,6 +168,23 @@
                 </div>
             </div>
         </md-content>
+
+        <md-content id="reviews" class="md-padding">
+            <div class="md-title">Reviews ({{vacation.reviews.length}})</div>
+
+            <md-list>
+                <md-list-item class="md-3-line" ng-repeat="review in vacation.reviews">
+                    <div class="md-list-item-text">
+                        <h3>{{review.title}}</h3>
+                        <h4>by {{review.user.username}}UserName</h4>
+
+                        <p>{{review.description}}</p>
+                    </div>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-content>
+
     </div>
 </md-content>
 </div>
