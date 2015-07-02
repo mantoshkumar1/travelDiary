@@ -1,6 +1,5 @@
 <md-content>
     <md-divider></md-divider>
-    <!--md-content style="z-index: 1000;"-->
     <span id="sticky" style="position: fixed;"></span>
 
     <div fixed-nav>
@@ -86,7 +85,7 @@
             <md-content class="md-padding" flex>
                 <div class="md-title">Overview</div>
                 <div style="height: 320px; overflow: hidden;">
-                    <carousel interval="5000">
+                    <carousel interval="5000" ng-if="(vacation.images !== undefined) && (vacation.images.length > 0)">
                         <slide ng-repeat="image in vacation.images">
                             <img ng-src="{{image.url}}" style="width: 100%">
                             <!--div class="carousel-caption">
@@ -94,6 +93,9 @@
                             </div-->
                         </slide>
                     </carousel>
+                    <div class="well" layout row layout-align="center center" ng-if="(vacation.images == undefined) || (vacation.images.length == 0)" style="height: 100%;">
+                        <div>No Images available</div>
+                    </div>
                 </div>
                 <md-button aria-label="Upload" ng-if="creator" base-sixty-four-input>
                     <md-icon class="material-icons">image</md-icon>
@@ -129,7 +131,7 @@
                                     <input type="text" ng-model="budgetTitle" />
                                 </md-input-container></td>
                                 <td align="right"><md-input-container class="inline-input">
-                                    <input type="number" ng-model="budget" />
+                                    <input type="number" ng-model="budget" style="-moz-appearance:textfield;" />
                                 </md-input-container></td>
                                 <td align="center"><md-icon class="material-icons" ng-click="addBudget()">add_circle</md-icon></td>
                             </tr>
@@ -161,7 +163,7 @@
         <md-content id="keywords" class="md-padding">
             <div class="md-title">Keywords</div>
             <div layout="row" layout-align="center center">
-                <div flex ng-repeat="keyword in vacation.keywords">
+                <div ng-repeat="keyword in vacation.keywords">
                     <keyword-chip keyword-src="keyword">
                     </keyword-chip>
                 </div>
@@ -173,8 +175,19 @@
             <div layout="row">
                 <div flex="33" ng-repeat="activity in vacation.activities">
                     <md-card>
-                        <img ng-src="activity.images[0]"
-                             ng-show="(activity.images !== undefined) && (activity.images.length > 0)">
+                        <div style="height: 220px; overflow: hidden;">
+                            <carousel interval="5000" ng-if="(activity.images !== undefined) && (activity.images.length > 0)">
+                                <slide ng-repeat="image in activity.images">
+                                    <img ng-src="{{image.url}}" style="width: 100%">
+                                    <!--div class="carousel-caption">
+                                        <h4>{{image.name}}</h4>
+                                    </div-->
+                                </slide>
+                            </carousel>
+                            <div class="well" layout row layout-align="center center" ng-if="(activity.images == undefined) || (activity.images.length == 0)" style="height: 100%;">
+                                <div>No Images available</div>
+                            </div>
+                        </div>
                         <md-card-content>
                             <div class="md-title" flex>{{activity.name}}</div>
                             <div class="md-body-2" flex style="float: right;">{{activity.startTime |
