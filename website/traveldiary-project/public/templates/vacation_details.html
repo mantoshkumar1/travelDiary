@@ -116,13 +116,25 @@
                         <table class="table">
                             <thead>
                             <th>Overall</th>
-                            <th>{{vacation.budget}}</th>
+                            <th align="right">{{vacation.budget}}</th>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Hotel</td>
-                                <td align="right">$34</td>
+                            <tr ng-repeat="budget in budgetList">
+                                <td>{{budget.title}}</td>
+                                <td align="right">{{budget.budget}}</td>
+                                <td align="center" ng-show="creator"><md-icon class="material-icons" ng-click="removeBudget($index)">remove_circle</md-icon></td>
                             </tr>
+                            <tr ng-show="creator">
+                                <td><md-input-container class="inline-input">
+                                    <input type="text" ng-model="budgetTitle" />
+                                </md-input-container></td>
+                                <td align="right"><md-input-container class="inline-input">
+                                    <input type="number" ng-model="budget" />
+                                </md-input-container></td>
+                                <td align="center"><md-icon class="material-icons" ng-click="addBudget()">add_circle</md-icon></td>
+                            </tr>
+                            <th>Activities</th>
+                            <th></th>
                             <tr>
                                 <td>Activity 1</td>
                                 <td align="right">$3</td>
@@ -130,6 +142,11 @@
                             <tr>
                                 <td>Activity 2</td>
                                 <td align="right">$4</td>
+                            </tr>
+                            <tr class="hide" id="rowTemplate">
+                                <td name="title"></td>
+                                <td name="price" align="right"></td>
+                                <td name="price" align="right"><md-icon class="material-icons">remove_circle</md-icon></td>
                             </tr>
                             </tbody>
                         </table>

@@ -65,6 +65,21 @@
             $scope.openedStart = true;
         };
 
+
+        $scope.budgetList = [];
+        $scope.budget = "";
+        $scope.budgetTitle = "";
+        $scope.addBudget = function(){
+            $scope.budgetList.push({'budget': $scope.budget, 'title': $scope.budgetTitle});
+            $scope.budget = "";
+            $scope.budgetTitle = "";
+        };
+
+        $scope.removeBudget = function(index){
+           console.log(index);
+            $scope.budgetList.splice(index, 1);
+        };
+
     }]);
 
     App.filter('range', function () {
@@ -74,6 +89,7 @@
                 val.push(i);
             return val;
         };
+
     });
 
     App.service('anchorSmoothScroll', function () {
