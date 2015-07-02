@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -49,4 +50,7 @@ public class VacationImage {
         return vacation.getId();
     }
 
+    @JsonIgnore
+    @JsonProperty("vacationId")
+    public void setVacationId(int id) { }
 }

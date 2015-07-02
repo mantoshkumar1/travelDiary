@@ -10,7 +10,6 @@
                 $scope.currentUser = $sessionStorage.currentUser;
 
                 $scope.isCreator = function(){
-                    console.log("is creator");
                     if ($sessionStorage.currentUser.username == $scope.vacation.creator.username){
                         return true;
                     }
@@ -19,10 +18,8 @@
 
                 $scope.totalBudget =  function(){
                     var total = $scope.vacation.budget;
-                    console.log("Budget: " + total);
                     for(var i = 0; i < $scope.vacation.activities.length; i++){
                         total += $scope.vacation.activities[i].budget;
-                        console.log("Budget: " + total);
                     }
                     return total;
                 };
@@ -42,16 +39,15 @@
                     $scope.newVacation.startDate = $scope.vacation.startDate;
                     $scope.newVacation.endDate = $scope.vacation.endDate;
                     $scope.newVacation.keywords = $scope.vacation.keywords;
-                    $scope.newVacation.reviews = $scope.vacation.reviews;
+                    $scope.newVacation.reviews = [];
 
-                    $scope.newVacation.DSCreate().then(function () {
-                        $scope.vacation = $scope.newVacation;
+                    $scope.newVacation.DSCreate().then(function (vacation) {
+                        console.log("created Vacation");
+                        console.log(vacation);
+                        console.log(vacation.id);
+                        $state.go("main.vacation.details.edit", vacation.id);
                         $scope.success = true;
                     });
-                    console.log("created Vacation");
-                    console.log($scope.vacation);
-                    $scope.creator = $scope.isCreator();
-
                 };
 
                 $scope.deleteVacation = function () {
@@ -59,44 +55,7 @@
                 };
 
 
-                /*---------------- UI -------------------------*/
-                /* Scroll */
-                $scope.scrollToElement = function (eID) {
-                    // set the location.hash to the id of
-                    // the element you wish to scroll to.
-                    $location.hash(eID);
-                    anchorSmoothScroll.scrollTo(eID);
-                };
-
-                /* Calendar */
-                $scope.openEnd = function ($event) {
-                    $event.preventDefault();
-                    $event.stopPropagation();
-                    $scope.openedEnd = true;
-                };
-
-                $scope.openStart = function ($event) {
-                    $event.preventDefault();
-                    $event.stopPropagation();
-                    $scope.openedStart = true;
-                };
-
-                /*
-                $scope.budgetList = [];
-                $scope.budget = "";
-                $scope.budgetTitle = "";
-                $scope.addBudget = function () {
-                    $scope.budgetList.push({'budget': $scope.budget, 'title': $scope.budgetTitle});
-                    $scope.budget = "";
-                    $scope.budgetTitle = "";
-                };
-
-                $scope.removeBudget = function (index) {
-                    console.log(index);
-                    $scope.budgetList.splice(index, 1);
-                };
-*/
-
+               /* Reviews */
                 $scope.currentUserReview = getReviewForUser($scope.vacation.reviews, $scope.currentUser);
 
                 $scope.showReviewDialog = function (user, review, vacation) {
@@ -162,7 +121,45 @@
                     return null;
                 }
 
+
+                /*---------------- UI -------------------------*/
+                /* Scroll */
+                $scope.scrollToElement = function (eID) {
+                    // set the location.hash to the id of
+                    // the element you wish to scroll to.
+                    $location.hash(eID);
+                    anchorSmoothScroll.scrollTo(eID);
+                };
+
+                /* Calendar */
+                $scope.openEnd = function ($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    $scope.openedEnd = true;
+                };
+
+                $scope.openStart = function ($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    $scope.openedStart = true;
+                };
+
+                /*
+                 $scope.budgetList = [];
+                 $scope.budget = "";
+                 $scope.budgetTitle = "";
+                 $scope.addBudget = function () {
+                 $scope.budgetList.push({'budget': $scope.budget, 'title': $scope.budgetTitle});
+                 $scope.budget = "";
+                 $scope.budgetTitle = "";
+                 };
+
+                 $scope.removeBudget = function (index) {
+                 console.log(index);
+                 $scope.budgetList.splice(index, 1);
+                 };
+                 */
+
+
             }]);
-
-
 }());

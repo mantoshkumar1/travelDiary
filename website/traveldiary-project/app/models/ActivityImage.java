@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -48,4 +49,8 @@ public class ActivityImage {
     public int getActivityId() {
         return activity.getId();
     }
+
+    @JsonIgnore
+    @JsonProperty("activityId")
+    public void setActivityId(int id) {  }
 }

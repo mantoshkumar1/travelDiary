@@ -114,7 +114,7 @@ public class ActivityReview {
 
     @JsonIgnore
     @JsonProperty("activityId")
-    public void ActivityId(int id) {}
+    public void setActivityId(int id) {}
 
 
     public void setActivity(Activity activity) {
