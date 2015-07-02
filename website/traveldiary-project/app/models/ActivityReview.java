@@ -113,7 +113,7 @@ public class ActivityReview {
     }
 
     @JsonIgnore
-    @JsonProperty("vacationId")
+    @JsonProperty("activityId")
     public void setActivityId(int id) {}
 
 

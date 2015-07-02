@@ -14,7 +14,7 @@
             </div>
             <div layout="row" layout-align="end center" flex>
                 <md-button aria-label="Copy" ng-click="createVacation()"
-                           ng-if="!creator">
+                           ng-if="!isCreator()">
                     <md-icon class="material-icons">favorite_border</md-icon>
                     Copy
                 </md-button>
@@ -44,24 +44,23 @@
                         </md-menu-item>
                     </md-menu-content>
                 </md-menu>
-                <md-button aria-label="Review" ng-if="creator" ng-click="deleteVacation()">
+                <md-button aria-label="Review" ng-if="isCreator()" ng-click="deleteVacation()">
                     <md-icon class="material-icons">delete</md-icon>
                     Delete
                 </md-button>
             </div>
         </div>
     </div>
-    <!--/md-content-->
 
     <div class="md-whiteframe-z1" style="width: 80%; margin-left: auto; margin-right: auto;">
         <div layout-margin layout-padding>
             <div layout="row">
                 <div layout="column" layout-align="start start" flex>
                     <div class="md-headline">
-                        <div ng-show="!creator">
+                        <div ng-show="!isCreator()">
                             {{vacation.name}}
                         </div>
-                        <md-input-container class="inline-input" ng-show="creator">
+                        <md-input-container class="inline-input" ng-show="isCreator()">
                             <input ng-model="vacation.name">
                         </md-input-container>
                     </div>
@@ -73,24 +72,26 @@
                 </div>
                 <div layout="row" layout-align="end start">
                     <div class="md-headline">
-                        <div ng-show="!creator">
+                        <div ng-show="!isCreator()">
                             {{vacation.startDate | date:'dd.MM.yyyy'}} to
                             {{vacation.endDate | date:'dd.MM.yyyy'}}
                         </div>
-                        <div class="md-headline" layout="row" ng-show="creator">
+                        <div class="md-headline" layout="row" ng-show="isCreator()">
                             <md-input-container class="inline-input">
                                 <div layout="row">
                                     <input class=" md-headline" flex flex-order="1" type="text"
                                            is-open="openedStart" datepicker-popup="{{dd.MM.yyyy}}"
-                                           ng-model="vacation.startDate" show-weeks="false" show-button-bar="false" style="width: 130px;" ng-click="openStart($event)"/>
+                                           ng-model="vacation.startDate" show-weeks="false" show-button-bar="false"
+                                           style="width: 130px;" ng-click="openStart($event)"/>
                                 </div>
                             </md-input-container>
-                            <div class="md-headline" style="padding-left: 2px; padding-right: 2px;"> to </div>
+                            <div class="md-headline" style="padding-left: 2px; padding-right: 2px;"> to</div>
                             <md-input-container class="inline-input md-headline">
                                 <div layout="row">
                                     <input class=" md-headline" flex-order="1" type="text"
                                            class="form-control" is-open="openedEnd" datepicker-popup="{{dd.MM.yyyy}}"
-                                           ng-model="vacation.endDate" show-weeks="false" show-button-bar="false" style="width: 130px;" ng-click="openEnd($event)"/>
+                                           ng-model="vacation.endDate" show-weeks="false" show-button-bar="false"
+                                           style="width: 130px;" ng-click="openEnd($event)"/>
                                 </div>
                             </md-input-container>
                         </div>
@@ -106,16 +107,14 @@
                     <carousel interval="5000" ng-if="(vacation.images !== undefined) && (vacation.images.length > 0)">
                         <slide ng-repeat="image in vacation.images">
                             <img ng-src="{{image.url}}" style="width: 100%">
-                            <!--div class="carousel-caption">
-                                <h4>{{image.name}}</h4>
-                            </div-->
                         </slide>
                     </carousel>
-                    <div class="well" layout row layout-align="center center" ng-if="(vacation.images == undefined) || (vacation.images.length == 0)" style="height: 100%;">
+                    <div class="well" layout row layout-align="center center"
+                         ng-if="(vacation.images == undefined) || (vacation.images.length == 0)" style="height: 100%;">
                         <div>No Images available</div>
                     </div>
                 </div>
-                <md-button aria-label="Upload" ng-if="creator" base-sixty-four-input>
+                <md-button aria-label="Upload" ng-if="isCreator()" base-sixty-four-input>
                     <md-icon class="material-icons">image</md-icon>
                     Upload
                 </md-button>
@@ -124,9 +123,9 @@
             <md-content class="md-padding" flex>
                 <div class="md-padding">
                     <div class="md-title">Description</div>
-                    <div layout-align="center" ng-show="!creator">{{vacation.description}}</div>
-                    <md-input-container class="inline-input" ng-show="creator">
-                            <textarea type="text" ng-model="vacation.description" />
+                    <div layout-align="center" ng-show="!isCreator()">{{vacation.description}}</div>
+                    <md-input-container class="inline-input" ng-show="isCreator()">
+                        <textarea type="text" ng-model="vacation.description"/>
                     </md-input-container>
                 </div>
 
@@ -136,15 +135,20 @@
                         <table class="table">
                             <thead>
                             <th>Overall</th>
-                            <th align="right">{{vacation.budget}}</th>
+                            <th align="right" style="text-align: right;">{{totalBudget() | currency}}</th>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="budget in budgetList">
+                            <tr>
+                                <td>Vacation (Hotel, Flight etc.)</td>
+                                <td align="right">{{vacation.budget | currency}}</td>
+                                <td align="right"></td>
+                            </tr>
+                            <!--tr ng-repeat="budget in budgetList">
                                 <td>{{budget.title}}</td>
                                 <td align="right">{{budget.budget}}</td>
-                                <td align="center" ng-show="creator"><md-icon class="material-icons" ng-click="removeBudget($index)">remove_circle</md-icon></td>
+                                <td align="center" ng-show="isCreator()"><md-icon class="material-icons" ng-click="removeBudget($index)">remove_circle</md-icon></td>
                             </tr>
-                            <tr ng-show="creator">
+                            <tr ng-show="isCreator()">
                                 <td><md-input-container class="inline-input">
                                     <input type="text" ng-model="budgetTitle" />
                                 </md-input-container></td>
@@ -152,21 +156,12 @@
                                     <input type="number" ng-model="budget" style="-moz-appearance:textfield;" />
                                 </md-input-container></td>
                                 <td align="center"><md-icon class="material-icons" ng-click="addBudget()">add_circle</md-icon></td>
-                            </tr>
+                            </tr-->
                             <th>Activities</th>
                             <th></th>
-                            <tr>
-                                <td>Activity 1</td>
-                                <td align="right">$3</td>
-                            </tr>
-                            <tr>
-                                <td>Activity 2</td>
-                                <td align="right">$4</td>
-                            </tr>
-                            <tr class="hide" id="rowTemplate">
-                                <td name="title"></td>
-                                <td name="price" align="right"></td>
-                                <td name="price" align="right"><md-icon class="material-icons">remove_circle</md-icon></td>
+                            <tr ng-repeat="activity in vacation.activities">
+                                <td>{{activity.name}}</td>
+                                <td align="right">{{activity.budget | currency}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -191,7 +186,8 @@
                 <div flex="33" ng-repeat="activity in vacation.activities">
                     <md-card>
                         <div style="height: 220px; overflow: hidden;">
-                            <carousel interval="5000" ng-if="(activity.images !== undefined) && (activity.images.length > 0)">
+                            <carousel interval="5000"
+                                      ng-if="(activity.images !== undefined) && (activity.images.length > 0)">
                                 <slide ng-repeat="image in activity.images">
                                     <img ng-src="{{image.url}}" style="width: 100%">
                                     <!--div class="carousel-caption">
@@ -199,7 +195,9 @@
                                     </div-->
                                 </slide>
                             </carousel>
-                            <div class="well" layout row layout-align="center center" ng-if="(activity.images == undefined) || (activity.images.length == 0)" style="height: 100%;">
+                            <div class="well" layout row layout-align="center center"
+                                 ng-if="(activity.images == undefined) || (activity.images.length == 0)"
+                                 style="height: 100%;">
                                 <div>No Images available</div>
                             </div>
                         </div>

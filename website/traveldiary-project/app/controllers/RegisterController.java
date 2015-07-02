@@ -26,7 +26,7 @@ public class RegisterController extends Controller {
         try {
             InsertDAO.insertUser(newUser);
         } catch (EntityExistsException e) {
-            return forbidden("User already exsits!");
+            return forbidden("User already exists!");
         }
 
         return created(Json.toJson(newUser));

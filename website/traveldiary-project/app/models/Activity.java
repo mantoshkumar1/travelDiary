@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -43,6 +44,9 @@ public class Activity {
     @JoinColumn(name = "creatorId")
     @JsonBackReference
     private User creator;
+
+    @Column(precision = 5, scale = 2)
+    private BigDecimal budget;
 
     @ManyToMany
     @JoinTable(name = "ActivityKeywords",
@@ -132,6 +136,14 @@ public class Activity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public BigDecimal getBudget() {
+        return budget;
+    }
+
+    public void setBudget(BigDecimal budget) {
+        this.budget = budget;
     }
 
     @Transient

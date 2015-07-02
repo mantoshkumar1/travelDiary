@@ -33,7 +33,7 @@ App.factory('AuthService', [ '$http', 'Session', function ($http, Session) {
     return authService;
 
     function login(credentials) {
-        console.log(credentials)
+        console.log(credentials);
 
         return $http
             .post('/api/login', credentials)
@@ -59,13 +59,14 @@ App.controller('loginController', ['$scope', '$state', '$rootScope', 'AuthServic
         password: ''
     };
 
-    $scope.login = function (credentials) {
+    $scope.userLogin = function (credentials) {
         AuthService.login(credentials).then(function (user) {
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
             // Function defined in SessionController
             $scope.setCurrentUser(user);
+            $state.go("main.index");
         }, function () {
-            $rootScope.$broadcast(AUTH_EVENTS.loginFailed)
+            $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
         });
     };
 

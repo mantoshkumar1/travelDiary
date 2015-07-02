@@ -18,19 +18,12 @@ public class LoginController extends Controller {
         Credentials credentials = Json.fromJson(request().body().asJson(), Credentials.class);
 
         User user = TravelDiaryDAO.getUserByMail(credentials.email);
+        //String inputPassword = PasswordUtil.calculateHashString(credentials.password);
+        boolean valid_password = PasswordUtil.comparePassword(credentials.password, user.getPasswordHash());
 
-        /**
-         * Calculate the hash on the server side. If this is done on the client side
-         * an adversary that has obtained the hash from the db can just login using the
-         * hash. That defeats the purpose of hashing.
-         */
-        String providedPasswordHash = PasswordUtil.calculateHashString(credentials.password);
-
-        if (user != null &&
-                user.getPasswordHash().equals(PasswordUtil.calculateHashString(credentials.password))) {
+        if ((user != null) && (true == valid_password)) {
             // Success. Create new session
             session(LOGIN_SESSION, credentials.email);
-
             // Return user
             return ok(Json.toJson(user));
         } else {
@@ -43,7 +36,7 @@ public class LoginController extends Controller {
     @Transactional
     public static Result logout() {
         session().clear();
-        flash("success", "Successfully Logout");
+        flash("success", "Successfully Logout!");
         redirect("/");
         return ok("Bye");
     }
