@@ -6,7 +6,7 @@
             </h2>
     </md-toolbar>
     <md-dialog-content class="review-dialog-content">
-        <form name="reviewForm" ng-submit="saveVacation(review)">
+        <form name="reviewForm" ng-submit="submit(review)">
             <md-input-container>
                 <label>Title</label>
                 <input type="text" required name="title" ng-model="review.title">
@@ -34,7 +34,7 @@
                     Submit
                 </md-button>
 
-                <md-button ng-click="cancel()">
+                <md-button ng-click="cancel()" type="button">
                     Cancel
                 </md-button>
             </div>

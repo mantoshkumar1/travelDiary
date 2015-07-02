@@ -9,6 +9,7 @@
         ['$scope', '$state', '$location', 'anchorSmoothScroll', 'vacation','keywords',
             function ($scope, $state, $location, anchorSmoothScroll, vacation, keywords) {
 
+
                 $scope.vacation = vacation;
                 $scope.keywords = keywords;
 

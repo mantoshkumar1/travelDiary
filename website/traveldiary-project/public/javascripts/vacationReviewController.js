@@ -24,6 +24,9 @@ angular.module("travelDiary")
         $scope.submit = function(review) {
             review.date = Date.now();
 
+            console.log(review);
+
+
             $mdDialog.hide(review);
         };
 
