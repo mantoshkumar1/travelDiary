@@ -6,7 +6,7 @@ package util;
 public class PasswordUtil {
 
     public static String calculateHashString(String password) {
-        // TODO: Acutally calculate a hash here!
+        // TODO: Acutally calculate a hash here!..add a class for encryption/decryption and also add method for cal pass here
         return password;
     }
 }
