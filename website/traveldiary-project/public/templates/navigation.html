@@ -42,12 +42,12 @@
                 </div>
                 <div flex="25" flex-sm="100" layout="row" layout-align="end center" layout-align-sm="center center">
                     <div ng-if="currentUser != null">
-                        Welcome {{currentUser.username}}
+                        {{currentUser.username}}
+                        <md-button ng-click="navCtrl.userLogout()">Logout</md-button>
                     </div>
-                    <div>
+                    
+                    <div ng-if="currentUser == null">
                         <md-button ng-click="navCtrl.clickLogin()">Login</md-button>
-                    </div>
-                    <div>
                         <md-button ng-click="navCtrl.clickRegister()">Register</md-button>
                     </div>
                 </div>
