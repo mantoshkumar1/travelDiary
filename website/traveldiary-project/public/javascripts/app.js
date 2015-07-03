@@ -102,7 +102,33 @@
         };
 
         var vacation_details_edit_config = {
-            url: '/edit',
+            url: '/edit/{id}',
+            resolve: {
+                vacationWithoutUser: ['$stateParams', 'Vacation', function ($stateParams, Vacation) {
+                    return Vacation.find($stateParams.id);
+                }],
+                vacation: ['vacationWithoutUser', 'Vacation', function (vacationWithoutUser, Vacation) {
+                    return Vacation.loadRelations(vacationWithoutUser, ['creator']);
+                }]
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'assets/templates/vacation_edit.html',
+                    controller: 'VacationEditController'
+                }
+            }
+        };
+
+        var vacation_details_add_activity_config = {
+            url: '/add/{id}',
+            resolve: {
+                vacationWithoutUser: ['$stateParams', 'Vacation', function ($stateParams, Vacation) {
+                    return Vacation.find($stateParams.id);
+                }],
+                vacation: ['vacationWithoutUser', 'Vacation', function (vacationWithoutUser, Vacation) {
+                    return Vacation.loadRelations(vacationWithoutUser, ['creator']);
+                }]
+            },
             views: {
                 'content@': {
                     templateUrl: 'assets/templates/vacation_edit.html',
@@ -204,7 +230,7 @@
         $stateProvider.state('main.vacation', vacation_config);
         $stateProvider.state('main.vacation.search', vacation_search_config);
         $stateProvider.state('main.vacation.details', vacation_details_config);
-        $stateProvider.state('main.vacation.details.edit', vacation_details_edit_config);
+        $stateProvider.state('main.vacation.edit', vacation_details_edit_config);
         $stateProvider.state('main.activity', activity_config);
         $stateProvider.state('main.activity.search', activity_search_config);
         $stateProvider.state('main.activity.details', activity_details_config);
