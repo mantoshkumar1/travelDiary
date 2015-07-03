@@ -4,30 +4,29 @@
     </h1>
 </md-toolbar>
 
-<form class="form-horizontal" name="userForm">
+<form class="form-default" name="userForm">
 
     <div class="form-group">
         <md-input-container flex="">
-            <label for="credentials.email" class="col-xs-2 control-label">Email</label>
+            <label for="credentials.email">Email</label>
             <input class="form-control" id="credentials.email" required="" ng-model="credentials.email" type="email">
         </md-input-container>
     </div>
 
     <div class="form-group">
         <md-input-container flex="">
-            <label for="credentials.password" class="col-xs-2 control-label">Password</label>
+            <label for="credentials.password">Password</label>
             <input class="form-control" id="credentials.password" required="" ng-model="credentials.password" type="password">
         </md-input-container>
     </div>
     <br>
 
     <div class="form-group">
-        <div class="col-sm-offset-2 col-xs-10">
-            <md-button type="submit" class="md-raised" md-ripple-size ng-click="userLogin(credentials)">
-                <span class="glyphicon glyphicon-plus"></span> Login
-            </md-button>
-            <a href="#/" class="btn"> Cancel</a>
-        </div>
+        <md-button type="submit" class="md-raised" md-ripple-size ng-click="userLogin(credentials)">
+            <span class="glyphicon glyphicon-plus"></span> Login
+        </md-button>
+        <a href="#/" class="btn"> Cancel</a>
+
     </div>
 
 </form>
