@@ -193,22 +193,4 @@ App.directive('fixedNav', function ($window) {
         })
     };
 });
-
-App.directive('searchBarFix', function () {
-        return {
-            restrict: 'C',
-            compile: function compile(tElement, tAttrs, transclude) {
-                return {
-                    post: function compile(tElement, tAttrs, transclude) {
-                        var searchInput = angular.element('[input]');
-                        var controller = searchInput.controller();
-
-                        console.log(searchInput);
-
-                    }
-                }
-            }
-        }
-    }
-);
 }());

@@ -4,8 +4,8 @@
 (function() {
 
 angular.module("travelDiary")
-    .controller('activitySearchController', ['$scope', '$state', 'SearchService', 'activities','SearchService',
-        function ($scope, $state, SearchService, activities, SearchService) {
+    .controller('activitySearchController', ['$scope', '$state', 'SearchService', 'activities',
+        function ($scope, $state, SearchService, activities) {
 
         var thisCtrl = this;
 
@@ -27,7 +27,7 @@ angular.module("travelDiary")
 
             var neededMatches = selectedKeywords.length;
 
-            return actualMatches === neededMatches;
+            return actualMatches === neededMatches && activity.budget <= SearchService.budgetContainer.currentBudget;
         };
 
         thisCtrl.loadActivity = function (activity) {
