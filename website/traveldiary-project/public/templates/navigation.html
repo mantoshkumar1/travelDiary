@@ -2,8 +2,10 @@
     <div layout="column">
         <md-toolbar md-scroll-shrink class="md-raised">
             <div layout="row" layout-sm="column" layout-align="center center" class="nav-padding">
-                <div flex="25" flex-sm="100">
-                    Travel Diary
+                <div  flex="25" flex-sm="100" layout-align="start center">
+                    <md-button target="_blank" no-ink href="#/index">
+                        Travel Diary
+                    </md-button>
                 </div>
                 <div flex="50" flex-sm="100">
                     <div id="search-bar" class="flexbox" layout="row" layout-align="start center">
@@ -15,7 +17,6 @@
                         </div>
                         <div>
                             <md-autocomplete id="search"
-                                             class="md-light"
                                              md-search-text="navCtrl.searchText"
                                              md-items="keyword in navCtrl.getFilteredKeywords(navCtrl.searchText)"
                                              ng-disabled="navCtrl.isDisabled"
@@ -40,20 +41,22 @@
                         </div>
                     </div>
                 </div>
-                <div flex="25" flex-sm="100" layout="row" layout-align="end center" layout-align-sm="center center">
-                    <div ng-if="currentUser != null">
-                        Welcome {{currentUser.username}}
-                    </div>
-                    <div>
-                        <md-button ng-click="navCtrl.clickLogin()" class="md-icon-button">
-                            <md-icon class="md-48 material-icons">event_available</md-icon>
-                        </md-button>
-                    </div>
-                    <div>
-                        <md-button ng-click="navCtrl.clickRegister()" class="md-icon-button">
-                            <md-icon class="md-48 material-icons">home</md-icon>
-                        </md-button>
-                    </div>
+                <div ng-if="currentUser == null" flex="25" flex-sm="100" layout="row" layout-align="end center" layout-align-sm="center center">
+                    <md-button>
+                        Login
+                        <md-icon class="md-48 material-icons">event_available</md-icon>
+                    </md-button>
+                    <md-button>
+                        Register
+                        <md-icon class="md-48 material-icons">event_available</md-icon>
+                    </md-button>
+                </div>
+
+                <div ng-if="currentUser != null" flex="25" flex-sm="100" layout="row" layout-align="end center" layout-align-sm="center center">
+                    <md-button ng-click="navCtrl.clickRegister()">
+                        <span>{{currentUser.username}}</span>
+                        <md-icon class="md-48 material-icons">account_box</md-icon>
+                    </md-button>
                 </div>
             </div>
         </md-toolbar>
