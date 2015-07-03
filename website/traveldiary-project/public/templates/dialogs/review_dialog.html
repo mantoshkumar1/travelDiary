@@ -1,0 +1,43 @@
+<md-dialog class="review-dialog" flex="80">
+    <md-toolbar class="md-accent">
+        <h2 class="md-toolbar-tools">
+           <span>Write your Review </span>
+
+            </h2>
+    </md-toolbar>
+    <md-dialog-content class="review-dialog-content">
+        <form name="reviewForm" ng-submit="revCtrl.submit(revCtrl.review)">
+            <md-input-container>
+                <label>Title</label>
+                <input type="text" required name="title" ng-model="revCtrl.review.title">
+                <div ng-messages="reviewForm.title.$error">
+                    <div ng-message="required">Title is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Your Opinion</label>
+                <textarea type="text" required rows="5" name="description" ng-model="revCtrl.review.description"></textarea>
+                <div ng-messages="reviewForm.description.$error">
+                    <div ng-message="required">Description is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <md-select required name="rating" placeholder="Your Rating" ng-model="revCtrl.review.rating">
+                    <md-option ng-repeat="rating in revCtrl.ratings" ng-value="rating.value">{{rating.rating}}</md-option>
+                </md-select>
+                <div ng-messages="reviewForm.rating.$error">
+                    <div ng-message="required">Rating is required.</div>
+                </div>
+            </md-input-container>
+            <div layout="row" layout-align="center center">
+                <md-button type="submit">
+                    Submit
+                </md-button>
+
+                <md-button ng-click="revCtrl.cancel()" type="button">
+                    Cancel
+                </md-button>
+            </div>
+        </form>
+    </md-dialog-content>
+</md-dialog>

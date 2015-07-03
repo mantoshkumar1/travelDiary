@@ -6,8 +6,8 @@
 
 <div class="alert alert-success" role='alert' ng-show="$scope.success">Your account has been created successfully</div>
 
-<form class="form-horizontal" name="userForm">
-
+<form class="form-default" name="userForm">
+<div id = "wrapper">
     <div class="form-group" layout="" layout-sm="column">
         <md-input-container flex="">
             <label for="firstName" class="col-xs-2 control-label">First name</label>
@@ -44,13 +44,17 @@
     <br>
 
     <div class="form-group">
-        <div class="col-sm-offset-2 col-xs-10">
-            <md-button type="submit" class="md-raised" md-ripple-size ng-click="save()">
-                <span class="glyphicon glyphicon-plus"></span> Sign up
-            </md-button>
-            <a href="#/" class="btn"> Cancel</a>
-        </div>
+        <md-button type="submit" class="md-raised" md-ripple-size ng-click="save()">
+            <span class="glyphicon glyphicon-plus"></span> Sign up
+        </md-button>
+        <a href="#/" class="btn"> Cancel</a>
     </div>
 
+    <footer>
+        <p>Developers: Albert, Mantosh, Ulrike</p>
+        <p>Contact: <a href="https://wwwmatthes.in.tum.de/pages/1mqqqoqe7gapz/Web-Application-Engineering">Web-Application-Engineering Department</a></p>
+    </footer>
+
+</div>
 </form>
 

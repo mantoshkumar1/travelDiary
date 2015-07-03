@@ -1,11 +1,13 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +16,7 @@ import java.util.List;
  */
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Activity {
 
     @Id
@@ -33,6 +36,7 @@ public class Activity {
     @OneToMany
     @JoinColumn(name = "activityId")
     private List<ActivityReview> reviews;
+
     private Date startTime;
     private Date endTime;
 
@@ -40,6 +44,9 @@ public class Activity {
     @JoinColumn(name = "creatorId")
     @JsonBackReference
     private User creator;
+
+    @Column(precision = 5, scale = 2)
+    private BigDecimal budget;
 
     @ManyToMany
     @JoinTable(name = "ActivityKeywords",
@@ -129,6 +136,14 @@ public class Activity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public BigDecimal getBudget() {
+        return budget;
+    }
+
+    public void setBudget(BigDecimal budget) {
+        this.budget = budget;
     }
 
     @Transient

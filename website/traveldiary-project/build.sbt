@@ -14,19 +14,22 @@ libraryDependencies ++= Seq(
   // We explicitly define both angular/angularjs libraries as dependencies. angularjs provides angular.js which is the
   // one that will be imported and used in code. Since angular-ui-router etc. depend on the angular package we force
   // them to use version 1.4.1 as well. We can then safely use the angular.js file from angularjs instead of angular.
-  "org.webjars" % "angularjs" % "1.4.0",
-  "org.webjars.bower" % "angular" % "1.4.0",
+  "org.webjars" % "angularjs" % "1.3.15",
+  "org.webjars.bower" % "angular" % "1.3.15",
   // END NOTE
   "org.webjars" % "angular-ui-router" % "0.2.15",
   "org.webjars" % "angular-material" % "0.10.0",
+  "org.webjars.bower" % "ngstorage" % "0.3.6",
+  "org.webjars.bower" % "angular-messages" % "1.3.15",
   "org.webjars.bower" % "angular-material-icons" % "0.4.0",
   "org.webjars.bower" % "bootstrap" % "3.3.5",
-  "org.webjars.bower" % "angular-animate" % "1.4.0",
-  "org.webjars.bower" % "angular-aria" % "1.4.0",
+  "org.webjars.bower" % "angular-animate" % "1.3.15",
+  "org.webjars.bower" % "angular-aria" % "1.3.15",
   "org.webjars.bower" % "js-data-angular" % "2.4.0",
   "org.webjars.bower" % "angular-bootstrap" % "0.13.0",
   "org.webjars.bower" % "angular-filter" % "0.5.4",
   "org.webjars" % "jquery" % "2.1.4",
+  "org.webjars.bower" % "angular-base64-upload" % "0.1.8",
   javaJdbc,
   "org.xerial" % "sqlite-jdbc" % "3.8.6",
   javaJpa.exclude("org.hibernate.javax.persistence", "hibernate-jpa-2.0-api"),

@@ -1,7 +1,7 @@
 @()
 
 <!DOCTYPE html>
-<html>
+<html ng-app="travelDiary">
     <head>
         <title>Travel Diary</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,10 +11,11 @@
         <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("angular-material.css"))">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.css"))'>
         <link rel='custom stylesheet' href='@routes.Assets.at("stylesheets/main.css")'>
     </head>
 
-    <body ng-app="travelDiary">
+    <body ng-controller="SessionController">
         <div ui-view="navigation"></div>
         <div ui-view="content"></div>
 
@@ -27,28 +28,42 @@
         should correspond to the versions of the dependencies in build.sbt.
         *@
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("2.1.4/jquery.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.4.0/angular.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.4.0/angular-animate.js"))"></script>
-        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.4.0/angular-aria.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.3.15/angular.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.3.15/angular-animate.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angularjs/1.3.15/angular-aria.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-ui-router.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-messages/1.3.15/angular-messages.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-filter.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-material.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("js-data.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("js-data-angular.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("ui-bootstrap-tpls.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("ngStorage.js"))"></script>
 
         @*
         Adding app javascript code.
         *@
         <script type="text/javascript" src="@routes.Assets.at("javascripts/app.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("javascripts/services.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("javascripts/navigationController.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("javascripts/registerController.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("javascripts/vacationSearchController.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("javascripts/vacationDetailsController.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("javascripts/directives.js")"></script>
+            <!-- SERVICES -->
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/service/services.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/service/anchorSmoothScroll.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/service/reviewDialogService.js")"></script>
+            <!-- FILTER -->
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/filter/range.js")"></script>
+            <!-- CONTROLLER -->
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/navigationController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/registerController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/vacationSearchController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/reviewDialogController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/vacationDetailsController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/vacationEditController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/controller/activitySearchController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/activityDetailsController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/directive/directives.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/login.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("javascripts/starRating.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/factories.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/sessionController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/directive/starRating.js")"></script>
     </body>
 </html>

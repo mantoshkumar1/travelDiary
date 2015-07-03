@@ -1,4 +1,15 @@
 <figure ng-switch on="activity.images.length">
+    <md-grid-tile-header>
+        <h3>
+            <div ng-layout="row" ng-if="activity.rating > 0">
+                <i class="material-icons" ng-repeat="n in [] | range:vacation.rating">star</i>
+                <i class="material-icons" ng-repeat="n in [] | range:(5-vacation.rating)">star_border</i>
+            </div>
+            <div ng-if="activity.rating === 0">
+                No Ratings Yet
+            </div>
+        </h3>
+    </md-grid-tile-header>
     <img ng-switch-when="0" ng-src="assets/images/1.jpg">
     <!-- TODO: Why is trim necessary? There are no spaces in the DB.-->
     <img ng-switch-default ng-src="{{activity.images[0].url.trim()}}">

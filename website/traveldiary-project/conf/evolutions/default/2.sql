@@ -75,16 +75,16 @@ INSERT INTO Vacation VALUES (15, 'An extensive tour through the Deutsches Museum
 
 
 INSERT INTO Activity VALUES
-  (1, 'Activity1', 'Activity description 1', strftime('%Y-%m-%d %H:%M:%f', 'now'), strftime('%Y-%m-%d %H:%M:%f', 'now'),
+  (1, 'Activity1', 'Activity description 1',0, strftime('%Y-%m-%d %H:%M:%f', 'now'), strftime('%Y-%m-%d %H:%M:%f', 'now'),
    1, 1);
 INSERT INTO Activity VALUES
-  (2, 'Activity2', 'Activity description 2', strftime('%Y-%m-%d %H:%M:%f', 'now'), strftime('%Y-%m-%d %H:%M:%f', 'now'),
+  (2, 'Activity2', 'Activity description 2', 25, strftime('%Y-%m-%d %H:%M:%f', 'now'), strftime('%Y-%m-%d %H:%M:%f', 'now'),
    2, 2);
 INSERT INTO Activity VALUES
-  (3, 'Activity3', 'Activity description 3', strftime('%Y-%m-%d %H:%M:%f', 'now'), strftime('%Y-%m-%d %H:%M:%f', 'now'),
+  (3, 'Activity3', 'Activity description 3', 6.5, strftime('%Y-%m-%d %H:%M:%f', 'now'), strftime('%Y-%m-%d %H:%M:%f', 'now'),
    3, 3);
 INSERT INTO Activity VALUES
-  (4, 'Activity4', 'Activity description 4', strftime('%Y-%m-%d %H:%M:%f', 'now'), strftime('%Y-%m-%d %H:%M:%f', 'now'),
+  (4, 'Activity4', 'Activity description 4', 12.9, strftime('%Y-%m-%d %H:%M:%f', 'now'), strftime('%Y-%m-%d %H:%M:%f', 'now'),
    4, 4);
 
 INSERT INTO activitykeywords VALUES (1, 1);
