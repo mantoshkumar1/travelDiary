@@ -5,9 +5,26 @@
 
 var App = angular.module("travelDiary");
 
+App.factory('AuthOutService', [ '$http', function ($http) {
+
+        var authOutService = {
+            logout:logout
+        };
+
+        return authOutService;
+
+        function logout() {
+            return $http
+                .post('/api/logout')
+                .then(function () {
+                    console.log("User logged out.");
+                });
+        };
+    }]);
+
 App.controller('navigationController',
-    ['Util', 'SearchService', '$scope', '$state', '$log', 'keywords', 'selectedKeywords', 'maxBudget',
-        function (Util, SearchService, $scope, $state, $log, injectedKeywords, injectedSelectedKeywords,maxBudget) {
+    ['Util', 'SearchService', '$scope', '$state', '$log', 'keywords', 'selectedKeywords', 'maxBudget','AuthOutService',
+        function (Util, SearchService, $scope, $state, $log, injectedKeywords, injectedSelectedKeywords,maxBudget, AuthOutService) {
 
             // Use alias to avoid scope clashes
             var thisCtrl = this;
@@ -67,6 +84,13 @@ App.controller('navigationController',
             thisCtrl.goToHome = function () {
                 $state.go('main.index');
             };
+
+            thisCtrl.userLogout = function () {
+                AuthOutService.logout().then(function(){
+                    $scope.wipeSession();
+                    $state.go('main.index');
+                })
+            }
 
             // Search input
             thisCtrl.isDisabled = false;

@@ -69,14 +69,6 @@ App.controller('loginController', ['$scope', '$state', '$rootScope', 'AuthServic
             $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
         });
     };
-
-    $scope.logout = function () {
-        $http.post('api/logout', {}).success(function(data){
-            $scope.wipeSession();
-
-            $state.go('main.index');
-        });
-    }
 }]);
 
 }());

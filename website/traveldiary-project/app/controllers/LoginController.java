@@ -16,7 +16,6 @@ public class LoginController extends Controller {
     @Transactional
     public static Result login() {
         Credentials credentials = Json.fromJson(request().body().asJson(), Credentials.class);
-
         User user = TravelDiaryDAO.getUserByMail(credentials.email);
         //String inputPassword = PasswordUtil.calculateHashString(credentials.password);
         boolean valid_password = PasswordUtil.comparePassword(credentials.password, user.getPasswordHash());
@@ -36,8 +35,6 @@ public class LoginController extends Controller {
     @Transactional
     public static Result logout() {
         session().clear();
-        flash("success", "Successfully Logout!");
-        redirect("/");
         return ok("Bye");
     }
 }
