@@ -41,13 +41,16 @@
                     $scope.newVacation.keywords = $scope.vacation.keywords;
                     $scope.newVacation.reviews = [];
 
+
                     $scope.newVacation.DSCreate().then(function (vacation) {
                         console.log("created Vacation");
-                        console.log(vacation);
-                        console.log(vacation.id);
-                        $state.go("main.vacation.details.edit", vacation.id);
-                        $scope.success = true;
+                        //vacation.activities.push($scope.vacation.activities[0]);
+                        //vacation.DSSave().then(function(vacation){
+                            $state.go("main.vacation.edit",{id: vacation.id});
+                        //S});
                     });
+
+
                 };
 
                 $scope.deleteVacation = function () {
@@ -76,7 +79,7 @@
                         controller: 'VacationReviewController'
                     }).then(function (newReview) {
 
-                        console.log(newReview)
+                        console.log(newReview);
 
 
                         if (hasReview) {
@@ -130,36 +133,6 @@
                     $location.hash(eID);
                     anchorSmoothScroll.scrollTo(eID);
                 };
-
-                /* Calendar */
-                $scope.openEnd = function ($event) {
-                    $event.preventDefault();
-                    $event.stopPropagation();
-                    $scope.openedEnd = true;
-                };
-
-                $scope.openStart = function ($event) {
-                    $event.preventDefault();
-                    $event.stopPropagation();
-                    $scope.openedStart = true;
-                };
-
-                /*
-                 $scope.budgetList = [];
-                 $scope.budget = "";
-                 $scope.budgetTitle = "";
-                 $scope.addBudget = function () {
-                 $scope.budgetList.push({'budget': $scope.budget, 'title': $scope.budgetTitle});
-                 $scope.budget = "";
-                 $scope.budgetTitle = "";
-                 };
-
-                 $scope.removeBudget = function (index) {
-                 console.log(index);
-                 $scope.budgetList.splice(index, 1);
-                 };
-                 */
-
 
             }]);
 }());
