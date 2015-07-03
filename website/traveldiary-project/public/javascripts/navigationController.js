@@ -64,6 +64,10 @@ App.controller('navigationController',
                 $state.go('main.login');
             };
 
+            thisCtrl.goToHome = function () {
+                $state.go('main.index');
+            };
+
             // Search input
             thisCtrl.isDisabled = false;
             thisCtrl.noCache = true;
