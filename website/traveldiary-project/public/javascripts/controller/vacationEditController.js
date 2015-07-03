@@ -29,6 +29,8 @@
 
                 $scope.deleteVacation = function (vacation) {
                     console.log(vacation);
+                    //finally go back to main index page
+                    $state.go("main.index");
                 };
 
                 $scope.saveVacation = function (vacation) {
