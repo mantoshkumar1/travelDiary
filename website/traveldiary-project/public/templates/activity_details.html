@@ -161,8 +161,14 @@
             <md-list>
                 <md-list-item class="md-3-line" ng-repeat="review in activity.reviews">
                     <div class="md-list-item-text">
+                        <div layout="row" layout-align="start center">
+                            <div style="color: #90caf9;">
+                                <i class="material-icons" ng-repeat="n in [] | range:review.rating">star</i>
+                                <i class="material-icons" ng-repeat="n in [] | range:(5-review.rating)">star_border</i>
+                            </div>
+                        </div>
                         <h3>{{review.title}}</h3>
-                        <h4>by {{review.user.username}}UserName</h4>
+                        <h4>by {{review.user.username}}</h4>
 
                         <p>{{review.description}}</p>
                     </div>

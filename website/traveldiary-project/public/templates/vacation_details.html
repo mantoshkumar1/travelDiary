@@ -38,7 +38,7 @@
                         </md-menu-item>
                         <md-menu-item ng-if="!currentUserReview">
                             <md-button ng-click="showReviewCreateDialog()"
-                                    aria-label="Add Review">
+                                       aria-label="Add Review">
                                 Add Review
                             </md-button>
                         </md-menu-item>
@@ -221,8 +221,14 @@
             <md-list>
                 <md-list-item class="md-3-line" ng-repeat="review in vacation.reviews">
                     <div class="md-list-item-text">
-                        <h3>{{review.title}}</h3>
-                        <h4>by {{review.user.username}}UserName</h4>
+                        <div layout="row" layout-align="start center">
+                            <div style="color: #90caf9;">
+                                <i class="material-icons" ng-repeat="n in [] | range:review.rating">star</i>
+                                <i class="material-icons" ng-repeat="n in [] | range:(5-review.rating)">star_border</i>
+                            </div>
+                        </div>
+                        <h3> {{review.title}}</h3>
+                        <h4>by {{review.user.username}}</h4>
 
                         <p>{{review.description}}</p>
                     </div>

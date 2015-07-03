@@ -3,8 +3,8 @@
     var App = angular.module("travelDiary");
 
     App.controller('VacationEditController',
-        ['$scope', '$state', '$location', 'anchorSmoothScroll', 'vacation','keywords',
-            function ($scope, $state, $location, anchorSmoothScroll, vacation, keywords) {
+        ['$scope', '$state', '$location', 'anchorSmoothScroll', 'SearchService', 'vacation','keywords',
+            function ($scope, $state, $location, anchorSmoothScroll, SearchService, vacation, keywords) {
 
 
                 $scope.vacation = vacation;
@@ -25,6 +25,27 @@
 
                 $scope.removeActivity = function(index){
                     $scope.vacation.activities.splice(index, 1);
+                };
+
+                $scope.searchText = '';
+                $scope.selectedKeyword = undefined;
+                $scope.addKeyword = function (keyword) {
+                    $scope.vacation.keywords.push(keyword);
+                    $scope.searchText = '';
+
+                };
+
+                createKeywordFilter = function(searchText) {
+                    var lowerCaseSearchText = angular.lowercase(searchText);
+                    return function (keyword) {
+                        var lowerCaseKeyword = angular.lowercase(keyword.keyword);
+                        return (lowerCaseKeyword.indexOf(lowerCaseSearchText) === 0);
+                    }
+                };
+
+                $scope.getFilteredKeywords = function (searchText) {
+                    var results = searchText ? keywords.filter(createKeywordFilter(searchText)) : keywords;
+                    return results;
                 };
 
                 $scope.deleteVacation = function (vacation) {

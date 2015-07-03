@@ -110,9 +110,34 @@
                 <md-content class="md-padding" flex>
                     <div class="md-title">Keywords</div>
                     <div layout="row" layout-align="center center">
-                        <div ng-repeat="keyword in vacation.keywords">
+                        <div flex  layout-wrap ng-repeat="keyword in vacation.keywords">
                             <keyword-chip keyword-src="keyword">
                             </keyword-chip>
+                        </div>
+                        <div flex="33">
+                            <md-autocomplete id="search"
+                                             class="search-bar-fix"
+                                             md-search-text="searchText"
+                                             md-items="keyword in getFilteredKeywords(searchText)"
+                                             ng-disabled="false"
+                                             md-no-cache="true"
+                                             md-autofocus="true"
+                                             md-autoselect="true"
+                                             md-selected-item="selectedKeyword"
+                                             ng-enter="addKeyword(selectedKeyword)"
+                                             md-item-text="keyword.keyword"
+                                             placeholder="Add more keywords..."
+                                             secondary-placeholder="">
+                                <md-item-template>
+                                    <span md-highlight-text="searchText"
+                                          ng-click="addKeyword(keyword)">
+                                        {{keyword.keyword}}
+                                    </span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No matches found.
+                                </md-not-found>
+                            </md-autocomplete>
                         </div>
                     </div>
                 </md-content>
