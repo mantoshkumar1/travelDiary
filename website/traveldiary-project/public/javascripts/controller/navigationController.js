@@ -23,8 +23,10 @@ App.factory('AuthOutService', [ '$http', function ($http) {
     }]);
 
 App.controller('navigationController',
-    ['Util', 'SearchService', '$scope', '$state', '$log', 'keywords', 'selectedKeywords', 'maxBudget','AuthOutService',
-        function (Util, SearchService, $scope, $state, $log, injectedKeywords, injectedSelectedKeywords,maxBudget, AuthOutService) {
+    ['Util', 'SearchService', '$scope', '$state', '$log', 'keywords', 'selectedKeywords', 'maxVacationBudget',
+        'maxActivityBudget','AuthOutService',
+        function (Util, SearchService, $scope, $state, $log, injectedKeywords, injectedSelectedKeywords,maxVacationBudget,
+                  maxActivityBudget, AuthOutService) {
 
             // Use alias to avoid scope clashes
             var thisCtrl = this;
@@ -35,9 +37,16 @@ App.controller('navigationController',
             // Private, but shared, keyword service.
             var searchService = SearchService;
 
-            searchService.budgetContainer.currentBudget = maxBudget;
+            if ($state.includes('main.activity')) {
+                searchService.budgetContainer.currentBudget = maxActivityBudget;
+                thisCtrl.maxBudget = maxActivityBudget;
+            } else {
+                searchService.budgetContainer.currentBudget = maxVacationBudget;
+                thisCtrl.maxBudget = maxVacationBudget;
+            }
+
             thisCtrl.budgetContainer = SearchService.budgetContainer;
-            thisCtrl.maxBudget = maxBudget;
+
 
             searchService.setSelectedKeyWords(injectedSelectedKeywords);
             searchService.setSuggestedKeywords(keywords);
@@ -137,23 +146,25 @@ App.controller('navigationController',
     ]);
 
 App.controller('navigationControllerWithoutSelection',
-    ['keywords', '$controller', '$scope','maxBudget',
-        function (keywords, $controller, $scope, maxBudget) {
+    ['keywords', '$controller', '$scope','maxVacationBudget', 'maxActivityBudget',
+        function (keywords, $controller, $scope, maxVacationBudget, maxActivityBudget) {
             $controller('navigationController as navCtrl', {
                 $scope: $scope,
                 keywords: keywords,
                 selectedKeywords: [],
-                maxBudget: maxBudget});
+                maxVacationBudget: maxVacationBudget,
+                maxActivityBudget: maxActivityBudget});
         }]);
 
 App.controller('navigationControllerWithSelection',
-    ['keywords', '$controller', '$scope', 'selectedKeywords', 'maxBudget',
-        function (keywords, $controller, $scope, selectedKeywords, maxBudget) {
+    ['keywords', '$controller', '$scope', 'selectedKeywords', 'maxVacationBudget', 'maxActivityBudget',
+        function (keywords, $controller, $scope, selectedKeywords, maxVacationBudget, maxActivityBudget) {
             $controller('navigationController as navCtrl', {
                 $scope: $scope,
                 keywords: keywords,
                 selectedKeywords: selectedKeywords,
-                maxBudget: maxBudget
+                maxVacationBudget: maxVacationBudget,
+                maxActivityBudget: maxActivityBudget
             });
         }]);
 }());

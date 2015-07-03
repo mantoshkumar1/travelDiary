@@ -22,12 +22,12 @@ App.service('Util', function () {
 
             return result;
         }),
-        getMaxBudget: ( function (vacations) {
+        getMaxBudget: ( function (modelObjectsWithBudget) {
             var max = 0.0;
 
-            vacations.forEach(function (vacation) {
-                if (vacation.budget > max) {
-                    max = vacation.budget;
+            modelObjectsWithBudget.forEach(function (modelObjectWithBudget) {
+                if (modelObjectWithBudget.budget > max) {
+                    max = modelObjectWithBudget.budget;
                 }
             })
 

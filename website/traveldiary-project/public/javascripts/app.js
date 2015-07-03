@@ -18,8 +18,14 @@
                 vacations: ['Vacation', function (Vacation) {
                     return Vacation.findAll();
                 }],
-                maxBudget: ['vacations', 'Util', function (vacations, Util) {
+                maxVacationBudget: ['vacations', 'Util', function (vacations, Util) {
                     return Util.getMaxBudget(vacations);
+                }],
+                activities: ['Activity', function (Activity) {
+                    return Activity.findAll();
+                }],
+                maxActivityBudget: ['activities', 'Util', function (activites, Util) {
+                    return Util.getMaxBudget(activites);
                 }]
             },
             views: {
