@@ -225,7 +225,7 @@
         $stateProvider.state('main.vacation.search', vacation_search_config);
         $stateProvider.state('main.vacation.details', vacation_details_config);
         $stateProvider.state('main.vacation.edit', vacation_details_edit_config);
-        $stateProvider.state('main.vacation.details.activity', activity_config);
+        $stateProvider.state('main.activity', activity_config);
         $stateProvider.state('main.activity.search', activity_search_config);
         $stateProvider.state('main.activity.details', activity_details_config);
         $stateProvider.state('main.register', register_config);

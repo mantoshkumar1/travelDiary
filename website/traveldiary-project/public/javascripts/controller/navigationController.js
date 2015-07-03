@@ -5,18 +5,29 @@
 
 var App = angular.module("travelDiary");
 
+App.factory('AuthOutService', [ '$http', function ($http) {
+
+        var authOutService = {
+            logout:logout
+        };
+
+        return authOutService;
+
+        function logout() {
+            return $http
+                .post('/api/logout')
+                .then(function () {
+                    console.log("User logged out.");
+                });
+        };
+    }]);
+
 App.controller('navigationController',
-    ['Util', 'SearchService', '$scope', '$state', '$log', 'keywords', 'selectedKeywords', 'maxBudget',
-        function (Util, SearchService, $scope, $state, $log, injectedKeywords, injectedSelectedKeywords,maxBudget) {
+    ['Util', 'SearchService', '$scope', '$state', '$log', 'keywords', 'selectedKeywords', 'maxBudget','AuthOutService',
+        function (Util, SearchService, $scope, $state, $log, injectedKeywords, injectedSelectedKeywords,maxBudget, AuthOutService) {
 
             // Use alias to avoid scope clashes
             var thisCtrl = this;
-
-            if ($state.includes('main.vacation')) {
-                thisCtrl.showBudget = true;
-            } else if ($state.includes('main.activity')) {
-                thisCtrl.showBudget = false;
-            }
 
             // Private list of all keywords.
             var keywords = injectedKeywords;
@@ -41,17 +52,16 @@ App.controller('navigationController',
                 var keyStrings = Util.getKeywordString(thisCtrl.selectedKeywords);
 
                 if (keyStrings.trim() !== '') {
-                    if ($state.includes('main.vacation')) {
-                        $state.go('main.vacation.search', {keywordStrings: keyStrings});
-                    } else if ($state.includes('main.activity')) {
+                    if ($state.includes('main.activity')) {
                         $state.go('main.activity.search', {keywordStrings: keyStrings});
+                    } else {
+                        $state.go('main.vacation.search', {keywordStrings: keyStrings});
                     }
-
                 } else {
-                    if ($state.includes('main.vacation')) {
-                        $state.go('main.vacation');
-                    } else if ($state.includes('main.activity')) {
+                    if ($state.includes('main.activity')) {
                         $state.go('main.activity');
+                    } else {
+                        $state.go('main.vacation');
                     }
                 }
             }
@@ -63,6 +73,17 @@ App.controller('navigationController',
             thisCtrl.clickLogin = function () {
                 $state.go('main.login');
             };
+
+            thisCtrl.goToHome = function () {
+                $state.go('main.index');
+            };
+
+            thisCtrl.userLogout = function () {
+                AuthOutService.logout().then(function(){
+                    $scope.wipeSession();
+                    $state.go('main.index');
+                })
+            }
 
             // Search input
             thisCtrl.isDisabled = false;

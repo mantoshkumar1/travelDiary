@@ -3,8 +3,8 @@
     var App = angular.module("travelDiary");
 
     App.controller('vacationDetailsController',
-        ['$scope', '$state', '$location', '$sessionStorage', 'anchorSmoothScroll', 'vacation', 'Vacation', 'VacationReview', '$mdDialog',
-            function ($scope, $state, $location, $sessionStorage, anchorSmoothScroll, vacation, Vacation, VacationReview, $mdDialog) {
+        ['$scope', '$state', '$location', '$sessionStorage', 'anchorSmoothScroll', 'vacation', 'Vacation', 'ReviewDialogService', 'VacationReview',
+            function ($scope, $state, $location, $sessionStorage, anchorSmoothScroll, vacation, Vacation, ReviewDialogService, VacationReview) {
 
                 $scope.vacation = vacation;
                 $scope.currentUser = $sessionStorage.currentUser;
@@ -57,73 +57,42 @@
                     // TODO
                 };
 
+                $scope.currentUserReview =
+                    ReviewDialogService
+                        .getReviewForUser($scope.vacation.reviews, $scope.currentUser);
 
                /* Reviews */
-                $scope.currentUserReview = getReviewForUser($scope.vacation.reviews, $scope.currentUser);
+                $scope.showReviewCreateDialog = function () {
+                    ReviewDialogService
+                        .showVacationReviewCreateDialog($scope.currentUser, $scope.vacation)
+                        .then( function (review) {
+                            console.log("Created Review");
+                            console.log(review);
 
-                $scope.showReviewDialog = function (user, review, vacation) {
-
-                    var hasReview = review !== null;
-
-
-                    $mdDialog.show({
-                        parent: angular.element(document.body),
-                        locals: {
-                            review: {
-                                title: hasReview ? review.title : '',
-                                description: hasReview ? review.description : '',
-                                rating: hasReview ? review.rating : ''
-                            }
-                        },
-                        templateUrl: 'assets/templates/dialogs/review_dialog.html',
-                        controller: 'VacationReviewController'
-                    }).then(function (newReview) {
-
-                        console.log(newReview);
-
-
-                        if (hasReview) {
-                            newReview.userId = user.id;
-                            newReview.vacationId = vacation.id;
-                            VacationReview.update(review.id, newReview);
-
-                        } else {
-                            var reviewToInsert = VacationReview.createInstance();
-
-                            reviewToInsert.title = newReview.title;
-                            reviewToInsert.description = newReview.description;
-                            reviewToInsert.rating = newReview.rating;
-                            reviewToInsert.date = newReview.date;
-                            reviewToInsert.userId = user.id;
-                            reviewToInsert.vacationId = vacation.id;
-                            reviewToInsert.DSCreate().then(function (review) {
-
-                                $state.reload();
-                            });
-
+                        }, function (error) {
+                            console.log("Could not create Dialog");
+                            console.log(error);
                         }
-                    });
+                    );
+                }
 
+                $scope.showReviewEditDialog = function () {
+                    ReviewDialogService
+                        .showVacationReviewEditDialog($scope.currentUser, $scope.vacation, $scope.currentUserReview)
+                        .then( function (review) {
+                            console.log("Created Review");
+                            console.log(review);
 
+                        }, function (error) {
+                            console.log("Could not create Dialog");
+                            console.log(error);
+                        }
+                    );
                 };
 
                 $scope.deleteReview = function (review) {
                     VacationReview.destroy(review.id);
-                    $state.reload();
                 };
-
-                function getReviewForUser(reviews, user) {
-                    if (reviews && user) {
-                        for (i = 0; i < reviews.length; i++) {
-                            if (reviews[i].userId === user.id) {
-                                return reviews[i];
-                            }
-                        }
-                    }
-
-                    return null;
-                }
-
 
                 /*---------------- UI -------------------------*/
                 /* Scroll */
