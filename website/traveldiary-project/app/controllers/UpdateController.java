@@ -8,6 +8,10 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import javax.persistence.EntityManager;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by albert on 02.07.15.
  */
@@ -79,6 +83,37 @@ public class UpdateController extends Controller {
         }
 
         return unauthorized("You're not authorized to update this");
+    }
+
+    @Transactional
+    public static Result updateVacation(int id) {
+
+        Vacation updatedVacation = Json.fromJson(request().body().asJson(), Vacation.class);
+
+        String sessionMail = session(LoginController.LOGIN_SESSION);
+
+        if (!sessionMail.equals(updatedVacation.getCreator().getEmail())) {
+            return unauthorized("The user of this session is not the creator of the vacation to edit.");
+        }
+
+        List<Activity> parsedActivites = updatedVacation.getActivities();
+        List<Activity> activiesInDb = new ArrayList<Activity>();
+
+        EntityManager em = JPA.em();
+
+        // Fixing the half parsed activites where the user class is not parsed completely
+        for (Activity activity : parsedActivites) {
+            Activity activityInDb = em.find(Activity.class, activity.getId());
+
+            activiesInDb.add(activityInDb);
+        }
+
+        updatedVacation.setActivities(activiesInDb);
+        // End of fix
+
+        em.merge(updatedVacation);
+
+        return ok(Json.toJson(updatedVacation));
     }
 }
 

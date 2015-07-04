@@ -28,7 +28,6 @@ public class Vacation {
 
     @ManyToOne
     @JoinColumn(name = "creatorId")
-    @JsonBackReference
     private User creator;
 
     @ManyToMany

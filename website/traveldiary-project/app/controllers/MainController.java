@@ -68,7 +68,8 @@ public class MainController extends Controller {
 
     @Transactional(readOnly = true)
     public static Result getVacation(int id) {
-        return ok(Json.toJson(TravelDiaryDAO.getVacation(id)));
+        Vacation vacation = TravelDiaryDAO.getVacation(id);
+        return ok(Json.toJson(vacation));
     }
 
     @Transactional(readOnly = true)

@@ -3,14 +3,16 @@
     var App = angular.module("travelDiary");
 
     App.controller('vacationDetailsController',
-        ['$scope', '$state', '$location', '$sessionStorage', 'anchorSmoothScroll', 'vacation', 'Vacation', 'ReviewDialogService', 'VacationReview',
-            function ($scope, $state, $location, $sessionStorage, anchorSmoothScroll, vacation, Vacation, ReviewDialogService, VacationReview) {
+        ['$scope', '$state', '$location', '$sessionStorage', 'anchorSmoothScroll', 'vacation', 'Vacation',
+            'ReviewDialogService', 'VacationReview','VacationService',
+            function ($scope, $state, $location, $sessionStorage, anchorSmoothScroll, vacation, Vacation,
+                      ReviewDialogService, VacationReview, VacationService) {
 
                 $scope.vacation = vacation;
                 $scope.currentUser = $sessionStorage.currentUser;
 
                 $scope.isCreator = function(){
-                    if ($sessionStorage.currentUser.username == $scope.vacation.creator.username){
+                    if ($sessionStorage.currentUser && $sessionStorage.currentUser.username == $scope.vacation.creator.username){
                         return true;
                     }
                     return false;
@@ -33,7 +35,7 @@
                     $scope.newVacation.creator = $scope.currentUser;
                     $scope.newVacation.name = "Test";
                     $scope.newVacation.description = $scope.vacation.description;
-                    $scope.newVacation.activities = [];
+                    $scope.newVacation.activities = $scope.vacation.activities;
                     $scope.newVacation.budget = $scope.vacation.budget;
                     $scope.newVacation.location = $scope.vacation.location;
                     $scope.newVacation.startDate = $scope.vacation.startDate;
@@ -42,15 +44,10 @@
                     $scope.newVacation.reviews = [];
 
 
-                    $scope.newVacation.DSCreate().then(function (vacation) {
-                        console.log("created Vacation");
-                        //vacation.activities.push($scope.vacation.activities[0]);
-                        //vacation.DSSave().then(function(vacation){
-                            $state.go("main.vacation.edit",{id: vacation.id});
-                        //S});
+                    VacationService.createVacation($scope.newVacation).then(function (vacation) {
+                        console.log('Created vacation:');
+                        console.log(vacation);
                     });
-
-
                 };
 
                 $scope.deleteVacation = function () {

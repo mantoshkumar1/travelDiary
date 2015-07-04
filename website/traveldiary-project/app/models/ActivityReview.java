@@ -17,7 +17,6 @@ import java.util.Date;
  * Created by albert on 27.06.15.
  */
 @Entity
-@JsonIgnoreProperties({"activity"})
 public class ActivityReview {
 
     @Id
@@ -37,8 +36,12 @@ public class ActivityReview {
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    @JsonBackReference
     private User user;
+
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "activityId")
+    @JsonIgnore
+    private Activity activity;
 
     private Date date;
 
@@ -101,14 +104,11 @@ public class ActivityReview {
     @JsonProperty("userId")
     public void setUserId(int id) {}
 
-    @ManyToOne
-    @JoinColumn(name = "activityId")
-    private Activity activity;
-
     @Transient
     @JsonSerialize
     @JsonProperty("activityId")
     public int getActivityId() {
+
         return activity.getId();
     }
 

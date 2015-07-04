@@ -86,11 +86,8 @@
         var vacation_details_config = {
             url: '/details/{id}',
             resolve: {
-                vacationWithoutUser: ['$stateParams', 'Vacation', function ($stateParams, Vacation) {
+                vacation: ['$stateParams', 'Vacation', function ($stateParams, Vacation) {
                     return Vacation.find($stateParams.id);
-                }],
-                vacation: ['vacationWithoutUser', 'Vacation', function (vacationWithoutUser, Vacation) {
-                    return Vacation.loadRelations(vacationWithoutUser, ['creator']);
                 }]
             },
             views: {
@@ -104,11 +101,8 @@
         var vacation_details_edit_config = {
             url: '/edit/{id}',
             resolve: {
-                vacationWithoutUser: ['$stateParams', 'Vacation', function ($stateParams, Vacation) {
+                vacation: ['$stateParams', 'Vacation', function ($stateParams, Vacation) {
                     return Vacation.find($stateParams.id);
-                }],
-                vacation: ['vacationWithoutUser', 'Vacation', function (vacationWithoutUser, Vacation) {
-                    return Vacation.loadRelations(vacationWithoutUser, ['creator']);
                 }]
             },
             views: {
@@ -179,12 +173,9 @@
         var activity_details_config = {
             url: '/details/{id}',
             resolve: {
-                activityWithoutUser: [ '$stateParams', 'Activity', function ($stateParams,Activity) {
+                activity: [ '$stateParams', 'Activity', function ($stateParams,Activity) {
                     return Activity.find($stateParams.id);
-                 }],
-                activity: ['Activity', 'activityWithoutUser', function (Activity, activityWithoutUser) {
-                    return Activity.loadRelations(activityWithoutUser, ['creator']);
-                }]
+                 }]
             },
             views: {
                 'content@': {
@@ -242,9 +233,9 @@
         $urlRouterProvider.otherwise('/index');
     }]).run(
         ['Activity', 'Vacation', 'User', 'Role', 'Location', 'ActivityReview', 'VacationReview', 'VacationImage',
-            'ActivityImage', 'Keyword', 'ActivityKeywordJoinTableEntry', 'VacationKeywordJoinTableEntry',
+            'ActivityImage', 'Keyword',
             function (Activity, Vacation, User, Role, Location, ActivityReview, VacationReview, VacationImage, ActivityImage,
-                      Keyword, ActivityKeywordJoinTableEntry, VacationKeywordJoinTableEntry) {
+                      Keyword) {
                 // Just loading all factories because otherwise we get resource undefined errors because of the defined relations.
             }]);
 }());
