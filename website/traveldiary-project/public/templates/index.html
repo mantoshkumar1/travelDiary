@@ -1,7 +1,7 @@
 <md-contett class="md-padding" layout="row" layout-align="center center">
     <div flex="70" flex-md="80" flex-sm="90">
         <md-card>
-            <img src="http://wallpoper.com/images/00/44/43/05/mountain-hiking_00444305.jpg">
+            <img src = '/assets/images/home_page_pic.jpg'>
             <br>
             <md-content class="md-padding">
                 <h2>
@@ -46,10 +46,14 @@
                 <li>
                     You can start searching for vacations by typing some keywords in at the top of the page.
                 </li>
-                <li>
-                    You can register <a href="/#/register">here</a> or login <a href="/#/login">here</a> if you
-                    already have an account.
-                </li>
+
+                <div ng-if="currentUser == null">
+                    <li>
+                        You can register <a href="/#/register">here</a> or login <a href="/#/login">here</a> if you
+                        already have an account.
+                    </li>
+                </div>
+                
                 </p>
             </md-content>
             </md-card-content>
