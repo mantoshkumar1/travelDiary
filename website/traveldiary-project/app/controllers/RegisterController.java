@@ -20,6 +20,33 @@ public class RegisterController extends Controller {
     public static Result createUser() {
         User newUser = Json.fromJson(request().body().asJson(), User.class);
 
+        String username = newUser.getUsername();
+        boolean validUsername = false;
+        try {
+            User.findByUsername(username);
+        }
+        catch(Exception e) {
+            validUsername = true;
+        }
+
+        if(!validUsername) {
+            return forbidden("Username already exists!");
+        }
+
+
+        String email = newUser.getEmail();
+        boolean validEmail = false;
+        try {
+            User.findByEmail(email);
+        }
+        catch(Exception e) {
+            validEmail = true;
+        }
+
+        if(!validEmail) {
+            return forbidden("Email already exists!");
+        }
+
         // Convert plaintext password to hash
         newUser.setPasswordHash(PasswordUtil.calculateHashString(newUser.getPasswordHash()));
 

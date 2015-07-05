@@ -149,7 +149,11 @@ public class User {
     }
 
     public static User findByEmail(String email){
-        return (User) JPA.em().createNativeQuery("SELECT * FROM User WHERE email='"+email+"'",User.class).getSingleResult();
+        return (User) JPA.em().createNativeQuery("SELECT * FROM User WHERE email='"+email+"'", User.class).getSingleResult();
+    }
+
+    public static User findByUsername(String username){
+        return (User) JPA.em().createNativeQuery("SELECT * FROM User WHERE username='"+username+"'",User.class).getSingleResult();
     }
 
     @Transient
