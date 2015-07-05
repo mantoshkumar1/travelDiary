@@ -1,8 +1,7 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import play.data.validation.Constraints;
 import play.db.jpa.JPA;
@@ -39,12 +38,14 @@ public class User {
 
     @OneToMany
     @JoinColumn(name = "creatorId")
-    @JsonManagedReference
+    @JsonIgnore
+    @JsonDeserialize
     private List<Activity> createdActivites;
 
     @OneToMany
     @JoinColumn(name = "creatorId")
-    @JsonManagedReference
+    @JsonIgnore
+    @JsonDeserialize
     private List<Vacation> createdVacations;
 
     @ManyToOne(cascade=CascadeType.ALL)

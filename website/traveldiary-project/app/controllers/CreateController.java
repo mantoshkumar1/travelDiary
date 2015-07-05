@@ -69,4 +69,20 @@ public class CreateController extends Controller {
             return unauthorized("Can't insert review.");
         }
     }
+
+    @Transactional
+    public static Result createVacation() {
+        // TODO:
+        JsonNode json = request().body().asJson();
+
+        Vacation newVacation = Json.fromJson(json, Vacation.class);
+        InsertDAO.insertVacation(newVacation);
+
+        // Reload vacation which correclty loads activity field in activityreview
+        // TODO: Doesn't reload anything for some reason. We don't get null in activitydetails view when loading.
+        JPA.em().getEntityManagerFactory().getCache().evictAll();
+        newVacation = JPA.em().find(Vacation.class, newVacation.getId());
+
+        return created(Json.toJson(newVacation));
+    }
 }

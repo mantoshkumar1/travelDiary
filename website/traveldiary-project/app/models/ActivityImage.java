@@ -39,8 +39,7 @@ public class ActivityImage {
     }
 
     public void setUrl(String url) {
-        this.url = url
-        ;
+        this.url = url;
     }
 
     @Transient

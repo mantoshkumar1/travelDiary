@@ -2,6 +2,7 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import play.data.validation.Constraints;
@@ -33,8 +34,7 @@ public class Activity {
     @JoinColumn(name = "locationId")
     private Location location;
 
-    @OneToMany
-    @JoinColumn(name = "activityId")
+    @OneToMany(mappedBy = "activity")
     private List<ActivityReview> reviews;
 
     private Date startTime;
@@ -42,7 +42,6 @@ public class Activity {
 
     @ManyToOne
     @JoinColumn(name = "creatorId")
-    @JsonBackReference
     private User creator;
 
     @Column(precision = 5, scale = 2)

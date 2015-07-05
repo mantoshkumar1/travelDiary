@@ -37,7 +37,6 @@ public class VacationReview {
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    @JsonBackReference
     private User user;
 
     private Date date;

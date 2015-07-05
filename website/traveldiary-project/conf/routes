@@ -27,39 +27,23 @@ GET           /api/vacationimage/:id                  controllers.MainController
 GET           /api/activityimage                      controllers.MainController.getAllActivityImages()
 GET           /api/activityimage/:id                  controllers.MainController.getActivityImage(id: Integer)
 
-# All api functions related to the jointables for many to many relationships
-GET           /api/vacationkeyword                    controllers.JoinTableController.getAllVacationKeywordsEntries()
-GET           /api/vacationkeyword/:vId/:kId          controllers.JoinTableController.getVacationKeywordEntry(vId: Integer, kId: Integer)
-GET           /api/activitykeyword                    controllers.JoinTableController.getAllVacationKeywordsEntries()
-GET           /api/vacationkeyword/:aId/:kId          controllers.JoinTableController.getVacationKeywordEntry(aId: Integer, kId: Integer)
-
 # Basic api POST functions for js-data
-POST          /api/vacation                           controllers.VacationController.createVacation()
-#POST        /api/activity                           controllers.RegisterController.createActivity()
-#POST        /api/keyword                            controllers.RegisterController.createKeyword()
+POST          /api/vacation                           controllers.CreateController.createVacation()
 POST          /api/location                           controllers.RegisterController.createLocation()
 POST          /api/user                               controllers.RegisterController.createUser()
 POST          /api/login                              controllers.LoginController.login()
 POST          /api/logout                             controllers.LoginController.logout()
 POST          /api/vacationreview                     controllers.CreateController.createVacationReview()
 POST          /api/activityreview                     controllers.CreateController.createActivityReview()
-#POST        /api/vacationimage                      controllers.RegisterController.createVacationImage()
-#POST        /api/activityimage                      controllers.RegisterController.createActivityImage()
 
 # Basic api update functions for single items
-#PUT         /api/vacation/:id                       controllers.RegisterController.updateVacation(id: Integer)
-#PUT         /api/activity/:id                       controllers.RegisterController.updateActivity(id: Integer)
-#PUT         /api/keyword/:id                        controllers.RegisterController.updateKeyword(id: Integer)
-#PUT         /api/location/:id                       controllers.RegisterController.updateLocation(id: Integer)
-#PUT         /api/user/:id                           controllers.RegisterController.updateUser(id: Integer)
+PUT           /api/vacation/:id                       controllers.UpdateController.updateVacation(id: Integer)
 PUT           /api/activityreview/:id                 controllers.UpdateController.updateActivityReview(id: Integer)
 PUT           /api/vacationreview/:id                 controllers.UpdateController.updateVacationReview(id: Integer)
-#PUT         /api/vacationimage/:id                  controllers.RegisterController.updateVacationImage(id: Integer)
-#PUT         /api/activityimage/:id                  controllers.RegisterController.updateActivityImage(id: Integer)
 
 # Basic api delete functions for single items
 DELETE        /api/vacationreview/:id                 controllers.DeleteController.deleteVacationReview(id: Integer)
-DELETE      /api/activityreview/:id                  controllers.DeleteController.deleteActivityReview(id: Integer)
+DELETE        /api/activityreview/:id                 controllers.DeleteController.deleteActivityReview(id: Integer)
 
 
 # Additional apis for special use cases

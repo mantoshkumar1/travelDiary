@@ -5,21 +5,6 @@
 
 var App = angular.module('travelDiary');
 
-App.factory('VacationKeywordJoinTableEntry', ['DS', function (DS) {
-    return DS.defineResource(
-        {
-            name: 'vacationkeyword'
-        });
-}]);
-
-App.factory('ActivityKeywordJoinTableEntry', ['DS', function (DS) {
-    return DS.defineResource(
-        {
-            name: 'activitykeyword'
-        });
-}]);
-
-
 App.factory('Keyword', ['DS', function (DS) {
     return DS.defineResource(
         {
