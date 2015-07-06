@@ -103,8 +103,9 @@ public class UpdateController extends Controller {
         EntityManager em = JPA.em();
         Cache cache = em.getEntityManagerFactory().getCache();
 
-        // Fixing the half parsed activites where the user class is not parsed completely
+        // Fixing the half parsed activites where the User and ActivityReview class is not parsed completely
         cache.evict(ActivityReview.class);
+        cache.evict(User.class);
 
         for (Activity activity : parsedActivites) {
             cache.evict(Activity.class, activity.getId());
