@@ -8,6 +8,7 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import javax.persistence.Cache;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,9 +101,14 @@ public class UpdateController extends Controller {
         List<Activity> activiesInDb = new ArrayList<Activity>();
 
         EntityManager em = JPA.em();
+        Cache cache = em.getEntityManagerFactory().getCache();
 
         // Fixing the half parsed activites where the user class is not parsed completely
+        cache.evict(ActivityReview.class);
+
         for (Activity activity : parsedActivites) {
+            cache.evict(Activity.class, activity.getId());
+
             Activity activityInDb = em.find(Activity.class, activity.getId());
 
             activiesInDb.add(activityInDb);

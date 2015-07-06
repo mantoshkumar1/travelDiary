@@ -19,12 +19,12 @@
         function createVacation(vacation) {
             // Store activites field. Will be needed later but for creation of vacations we need the
             // vacation.activites field to be empty
-            var activites = vacation.activities;
+            var savedActivities = vacation.activities;
 
-            vacation.activties = [];
+            vacation.activities = [];
 
             return vacation.DSCreate().then( function (vacation) {
-                vacation.activties = activites;
+                vacation.activities = savedActivities;
 
                 return Vacation.update(vacation.id, vacation);
             });
