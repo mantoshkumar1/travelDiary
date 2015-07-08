@@ -16,27 +16,30 @@
             </md-input-container>
             <md-input-container>
                 <label>Your Opinion</label>
-                <textarea type="text" required rows="5" name="description" ng-model="revCtrl.review.description"></textarea>
+                <textarea type="text" required rows="4" name="description" ng-model="revCtrl.review.description"></textarea>
                 <div ng-messages="reviewForm.description.$error">
                     <div ng-message="required">Description is required.</div>
                 </div>
             </md-input-container>
-            <md-input-container>
-                <md-select required name="rating" placeholder="Your Rating" ng-model="revCtrl.review.rating">
-                    <md-option ng-repeat="rating in revCtrl.ratings" ng-value="rating.value">{{rating.rating}}</md-option>
-                </md-select>
-                <div ng-messages="reviewForm.rating.$error">
-                    <div ng-message="required">Rating is required.</div>
-                </div>
-            </md-input-container>
             <div layout="row" layout-align="center center">
-                <md-button type="submit">
-                    Submit
-                </md-button>
-
-                <md-button ng-click="revCtrl.cancel()" type="button">
-                    Cancel
-                </md-button>
+                <div flex="50" layout="row" layout-align="start center">
+                    <md-input-container>
+                        <md-select required name="rating" placeholder="Your Rating" ng-model="revCtrl.review.rating">
+                            <md-option ng-repeat="rating in revCtrl.ratings" ng-value="rating.value">{{rating.rating}}</md-option>
+                        </md-select>
+                        <div ng-messages="reviewForm.rating.$error">
+                            <div ng-message="required">Rating is required.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div flex="50" layout="row" layout-align="center center">
+                    <md-button type="submit">
+                        Submit
+                    </md-button>
+                    <md-button ng-click="revCtrl.cancel()" type="button">
+                        Cancel
+                    </md-button>
+                </div>
             </div>
         </form>
     </md-dialog-content>

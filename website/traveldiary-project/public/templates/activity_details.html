@@ -11,7 +11,7 @@
                     <md-tab><span ng-click="scrollToElement('reviews')">Reviews</span></md-tab>
                 </md-tabs>
             </div>
-            <div layout="row" layout-align="end center" flex>
+            <div layout="row" layout-align="end center" flex ng-if="currentUser">
                 <md-menu>
                     <md-button aria-label="My Review" ng-click="$mdOpenMenu()">
                         <md-icon md-menu-origin ng-if="!currentUserReview" class="material-icons">star_border</md-icon>

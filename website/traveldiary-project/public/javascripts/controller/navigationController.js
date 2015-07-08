@@ -24,9 +24,9 @@ App.factory('AuthOutService', [ '$http', function ($http) {
 
 App.controller('navigationController',
     ['Util', 'SearchService', '$scope', '$state', '$log', 'keywords', 'selectedKeywords', 'maxVacationBudget',
-        'maxActivityBudget','AuthOutService',
+        'maxActivityBudget','AuthOutService','$rootScope', '$sessionStorage',
         function (Util, SearchService, $scope, $state, $log, injectedKeywords, injectedSelectedKeywords,maxVacationBudget,
-                  maxActivityBudget, AuthOutService) {
+                  maxActivityBudget, AuthOutService, $rootScope, $sessionStorage) {
 
             // Use alias to avoid scope clashes
             var thisCtrl = this;
@@ -38,12 +38,34 @@ App.controller('navigationController',
             var searchService = SearchService;
 
             if ($state.includes('main.activity')) {
-                searchService.budgetContainer.currentBudget = maxActivityBudget;
+                searchService.budgetContainer.currentBudget = $sessionStorage.currentBudget ? $sessionStorage.currentBudget : maxActivityBudget;
                 thisCtrl.maxBudget = maxActivityBudget;
             } else {
-                searchService.budgetContainer.currentBudget = maxVacationBudget;
+                searchService.budgetContainer.currentBudget = $sessionStorage.currentBudget ? $sessionStorage.currentBudget : maxVacationBudget;
                 thisCtrl.maxBudget = maxVacationBudget;
             }
+
+
+            $rootScope.$on('$stateChangeStart',
+                function (event, toState, toParams, fromState, fromParams) {
+                    console.log(fromState.name);
+                    console.log(toState.name);
+
+                    if (fromState.name.indexOf('main.activity') === 0 && toState.name.indexOf('main.vacation') === 0) {
+                        $sessionStorage.currentBudget = null;
+                        thisCtrl.maxBudget = maxVacationBudget;
+                        searchService.budgetContainer.currentBudget = maxVacationBudget;
+                    } else if (fromState.name.indexOf('main.vacation') === 0 && toState.name.indexOf('main.activity') === 0) {
+                        $sessionStorage.currentBudget = null;
+                        thisCtrl.maxBudget = maxActivityBudget;
+                        searchService.budgetContainer.currentBudget = maxActivityBudget;
+                    } else {
+                        console.log('Saving session budget.');
+
+                        $sessionStorage.currentBudget = searchService.budgetContainer.currentBudget;
+                    }
+                }
+            );
 
             thisCtrl.budgetContainer = SearchService.budgetContainer;
 
@@ -99,12 +121,15 @@ App.controller('navigationController',
             thisCtrl.noCache = true;
             thisCtrl.autofocus = true;
             thisCtrl.autoselect = true;
-            thisCtrl.showSuggestions = false;
+            thisCtrl.showSearchDetails = $sessionStorage.showSearchDetails || false;
             thisCtrl.searchText = undefined;
             thisCtrl.selectedKeyword = undefined;
 
             thisCtrl.toggleSuggestions = function () {
-                thisCtrl.showSuggestions = !thisCtrl.showSuggestions;
+                thisCtrl.showSearchDetails = !thisCtrl.showSearchDetails;
+
+                $sessionStorage.showSearchDetails = thisCtrl.showSearchDetails;
+
             }
 
             thisCtrl.addKeyword = function (keyword) {

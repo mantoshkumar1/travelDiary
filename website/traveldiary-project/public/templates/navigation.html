@@ -7,8 +7,8 @@
                         <img width="60" height="37"src = '/assets/images/logo.jpg'>
                     </md-button>
                 </div>
-                <div flex="50" flex-sm="100">
-                    <div id="search-bar" class="flexbox" layout="row" layout-align="start center">
+                <div layout="row" flex="50" flex-sm="100">
+                    <div flex="90" id="search-bar" class="flexbox" layout="row" layout-align="start center">
                         <div ng-repeat="keyword in navCtrl.selectedKeywords">
                             <keyword-chip keyword-src="keyword"
                                           td-on-click="navCtrl.removeKeyword"
@@ -26,7 +26,7 @@
                                              md-selected-item="navCtrl.selectedKeyword"
                                              ng-enter="navCtrl.addKeyword(navCtrl.selectedKeyword)"
                                              md-item-text="keyword.keyword"
-                                             placeholder="Search here with keywords..."
+                                             placeholder="Search with keywords..."
                                              secondary-placeholder="">
                                 <md-item-template>
                                     <span md-highlight-text="searchText"
@@ -40,13 +40,34 @@
                             </md-autocomplete>
                         </div>
                     </div>
+                    <div flex="10">
+                        <md-menu>
+                            <md-button aria-label="Search Activites or Vacations" ng-click="$mdOpenMenu()">
+                                <md-icon md-menu-origin class="material-icons">search</md-icon>
+                            </md-button>
+                            <md-menu-content>
+                                <md-menu-item>
+                                    <md-button ng-href="#/vacation"
+                                               aria-label="Search Vacations">
+                                        Search Vacations
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button ng-href="#/activity" aria-label="Search Activities">
+                                        Search Activities
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                    </div>
                 </div>
                 <div flex="25" flex-sm="100" layout="row" layout-align="end center" layout-align-sm="center center">
+
                     <div ng-if="currentUser != null">
                         {{currentUser.firstName}}
                         <md-button ng-click="navCtrl.userLogout()">Logout</md-button>
                     </div>
-                    
+
                     <div ng-if="currentUser == null">
                         <md-button ng-click="navCtrl.clickLogin()">Login</md-button>
                         <md-button ng-click="navCtrl.clickRegister()">Register</md-button>
@@ -54,7 +75,7 @@
                 </div>
             </div>
         </md-toolbar>
-        <div ng-show="navCtrl.showSuggestions" class="slide-in-out-vertically">
+        <div ng-show="navCtrl.showSearchDetails" class="slide-in-out-vertically">
             <md-tabs md-border-bottom md-center-tabs md-swipe-content>
                 <md-tab label="Keywords">
                     <md-content layout-padding>
@@ -99,9 +120,12 @@
             <md-divider></md-divider>
         </div>
 
-        <div layout="row" flex layout-align="center center" ng-click="navCtrl.toggleSuggestions()">
-            <md-icon ng-if="navCtrl.showSuggestions" class="md-48 material-icons">keyboard_arrow_up</md-icon>
-            <md-icon ng-if="!navCtrl.showSuggestions" class="md-48 material-icons">keyboard_arrow_down</md-icon>
+        <div layout="column" class="searchOptionsButton" flex layout-align="center center" ng-click="navCtrl.toggleSuggestions()">
+            <span ng-if="navCtrl.showSearchDetails">Hide Search Options</span>
+            <md-icon ng-if="navCtrl.showSearchDetails" class="md-48 material-icons">keyboard_arrow_up</md-icon>
+
+            <span ng-if="!navCtrl.showSearchDetails">More Search Options</span>
+            <md-icon ng-if="!navCtrl.showSearchDetails" class="md-48 material-icons">keyboard_arrow_down</md-icon>
         </div>
     </div>
     <md-divider></md-divider>

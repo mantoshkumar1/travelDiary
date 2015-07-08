@@ -24,7 +24,7 @@ public class UpdateController extends Controller {
     public static Result updateVacationReview(int id) {
         JsonNode json = request().body().asJson();
 
-        int userId = json.findValue("userId").intValue();
+        int userId = json.get("userId").asInt();
         User creator = JPA.em().find(User.class, userId);
 
         VacationReview reviewInDb = JPA.em().find(VacationReview.class, id);
@@ -57,7 +57,7 @@ public class UpdateController extends Controller {
     public static Result updateActivityReview(int id) {
         JsonNode json = request().body().asJson();
 
-        int userId = json.findValue("userId").intValue();
+        int userId = json.get("userId").asInt();
         User creator = JPA.em().find(User.class, userId);
 
         ActivityReview reviewInDb = JPA.em().find(ActivityReview.class, id);
