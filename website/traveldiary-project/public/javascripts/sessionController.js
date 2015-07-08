@@ -4,19 +4,25 @@
 
 (function() {
 angular.module('travelDiary')
-    .controller('SessionController', [ '$scope', 'AuthService','$sessionStorage', function($scope, AuthService, $sessionStorage) {
-        $scope.currentUser = $sessionStorage.currentUser || null;
-        $scope.isAuthorized = AuthService.isAuthorized;
+    .controller('SessionController', [ '$scope', 'AuthService','$sessionStorage',
+        function($scope, AuthService, $sessionStorage,SearchService) {
 
-        $scope.setCurrentUser = function (user) {
-            console.log("Setting user");
-            console.log(user);
-            $sessionStorage.currentUser = user;
-            $scope.currentUser = user;
-        };
+            $scope.currentUser = $sessionStorage.currentUser || null;
+            $scope.isAuthorized = AuthService.isAuthorized;
 
-        $scope.wipeSession = function () {
-            $scope.currentUser = null;
-        };
+            $scope.toogleSearchDetails = function () {
+                $scope.showSearchDetails = !$scope.showSearchDetails;
+            };
+
+            $scope.setCurrentUser = function (user) {
+                console.log("Setting user");
+                console.log(user);
+                $sessionStorage.currentUser = user;
+                $scope.currentUser = user;
+            };
+
+            $scope.wipeSession = function () {
+                $scope.currentUser = null;
+            };
     }]);
 })();

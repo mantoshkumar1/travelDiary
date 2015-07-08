@@ -145,7 +145,7 @@ App.factory('Vacation', ['DS', function (DS) {
                     rating = rating / reviews.length;
                 }
 
-                return rating;
+                return Math.round(rating);
             }]
         }
     });

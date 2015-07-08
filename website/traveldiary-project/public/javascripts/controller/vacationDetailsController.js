@@ -4,9 +4,9 @@
 
     App.controller('vacationDetailsController',
         ['$scope', '$state', '$location', '$sessionStorage', 'anchorSmoothScroll', 'vacation', 'Vacation',
-            'ReviewDialogService', 'VacationReview','VacationService',
+            'ReviewDialogService', 'VacationReview','VacationService','$stateParams',
             function ($scope, $state, $location, $sessionStorage, anchorSmoothScroll, vacation, Vacation,
-                      ReviewDialogService, VacationReview, VacationService) {
+                      ReviewDialogService, VacationReview, VacationService, $stateParams) {
 
                 $scope.vacation = vacation;
                 $scope.currentUser = $sessionStorage.currentUser;
@@ -54,6 +54,14 @@
                     // TODO
                 };
 
+                function refreshState() {
+                    Vacation.refresh($scope.vacation.id).then(function (vacation) {
+                        Vacation.compute($scope.vacation.id);
+
+                        $state.go($state.current, $stateParams, { reload: true, inherit: true, notify: true });
+                    });
+                }
+
                 $scope.currentUserReview =
                     ReviewDialogService
                         .getReviewForUser($scope.vacation.reviews, $scope.currentUser);
@@ -66,8 +74,10 @@
                             console.log("Created Review");
                             console.log(review);
 
+                            $scope.currentUserReview = review;
+                            refreshState();
                         }, function (error) {
-                            console.log("Could not create Dialog");
+                            console.log("Could not create Review");
                             console.log(error);
                         }
                     );
@@ -80,15 +90,22 @@
                             console.log("Created Review");
                             console.log(review);
 
+                            $scope.currentUserReview = review;
+                            refreshState();
                         }, function (error) {
-                            console.log("Could not create Dialog");
+                            console.log("Could not create Review");
                             console.log(error);
                         }
                     );
                 };
 
+
+
                 $scope.deleteReview = function (review) {
-                    VacationReview.destroy(review.id);
+                    VacationReview.destroy(review.id).then( function () {
+                        $scope.currentUserReview = false;
+                        refreshState();
+                    });
                 };
 
                 /*---------------- UI -------------------------*/
