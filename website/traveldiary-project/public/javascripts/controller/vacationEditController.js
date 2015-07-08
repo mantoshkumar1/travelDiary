@@ -18,13 +18,14 @@
                     return total;
                 };
 
-                $scope.addActivity = function(index){
-
-
+                $scope.addActivity = function(){
+                    console.log("add vacation");
+                    $state.go('main.activity');
                 };
 
                 $scope.removeActivity = function(index){
                     $scope.vacation.activities.splice(index, 1);
+                    $scope.saveVacation($scope.vacation);
                 };
 
                 $scope.searchText = '';
@@ -32,7 +33,6 @@
                 $scope.addKeyword = function (keyword) {
                     $scope.vacation.keywords.push(keyword);
                     $scope.searchText = '';
-
                 };
 
                 createKeywordFilter = function(searchText) {
@@ -50,11 +50,13 @@
 
                 $scope.deleteVacation = function (vacation) {
                     console.log(vacation);
+
                     //finally go back to main index page
                     $state.go("main.index");
                 };
 
                 $scope.saveVacation = function (vacation) {
+                    Vacation.update(vacation.id, vacation)
                     console.log(vacation);
                 };
 
@@ -79,23 +81,6 @@
                     $event.stopPropagation();
                     $scope.openedStart = true;
                 };
-
-                /*
-                 $scope.budgetList = [];
-                 $scope.budget = "";
-                 $scope.budgetTitle = "";
-                 $scope.addBudget = function () {
-                 $scope.budgetList.push({'budget': $scope.budget, 'title': $scope.budgetTitle});
-                 $scope.budget = "";
-                 $scope.budgetTitle = "";
-                 };
-
-                 $scope.removeBudget = function (index) {
-                 console.log(index);
-                 $scope.budgetList.splice(index, 1);
-                 };
-                 */
-
 
             }]);
 }());

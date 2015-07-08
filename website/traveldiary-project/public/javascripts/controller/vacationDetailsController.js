@@ -33,7 +33,7 @@
 
                     $scope.newVacation = Vacation.createInstance();
                     $scope.newVacation.creator = $scope.currentUser;
-                    $scope.newVacation.name = "Test";
+                    $scope.newVacation.name = $scope.vacation.name;
                     $scope.newVacation.description = $scope.vacation.description;
                     $scope.newVacation.activities = $scope.vacation.activities;
                     $scope.newVacation.budget = $scope.vacation.budget;
@@ -47,7 +47,12 @@
                     VacationService.createVacation($scope.newVacation).then(function (vacation) {
                         console.log('Created vacation:');
                         console.log(vacation);
+                        $state.go('main.vacation.edit', {id: vacation.id});
                     });
+                };
+
+                $scope.editVacation = function() {
+                    $state.go('main.vacation.edit', {id: $scope.vacation.id});
                 };
 
                 $scope.deleteVacation = function () {
