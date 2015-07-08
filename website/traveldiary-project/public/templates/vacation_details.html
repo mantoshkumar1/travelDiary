@@ -12,7 +12,7 @@
                     <md-tab><span ng-click="scrollToElement('reviews')">Reviews</span></md-tab>
                 </md-tabs>
             </div>
-            <div layout="row" layout-align="end center" flex>
+            <div layout="row" layout-align="end center" flex ng-if="currentUser">
                 <md-button aria-label="Copy" ng-click="createVacation()"
                            ng-if="!isCreator()">
                     <md-icon class="material-icons">favorite_border</md-icon>
