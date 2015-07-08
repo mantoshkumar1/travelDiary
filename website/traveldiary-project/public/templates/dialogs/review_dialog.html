@@ -24,7 +24,6 @@
             <div layout="row" layout-align="center center">
                 <div flex="50" layout="row" layout-align="start center">
                     <md-input-container>
-                        <label>Rating</label>
                         <md-select required name="rating" placeholder="Your Rating" ng-model="revCtrl.review.rating">
                             <md-option ng-repeat="rating in revCtrl.ratings" ng-value="rating.value">{{rating.rating}}</md-option>
                         </md-select>
