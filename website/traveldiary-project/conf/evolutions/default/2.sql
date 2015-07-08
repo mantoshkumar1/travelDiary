@@ -183,4 +183,24 @@ VALUES (14, 2, 'review14', 'review description14', strftime('%Y-%m-%d %H:%M:%f',
 
 INSERT INTO vacationimage VALUES (1, 'assets/images/1.jpg', 1);
 INSERT INTO vacationimage VALUES (2, 'assets/images/2.jpg', 2);
+INSERT INTO vacationimage VALUES (3, 'assets/images/3.jpg', 3);
+INSERT INTO vacationimage VALUES (4, 'assets/images/4.jpg', 4);
+INSERT INTO vacationimage VALUES (5, 'assets/images/5.jpg', 5);
+INSERT INTO vacationimage VALUES (6, 'assets/images/6.jpg', 6);
+INSERT INTO vacationimage VALUES (7, 'assets/images/7.jpg', 7);
+INSERT INTO vacationimage VALUES (8, 'assets/images/8.jpg', 8);
+INSERT INTO vacationimage VALUES (9, 'assets/images/9.jpg', 9);
+INSERT INTO vacationimage VALUES (10, 'assets/images/10.jpg', 10);
+INSERT INTO vacationimage VALUES (11, 'assets/images/11.jpg', 11);
+INSERT INTO vacationimage VALUES (12, 'assets/images/12.jpg', 12);
+INSERT INTO vacationimage VALUES (13, 'assets/images/13.jpg', 13);
+INSERT INTO vacationimage VALUES (14, 'assets/images/14.jpg', 14);
+INSERT INTO vacationimage VALUES (15, 'assets/images/15.jpg', 15);
+INSERT INTO vacationimage VALUES (16, 'assets/images/1.jpg', 16);
+INSERT INTO vacationimage VALUES (17, 'assets/images/2.jpg', 17);
+
+INSERT INTO activityimage VALUES (1, 'assets/images/1.jpg', 1);
+INSERT INTO activityimage VALUES (2, 'assets/images/2.jpg', 2);
+INSERT INTO activityimage VALUES (3, 'assets/images/3.jpg', 3);
+INSERT INTO activityimage VALUES (4, 'assets/images/4.jpg', 4);
 # --- !Downs
